@@ -148,10 +148,18 @@ export async function rankItems({ tasteMd, items, todayKey }) {
 
   const client = new Anthropic();
 
+  // The taste profile is the source of truth — system instructions support
+  // it, never override it. Anything in the "Low-fit signals" / "drop" /
+  // "avoid" lists of the profile is treated as a HARD EXCLUDE, not a soft
+  // demote. The note below is reinforced inside SYSTEM_INSTRUCTIONS too.
   const system = [
     {
       type: "text",
-      text: `# Taste profile\n\n${tasteMd}\n\n${SYSTEM_INSTRUCTIONS}`,
+      text:
+        `# Taste profile (authoritative — drop anything that violates it)\n\n${tasteMd}\n\n` +
+        `# Critical: how to read the taste profile\n\n` +
+        `Treat any item listed under "Low-fit signals", "avoid", or "drop" in the taste profile above as a HARD EXCLUDE. Do not include such items even if they are dated, popular, sponsored, or appear in many source items. The profile is more important than volume. If the only events available for a day are low-fit, return zero events for that day. Specifically, when the profile names a category of show (e.g. "'Business'-themed corporate-satire variety shows — drop"), exclude every instance, every date, every venue. Do not paraphrase your way around the exclusion.\n\n` +
+        `${SYSTEM_INSTRUCTIONS}`,
       cache_control: { type: "ephemeral" },
     },
   ];
