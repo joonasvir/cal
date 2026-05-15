@@ -201,6 +201,37 @@
       margin-top: clamp(20px, 3vw, 36px);
     }
 
+    /* ── Mode tabs (above filters) ─────────────────────── */
+    .tabs {
+      display: flex;
+      gap: 0;
+      padding: 0 var(--pad-x);
+      border-top: 1px solid var(--rule);
+      background: var(--paper);
+    }
+    .tab {
+      appearance: none;
+      background: none;
+      border: 0;
+      padding: 14px 0;
+      margin-right: 28px;
+      font: inherit;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--soft);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color 120ms ease, border-color 120ms ease;
+    }
+    .tab:hover { color: var(--ink); }
+    .tab.is-active {
+      color: var(--ink);
+      font-weight: 600;
+      border-bottom-color: var(--ink);
+    }
+
     /* ── Filter bar (sticky) ───────────────────────────── */
     .filters {
       position: sticky;
@@ -478,6 +509,204 @@
       padding-top: 8px;
     }
 
+    /* ── Date Night view ───────────────────────────────── */
+    body[data-view="dn"] #calendar { display: none; }
+    body[data-view="calendar"] #date-night { display: none; }
+    body[data-view="dn"] .today-btn { display: none; }
+    /* The category/hood/weather chips don't apply to the planner. */
+    body[data-view="dn"] .filters { display: none; }
+
+    #date-night {
+      padding: clamp(24px, 4vw, 48px) var(--pad-x) clamp(40px, 6vw, 80px);
+    }
+    .dn-day-picker {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+      margin-bottom: clamp(20px, 3vw, 32px);
+    }
+    .dn-day-picker::-webkit-scrollbar { display: none; }
+    .dn-day-chip {
+      appearance: none;
+      background: none;
+      border: 1px solid var(--softer);
+      padding: 10px 14px 8px;
+      font: inherit;
+      cursor: pointer;
+      text-align: left;
+      min-width: 76px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: border-color 120ms ease, background 120ms ease, color 120ms ease;
+    }
+    .dn-day-chip .dow {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--soft);
+      margin: 0;
+      display: block;
+    }
+    .dn-day-chip .num {
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1;
+      font-variant-numeric: lining-nums;
+    }
+    .dn-day-chip:hover { border-color: var(--ink); }
+    .dn-day-chip.is-active {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+    .dn-day-chip.is-active .dow { color: var(--paper); opacity: 0.7; }
+
+    .dn-hero {
+      border-top: 1px solid var(--rule);
+      padding-top: clamp(20px, 3vw, 32px);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: clamp(24px, 4vw, 56px);
+      align-items: end;
+      margin-bottom: clamp(32px, 4vw, 56px);
+    }
+    .dn-hero-date {
+      font-size: clamp(64px, 10vw, 140px);
+      font-weight: 500;
+      letter-spacing: -0.045em;
+      line-height: 0.9;
+      font-variant-numeric: lining-nums;
+    }
+    .dn-hero-date small {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--soft);
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+    .dn-hero-weather {
+      padding-bottom: 8px;
+    }
+    .dn-hero-weather .row {
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--soft);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      align-items: baseline;
+    }
+    .dn-hero-weather .row strong {
+      color: var(--ink);
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+    }
+    .dn-hero-weather .note {
+      font-size: 14px;
+      line-height: 1.4;
+      margin-top: 10px;
+      color: var(--ink);
+      max-width: 48ch;
+    }
+
+    .dn-plan-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-top: 1px solid var(--rule);
+      padding-top: clamp(20px, 3vw, 32px);
+      margin-bottom: clamp(16px, 2vw, 24px);
+    }
+    .dn-plan-title {
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+    .dn-shuffle {
+      appearance: none;
+      background: none;
+      border: 1px solid var(--ink);
+      padding: 9px 14px 8px;
+      font: inherit;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .dn-shuffle:hover { background: var(--ink); color: var(--paper); }
+    .dn-shuffle::after { content: '↻'; font-weight: 400; }
+
+    .dn-plan { list-style: none; padding: 0; margin: 0; }
+    .dn-move {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: clamp(16px, 2.5vw, 40px);
+      padding: clamp(16px, 2.5vw, 24px) 0;
+      border-bottom: 1px solid var(--softest);
+      align-items: start;
+    }
+    .dn-move:last-child { border-bottom: 0; }
+    .dn-move-band {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--soft);
+      padding-top: 6px;
+    }
+    .dn-move-band .flag {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      color: var(--ink);
+      border-top: 1px solid var(--softer);
+      padding-top: 6px;
+    }
+    .dn-move-title {
+      font-size: clamp(18px, 2.5vw, 22px);
+      font-weight: 500;
+      line-height: 1.25;
+      letter-spacing: -0.005em;
+    }
+    .dn-move-title a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+    .dn-move-title a:hover { border-bottom-color: var(--ink); }
+    .dn-move-meta {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--soft);
+      margin-top: 4px;
+    }
+    .dn-move-blurb {
+      font-size: 14.5px;
+      line-height: 1.5;
+      margin-top: 8px;
+      max-width: 60ch;
+    }
+
+    .dn-empty {
+      font-size: 14px;
+      color: var(--soft);
+      padding: 24px 0;
+    }
+
     /* ── Floating today button ──────────────────────────── */
     .today-btn {
       position: fixed;
@@ -585,6 +814,33 @@
         bottom: 16px;
       }
 
+      .tab { font-size: 10px; padding: 12px 0; margin-right: 20px; }
+
+      #date-night { padding: 20px var(--pad-x) 40px; }
+      .dn-day-chip { min-width: 64px; padding: 8px 12px 6px; }
+      .dn-day-chip .num { font-size: 18px; }
+      .dn-hero {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        align-items: start;
+      }
+      .dn-hero-date { font-size: clamp(56px, 17vw, 88px); }
+      .dn-hero-date small { font-size: 10px; }
+      .dn-plan-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .dn-move {
+        grid-template-columns: 1fr;
+        gap: 6px;
+        padding: 16px 0;
+      }
+      .dn-move-band { padding-top: 0; }
+      .dn-move-band .flag { border-top: 0; padding-top: 0; margin-top: 4px; display: inline; margin-left: 8px; }
+      .dn-move-title { font-size: 17px; }
+      .dn-move-blurb { font-size: 13.5px; }
+
       /* Sheet slides up from bottom on phones */
       .sheet {
         width: 100%;
@@ -619,7 +875,7 @@
     }
   </style>
 </head>
-<body>
+<body data-view="calendar">
   <header class="masthead">
     <div class="meta-left">
       <span class="meta-label">What's on</span>
@@ -634,6 +890,11 @@
     </div>
     <h1 class="title">2026 / A year in nights.</h1>
   </header>
+
+  <nav class="tabs" id="tabs" role="tablist" aria-label="View">
+    <button class="tab is-active" id="tab-calendar" role="tab" type="button" aria-selected="true" data-view="calendar">Calendar</button>
+    <button class="tab" id="tab-dn" role="tab" type="button" aria-selected="false" data-view="dn">Date night</button>
+  </nav>
 
   <nav class="filters" id="filters" role="toolbar" aria-label="Filters">
     <div class="filter-row">
@@ -651,6 +912,15 @@
   </nav>
 
   <main id="calendar"></main>
+  <section id="date-night" aria-label="Date night planner">
+    <div class="dn-day-picker" id="dn-days"></div>
+    <div class="dn-hero" id="dn-hero"></div>
+    <div class="dn-plan-head">
+      <h2 class="dn-plan-title">The plan</h2>
+      <button type="button" class="dn-shuffle" id="dn-shuffle">Shuffle</button>
+    </div>
+    <ul class="dn-plan" id="dn-plan"></ul>
+  </section>
 
   <button class="today-btn" id="today-btn" type="button" aria-label="Scroll to today">Today</button>
 
@@ -676,9 +946,84 @@
       'January', 'February', 'March', 'April', 'May', 'June',
       'July', 'August', 'September', 'October', 'November', 'December'
     ];
+    const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     const DOW = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+    const DOW_LONG = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
     const CATEGORIES = ['music', 'comedy', 'art', 'food', 'talk', 'nightlife'];
     const TOP_N = 3;
+
+    // ── Date-night catalog ─────────────────────────────
+    // Static set of Brooklyn/NYC date moves. Tagged by time band, vibe and
+    // weather preference; the planner picks 4 that flow afternoon → late.
+    const DATE_MOVES = [
+      { id:'prospect-park-picnic', title:'Picnic in Prospect Park', hood:'Prospect Park', band:'afternoon', vibe:['picnic','outdoor','playful'], weather:['sunny','warm','mild'],
+        blurb:"Long Meadow if it's hot, the slope by the boathouse if you want a view. Grab a bottle and snacks at Sahadi's on the way." },
+      { id:'baguette-sandwich', title:'Make-your-own baguette sandwich', hood:'Carroll Gardens', band:'afternoon', vibe:['playful','lowkey','food'], weather:['any'],
+        blurb:"She Wolf for the baguette, Caputo's for prosciutto and good butter. Eat on the stoop or in Carroll Park." },
+      { id:'dog-adoption', title:'Visit a dog adoption center', hood:'Cobble Hill', band:'afternoon', vibe:['playful','wholesome'], weather:['any'],
+        blurb:"Bideawee or Sean Casey, then a long walk and coffee. Don't bring one home unless you both agree." },
+      { id:'court-street-picnic', title:'Court Street Grocers + Carroll Park', hood:'Carroll Gardens', band:'afternoon', vibe:['picnic','lowkey','food'], weather:['sunny','warm','mild'],
+        blurb:"Sandwiches from Court Street Grocers, eat in Carroll Park. Easy unfussy date energy." },
+      { id:'bk-bridge-sunset', title:'Walk the Brooklyn Bridge at sunset', hood:'DUMBO', band:'early', vibe:['outdoor','romantic','atmospheric'], weather:['sunny','mild','warm','cool'],
+        blurb:"Start Manhattan-side so the skyline opens up behind you. End at Cecconi's or hold out for Lucali if you got in." },
+      { id:'bk-heights-promenade', title:'Brooklyn Heights Promenade', hood:'Brooklyn Heights', band:'early', vibe:['outdoor','romantic','old-ny'], weather:['sunny','mild','cool'],
+        blurb:"Old New York walk, full skyline view. Stop at Front Street or Henry Public after for a martini." },
+      { id:'domino-sunset', title:'Sunset at Domino Park', hood:'Williamsburg', band:'early', vibe:['outdoor','sunset','view'], weather:['sunny','mild','warm'],
+        blurb:"Walk along the East River, drinks at the rooftop or just hang on the lawn. Best in golden hour." },
+      { id:'wythe-roof', title:'Drinks on the Wythe rooftop', hood:'Williamsburg', band:'early', vibe:['cocktail','view'], weather:['sunny','mild','warm'],
+        blurb:"Manhattan view, slow drinks, no rush. Sit on the east side." },
+      { id:'lib-cocktail', title:'Drinks at Long Island Bar', hood:'Cobble Hill', band:'early', vibe:['cocktail','atmospheric','old-ny'], weather:['any'],
+        blurb:"Art Deco room, sit at the bar. Negroni or French 75 to start. Stay for the burger if you're hungry." },
+      { id:'public-records-listen', title:'Listening room at Public Records', hood:'Gowanus', band:'evening', vibe:['music','atmospheric','cozy'], weather:['any'],
+        blurb:"Sit close to the speakers, share a vermouth, no phones. Spiritual jazz or whatever they're spinning that night." },
+      { id:'bar-bayeux', title:'Live jazz at Bar Bayeux', hood:'Prospect Heights', band:'evening', vibe:['music','atmospheric','cozy'], weather:['any'],
+        blurb:"Tiny supper-club room, drummer-led trio energy. Stage-side seating if you can get it." },
+      { id:'smalls-late', title:'Late set at Smalls', hood:'West Village', band:'late', vibe:['music','atmospheric','late'], weather:['any'],
+        blurb:"Slip in after dinner, stand near the bar, share a drink. Drummers' late sets are the move." },
+      { id:'attaboy', title:'Nightcap at Attaboy', hood:'Lower East Side', band:'late', vibe:['cocktail','atmospheric','late'], weather:['any'],
+        blurb:"Ring the bell, no menu — tell them a flavor. Tight room, late night, exact right energy." },
+      { id:'long-room', title:'Smoking-room cocktails at The Long Room', hood:'Williamsburg', band:'late', vibe:['cocktail','late','atmospheric'], weather:['any'],
+        blurb:"Tile and dark wood, last-drink-of-the-night kind of bar." },
+      { id:'sunnys', title:"Late at Sunny's", hood:'Red Hook', band:'late', vibe:['weird','late','music'], weather:['any'],
+        blurb:"Bluegrass jam, jukebox, waterfront, vaguely impossible to get to — exactly why it works." },
+      { id:'film-forum', title:'Film Forum noir double', hood:'West Village', band:'evening', vibe:['cinema','cozy','atmospheric'], weather:['rainy','cold','any'],
+        blurb:"Check the calendar — usually something noir or 70s. White Horse Tavern for a drink after." },
+      { id:'strand', title:'Books at the Strand', hood:'Union Square', band:'afternoon', vibe:['lowkey','cozy','bookish'], weather:['rainy','cold','cool','any'],
+        blurb:"Pick a book each, no pressure, browse upstairs. Coffee at Joe's after." },
+      { id:'books-magic', title:'Books are Magic + Cafe Spaghetti', hood:'Cobble Hill', band:'afternoon', vibe:['lowkey','cozy','bookish'], weather:['any'],
+        blurb:"Pick a book each. Pasta and a glass of red across the street after." },
+      { id:'whitney-late', title:'Whitney late hours', hood:'Meatpacking', band:'evening', vibe:['art','atmospheric'], weather:['rainy','cold','cool','any'],
+        blurb:"Quiet rooms, well-lit galleries, very gallery-date energy. End with martinis somewhere west." },
+      { id:'brooklyn-museum', title:'Brooklyn Museum walk-through', hood:'Prospect Heights', band:'afternoon', vibe:['art','lowkey'], weather:['rainy','cold','any'],
+        blurb:"See what's up — usually something worth the room. Sahadi's nearby if you want lunch." },
+      { id:'pioneer-works', title:'Pioneer Works show', hood:'Red Hook', band:'evening', vibe:['art','experimental','atmospheric'], weather:['any'],
+        blurb:"Check what's on — usually something weird and good. Sunny's after if it's a late one." },
+      { id:'lilia-dinner', title:'Dinner at Lilia', hood:'Williamsburg', band:'evening', vibe:['food','atmospheric','romantic'], weather:['any'],
+        blurb:"Prettiest Italian room in Brooklyn. Pastas plus orange wine. Book ahead, it's that kind of night." },
+      { id:'four-horsemen', title:'Four Horsemen for wine and snacks', hood:'Williamsburg', band:'evening', vibe:['food','atmospheric','wine'], weather:['any'],
+        blurb:"Natural wine bar, intimate. A few small plates and a bottle. No rush." },
+      { id:'oxalis', title:'Oxalis tasting room', hood:'Crown Heights', band:'evening', vibe:['food','atmospheric','romantic'], weather:['any'],
+        blurb:"Tasteful Crown Heights tasting menu. Save it for a real night." },
+      { id:'roberta', title:'Pizza at Roberta’s', hood:'Bushwick', band:'evening', vibe:['food','lowkey'], weather:['any'],
+        blurb:"Patio if it's warm, big room if not. Margaritas + a few small plates + the bee-sting." },
+      { id:'mood-ring', title:'Karaoke at Mood Ring', hood:'Bushwick', band:'late', vibe:['playful','late'], weather:['any'],
+        blurb:"Sweaty, fun, low-stakes. Pick a song you both know." },
+      { id:'greenwood', title:'Walk in Green-Wood Cemetery', hood:'Sunset Park', band:'afternoon', vibe:['outdoor','atmospheric','quiet'], weather:['sunny','mild','cool'],
+        blurb:"Quiet old-NY walk, real views, no crowd. Bring a thermos." },
+      { id:'mccarren', title:'McCarren Park hang', hood:'Williamsburg', band:'afternoon', vibe:['outdoor','playful'], weather:['sunny','warm','hot'],
+        blurb:"Park beers, frisbee, watch the Williamsburg crowd. Easy unplanned afternoon." },
+      { id:'coney', title:'Coney Island day', hood:'Coney Island', band:'afternoon', vibe:['outdoor','playful','summer'], weather:['hot','sunny','warm'],
+        blurb:"Boardwalk, Nathan's, the Cyclone if you're in the mood, ocean for the feet." },
+      { id:'torst', title:"Tørst beer flights", hood:'Greenpoint', band:'evening', vibe:['lowkey','beer','cozy'], weather:['any'],
+        blurb:"Order the small pours and share. Greenpoint's cozy version of a beer date." },
+    ];
+
+    const BANDS = [
+      { id:'afternoon', label:'Afternoon' },
+      { id:'early',     label:'Early evening' },
+      { id:'evening',   label:'Evening' },
+      { id:'late',      label:'Late' },
+    ];
 
     const pad = (n) => String(n).padStart(2, '0');
     const isoDate = (y, m, d) => `${y}-${pad(m + 1)}-${pad(d)}`;
@@ -703,6 +1048,9 @@
       todayKey: null,
       linkedDate: null, // YYYY-MM-DD when set via URL/click
       hoodSlugToName: new Map(),
+      view: 'calendar', // 'calendar' | 'dn'
+      dnDate: null, // YYYY-MM-DD selected in date-night view
+      dnSeed: 0, // bumps on shuffle
     };
 
     // ── Slug helpers ───────────────────────────────────
@@ -956,6 +1304,230 @@
       window.scrollTo({ top: scrollY, behavior: 'instant' });
     }
 
+    // ── Date Night ─────────────────────────────────────
+    function setView(v, opts = {}) {
+      if (v !== 'calendar' && v !== 'dn') v = 'calendar';
+      state.view = v;
+      document.body.dataset.view = v;
+      document.querySelectorAll('.tab').forEach((b) => {
+        const on = b.dataset.view === v;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      if (v === 'dn') {
+        if (!state.dnDate) state.dnDate = state.linkedDate || state.todayKey;
+        renderDateNight();
+      }
+      if (!opts.silent) writeHash();
+    }
+
+    function weatherTags(w) {
+      if (!w) return new Set(['any']);
+      const tags = new Set(['any']);
+      const hi = Number(w.high ?? w.high_f ?? NaN);
+      const lo = Number(w.low ?? w.low_f ?? NaN);
+      const unit = (w.unit || (w.high_f != null ? 'F' : 'C')).toUpperCase();
+      const hiC = unit === 'F' ? (hi - 32) * 5 / 9 : hi;
+      const loC = unit === 'F' ? (lo - 32) * 5 / 9 : lo;
+      const cond = (w.condition || '').toLowerCase();
+      const precip = Number(w.precip_chance ?? 0);
+
+      if (precip >= 50 || /rain|shower|storm|drizzle/.test(cond)) tags.add('rainy');
+      if (hiC >= 28) tags.add('hot');
+      if (hiC >= 22 && hiC < 28) tags.add('warm');
+      if (hiC >= 15 && hiC < 22) tags.add('mild');
+      if (hiC >= 8 && hiC < 15) tags.add('cool');
+      if (hiC < 8 || loC < 2) tags.add('cold');
+      if (/sun|clear/.test(cond) && precip < 30) tags.add('sunny');
+      return tags;
+    }
+
+    // Deterministic mulberry32 for stable shuffles
+    function makeRng(seed) {
+      let s = seed >>> 0;
+      return function() {
+        s = (s + 0x6D2B79F5) >>> 0;
+        let t = s;
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+    function seedFor(dateKey, n) {
+      let h = 2166136261 >>> 0;
+      const s = `${dateKey}|${n}`;
+      for (let i = 0; i < s.length; i++) {
+        h ^= s.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+      }
+      return h >>> 0;
+    }
+
+    function scoreMove(move, tags) {
+      let score = 0;
+      const isOutdoor = move.vibe.includes('outdoor') || move.vibe.includes('picnic') || move.vibe.includes('sunset');
+      const isCozy = move.vibe.includes('cozy') || move.vibe.includes('atmospheric') || move.vibe.includes('cinema');
+      let weatherMatch = false;
+      for (const w of move.weather) {
+        if (w === 'any') { score += 1; continue; }
+        if (tags.has(w)) { score += 3; weatherMatch = true; }
+      }
+      if (isOutdoor && tags.has('rainy')) score -= 6;
+      if (isOutdoor && tags.has('cold')) score -= 3;
+      if (isCozy && tags.has('rainy')) score += 2;
+      if (isCozy && tags.has('cold')) score += 1;
+      if (!weatherMatch && !move.weather.includes('any')) score -= 1;
+      return score;
+    }
+
+    function pickPlan(dateKey, weather, seed) {
+      const tags = weatherTags(weather);
+      const rng = makeRng(seed);
+      const scored = DATE_MOVES.map((m) => ({
+        m,
+        score: scoreMove(m, tags) + rng() * 0.99, // jitter for variety
+      }));
+      const byBand = new Map();
+      for (const b of BANDS) byBand.set(b.id, []);
+      for (const s of scored) byBand.get(s.m.band).push(s);
+      for (const arr of byBand.values()) arr.sort((a, b) => b.score - a.score);
+      // Layer in one curated event for the date if available.
+      const payload = state.feed.days?.[dateKey];
+      const events = payload?.events || [];
+      const featuredEvent = events[0] || null;
+      const featuredBand = featuredEvent ? bandForTime(featuredEvent.time) : null;
+      const usedHoods = new Set();
+      const plan = [];
+      for (const band of BANDS) {
+        if (featuredEvent && band.id === featuredBand) {
+          plan.push({ band: band.id, label: band.label, fromEvent: true, ev: featuredEvent });
+          if (featuredEvent.neighborhood) usedHoods.add(featuredEvent.neighborhood);
+          continue;
+        }
+        const choices = byBand.get(band.id);
+        const pick = choices.find((c) => !usedHoods.has(c.m.hood)) || choices[0];
+        if (!pick) continue;
+        plan.push({ band: band.id, label: band.label, fromEvent: false, move: pick.m });
+        if (pick.m.hood) usedHoods.add(pick.m.hood);
+      }
+      return plan;
+    }
+
+    function bandForTime(t) {
+      if (!t) return 'evening';
+      const [h] = String(t).split(':').map(Number);
+      if (h < 17) return 'afternoon';
+      if (h < 20) return 'early';
+      if (h < 22) return 'evening';
+      return 'late';
+    }
+
+    function pickerDates(count = 8) {
+      const arr = [];
+      const start = new Date(state.todayKey + 'T00:00:00');
+      for (let i = 0; i < count; i++) {
+        const d = new Date(start);
+        d.setDate(start.getDate() + i);
+        const key = isoDate(d.getFullYear(), d.getMonth(), d.getDate());
+        arr.push({ key, d });
+      }
+      return arr;
+    }
+
+    function renderDateNight() {
+      const dnDate = state.dnDate || state.todayKey;
+      const picker = document.getElementById('dn-days');
+      picker.innerHTML = '';
+      for (const { key, d } of pickerDates(10)) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'dn-day-chip' + (key === dnDate ? ' is-active' : '');
+        const dowIdx = (d.getDay() + 6) % 7;
+        const dowLabel = key === state.todayKey ? 'Today' : DOW_LONG[dowIdx];
+        btn.innerHTML = `<span class="dow">${dowLabel}</span><span class="num">${d.getDate()}</span>`;
+        btn.addEventListener('click', () => {
+          state.dnDate = key;
+          state.dnSeed = 0;
+          writeHash();
+          renderDateNight();
+        });
+        picker.appendChild(btn);
+      }
+
+      const payload = state.feed.days?.[dnDate];
+      const weather = payload?.weather;
+      const hero = document.getElementById('dn-hero');
+      const d = new Date(dnDate + 'T00:00:00');
+      const dowIdx = (d.getDay() + 6) % 7;
+      const dateBlock = `
+        <div class="dn-hero-date">
+          <small>${DOW_LONG[dowIdx]} · ${MONTHS_SHORT[d.getMonth()]} ${d.getFullYear()}</small>
+          ${d.getDate()}
+        </div>
+      `;
+      let wxBlock = '<div class="dn-hero-weather"><div class="row"><span>No forecast for this day yet</span></div></div>';
+      if (weather) {
+        const hi = weather.high ?? weather.high_f;
+        const lo = weather.low ?? weather.low_f;
+        const unit = (weather.unit || (weather.high_f != null ? 'F' : 'C'));
+        const tags = [...weatherTags(weather)].filter((t) => t !== 'any').join(' · ');
+        wxBlock = `
+          <div class="dn-hero-weather">
+            <div class="row">
+              <strong>${hi}° / ${lo}°${unit}</strong>
+              <span>${escapeHtml(weather.condition || '')}</span>
+              ${weather.sunset ? `<span>sunset ${escapeHtml(weather.sunset)}</span>` : ''}
+              ${tags ? `<span>${escapeHtml(tags)}</span>` : ''}
+            </div>
+            ${weather.note ? `<div class="note">${escapeHtml(weather.note)}</div>` : ''}
+          </div>
+        `;
+      }
+      hero.innerHTML = dateBlock + wxBlock;
+
+      const seed = seedFor(dnDate, state.dnSeed);
+      const plan = pickPlan(dnDate, weather, seed);
+      const list = document.getElementById('dn-plan');
+      list.innerHTML = '';
+      if (!plan.length) {
+        list.innerHTML = '<li class="dn-empty">No plan to suggest — try shuffling.</li>';
+      } else {
+        for (const item of plan) {
+          const li = document.createElement('li');
+          li.className = 'dn-move';
+          if (item.fromEvent) {
+            const ev = item.ev;
+            li.innerHTML = `
+              <div class="dn-move-band">
+                ${escapeHtml(item.label)}${ev.time ? ` · ${escapeHtml(fmtTime(ev.time))}` : ''}
+                <span class="flag">★ on this week</span>
+              </div>
+              <div>
+                <div class="dn-move-title">${ev.url
+                  ? `<a href="${escapeHtml(ev.url)}" target="_blank" rel="noopener">${escapeHtml(ev.title)}</a>`
+                  : escapeHtml(ev.title)}</div>
+                ${ev.venue || ev.neighborhood
+                  ? `<div class="dn-move-meta">${[ev.venue, ev.neighborhood].filter(Boolean).map(escapeHtml).join(' · ')}</div>`
+                  : ''}
+                ${ev.note ? `<div class="dn-move-blurb">${escapeHtml(ev.note)}</div>` : ''}
+              </div>
+            `;
+          } else {
+            const m = item.move;
+            li.innerHTML = `
+              <div class="dn-move-band">${escapeHtml(item.label)}</div>
+              <div>
+                <div class="dn-move-title">${escapeHtml(m.title)}</div>
+                ${m.hood ? `<div class="dn-move-meta">${escapeHtml(m.hood)}</div>` : ''}
+                <div class="dn-move-blurb">${escapeHtml(m.blurb)}</div>
+              </div>
+            `;
+          }
+          list.appendChild(li);
+        }
+      }
+    }
+
     function escapeHtml(s) {
       if (s == null) return '';
       return String(s).replace(/[&<>"']/g, (c) => ({
@@ -1016,6 +1588,9 @@
       if (params.has('n')) out.hoods = params.get('n').split(',').filter(Boolean);
       if (params.has('w')) out.weather = params.get('w') !== '0';
       if (params.has('d')) out.date = params.get('d');
+      if (params.has('v')) out.view = params.get('v');
+      if (params.has('dn')) out.dnDate = params.get('dn');
+      if (params.has('s')) out.dnSeed = parseInt(params.get('s'), 10) || 0;
       return out;
     }
 
@@ -1026,6 +1601,9 @@
       if (state.activeHoods.size) params.set('n', [...state.activeHoods].join(','));
       if (!state.showWeather) params.set('w', '0');
       if (state.linkedDate) params.set('d', state.linkedDate);
+      if (state.view === 'dn') params.set('v', 'dn');
+      if (state.view === 'dn' && state.dnDate) params.set('dn', state.dnDate);
+      if (state.view === 'dn' && state.dnSeed) params.set('s', String(state.dnSeed));
       const str = params.toString();
       const target = str ? `#${str}` : '';
       const current = location.hash || '';
@@ -1051,6 +1629,9 @@
         state.linkedDate = h.date;
         state.expandedDates.add(h.date);
       }
+      if (h.view === 'dn') state.view = 'dn';
+      if (h.dnDate && /^\d{4}-\d{2}-\d{2}$/.test(h.dnDate)) state.dnDate = h.dnDate;
+      if (Number.isFinite(h.dnSeed)) state.dnSeed = h.dnSeed;
     }
 
     // ── Sources sheet ──────────────────────────────────
@@ -1171,16 +1752,27 @@
 
       renderCalendar();
 
+      // Apply view from URL (default calendar). setView({silent}) — don't rewrite hash.
+      setView(state.view, { silent: true });
+
       // Scroll target: linked date from hash, else today.
       const target = state.linkedDate || state.todayKey;
       requestAnimationFrame(() => {
-        scrollToDate(target, 'instant');
+        if (state.view === 'calendar') scrollToDate(target, 'instant');
         setTimeout(() => observeToday(), 50);
       });
 
       document.getElementById('today-btn').addEventListener('click', scrollToToday);
       document.getElementById('sources-open').addEventListener('click', openSourcesSheet);
       document.getElementById('sources-close').addEventListener('click', closeSourcesSheet);
+      document.querySelectorAll('.tab').forEach((b) => {
+        b.addEventListener('click', () => setView(b.dataset.view));
+      });
+      document.getElementById('dn-shuffle').addEventListener('click', () => {
+        state.dnSeed = (state.dnSeed + 1) >>> 0 || 1;
+        writeHash();
+        renderDateNight();
+      });
       const sheet = document.getElementById('sources-sheet');
       // Click outside the sheet content (on the dialog itself / backdrop) closes it.
       sheet.addEventListener('click', (e) => {
@@ -1193,6 +1785,9 @@
         state.activeHoods = new Set();
         state.showWeather = true;
         state.linkedDate = null;
+        state.view = 'calendar';
+        state.dnDate = null;
+        state.dnSeed = 0;
         document.body.classList.remove('hide-weather');
         applyHashState();
         for (const slug of [...state.activeHoods]) {
@@ -1201,8 +1796,9 @@
         updateCategoryChips();
         updateHoodChips();
         renderCalendar();
+        setView(state.view, { silent: true });
         suppressHash = false;
-        if (state.linkedDate) scrollToDate(state.linkedDate, 'smooth');
+        if (state.view === 'calendar' && state.linkedDate) scrollToDate(state.linkedDate, 'smooth');
       });
     }
 
