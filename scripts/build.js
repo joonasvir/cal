@@ -88,7 +88,7 @@ async function main() {
   const today = todayKey();
   console.error(`# build: ${today}`);
 
-  console.error("# 1/3 fetching sources…");
+  console.error("# 1/4 fetching sources…");
   const [{ items, sources }, weather] = await Promise.all([
     fetchAllFeeds(),
     fetchWeather(),
@@ -99,7 +99,7 @@ async function main() {
     throw new Error("no items pulled — every feed failed; refusing to write empty feed.json");
   }
 
-  console.error("# 2/3 ranking with Claude…");
+  console.error("# 2/4 ranking with Claude…");
   // Taste profile is private — pulled from env (GH Actions secret) or
   // falls back to a local file for ad-hoc runs. Never read from a public path.
   const tasteMd = process.env.TASTE_PROFILE
