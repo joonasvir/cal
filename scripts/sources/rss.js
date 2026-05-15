@@ -23,24 +23,34 @@ export async function fetchAllFeeds() {
   const results = await Promise.allSettled(FEEDS.map(fetchOne));
 
   const items = [];
+  const sources = [];
   for (let i = 0; i < FEEDS.length; i++) {
     const r = results[i];
     const feed = FEEDS[i];
-    if (r.status === "rejected") {
-      console.error(`  ✗ ${feed.name}: ${r.reason?.message ?? r.reason}`);
-      continue;
-    }
     let kept = 0;
-    for (const item of r.value) {
-      const published = item.published_at ? Date.parse(item.published_at) : Date.now();
-      if (Number.isFinite(published) && published < cutoff) continue;
-      items.push(item);
-      kept++;
-      if (kept >= MAX_ITEMS_PER_FEED) break;
+    let error = null;
+    if (r.status === "rejected") {
+      error = String(r.reason?.message ?? r.reason);
+      console.error(`  ✗ ${feed.name}: ${error}`);
+    } else {
+      for (const item of r.value) {
+        const published = item.published_at ? Date.parse(item.published_at) : Date.now();
+        if (Number.isFinite(published) && published < cutoff) continue;
+        items.push(item);
+        kept++;
+        if (kept >= MAX_ITEMS_PER_FEED) break;
+      }
+      console.error(`  ✓ ${feed.name}: ${kept} items`);
     }
-    console.error(`  ✓ ${feed.name}: ${kept} items`);
+    sources.push({
+      name: feed.name,
+      url: feed.url,
+      tags: feed.tags,
+      kept,
+      error,
+    });
   }
-  return items;
+  return { items, sources };
 }
 
 async function fetchOne(feed) {
@@ -61,8 +71,8 @@ function cleanText(s) {
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  fetchAllFeeds().then((items) => {
-    console.error(`\nTotal: ${items.length} items`);
-    console.log(JSON.stringify(items.slice(0, 5), null, 2));
+  fetchAllFeeds().then(({ items, sources }) => {
+    console.error(`\nTotal: ${items.length} items across ${sources.length} sources`);
+    console.log(JSON.stringify({ items: items.slice(0, 5), sources }, null, 2));
   });
 }

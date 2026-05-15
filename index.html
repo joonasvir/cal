@@ -48,6 +48,150 @@
     }
     .masthead .meta-right { text-align: right; }
     .masthead .meta-label { display: block; }
+
+    .meta-btn {
+      appearance: none;
+      background: none;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      font: inherit;
+      color: inherit;
+      text-align: inherit;
+      cursor: pointer;
+      display: block;
+    }
+    .meta-btn .meta-label { display: block; }
+    .meta-btn .meta-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink);
+      font-weight: 600;
+      margin-top: 6px;
+      border-bottom: 1.5px solid var(--ink);
+      padding-bottom: 2px;
+    }
+    .meta-btn .meta-cta::after {
+      content: '↗';
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+    .meta-btn:hover .meta-cta { opacity: 0.6; }
+    .meta-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+
+    /* ── Sources sheet (dialog) ─────────────────────────── */
+    .sheet {
+      padding: 0;
+      border: 1px solid var(--rule);
+      background: var(--paper);
+      color: var(--ink);
+      width: min(560px, calc(100vw - 32px));
+      max-height: min(80vh, 720px);
+      overflow: hidden;
+      margin: auto;
+    }
+    .sheet::backdrop { background: rgba(0, 0, 0, 0.5); }
+    .sheet:not([open]) { display: none; }
+    .sheet-inner { display: flex; flex-direction: column; max-height: inherit; }
+    .sheet-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      padding: 22px 26px 14px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .sheet-titles { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .sheet-title {
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin: 0;
+      line-height: 1;
+    }
+    .sheet-sub {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--soft);
+    }
+    .sheet-close {
+      appearance: none;
+      background: none;
+      border: 0;
+      padding: 4px 8px;
+      margin: -4px -6px 0 0;
+      font: inherit;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      color: var(--soft);
+    }
+    .sheet-close:hover { color: var(--ink); }
+    .sheet-body { padding: 16px 26px 24px; overflow: auto; }
+    .sheet-section + .sheet-section { margin-top: 22px; }
+    .sheet-section h3 {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--soft);
+      margin: 0 0 10px;
+      font-weight: 500;
+    }
+    .source-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      column-gap: 16px;
+      row-gap: 2px;
+      padding: 10px 0;
+      border-top: 1px solid var(--softest);
+    }
+    .source-row:first-child { border-top: 0; padding-top: 4px; }
+    .source-name { font-size: 14px; font-weight: 500; }
+    .source-count {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-variant-numeric: tabular-nums;
+      color: var(--soft);
+      align-self: center;
+    }
+    .source-row.has-error .source-count { color: #b00020; }
+    .source-url {
+      grid-column: 1 / -1;
+      font-size: 11px;
+      color: var(--soft);
+      font-family: ui-monospace, 'JetBrains Mono', SF Mono, Menlo, monospace;
+      word-break: break-all;
+      text-decoration: none;
+    }
+    .source-url:hover { color: var(--ink); }
+    .kv {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4px 16px;
+      font-size: 13px;
+    }
+    .kv dt { color: var(--soft); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; align-self: center; }
+    .kv dd { margin: 0; font-variant-numeric: tabular-nums; }
+    .kv dd a { color: inherit; }
+    .sheet-foot {
+      padding: 12px 26px 18px;
+      border-top: 1px solid var(--softest);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--soft);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .sheet-foot a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--softer); }
+    .sheet-foot a:hover { color: var(--ink); border-bottom-color: var(--ink); }
     .masthead .title {
       grid-column: 1 / -1;
       font-size: clamp(28px, 4vw, 44px);
@@ -440,6 +584,30 @@
         right: 16px;
         bottom: 16px;
       }
+
+      /* Sheet slides up from bottom on phones */
+      .sheet {
+        width: 100%;
+        max-width: 100%;
+        max-height: 88vh;
+        margin: 0;
+        margin-top: auto;
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 0;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: auto;
+        border-top-left-radius: 14px;
+        border-top-right-radius: 14px;
+      }
+      .sheet-header { padding: 18px 20px 12px; }
+      .sheet-body { padding: 14px 20px 20px; }
+      .sheet-foot { padding: 10px 20px 14px; }
+      .sheet-title { font-size: 19px; }
+      .meta-btn .meta-cta { font-size: 10px; margin-top: 4px; }
     }
 
     /* ── Print ──────────────────────────────────────────── */
@@ -458,8 +626,11 @@
       <span class="meta-label">Brooklyn / NYC</span>
     </div>
     <div class="meta-right">
-      <span class="meta-label" id="meta-edition">Edition 01</span>
-      <span class="meta-label" id="meta-date">—</span>
+      <button class="meta-btn" id="sources-open" type="button" aria-haspopup="dialog" aria-controls="sources-sheet">
+        <span class="meta-label" id="meta-edition">Edition 01</span>
+        <span class="meta-label" id="meta-date">—</span>
+        <span class="meta-cta">Sources</span>
+      </button>
     </div>
     <h1 class="title">2026 / A year in nights.</h1>
   </header>
@@ -482,6 +653,23 @@
   <main id="calendar"></main>
 
   <button class="today-btn" id="today-btn" type="button" aria-label="Scroll to today">Today</button>
+
+  <dialog class="sheet" id="sources-sheet" aria-labelledby="sources-sheet-title">
+    <div class="sheet-inner">
+      <header class="sheet-header">
+        <div class="sheet-titles">
+          <h2 class="sheet-title" id="sources-sheet-title">Sources</h2>
+          <span class="sheet-sub" id="sources-sheet-sub">—</span>
+        </div>
+        <button class="sheet-close" id="sources-close" type="button" aria-label="Close">×</button>
+      </header>
+      <div class="sheet-body" id="sources-body"></div>
+      <footer class="sheet-foot">
+        <a href="https://github.com/joonasvir/cal" target="_blank" rel="noopener">Repo</a>
+        <a href="https://github.com/joonasvir/cal/blob/main/taste.md" target="_blank" rel="noopener">Taste profile</a>
+      </footer>
+    </div>
+  </dialog>
 
   <script>
     const MONTHS = [
@@ -865,6 +1053,95 @@
       }
     }
 
+    // ── Sources sheet ──────────────────────────────────
+    function renderSourcesSheet() {
+      const meta = state.feed.meta || {};
+      const sub = document.getElementById('sources-sheet-sub');
+      const gen = state.feed.generated_at || '';
+      const genShort = gen.slice(0, 10) || '—';
+      sub.textContent = `Edition ${state.feed.edition || '01'} · ${genShort}`;
+
+      const body = document.getElementById('sources-body');
+      const sources = meta.sources || [];
+      const weather = meta.weather || {};
+      const ranker = meta.ranker || {};
+      const stats = meta.stats || {};
+
+      const sourcesHtml = sources.length
+        ? sources.map((s) => {
+            const cls = s.error ? ' has-error' : '';
+            const count = s.error ? 'failed' : `${s.kept ?? 0} items`;
+            return `
+              <div class="source-row${cls}">
+                <div class="source-name">${escapeHtml(s.name)}</div>
+                <div class="source-count">${escapeHtml(count)}</div>
+                <a class="source-url" href="${escapeHtml(s.url)}" target="_blank" rel="noopener">${escapeHtml(s.url)}</a>
+              </div>
+            `;
+          }).join('')
+        : '<p class="sheet-sub" style="text-transform:none; letter-spacing:0;">No source data in this build yet.</p>';
+
+      const weatherHtml = `
+        <dl class="kv">
+          <dt>Provider</dt><dd>${weather.url
+            ? `<a href="${escapeHtml(weather.url)}" target="_blank" rel="noopener">${escapeHtml(weather.provider || 'Open-Meteo')}</a>`
+            : escapeHtml(weather.provider || 'Open-Meteo')}</dd>
+          <dt>Location</dt><dd>${escapeHtml(weather.location || 'Brooklyn, NYC')}</dd>
+          <dt>Unit</dt><dd>${escapeHtml(weather.unit || 'C')}</dd>
+          <dt>Days</dt><dd>${weather.days ?? '—'}</dd>
+        </dl>
+      `;
+
+      const rankerHtml = `
+        <dl class="kv">
+          <dt>Model</dt><dd>${escapeHtml(ranker.model || 'claude-opus-4-7')}</dd>
+          <dt>Provider</dt><dd>${escapeHtml(ranker.provider || 'Anthropic')}</dd>
+          <dt>Days ranked</dt><dd>${ranker.ranked_days ?? '—'}</dd>
+        </dl>
+      `;
+
+      const statsHtml = `
+        <dl class="kv">
+          <dt>Items pulled</dt><dd>${stats.items_pulled ?? '—'}</dd>
+          <dt>Events curated</dt><dd>${stats.events_curated ?? '—'}</dd>
+          <dt>Days covered</dt><dd>${stats.days_covered ?? '—'}</dd>
+          <dt>Generated</dt><dd>${escapeHtml(gen || '—')}</dd>
+        </dl>
+      `;
+
+      body.innerHTML = `
+        <section class="sheet-section">
+          <h3>Feeds</h3>
+          ${sourcesHtml}
+        </section>
+        <section class="sheet-section">
+          <h3>Weather</h3>
+          ${weatherHtml}
+        </section>
+        <section class="sheet-section">
+          <h3>Ranker</h3>
+          ${rankerHtml}
+        </section>
+        <section class="sheet-section">
+          <h3>This edition</h3>
+          ${statsHtml}
+        </section>
+      `;
+    }
+
+    function openSourcesSheet() {
+      renderSourcesSheet();
+      const dlg = document.getElementById('sources-sheet');
+      if (typeof dlg.showModal === 'function') dlg.showModal();
+      else dlg.setAttribute('open', '');
+    }
+
+    function closeSourcesSheet() {
+      const dlg = document.getElementById('sources-sheet');
+      if (typeof dlg.close === 'function') dlg.close();
+      else dlg.removeAttribute('open');
+    }
+
     // ── Init ───────────────────────────────────────────
     async function init() {
       try {
@@ -902,6 +1179,13 @@
       });
 
       document.getElementById('today-btn').addEventListener('click', scrollToToday);
+      document.getElementById('sources-open').addEventListener('click', openSourcesSheet);
+      document.getElementById('sources-close').addEventListener('click', closeSourcesSheet);
+      const sheet = document.getElementById('sources-sheet');
+      // Click outside the sheet content (on the dialog itself / backdrop) closes it.
+      sheet.addEventListener('click', (e) => {
+        if (e.target === sheet) closeSourcesSheet();
+      });
       window.addEventListener('resize', updateFilterHeight, { passive: true });
       window.addEventListener('hashchange', () => {
         suppressHash = true;

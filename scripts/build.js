@@ -43,7 +43,7 @@ async function main() {
   console.error(`# build: ${today}`);
 
   console.error("# 1/3 fetching sources…");
-  const [items, weather] = await Promise.all([
+  const [{ items, sources }, weather] = await Promise.all([
     fetchAllFeeds(),
     fetchWeather(),
   ]);
@@ -72,16 +72,37 @@ async function main() {
     days[day.date].events = day.events ?? [];
   }
 
+  const eventCount = Object.values(days).reduce((sum, d) => sum + d.events.length, 0);
+
   const feed = {
     edition: nextEdition(prev?.edition),
     year: new Date().getFullYear(),
     generated_at: new Date().toISOString(),
     city: "New York",
+    meta: {
+      sources,
+      weather: {
+        provider: "Open-Meteo",
+        url: "https://open-meteo.com",
+        location: "Brooklyn, NYC (40.6782, -73.9442)",
+        unit: "C",
+        days: Object.keys(weather).length,
+      },
+      ranker: {
+        provider: "Anthropic",
+        model: "claude-opus-4-7",
+        ranked_days: ranked.days?.length ?? 0,
+      },
+      stats: {
+        items_pulled: items.length,
+        events_curated: eventCount,
+        days_covered: Object.keys(days).length,
+      },
+    },
     days,
   };
 
   await fs.writeFile(FEED_PATH, JSON.stringify(feed, null, 2) + "\n", "utf-8");
-  const eventCount = Object.values(days).reduce((sum, d) => sum + d.events.length, 0);
   console.error(`# done: ${Object.keys(days).length} days, ${eventCount} events, edition ${feed.edition}`);
 }
 

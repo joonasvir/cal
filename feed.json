@@ -688,5 +688,71 @@
         }
       ]
     }
+  },
+  "meta": {
+    "sources": [
+      {
+        "name": "Eater NY",
+        "url": "https://ny.eater.com/rss/index.xml",
+        "tags": [
+          "food"
+        ],
+        "kept": 22,
+        "error": null
+      },
+      {
+        "name": "The Skint",
+        "url": "https://theskint.com/feed/",
+        "tags": [
+          "general"
+        ],
+        "kept": 25,
+        "error": null
+      },
+      {
+        "name": "Bedford + Bowery",
+        "url": "https://bedfordandbowery.com/feed/",
+        "tags": [
+          "general"
+        ],
+        "kept": 14,
+        "error": null
+      },
+      {
+        "name": "Brooklyn Vegan",
+        "url": "https://www.brooklynvegan.com/feed/",
+        "tags": [
+          "music"
+        ],
+        "kept": 18,
+        "error": null
+      },
+      {
+        "name": "Hyperallergic",
+        "url": "https://hyperallergic.com/feed/",
+        "tags": [
+          "art"
+        ],
+        "kept": 8,
+        "error": null
+      }
+    ],
+    "weather": {
+      "provider": "Open-Meteo",
+      "url": "https://open-meteo.com",
+      "location": "Brooklyn, NYC (40.6782, -73.9442)",
+      "unit": "C",
+      "days": 18
+    },
+    "ranker": {
+      "provider": "Anthropic",
+      "model": "claude-opus-4-7",
+      "ranked_days": 18
+    },
+    "stats": {
+      "items_pulled": 87,
+      "events_curated": 45,
+      "days_covered": 18
+    }
   }
 }
