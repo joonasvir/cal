@@ -2902,7 +2902,7 @@
           ? `<div class="week-wx">${weather.high ?? weather.high_f}°/${weather.low ?? weather.low_f}° · ${escapeHtml(weather.condition || '')}</div>`
           : '';
         const eventsHtml = events.length
-          ? `<ul class="week-events">${events.slice(0, 8).map((ev) => {
+          ? `<ul class="week-events">${events.map((ev) => {
               const img = imageForEvent(ev);
               const cap = [ev.venue, ev.neighborhood].filter(Boolean).join(' · ');
               return `
