@@ -592,18 +592,29 @@
     }
     .event {
       display: grid;
-      grid-template-columns: 64px 1fr auto;
-      gap: 18px;
-      padding: 12px 0;
-      align-items: baseline;
+      grid-template-columns: 44px 64px 1fr auto;
+      gap: 16px;
+      padding: 14px 0;
+      align-items: start;
     }
     .event + .event { border-top: 1px solid var(--softest); }
+    .event-icon-wrap {
+      width: 36px;
+      height: 36px;
+      background: var(--ink);
+      color: var(--paper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .event-icon { width: 20px; height: 20px; }
     .event-time {
       font-size: 11px;
       letter-spacing: 0.08em;
       font-feature-settings: 'tnum';
       color: var(--soft);
-      padding-top: 3px;
+      padding-top: 9px;
     }
     .event-body { min-width: 0; }
     .event-title {
@@ -692,7 +703,7 @@
     .pick-head {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
+      align-items: center;
       gap: 14px;
       font-size: 11px;
       letter-spacing: 0.16em;
@@ -701,6 +712,16 @@
       color: var(--soft);
       flex-wrap: wrap;
     }
+    .pick-icon-wrap {
+      width: 28px;
+      height: 28px;
+      background: var(--ink);
+      color: var(--paper);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pick-icon-wrap .event-icon { width: 18px; height: 18px; }
     .pick-date { color: var(--ink); }
     .pick-title {
       font-size: clamp(22px, 2.4vw, 32px);
@@ -1298,6 +1319,18 @@
   </style>
 </head>
 <body data-view="calendar">
+  <!-- Brutalist category icon set -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 3h11v4H12v10.5a4.5 4.5 0 1 1-3-4.2V3z" fill="currentColor"/></symbol>
+      <symbol id="i-comedy" viewBox="0 0 24 24"><path d="M2 3h20v14H10l-6 5v-5H2V3z" fill="currentColor"/></symbol>
+      <symbol id="i-art" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M2 2v20h20V2H2zm4 4v12h12V6H6z" fill="currentColor"/></symbol>
+      <symbol id="i-food" viewBox="0 0 24 24"><path d="M6 2v8H4v3a3 3 0 0 0 3 3v6h2v-6a3 3 0 0 0 3-3v-3h-2V2h-1v8H7V2H6zm10 0a4 4 0 0 0-4 4v6h3v10h2V12h3V6a4 4 0 0 0-4-4z" fill="currentColor"/></symbol>
+      <symbol id="i-talk" viewBox="0 0 24 24"><path d="M2 3h20v5h-7v13h-6V8H2V3z" fill="currentColor"/></symbol>
+      <symbol id="i-nightlife" viewBox="0 0 24 24"><path d="M14 2a9 9 0 1 0 7.5 14A7 7 0 0 1 14 2z" fill="currentColor"/></symbol>
+    </defs>
+  </svg>
+
   <header class="masthead">
     <div class="meta-left">
       <span class="meta-label">What's on</span>
@@ -1328,26 +1361,27 @@
             <span class="dropdown-value" id="cat-dropdown-value">All</span>
           </button>
         </div>
+        <div class="dropdown" id="hood-dropdown">
+          <button class="dropdown-btn chip" id="hood-dropdown-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="hood-dropdown-panel" hidden>
+            <span class="dropdown-label">Where</span>
+            <span class="dropdown-value" id="hood-dropdown-value">All</span>
+          </button>
+        </div>
       </div>
       <div class="filter-group filter-group-end">
         <button class="chip chip-action" id="sources-chip-btn" type="button" aria-haspopup="dialog" aria-controls="sources-sheet">Sources</button>
         <button class="chip weather is-active" data-toggle="weather" aria-pressed="true">Weather</button>
       </div>
     </div>
-    <div class="filter-row" id="filter-row-hoods" hidden>
-      <div class="filter-group">
-        <span class="filter-label">Where</span>
-      </div>
-      <div class="filter-group" id="filter-hoods" data-group="neighborhoods"></div>
-    </div>
   </nav>
 
   <div class="dropdown-panel" id="cat-dropdown-panel" role="menu" aria-labelledby="cat-dropdown-btn" hidden></div>
+  <div class="dropdown-panel" id="hood-dropdown-panel" role="menu" aria-labelledby="hood-dropdown-btn" hidden></div>
 
-  <section class="picks" id="picks" aria-label="Top picks">
+  <section class="picks" id="picks" aria-label="My Usuals">
     <div class="picks-head">
-      <h2 class="picks-title">Tonight's Picks</h2>
-      <span class="picks-sub" id="picks-sub">Top picks from the next nights · curated for you</span>
+      <h2 class="picks-title">My Usuals</h2>
+      <span class="picks-sub" id="picks-sub">The two nights that fit you best</span>
     </div>
     <div class="picks-grid" id="picks-grid"></div>
   </section>
@@ -1680,23 +1714,29 @@
       });
       document.getElementById('cat-dropdown-clear').addEventListener('click', clearCategories);
 
+      // Neighborhoods live in their own dropdown panel, mirroring categories.
       const hoods = deriveNeighborhoods();
-      const hoodsRow = document.getElementById('filter-row-hoods');
-      const hoodsWrap = document.getElementById('filter-hoods');
-      hoodsWrap.innerHTML = '';
+      const hoodBtn = document.getElementById('hood-dropdown-btn');
+      const hoodPanel = document.getElementById('hood-dropdown-panel');
+      hoodPanel.innerHTML = '';
       if (!hoods.length) {
-        hoodsRow.hidden = true;
+        hoodBtn.hidden = true;
       } else {
-        hoodsRow.hidden = false;
+        hoodBtn.hidden = false;
+        const hoodHead = document.createElement('div');
+        hoodHead.className = 'dp-head';
+        hoodHead.innerHTML = `
+          <span class="dp-title">Where</span>
+          <button type="button" class="dp-clear" id="hood-dropdown-clear">Clear</button>
+        `;
+        hoodPanel.appendChild(hoodHead);
         hoods.forEach(({ slug, name }) => {
-          const btn = document.createElement('button');
-          btn.className = 'chip';
-          btn.textContent = name;
-          btn.dataset.hood = slug;
-          btn.setAttribute('aria-pressed', 'false');
-          btn.addEventListener('click', () => toggleHood(slug));
-          hoodsWrap.appendChild(btn);
+          const label = document.createElement('label');
+          label.innerHTML = `<input type="checkbox" data-hood="${escapeHtml(slug)}"><span>${escapeHtml(name)}</span>`;
+          label.querySelector('input').addEventListener('change', () => toggleHood(slug));
+          hoodPanel.appendChild(label);
         });
+        document.getElementById('hood-dropdown-clear').addEventListener('click', clearHoods);
       }
       // Drop any active hoods that no longer exist in the feed
       for (const slug of [...state.activeHoods]) {
@@ -1752,12 +1792,34 @@
       if (clear) clear.disabled = cats.length === 0;
     }
 
+    function clearHoods() {
+      state.activeHoods.clear();
+      updateHoodChips();
+      writeHash();
+      renderCalendar();
+      refreshMapMarkers();
+    }
+
     function updateHoodChips() {
-      document.querySelectorAll('.chip[data-hood]').forEach((btn) => {
-        const on = state.activeHoods.has(btn.dataset.hood);
-        btn.classList.toggle('is-active', on);
-        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      // Update checkboxes inside the dropdown
+      document.querySelectorAll('#hood-dropdown-panel input[data-hood]').forEach((cb) => {
+        cb.checked = state.activeHoods.has(cb.dataset.hood);
       });
+      // Update the button label
+      const valueEl = document.getElementById('hood-dropdown-value');
+      const clear = document.getElementById('hood-dropdown-clear');
+      if (!valueEl) return;
+      const hoods = [...state.activeHoods]
+        .map((slug) => state.hoodSlugToName.get(slug))
+        .filter(Boolean);
+      if (!hoods.length) {
+        valueEl.textContent = 'All';
+      } else if (hoods.length <= 2) {
+        valueEl.textContent = hoods.join(', ');
+      } else {
+        valueEl.textContent = `${hoods.length} selected`;
+      }
+      if (clear) clear.disabled = hoods.length === 0;
     }
 
     function toggleWeather() {
@@ -1811,6 +1873,49 @@
       closeCatDropdown();
     }
     function onEscDropdown(e) { if (e.key === 'Escape') closeCatDropdown(); }
+
+    // Neighborhood dropdown — mirrors the categories pattern
+    function positionHoodDropdown() {
+      const btn = document.getElementById('hood-dropdown-btn');
+      const panel = document.getElementById('hood-dropdown-panel');
+      if (!btn || panel.hidden) return;
+      const r = btn.getBoundingClientRect();
+      const panelW = panel.offsetWidth || 220;
+      let left = r.left;
+      if (left + panelW > window.innerWidth - 8) {
+        left = Math.max(8, window.innerWidth - panelW - 8);
+      }
+      panel.style.top = `${Math.round(r.bottom + 6)}px`;
+      panel.style.left = `${Math.round(left)}px`;
+    }
+    function openHoodDropdown() {
+      const btn = document.getElementById('hood-dropdown-btn');
+      const panel = document.getElementById('hood-dropdown-panel');
+      panel.hidden = false;
+      btn.setAttribute('aria-expanded', 'true');
+      positionHoodDropdown();
+      document.addEventListener('mousedown', onDocCloseHoodDropdown, true);
+      document.addEventListener('keydown', onEscHoodDropdown);
+      window.addEventListener('resize', positionHoodDropdown);
+      window.addEventListener('scroll', positionHoodDropdown, true);
+    }
+    function closeHoodDropdown() {
+      const btn = document.getElementById('hood-dropdown-btn');
+      const panel = document.getElementById('hood-dropdown-panel');
+      panel.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+      document.removeEventListener('mousedown', onDocCloseHoodDropdown, true);
+      document.removeEventListener('keydown', onEscHoodDropdown);
+      window.removeEventListener('resize', positionHoodDropdown);
+      window.removeEventListener('scroll', positionHoodDropdown, true);
+    }
+    function onDocCloseHoodDropdown(e) {
+      const panel = document.getElementById('hood-dropdown-panel');
+      const btn = document.getElementById('hood-dropdown-btn');
+      if (panel.contains(e.target) || btn.contains(e.target)) return;
+      closeHoodDropdown();
+    }
+    function onEscHoodDropdown(e) { if (e.key === 'Escape') closeHoodDropdown(); }
 
     function updateFilterHeight() {
       const fb = document.getElementById('filters');
@@ -1895,6 +2000,7 @@
           const previewImg = imageForEvent(ev);
           const previewCap = [ev.venue, ev.neighborhood].filter(Boolean).join(' · ');
           li.innerHTML = `
+            <div class="event-icon-wrap" aria-hidden="true">${iconFor(ev.category)}</div>
             <div class="event-time">${fmtTime(ev.time)}</div>
             <div class="event-body">
               <div class="event-title" data-image="${escapeHtml(previewImg)}"${previewCap ? ` data-caption="${escapeHtml(previewCap)}"` : ''}>${ev.url
@@ -1919,10 +2025,9 @@
           more.textContent = isExpanded
             ? 'Show fewer'
             : `See ${hiddenCount} more event${hiddenCount === 1 ? '' : 's'}`;
-          more.addEventListener('click', () => {
-            if (state.expandedDates.has(key)) state.expandedDates.delete(key);
-            else state.expandedDates.add(key);
-            renderCalendar();
+          more.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleDayExpanded(key);
           });
           content.appendChild(more);
         }
@@ -1930,7 +2035,30 @@
 
       day.appendChild(marker);
       day.appendChild(content);
+
+      // Click anywhere on the day (except links, the marker, or "+ more") to
+      // toggle inline expansion of the day's events.
+      if (!isEmpty) {
+        day.style.cursor = 'pointer';
+        day.addEventListener('click', (e) => {
+          if (e.target.closest('a, button, input, label')) return;
+          toggleDayExpanded(key);
+        });
+      }
+
       return day;
+    }
+
+    function toggleDayExpanded(key) {
+      if (state.expandedDates.has(key)) state.expandedDates.delete(key);
+      else state.expandedDates.add(key);
+      renderCalendar();
+    }
+
+    function iconFor(category) {
+      const id = ['music','comedy','art','food','talk','nightlife'].includes(category)
+        ? `i-${category}` : 'i-talk';
+      return `<svg class="event-icon" aria-hidden="true"><use href="#${id}"/></svg>`;
     }
 
     function renderCalendar() {
@@ -1983,8 +2111,8 @@
       }
 
       const filterNote = (state.activeCats?.size || state.activeHoods?.size)
-        ? 'Top picks · filtered'
-        : 'Top picks · curated for you';
+        ? 'Filtered to what you chose'
+        : 'The two nights that fit you best';
       if (sub) sub.textContent = filterNote;
 
       if (!picks.length) {
@@ -2003,7 +2131,7 @@
           <article class="pick-card" data-date="${escapeHtml(p.date)}">
             <div class="pick-head">
               <span class="pick-date">${escapeHtml(dayLabel)} · ${escapeHtml(fmtTime(ev.time))}</span>
-              <span>${escapeHtml(ev.category || '')}</span>
+              <span class="pick-icon-wrap" aria-hidden="true">${iconFor(ev.category)}</span>
             </div>
             <div class="pick-title">${titleInner}</div>
             ${ev.venue || ev.neighborhood
@@ -2794,10 +2922,19 @@
       setView(state.view, { silent: true });
 
       // Scroll target: linked date from hash, else today.
+      // Picks renders after fetch and changes layout height, so we double-RAF
+      // + a fallback setTimeout to make sure today is the landing position
+      // regardless of when layout settles.
       const target = state.linkedDate || state.todayKey;
-      requestAnimationFrame(() => {
+      const goToTarget = () => {
         if (state.view === 'calendar') scrollToDate(target, 'instant');
-        setTimeout(() => observeToday(), 50);
+      };
+      requestAnimationFrame(() => {
+        goToTarget();
+        requestAnimationFrame(() => {
+          goToTarget();
+          setTimeout(() => { goToTarget(); observeToday(); }, 80);
+        });
       });
 
       document.getElementById('today-btn').addEventListener('click', scrollToToday);
@@ -2810,6 +2947,12 @@
         const btn = document.getElementById('cat-dropdown-btn');
         if (btn.getAttribute('aria-expanded') === 'true') closeCatDropdown();
         else openCatDropdown();
+      });
+      // Neighborhood dropdown toggle
+      document.getElementById('hood-dropdown-btn').addEventListener('click', () => {
+        const btn = document.getElementById('hood-dropdown-btn');
+        if (btn.getAttribute('aria-expanded') === 'true') closeHoodDropdown();
+        else openHoodDropdown();
       });
       document.querySelectorAll('.tab').forEach((b) => {
         b.addEventListener('click', () => setView(b.dataset.view));
