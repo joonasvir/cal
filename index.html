@@ -330,6 +330,8 @@
       border-left: 1px solid var(--softest);
     }
     .topbar-group.is-end { margin-left: auto; }
+    /* The View dropdown is mobile-only; hide it on desktop. */
+    .view-mobile-only { display: none; }
 
     .tab {
       appearance: none;
@@ -435,6 +437,36 @@
     }
     .dropdown-panel .dp-clear:hover { color: var(--ink); }
     .dropdown-panel .dp-clear[disabled] { opacity: 0.3; cursor: default; }
+    /* Single-select rows (used by the mobile View dropdown). */
+    .dropdown-panel .dp-item {
+      appearance: none;
+      background: none;
+      border: 0;
+      padding: 9px 0;
+      font: inherit;
+      font-size: 14px;
+      letter-spacing: 0;
+      color: var(--soft);
+      cursor: pointer;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+    }
+    .dropdown-panel .dp-item::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      border: 1.5px solid var(--ink);
+      background: var(--paper);
+      flex-shrink: 0;
+    }
+    .dropdown-panel .dp-item.is-active::before { background: var(--ink); }
+    .dropdown-panel .dp-item:hover { color: var(--ink); }
+    .dropdown-panel .dp-item.is-active { color: var(--ink); font-weight: 600; }
+    .dropdown-panel .dp-item[data-action]::before { display: none; }
     .dropdown-panel label {
       display: flex;
       align-items: center;
@@ -1677,6 +1709,10 @@
       :root { --topbar-h: 44px; }
       .topbar { padding: 0 var(--pad-x); }
       .topbar-group + .topbar-group { margin-left: 14px; padding-left: 14px; }
+      /* On mobile: replace the 4-button tab row with the View dropdown so
+         the topbar (Categories · Where · View) fits a 375px iPhone. */
+      .topbar [role="tablist"] { display: none; }
+      .view-mobile-only { display: flex; }
       .tab { font-size: 10px; padding: 13px 0 11px; margin-right: 14px; letter-spacing: 0.12em; }
       .topbar-group .tab:last-child { margin-right: 0; }
 
@@ -1806,10 +1842,21 @@
       <button class="tab is-active" id="tab-month" role="tab" aria-selected="true" data-view="month">Month</button>
       <button class="tab" id="tab-year"  role="tab" aria-selected="false" data-view="year">Year</button>
     </div>
+    <!-- Mobile-only: collapses the tab row into a single dropdown so the
+         topbar fits on a 375px iPhone alongside Categories + Where. -->
+    <div class="topbar-group is-end view-mobile-only">
+      <div class="dropdown" id="view-dropdown">
+        <button class="dropdown-btn" id="view-dropdown-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="view-dropdown-panel">
+          <span class="dropdown-label">View</span>
+          <span class="dropdown-value" id="view-dropdown-value">Month</span>
+        </button>
+      </div>
+    </div>
   </nav>
 
   <div class="dropdown-panel" id="cat-dropdown-panel" role="menu" aria-labelledby="cat-dropdown-btn" hidden></div>
   <div class="dropdown-panel" id="hood-dropdown-panel" role="menu" aria-labelledby="hood-dropdown-btn" hidden></div>
+  <div class="dropdown-panel" id="view-dropdown-panel" role="menu" aria-labelledby="view-dropdown-btn" hidden></div>
 
   <section class="picks" id="picks" aria-label="My Usuals">
     <div class="picks-head">
@@ -2390,6 +2437,76 @@
     }
     function onEscHoodDropdown(e) { if (e.key === 'Escape') closeHoodDropdown(); }
 
+    // View dropdown (mobile-only) — same shape as Categories / Where but with
+    // a single-select radio model since exactly one view can be active.
+    const VIEW_LABELS = { month: 'Month', week: 'Week', year: 'Year', map: 'Map', dn: 'Date Night' };
+    function renderViewDropdownPanel() {
+      const panel = document.getElementById('view-dropdown-panel');
+      if (!panel || panel.dataset.built === '1') return;
+      panel.innerHTML = `
+        <div class="dp-head"><span class="dp-title">View</span></div>
+        <button type="button" class="dp-item" data-action="today">Today</button>
+        <button type="button" class="dp-item" data-view="month" role="menuitemradio" aria-checked="true">Month</button>
+        <button type="button" class="dp-item" data-view="week"  role="menuitemradio" aria-checked="false">Week</button>
+        <button type="button" class="dp-item" data-view="year"  role="menuitemradio" aria-checked="false">Year</button>
+        <button type="button" class="dp-item" data-view="map"   role="menuitemradio" aria-checked="false">Map</button>
+        <button type="button" class="dp-item" data-view="dn"    role="menuitemradio" aria-checked="false">Date Night</button>
+      `;
+      panel.querySelectorAll('.dp-item').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (btn.dataset.action === 'today') {
+            // Today is an action, not a view — jump to today without changing view.
+            scrollToDate(state.todayKey, 'smooth');
+          } else if (btn.dataset.view) {
+            setView(btn.dataset.view);
+          }
+          closeViewDropdown();
+        });
+      });
+      panel.dataset.built = '1';
+    }
+    function positionViewDropdown() {
+      const btn = document.getElementById('view-dropdown-btn');
+      const panel = document.getElementById('view-dropdown-panel');
+      if (!btn || panel.hidden) return;
+      const r = btn.getBoundingClientRect();
+      const panelW = panel.offsetWidth || 220;
+      let left = r.right - panelW;
+      if (left < 8) left = 8;
+      panel.style.top = `${Math.round(r.bottom + 6)}px`;
+      panel.style.left = `${Math.round(left)}px`;
+    }
+    function openViewDropdown() {
+      renderViewDropdownPanel();
+      const btn = document.getElementById('view-dropdown-btn');
+      const panel = document.getElementById('view-dropdown-panel');
+      panel.hidden = false;
+      btn.setAttribute('aria-expanded', 'true');
+      positionViewDropdown();
+      document.addEventListener('mousedown', onDocCloseViewDropdown, true);
+      document.addEventListener('keydown', onEscViewDropdown);
+      window.addEventListener('resize', positionViewDropdown);
+      window.addEventListener('scroll', positionViewDropdown, true);
+    }
+    function closeViewDropdown() {
+      const btn = document.getElementById('view-dropdown-btn');
+      const panel = document.getElementById('view-dropdown-panel');
+      panel.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+      document.removeEventListener('mousedown', onDocCloseViewDropdown, true);
+      document.removeEventListener('keydown', onEscViewDropdown);
+      window.removeEventListener('resize', positionViewDropdown);
+      window.removeEventListener('scroll', positionViewDropdown, true);
+    }
+    function onDocCloseViewDropdown(e) {
+      const panel = document.getElementById('view-dropdown-panel');
+      const btn = document.getElementById('view-dropdown-btn');
+      if (panel.contains(e.target) || btn.contains(e.target)) return;
+      closeViewDropdown();
+    }
+    function onEscViewDropdown(e) { if (e.key === 'Escape') closeViewDropdown(); }
+
     function updateFilterHeight() {
       // Single sticky bar now — the topbar carries both the filter
       // dropdowns and the view toggles. .day's scroll-margin-top and
@@ -2728,6 +2845,13 @@
         const on = b.dataset.view === v;
         b.classList.toggle('is-active', on);
         b.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      // Keep the mobile "View" dropdown label + selected indicator in sync.
+      const viewVal = document.getElementById('view-dropdown-value');
+      if (viewVal) viewVal.textContent = VIEW_LABELS[v] || v;
+      document.querySelectorAll('#view-dropdown-panel [data-view]').forEach((el) => {
+        el.classList.toggle('is-active', el.dataset.view === v);
+        el.setAttribute('aria-checked', el.dataset.view === v ? 'true' : 'false');
       });
       // Recalculate sticky offsets — the filter bar shows in some views and
       // hides in others, so the month-title's effective sticky-top changes.
@@ -3775,6 +3899,13 @@
         const btn = document.getElementById('hood-dropdown-btn');
         if (btn.getAttribute('aria-expanded') === 'true') closeHoodDropdown();
         else openHoodDropdown();
+      });
+      // View dropdown toggle (mobile-only) — collapses Today/Week/Month/Year
+      // tabs into one panel so the 375px iPhone topbar fits.
+      const viewBtn = document.getElementById('view-dropdown-btn');
+      if (viewBtn) viewBtn.addEventListener('click', () => {
+        if (viewBtn.getAttribute('aria-expanded') === 'true') closeViewDropdown();
+        else openViewDropdown();
       });
       // My Usuals — show more / show fewer
       const picksMore = document.getElementById('picks-more');

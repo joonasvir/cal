@@ -17,7 +17,10 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # Bumped from 15 → 20 minutes. The looser ranker prompt makes Claude
+    # think longer per day; the previous deeper-prompt run was killed at
+    # 15:22 right after the build step succeeded.
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
