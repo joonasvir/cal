@@ -153,17 +153,16 @@
     }
     .sheet-titles { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
     .sheet-title {
-      font-size: 22px;
-      font-weight: 500;
+      font-size: 26px;
+      font-weight: 700;
       letter-spacing: -0.02em;
       margin: 0;
-      line-height: 1;
+      line-height: 1.05;
     }
     .sheet-sub {
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+      font-size: 14px;
       color: var(--soft);
+      line-height: 1.4;
     }
     .sheet-close {
       appearance: none;
@@ -179,14 +178,35 @@
     }
     .sheet-close:hover { color: var(--ink); }
     .sheet-body { padding: 16px 26px 24px; overflow: auto; }
-    .sheet-section + .sheet-section { margin-top: 22px; }
+    .sheet-section + .sheet-section { margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--softest); }
     .sheet-section h3 {
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--soft);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.012em;
+      color: var(--ink);
+      margin: 0 0 8px;
+    }
+    .sheet-section p, .sheet-prose p {
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: var(--ink);
       margin: 0 0 10px;
-      font-weight: 500;
+    }
+    .sheet-prose p:last-child { margin-bottom: 0; }
+    .sheet-prose ol {
+      margin: 8px 0 0;
+      padding-left: 22px;
+      font-size: 14.5px;
+      line-height: 1.55;
+    }
+    .sheet-prose ol li { margin-bottom: 6px; }
+    .sheet-prose ol li strong { font-weight: 700; }
+    .sheet-prose code {
+      font-family: ui-monospace, 'JetBrains Mono', SF Mono, Menlo, monospace;
+      font-size: 13px;
+      background: var(--softest);
+      padding: 0 4px;
+      border-radius: 2px;
     }
     .source-row {
       display: grid;
@@ -208,11 +228,9 @@
     .source-row.is-ok    .source-dot { background: #16a34a; box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.18); }
     .source-row.is-empty .source-dot { background: #d97706; box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.18); }
     .source-row.has-error .source-dot { background: #b00020; box-shadow: 0 0 0 2px rgba(176, 0, 32, 0.18); }
-    .source-name { font-size: 14px; font-weight: 500; }
+    .source-name { font-size: 15px; font-weight: 600; }
     .source-count {
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-size: 13px;
       font-variant-numeric: tabular-nums;
       color: var(--soft);
       align-self: center;
@@ -222,61 +240,57 @@
     .source-row.is-empty .source-count { color: #d97706; font-weight: 600; }
     .source-fetched {
       grid-column: 2 / -1;
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--softer);
+      font-size: 12px;
+      color: var(--soft);
       font-variant-numeric: tabular-nums;
       margin-top: 2px;
     }
     .source-row .source-err {
       grid-column: 2 / -1;
-      font-size: 11px;
+      font-size: 12.5px;
       color: #b00020;
       font-family: ui-monospace, 'JetBrains Mono', SF Mono, Menlo, monospace;
-      margin-top: 4px;
+      margin-top: 6px;
       word-break: break-word;
     }
     .sheet-summary {
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: var(--soft);
     }
     .sheet-summary .ok  { color: var(--ink); font-weight: 600; }
     .sheet-summary .bad { color: #b00020; font-weight: 600; }
     .sheet-summary .muted { color: var(--soft); }
     .source-url {
       grid-column: 2 / -1;
-      font-size: 11px;
+      font-size: 12.5px;
       color: var(--soft);
       font-family: ui-monospace, 'JetBrains Mono', SF Mono, Menlo, monospace;
       word-break: break-all;
       text-decoration: none;
+      margin-top: 2px;
     }
-    .source-url:hover { color: var(--ink); }
+    .source-url:hover { color: var(--ink); text-decoration: underline; }
     .kv {
       display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 4px 16px;
-      font-size: 13px;
+      grid-template-columns: minmax(120px, auto) 1fr;
+      gap: 6px 18px;
+      font-size: 14px;
     }
-    .kv dt { color: var(--soft); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; align-self: center; }
-    .kv dd { margin: 0; font-variant-numeric: tabular-nums; }
-    .kv dd a { color: inherit; }
+    .kv dt { color: var(--soft); align-self: center; }
+    .kv dd { margin: 0; font-variant-numeric: tabular-nums; color: var(--ink); }
+    .kv dd a { color: inherit; text-decoration: underline; }
     .sheet-foot {
-      padding: 12px 26px 18px;
+      padding: 14px 26px 18px;
       border-top: 1px solid var(--softest);
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-size: 13px;
       color: var(--soft);
       display: flex;
       justify-content: space-between;
       gap: 12px;
     }
-    .sheet-foot a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--softer); }
-    .sheet-foot a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+    .sheet-foot a { color: var(--ink); text-decoration: underline; }
+    .sheet-foot a:hover { opacity: 0.6; }
     .masthead .title {
       grid-column: 1 / -1;
       font-size: clamp(28px, 4vw, 44px);
@@ -603,8 +617,9 @@
       padding: 0 6px;
       margin-left: -6px;
     }
-    .day-marker:hover .numeral { color: var(--softer); }
-    .day.is-linked .day-marker:hover .numeral { color: var(--paper); opacity: 0.85; }
+    /* Subtle hover — opacity dip, not a stark color shift. */
+    .day-marker { transition: opacity 140ms ease; }
+    .day-marker:hover { opacity: 0.72; }
     .dow {
       display: flex;
       gap: 6px;
@@ -1005,141 +1020,6 @@
       padding-top: 8px;
     }
 
-    /* ── Today view ──────────────────────────────────────
-       One-day focused page. Massive numeral + weather + the day's events,
-       no calendar grid clutter. */
-    #today-view {
-      padding: clamp(24px, 4vw, 56px) var(--pad-x) clamp(48px, 6vw, 96px);
-    }
-    .today-frame { max-width: 100%; }
-    .today-hero {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: clamp(24px, 4vw, 64px);
-      align-items: end;
-      padding-bottom: clamp(20px, 3vw, 36px);
-      border-bottom: 1px solid var(--rule);
-    }
-    .today-dow {
-      font-size: 12px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: var(--soft);
-      margin-bottom: clamp(10px, 1.5vw, 18px);
-    }
-    .today-numeral {
-      font-size: clamp(160px, 28vw, 420px);
-      font-weight: 900;
-      letter-spacing: -0.06em;
-      line-height: 0.84;
-      font-variant-numeric: lining-nums;
-    }
-    .today-month {
-      font-size: clamp(28px, 4vw, 56px);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1;
-      margin-top: 8px;
-    }
-    .today-weather { padding-bottom: 12px; }
-    .today-weather .row {
-      font-size: 13px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--soft);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px 16px;
-      align-items: baseline;
-    }
-    .today-weather .row strong {
-      color: var(--ink);
-      font-weight: 600;
-      font-variant-numeric: tabular-nums;
-    }
-    .today-weather .note {
-      font-size: 15px;
-      line-height: 1.4;
-      margin-top: 10px;
-      max-width: 48ch;
-    }
-    .today-section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin: clamp(28px, 4vw, 56px) 0 clamp(16px, 2vw, 24px);
-    }
-    .today-section-head h2 {
-      font-size: clamp(20px, 2.8vw, 28px);
-      font-weight: 700;
-      letter-spacing: -0.012em;
-      margin: 0;
-    }
-    .today-section-head .count {
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--soft);
-      font-variant-numeric: tabular-nums;
-    }
-    .today-events {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .today-event {
-      display: grid;
-      grid-template-columns: 80px 1fr auto;
-      gap: 24px;
-      padding: clamp(18px, 2.5vw, 28px) 0;
-      border-bottom: 1px solid var(--softest);
-      align-items: baseline;
-    }
-    .today-event-time {
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-variant-numeric: tabular-nums;
-      color: var(--soft);
-    }
-    .today-event-title {
-      font-size: clamp(22px, 2vw, 30px);
-      font-weight: 700;
-      line-height: 1.18;
-      letter-spacing: -0.015em;
-    }
-    .today-event-title a {
-      color: inherit;
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-    }
-    .today-event-title a:hover { border-bottom-color: var(--ink); }
-    .today-event-meta {
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--soft);
-      margin-top: 6px;
-    }
-    .today-event-note {
-      font-size: 15px;
-      line-height: 1.5;
-      margin-top: 10px;
-      max-width: 60ch;
-    }
-    .today-event-cat {
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--soft);
-    }
-    .today-empty {
-      font-size: 14px;
-      color: var(--soft);
-      padding: 32px 0;
-    }
-
     /* ── Week view (7-column at-a-glance) ────────────────── */
     #week-view {
       padding: clamp(20px, 3vw, 40px) var(--pad-x) clamp(40px, 6vw, 80px);
@@ -1376,26 +1256,23 @@
     /* ── View visibility ─────────────────────────────────
        Only one main view section is visible at a time. Topbar flips body[data-view].
        Default body markup has data-view="month". */
-    #today-view, #week-view, #year-view, #map-view, #date-night { display: none; }
+    #week-view, #year-view, #map-view, #date-night { display: none; }
 
-    body[data-view="today"] #today-view { display: block; }
-    body[data-view="week"]  #week-view  { display: block; }
-    body[data-view="year"]  #year-view  { display: block; }
-    body[data-view="dn"]    #date-night { display: block; }
-    body[data-view="map"]   #map-view   { display: block; }
+    body[data-view="week"] #week-view  { display: block; }
+    body[data-view="year"] #year-view  { display: block; }
+    body[data-view="dn"]   #date-night { display: block; }
+    body[data-view="map"]  #map-view   { display: block; }
 
     /* Hide the calendar grid in non-month views. */
-    body[data-view="today"] #calendar,
-    body[data-view="week"]  #calendar,
-    body[data-view="year"]  #calendar,
-    body[data-view="dn"]    #calendar,
-    body[data-view="map"]   #calendar { display: none; }
+    body[data-view="week"] #calendar,
+    body[data-view="year"] #calendar,
+    body[data-view="dn"]   #calendar,
+    body[data-view="map"]  #calendar { display: none; }
 
-    /* Picks (My Usuals) and the floating Today button only make sense in Month view. */
+    /* Picks (My Usuals) only makes sense in Month view. */
     body:not([data-view="month"]) .picks { display: none; }
-    body:not([data-view="month"]) .today-btn { display: none; }
 
-    /* Filters apply to Month / Today / Week / Year (event filtering).
+    /* Filters apply to Month / Week / Year (event filtering).
        Hide in Date Night and Map where they don't apply. */
     body[data-view="dn"]  .filters,
     body[data-view="map"] .filters { display: none; }
@@ -1665,42 +1542,52 @@
       padding: 24px 0;
     }
 
-    /* ── Floating today button ──────────────────────────── */
-    .today-btn {
+    /* ── Floating action cluster (bottom-right) ──────────
+       Date Night + Map icons. The old "Today" floating button is gone —
+       Today now lives as a tab in the always-visible topbar. */
+    .float-actions {
       position: fixed;
-      right: clamp(20px, 4vw, 56px);
-      bottom: clamp(20px, 3vw, 40px);
+      right: clamp(18px, 3vw, 40px);
+      bottom: clamp(18px, 3vw, 40px);
       z-index: 40;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
+    }
+    .float-btn {
+      appearance: none;
       background: var(--ink);
       color: var(--paper);
       border: 0;
-      padding: 14px 22px;
-      font: inherit;
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      font-weight: 600;
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(8px);
-      pointer-events: none;
-      transition: opacity 180ms ease, transform 180ms ease;
-    }
-    .today-btn.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-    .today-btn::before {
-      content: '';
-      display: inline-block;
-      width: 6px;
-      height: 6px;
+      padding: 0;
+      width: 48px;
+      height: 48px;
       border-radius: 999px;
-      margin-right: 8px;
-      background: var(--paper);
-      vertical-align: 1px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+      transition: transform 120ms ease, background 120ms ease, color 120ms ease, box-shadow 120ms ease;
     }
+    .float-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+    }
+    .float-btn:focus-visible { outline: 2.5px solid var(--ink); outline-offset: 3px; }
+    .float-btn.is-active {
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12), inset 0 0 0 2px var(--ink);
+    }
+    .float-btn-label {
+      position: absolute;
+      width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+    /* Hide DN button when DN view is open, Map button when Map view is open — no point pointing to where you already are. */
+    body[data-view="dn"]  #action-dn  { display: none; }
+    body[data-view="map"] #action-map { display: none; }
 
     /* ── Mobile ─────────────────────────────────────────── */
     @media (max-width: 720px) {
@@ -1714,18 +1601,6 @@
       .meta-link, .meta-links { font-size: 10px; letter-spacing: 0.14em; }
       .meta-caption { font-size: 10px; }
 
-      #today-view { padding: 16px var(--pad-x) 40px; }
-      .today-hero {
-        grid-template-columns: 1fr;
-        gap: 12px;
-        align-items: start;
-      }
-      .today-numeral { font-size: clamp(140px, 42vw, 220px); line-height: 0.86; }
-      .today-month { font-size: 22px; }
-      .today-event { grid-template-columns: 60px 1fr; gap: 12px; padding: 14px 0; }
-      .today-event-cat { display: none; }
-      .today-event-title { font-size: 19px; }
-      .today-event-note { font-size: 13.5px; }
 
       #year-view { padding: 16px var(--pad-x) 40px; }
       .year-head {
@@ -1807,13 +1682,8 @@
       .event-cat { display: none; }
       .more { font-size: 13px; }
 
-      .today-btn {
-        padding: 11px 16px;
-        font-size: 10px;
-        letter-spacing: 0.14em;
-        right: 16px;
-        bottom: 16px;
-      }
+      .float-actions { right: 14px; bottom: 14px; gap: 8px; }
+      .float-btn { width: 42px; height: 42px; }
 
       :root { --topbar-h: 44px; }
       .topbar { padding: 0 var(--pad-x); }
@@ -1893,7 +1763,7 @@
 
     /* ── Print ──────────────────────────────────────────── */
     @media print {
-      .filters, .today-btn { display: none; }
+      .topbar, .filters, .float-actions { display: none; }
       .month-title { position: static; }
       .month { break-before: page; }
       .day { break-inside: avoid; }
@@ -1926,20 +1796,15 @@
     <h1 class="title">2026 / A year in nights.</h1>
   </header>
 
-  <nav class="topbar" id="topbar" aria-label="View and data toggles">
-    <div class="topbar-group" role="tablist" aria-label="Zoom">
-      <button class="tab" id="tab-today" role="tab" type="button" aria-selected="false" data-view="today">Today</button>
-      <button class="tab" id="tab-week"  role="tab" type="button" aria-selected="false" data-view="week">Week</button>
-      <button class="tab is-active" id="tab-month" role="tab" type="button" aria-selected="true" data-view="month">Month</button>
-      <button class="tab" id="tab-year"  role="tab" type="button" aria-selected="false" data-view="year">Year</button>
-    </div>
-    <div class="topbar-group" role="tablist" aria-label="Modes">
-      <button class="tab" id="tab-dn"  role="tab" type="button" aria-selected="false" data-view="dn">Date night</button>
-      <button class="tab" id="tab-map" role="tab" type="button" aria-selected="false" data-view="map">Map</button>
-    </div>
-    <div class="topbar-group is-end">
+  <nav class="topbar" id="topbar" aria-label="View toggles">
+    <div class="topbar-group">
       <button class="tab" id="meta-sources" type="button" aria-haspopup="dialog" aria-controls="sources-sheet">Sources</button>
-      <button class="tab is-active" id="meta-weather" type="button" aria-pressed="true">Weather</button>
+    </div>
+    <div class="topbar-group is-end" role="tablist" aria-label="Zoom">
+      <button class="tab" id="tab-today" type="button" data-action="today">Today</button>
+      <button class="tab" id="tab-week"  role="tab" aria-selected="false" data-view="week">Week</button>
+      <button class="tab is-active" id="tab-month" role="tab" aria-selected="true" data-view="month">Month</button>
+      <button class="tab" id="tab-year"  role="tab" aria-selected="false" data-view="year">Year</button>
     </div>
   </nav>
 
@@ -1974,9 +1839,6 @@
     <button class="picks-more" id="picks-more" type="button" hidden></button>
   </section>
 
-  <section id="today-view" aria-label="Today">
-    <div class="today-frame" id="today-frame"></div>
-  </section>
   <section id="week-view" aria-label="This week">
     <div class="week-frame" id="week-frame"></div>
   </section>
@@ -2007,7 +1869,20 @@
     <div class="cap" id="title-preview-cap"></div>
   </div>
 
-  <button class="today-btn" id="today-btn" type="button" aria-label="Scroll to today">Today</button>
+  <div class="float-actions" role="toolbar" aria-label="Quick views">
+    <button class="float-btn" id="action-dn" type="button" data-view="dn" aria-label="Date night">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 4h14l-7 8z"/><path d="M12 12v8"/><path d="M8 20h8"/>
+      </svg>
+      <span class="float-btn-label">Date night</span>
+    </button>
+    <button class="float-btn" id="action-map" type="button" data-view="map" aria-label="Map">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
+      </svg>
+      <span class="float-btn-label">Map</span>
+    </button>
+  </div>
 
   <dialog class="sheet" id="sources-sheet" aria-labelledby="sources-sheet-title">
     <div class="sheet-inner">
@@ -2352,7 +2227,6 @@
     // switches feel instant) plus whichever view is on top.
     function renderCurrent() {
       renderCalendar();
-      if (state.view === 'today') renderTodayView();
       if (state.view === 'week')  renderWeekView();
       if (state.view === 'year')  renderYearView();
       if (state.view === 'dn')    renderDateNight();
@@ -2438,9 +2312,8 @@
         btn.setAttribute('aria-pressed', state.showWeather ? 'true' : 'false');
         btn.classList.toggle('is-active', state.showWeather);
       }
-      // Today and Week views bake the weather block in — re-render so the change is visible.
-      if (state.view === 'today') renderTodayView();
-      if (state.view === 'week')  renderWeekView();
+      // Week view bakes the weather block in — re-render so the change is visible.
+      if (state.view === 'week') renderWeekView();
       writeHash();
     }
 
@@ -2832,10 +2705,11 @@
     }
 
     // ── Date Night ─────────────────────────────────────
-    const ALL_VIEWS = ['today', 'week', 'month', 'year', 'dn', 'map'];
-    // Zoom levels — higher = more zoomed in. Today → Year is a clean
-    // zoom-out gradient; Date Night and Map sit at the "Month" level.
-    const VIEW_ZOOM = { today: 4, week: 3, month: 2, dn: 2, map: 2, year: 1 };
+    // 'today' is a snap-to-today action on the Month view, not its own view.
+    const ALL_VIEWS = ['week', 'month', 'year', 'dn', 'map'];
+    // Zoom levels — higher = more zoomed in. Week → Month → Year is the
+    // zoom gradient; Date Night and Map sit at the "Month" level.
+    const VIEW_ZOOM = { week: 3, month: 2, dn: 2, map: 2, year: 1 };
 
     function normalizeView(v) {
       if (v === 'calendar') return 'month'; // backwards-compat with old URLs
@@ -2872,7 +2746,6 @@
       // Recalculate sticky offsets — the filter bar shows in some views and
       // hides in others, so the month-title's effective sticky-top changes.
       requestAnimationFrame(updateFilterHeight);
-      if (v === 'today') renderTodayView();
       if (v === 'week')  renderWeekView();
       if (v === 'year')  renderYearView();
       if (v === 'dn') {
@@ -2883,79 +2756,6 @@
         initMap();
       }
       if (!opts.silent) writeHash();
-    }
-
-    // ── Today view ─────────────────────────────────────
-    function renderTodayView() {
-      const root = document.getElementById('today-frame');
-      if (!root) return;
-      // Defensive: if init() hasn't computed todayKey yet, compute it inline.
-      if (!state.todayKey) {
-        const t = new Date();
-        state.todayKey = isoDate(t.getFullYear(), t.getMonth(), t.getDate());
-      }
-      const key = state.todayKey;
-      const payload = state.feed.days?.[key];
-      const events = filterEvents(payload?.events || []);
-      const weather = payload?.weather;
-      const d = new Date(key + 'T00:00:00');
-      const dowIdx = (d.getDay() + 6) % 7;
-
-      let weatherHtml = '';
-      if (weather && state.showWeather) {
-        const hi = weather.high ?? weather.high_f;
-        const lo = weather.low ?? weather.low_f;
-        const unit = (weather.unit || (weather.high_f != null ? 'F' : 'C'));
-        weatherHtml = `
-          <div class="today-weather">
-            <div class="row">
-              <strong>${hi}° / ${lo}°${unit}</strong>
-              <span>${escapeHtml(weather.condition || '')}</span>
-              ${weather.sunset ? `<span>sunset ${escapeHtml(weather.sunset)}</span>` : ''}
-              ${weather.precip_chance != null ? `<span>${weather.precip_chance}% precip</span>` : ''}
-            </div>
-            ${weather.note ? `<div class="note">${escapeHtml(weather.note)}</div>` : ''}
-          </div>
-        `;
-      }
-
-      const eventsHtml = events.length
-        ? `<ul class="today-events">${events.map((ev) => {
-            const previewImg = imageForEvent(ev);
-            const previewCap = [ev.venue, ev.neighborhood].filter(Boolean).join(' · ');
-            return `
-              <li class="today-event">
-                <div class="today-event-time">${escapeHtml(fmtTime(ev.time) || '—')}</div>
-                <div class="today-event-body">
-                  <div class="today-event-title" data-image="${escapeHtml(previewImg)}"${previewCap ? ` data-caption="${escapeHtml(previewCap)}"` : ''}>${ev.url
-                    ? `<a href="${escapeHtml(ev.url)}" target="_blank" rel="noopener">${escapeHtml(ev.title)}</a>`
-                    : escapeHtml(ev.title)}</div>
-                  ${ev.venue || ev.neighborhood
-                    ? `<div class="today-event-meta">${[ev.venue, ev.neighborhood].filter(Boolean).map(escapeHtml).join(' · ')}</div>`
-                    : ''}
-                  ${ev.note ? `<div class="today-event-note">${escapeHtml(ev.note)}</div>` : ''}
-                </div>
-                <div class="today-event-cat">${escapeHtml(ev.category || '')}</div>
-              </li>
-            `;
-          }).join('')}</ul>`
-        : '<div class="today-empty">Nothing curated for tonight. Check the Month or Date Night view.</div>';
-
-      root.innerHTML = `
-        <div class="today-hero">
-          <div>
-            <div class="today-dow">${DOW_LONG[dowIdx]}</div>
-            <div class="today-numeral">${d.getDate()}</div>
-            <div class="today-month">${MONTHS[d.getMonth()]} ${d.getFullYear()}</div>
-          </div>
-          ${weatherHtml || '<div></div>'}
-        </div>
-        <div class="today-section-head">
-          <h2>Tonight</h2>
-          <span class="count">${events.length} event${events.length === 1 ? '' : 's'}</span>
-        </div>
-        ${eventsHtml}
-      `;
     }
 
     // ── Year view (brutalist 12-month poster) ──────────
@@ -3625,30 +3425,12 @@
       },
     };
 
-    // ── Today: observer + button ───────────────────────
-    let todayObserver = null;
-    function observeToday() {
-      if (todayObserver) todayObserver.disconnect();
-      const todayEl = document.querySelector(`[data-date="${state.todayKey}"]`);
-      const btn = document.getElementById('today-btn');
-      if (!todayEl) {
-        btn.classList.remove('is-visible');
-        return;
-      }
-      todayObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            btn.classList.toggle('is-visible', !e.isIntersecting);
-          });
-        },
-        { rootMargin: `-${parseInt(getComputedStyle(document.documentElement).getPropertyValue('--filter-h')) || 56}px 0px -20% 0px` }
-      );
-      todayObserver.observe(todayEl);
-    }
-
     function scrollToToday() {
       scrollToDate(state.todayKey, 'smooth');
     }
+    // No-op kept so callers don't need null checks; the IntersectionObserver
+    // is gone with the floating Today button.
+    function observeToday() {}
 
     function scrollToDate(key, behavior = 'smooth') {
       const el = document.querySelector(`#calendar [data-date="${key}"]`);
@@ -3843,22 +3625,44 @@
         </dl>
       ` : '<p class="sheet-sub" style="text-transform:none; letter-spacing:0;">Image scrape not run yet — picsum fallback in use.</p>';
 
+      const howHtml = `
+        <div class="sheet-prose">
+          <p>This page rebuilds itself once a day, around 5 a.m. New York time. A GitHub Action does the work and commits the new <code>feed.json</code> to <code>main</code>; Vercel auto-deploys the static page.</p>
+          <p>Each build runs four steps in order:</p>
+          <ol>
+            <li><strong>Pull RSS.</strong> Five NYC culture feeds (Eater NY, The Skint, Bedford + Bowery, Brooklyn Vegan, Hyperallergic). Items older than 21 days are dropped; up to 25 per feed are kept. Failures don't kill the build — see the per-feed status below.</li>
+            <li><strong>Pull weather.</strong> Open-Meteo's free 16-day forecast for Brooklyn (40.6782, -73.9442). No API key.</li>
+            <li><strong>Rank with Claude.</strong> Items + the private taste profile (stored as a GitHub Actions secret) go to Claude Opus 4.7 with adaptive thinking. Claude extracts each event, picks a category, writes a one-sentence note in your voice. Output is JSON-schema-validated, so the shape of the result is guaranteed.</li>
+            <li><strong>Scrape hover images.</strong> For each ranked event the script fetches its URL with a 6-second timeout, reads the first 200 KB, and pulls <code>og:image</code> / <code>twitter:image</code> from the head. Already-scraped images from yesterday's feed are cached and reused for free.</li>
+          </ol>
+          <p>The Action runs daily on schedule and can also be triggered manually from the repo's Actions tab → <em>daily build</em> → Run workflow. If a feed errors or a scrape misses, the rest still ships — the hover preview just falls back to a category-keyword photo from LoremFlickr.</p>
+        </div>
+      `;
+
       body.innerHTML = `
         <section class="sheet-section">
-          <h3>Feeds</h3>
+          <h3>How this is built</h3>
+          ${howHtml}
+        </section>
+        <section class="sheet-section">
+          <h3>Feeds — last build</h3>
+          <p>What each RSS source contributed to this edition. A green dot is a successful pull, amber means the feed returned but had no items in the time window, red is a failure (error message below).</p>
           ${sourcesSummary}
           ${sourcesHtml}
         </section>
         <section class="sheet-section">
           <h3>Weather</h3>
+          <p>Pulled from Open-Meteo. No API key, no auth, free for non-commercial use.</p>
           ${weatherHtml}
         </section>
         <section class="sheet-section">
           <h3>Ranker</h3>
+          <p>Claude Opus 4.7 with adaptive thinking, structured output (JSON schema), and prompt-cached system prompt so the daily run stays cheap.</p>
           ${rankerHtml}
         </section>
         <section class="sheet-section">
           <h3>Hover images</h3>
+          <p>Real images come from the build's <code>og:image</code> scrape over each event's URL; what didn't scrape falls back first to a curated venue→photo map, then to LoremFlickr with category-aware keywords.</p>
           ${imagesHtml}
         </section>
         <section class="sheet-section">
@@ -3930,11 +3734,23 @@
         });
       });
 
-      document.getElementById('today-btn').addEventListener('click', scrollToToday);
-      // Masthead links (cleaner replacement for the old chip-action + chip.weather)
+      // Topbar Sources link.
       document.getElementById('meta-sources').addEventListener('click', openSourcesSheet);
-      document.getElementById('meta-weather').addEventListener('click', toggleWeather);
       document.getElementById('sources-close').addEventListener('click', closeSourcesSheet);
+
+      // Today tab → snap to today (Month view), no separate Today page.
+      const todayTab = document.getElementById('tab-today');
+      if (todayTab) {
+        todayTab.addEventListener('click', () => {
+          if (state.view !== 'month') transitionTo('month');
+          requestAnimationFrame(() => scrollToDate(state.todayKey, 'smooth'));
+        });
+      }
+
+      // Bottom-right floating cluster — Date night + Map icons.
+      document.querySelectorAll('.float-btn[data-view]').forEach((b) => {
+        b.addEventListener('click', () => transitionTo(b.dataset.view));
+      });
 
       // Categories dropdown toggle
       document.getElementById('cat-dropdown-btn').addEventListener('click', () => {
