@@ -59,6 +59,7 @@ export async function fetchAllFeeds() {
       tags: feed.tags,
       kept,
       error,
+      fetched_at: new Date().toISOString(),
     });
   }
   return { items, sources };

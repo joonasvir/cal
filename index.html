@@ -144,13 +144,24 @@
     }
     .source-row {
       display: grid;
-      grid-template-columns: 1fr auto;
-      column-gap: 16px;
+      grid-template-columns: 12px 1fr auto;
+      column-gap: 14px;
       row-gap: 2px;
-      padding: 10px 0;
+      padding: 12px 0;
       border-top: 1px solid var(--softest);
     }
     .source-row:first-child { border-top: 0; padding-top: 4px; }
+    .source-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-top: 7px;
+      background: var(--softer);
+      box-shadow: 0 0 0 2px var(--softest);
+    }
+    .source-row.is-ok    .source-dot { background: #16a34a; box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.18); }
+    .source-row.is-empty .source-dot { background: #d97706; box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.18); }
+    .source-row.has-error .source-dot { background: #b00020; box-shadow: 0 0 0 2px rgba(176, 0, 32, 0.18); }
     .source-name { font-size: 14px; font-weight: 500; }
     .source-count {
       font-size: 11px;
@@ -160,10 +171,20 @@
       color: var(--soft);
       align-self: center;
     }
+    .source-row.is-ok    .source-count { color: var(--ink); font-weight: 600; }
     .source-row.has-error .source-count { color: #b00020; font-weight: 600; }
-    .source-row.is-empty .source-count { color: var(--softer); }
+    .source-row.is-empty .source-count { color: #d97706; font-weight: 600; }
+    .source-fetched {
+      grid-column: 2 / -1;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--softer);
+      font-variant-numeric: tabular-nums;
+      margin-top: 2px;
+    }
     .source-row .source-err {
-      grid-column: 1 / -1;
+      grid-column: 2 / -1;
       font-size: 11px;
       color: #b00020;
       font-family: ui-monospace, 'JetBrains Mono', SF Mono, Menlo, monospace;
@@ -180,7 +201,7 @@
     .sheet-summary .bad { color: #b00020; font-weight: 600; }
     .sheet-summary .muted { color: var(--soft); }
     .source-url {
-      grid-column: 1 / -1;
+      grid-column: 2 / -1;
       font-size: 11px;
       color: var(--soft);
       font-family: ui-monospace, 'JetBrains Mono', SF Mono, Menlo, monospace;
@@ -618,6 +639,106 @@
       color: var(--soft);
       padding-top: 4px;
       text-align: right;
+    }
+
+    /* ── Top picks (above the calendar) ─────────────────── */
+    .picks {
+      padding: clamp(28px, 4vw, 56px) var(--pad-x) clamp(20px, 3vw, 36px);
+      border-bottom: 2px solid var(--ink);
+    }
+    body[data-view="map"] .picks,
+    body[data-view="dn"] .picks { display: none; }
+    .picks-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: clamp(18px, 2vw, 28px);
+      flex-wrap: wrap;
+    }
+    .picks-title {
+      font-size: clamp(22px, 3vw, 36px);
+      font-weight: 900;
+      letter-spacing: -0.025em;
+      margin: 0;
+      text-transform: uppercase;
+    }
+    .picks-sub {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--soft);
+      font-weight: 700;
+    }
+    .picks-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 2px solid var(--ink);
+      border-left: 2px solid var(--ink);
+    }
+    .pick-card {
+      border-right: 2px solid var(--ink);
+      border-bottom: 2px solid var(--ink);
+      padding: clamp(20px, 2.5vw, 36px);
+      cursor: pointer;
+      transition: background 120ms ease;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 200px;
+    }
+    .pick-card:hover { background: rgba(0, 0, 0, 0.04); }
+    .pick-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 14px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--soft);
+      flex-wrap: wrap;
+    }
+    .pick-date { color: var(--ink); }
+    .pick-title {
+      font-size: clamp(22px, 2.4vw, 32px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .pick-title a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: border-color 120ms ease;
+    }
+    .pick-title a:hover { border-bottom-color: var(--ink); }
+    .pick-meta {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--soft);
+      font-weight: 700;
+    }
+    .pick-note {
+      font-size: 14px;
+      line-height: 1.5;
+      max-width: 56ch;
+      margin-top: auto;
+    }
+    .picks-empty {
+      padding: 24px;
+      border: 2px dashed var(--softer);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--soft);
+    }
+    @media (max-width: 720px) {
+      .picks-grid { grid-template-columns: 1fr; }
     }
 
     /* ── Show more ──────────────────────────────────────── */
@@ -1223,6 +1344,14 @@
 
   <div class="dropdown-panel" id="cat-dropdown-panel" role="menu" aria-labelledby="cat-dropdown-btn" hidden></div>
 
+  <section class="picks" id="picks" aria-label="Top picks">
+    <div class="picks-head">
+      <h2 class="picks-title">Tonight's Picks</h2>
+      <span class="picks-sub" id="picks-sub">Top picks from the next nights · curated for you</span>
+    </div>
+    <div class="picks-grid" id="picks-grid"></div>
+  </section>
+
   <main id="calendar"></main>
   <section id="map-view" aria-label="Event map">
     <div id="map" role="application" aria-label="Event locations"></div>
@@ -1827,10 +1956,76 @@
         }
         root.appendChild(section);
       }
+      renderPicks();
       observeToday();
       observeMonthTitles();
       // Preserve scroll across re-render (filter changes)
       window.scrollTo({ top: scrollY, behavior: 'instant' });
+    }
+
+    // ── Top picks (curated 2 events from the next event-having days) ───
+    function renderPicks() {
+      const grid = document.getElementById('picks-grid');
+      const sub = document.getElementById('picks-sub');
+      if (!grid) return;
+      const today = state.todayKey;
+      const days = state.feed.days || {};
+      const dateKeys = Object.keys(days)
+        .filter((k) => k >= today)
+        .sort();
+
+      const picks = [];
+      for (const key of dateKeys) {
+        const events = filterEvents(days[key].events || []);
+        if (events.length === 0) continue;
+        picks.push({ date: key, event: events[0] });
+        if (picks.length >= 2) break;
+      }
+
+      const filterNote = (state.activeCats?.size || state.activeHoods?.size)
+        ? 'Top picks · filtered'
+        : 'Top picks · curated for you';
+      if (sub) sub.textContent = filterNote;
+
+      if (!picks.length) {
+        grid.innerHTML = '<div class="picks-empty">No matching events in the next days. Try clearing filters.</div>';
+        return;
+      }
+
+      grid.innerHTML = picks.map((p) => {
+        const [py, pm, pd] = p.date.split('-').map(Number);
+        const dayLabel = `${MONTHS[pm - 1].slice(0, 3).toUpperCase()} ${pd}`;
+        const ev = p.event;
+        const titleInner = ev.url
+          ? `<a href="${escapeHtml(ev.url)}" target="_blank" rel="noopener">${escapeHtml(ev.title)}</a>`
+          : escapeHtml(ev.title);
+        return `
+          <article class="pick-card" data-date="${escapeHtml(p.date)}">
+            <div class="pick-head">
+              <span class="pick-date">${escapeHtml(dayLabel)} · ${escapeHtml(fmtTime(ev.time))}</span>
+              <span>${escapeHtml(ev.category || '')}</span>
+            </div>
+            <div class="pick-title">${titleInner}</div>
+            ${ev.venue || ev.neighborhood
+              ? `<div class="pick-meta">${[ev.venue, ev.neighborhood].filter(Boolean).map(escapeHtml).join(' · ')}</div>`
+              : ''}
+            ${ev.note ? `<div class="pick-note">${escapeHtml(ev.note)}</div>` : ''}
+          </article>
+        `;
+      }).join('');
+
+      // Tap card → smooth-scroll to that day in the calendar
+      grid.querySelectorAll('.pick-card').forEach((card) => {
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('a')) return;
+          const date = card.dataset.date;
+          const dayEl = document.querySelector(`#calendar [data-date="${date}"]`);
+          if (!dayEl) return;
+          const filterH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--filter-h')) || 56;
+          const top = dayEl.getBoundingClientRect().top + window.scrollY - filterH - 12;
+          window.scrollTo({ top, behavior: 'smooth' });
+        });
+      });
     }
 
     // Watches each month's sentinel; when it leaves the viewport at the top
@@ -2456,19 +2651,39 @@
       const ranker = meta.ranker || {};
       const stats = meta.stats || {};
 
+      const fmtAgo = (iso) => {
+        if (!iso) return '';
+        const ms = Date.now() - Date.parse(iso);
+        if (!Number.isFinite(ms) || ms < 0) return '';
+        const m = Math.round(ms / 60000);
+        if (m < 1) return 'just now';
+        if (m < 60) return `${m}m ago`;
+        const h = Math.round(m / 60);
+        if (h < 24) return `${h}h ago`;
+        return `${Math.round(h / 24)}d ago`;
+      };
+
       const sourcesHtml = sources.length
         ? sources.map((s) => {
             const failed = !!s.error;
             const empty = !failed && (s.kept ?? 0) === 0;
-            const cls = failed ? ' has-error' : (empty ? ' is-empty' : '');
-            const status = failed ? '✗ failed' : (empty ? '— no items' : `✓ ${s.kept} items`);
+            const cls = failed ? ' has-error' : (empty ? ' is-empty' : ' is-ok');
+            const status = failed ? '✗ failed' : (empty ? '— no items' : `${s.kept} items`);
+            const fetched = s.fetched_at
+              ? `${escapeHtml(s.fetched_at.slice(0, 16).replace('T', ' '))} UTC · ${fmtAgo(s.fetched_at)}`
+              : (gen ? `${escapeHtml(gen.slice(0, 16).replace('T', ' '))} UTC · ${fmtAgo(gen)}` : '');
+            const fetchedHtml = fetched
+              ? `<div class="source-fetched">Scraped ${fetched}</div>`
+              : '';
             const errHtml = failed
               ? `<div class="source-err">${escapeHtml(s.error)}</div>`
               : '';
             return `
               <div class="source-row${cls}">
+                <div class="source-dot" aria-hidden="true"></div>
                 <div class="source-name">${escapeHtml(s.name)}</div>
                 <div class="source-count">${escapeHtml(status)}</div>
+                ${fetchedHtml}
                 <a class="source-url" href="${escapeHtml(s.url)}" target="_blank" rel="noopener">${escapeHtml(s.url)}</a>
                 ${errHtml}
               </div>
