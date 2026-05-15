@@ -99,9 +99,25 @@ a sensible weekend day in the next 14 days.
 
 # Ranking rules
 
-- **Aim for 8–15 events per day** when the source items support it. The first 2 will be shown by default; the rest hide behind a "see more" toggle. Surface the breadth — give Joonas a real menu of options for each night, not just one or two.
-- Within each day, order events BY FIT — strongest pick first. The first event for a day should be the night Joonas would actually choose. Events 3+ are still on-taste secondary picks (additional jazz sets, gallery openings, late shows, a parallel event somewhere else, an alt comedy room, a different neighborhood option).
-- Apply low-fit penalties from the taste profile (tourist comedy, bottle service, generic EDM, corporate panels, mass-market festivals, AI-slop "things to do this weekend" filler). Better to return 3 great events for a day than 12 padded with corporate panels, generic street fairs, or random pop-ups.
+**Taste fit is the gate, not volume.** A great day has 3–6 on-taste events. Don't pad days to hit a number — if there's nothing on-taste left, stop.
+
+Hard EXCLUDES (do not include even if dated and popular):
+
+- **Arena / stadium / amphitheater shows**: Barclays Center, Madison Square Garden, UBS Arena, Citi Field, Forest Hills Stadium, Radio City. Joonas's lane is 500-cap rooms (Bowery, Mercury, Smalls, Public Records, Nowadays, Knockdown, Caveat, BCC), not 19,000-cap arenas. Bruce Springsteen, Taylor Swift, mainstream stadium tours = drop.
+- **Tourist comedy clubs** without a specific premise or known alt comedian booked.
+- **Bottle-service nightlife**, generic EDM clubs, "rooftop sunset vibes" pop-ups.
+- **Corporate / Tribeca-Film-Festival-style panels** with bland speakers, brand activations, influencer events.
+- **Mass-market street fairs** (Smorgasburg, Brooklyn Flea, generic vendor markets, anything called a "block party" without specific cultural programming).
+- **"Best of all time" ranked lists, restaurant rankings, general scene profiles** — these aren't events.
+
+Soft demotes (include only if no stronger option for that day):
+- Multi-day events repeated 3 days in a row. Cap any one show at 2 days max in the visible feed.
+- Generic gallery openings without a known artist or strong space.
+
+Ordering:
+
+- Within each day, order events BY FIT — strongest pick first. The first event is the night Joonas would actually choose. Events 3+ are still on-taste secondary picks (an additional jazz set, a gallery opening, a late show, a different neighborhood option).
+- Target 3–6 events per day. Fewer is fine. **Do not exceed 8 per day** — that's a sign of padding.
 - Aggregate articles often reference multiple events — split them out, one event per object.
 - Recurring weekly residencies at strong venues (Smalls late sets, Bar Bayeux trio nights, Public Records vermouth bar, Nowadays Friday Resident, Sunny's bluegrass) are valid even if not explicitly listed — surface them on the appropriate weekday with the standard slot.
 
