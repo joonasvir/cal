@@ -11,34 +11,28 @@
       --ink: #000;
       --paper: #fff;
       --rule: #000;
-      --soft: rgba(0, 0, 0, 0.35);
-      --softer: rgba(0, 0, 0, 0.18);
-      --sheet-pad-x: clamp(28px, 6vw, 96px);
-      --sheet-pad-y: clamp(48px, 7vw, 112px);
+      --soft: rgba(0, 0, 0, 0.4);
+      --softer: rgba(0, 0, 0, 0.2);
+      --softest: rgba(0, 0, 0, 0.08);
+      --pad-x: clamp(20px, 4vw, 80px);
+      --filter-h: 56px;
     }
 
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
-      background: #000;
+      background: var(--paper);
+      color: var(--ink);
       font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-feature-settings: 'cv11', 'ss03';
-      color: var(--ink);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
     @supports (font-variation-settings: normal) {
       body { font-family: 'InterVariable', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
-    }
-
-    .sheet {
-      max-width: 1180px;
-      margin: 40px auto;
-      background: var(--paper);
-      padding: var(--sheet-pad-y) var(--sheet-pad-x);
-      min-height: calc(100vh - 80px);
     }
 
     /* ── Masthead ───────────────────────────────────────── */
@@ -49,55 +43,123 @@
       font-size: 12px;
       letter-spacing: 0.01em;
       line-height: 1.4;
-      padding-bottom: clamp(40px, 6vw, 80px);
+      padding: clamp(28px, 4vw, 56px) var(--pad-x) clamp(24px, 4vw, 48px);
     }
     .masthead .meta-right { text-align: right; }
     .masthead .meta-label { display: block; }
+    .masthead .title {
+      grid-column: 1 / -1;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1;
+      margin-top: clamp(20px, 3vw, 36px);
+    }
+
+    /* ── Filter bar (sticky) ───────────────────────────── */
+    .filters {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: var(--paper);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      height: var(--filter-h);
+      display: flex;
+      align-items: center;
+      gap: clamp(8px, 1.5vw, 24px);
+      padding: 0 var(--pad-x);
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none;
+      white-space: nowrap;
+    }
+    .filters::-webkit-scrollbar { display: none; }
+    .filters .filter-group {
+      display: flex;
+      align-items: center;
+      gap: clamp(10px, 1.5vw, 22px);
+    }
+    .filters .filter-group + .filter-group {
+      margin-left: auto;
+      padding-left: clamp(16px, 2vw, 32px);
+      border-left: 1px solid var(--softer);
+    }
+    .chip {
+      appearance: none;
+      background: none;
+      border: 0;
+      padding: 6px 0;
+      font: inherit;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--soft);
+      cursor: pointer;
+      border-bottom: 1.5px solid transparent;
+      transition: color 120ms ease, border-color 120ms ease;
+    }
+    .chip:hover { color: var(--ink); }
+    .chip.is-active {
+      color: var(--ink);
+      font-weight: 600;
+      border-bottom-color: var(--ink);
+    }
+    .chip.weather::after {
+      content: '';
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      margin-left: 6px;
+      vertical-align: 1px;
+      background: var(--softer);
+      transition: background 120ms ease;
+    }
+    .chip.weather.is-active::after { background: var(--ink); }
 
     /* ── Month section ──────────────────────────────────── */
     .month {
-      padding-top: clamp(24px, 4vw, 48px);
-    }
-    .month + .month {
-      margin-top: clamp(40px, 6vw, 72px);
+      padding: 0 var(--pad-x);
     }
     .month-title {
-      font-size: clamp(72px, 14vw, 200px);
+      position: sticky;
+      top: var(--filter-h);
+      z-index: 20;
+      background: var(--paper);
+      font-size: clamp(56px, 11vw, 180px);
       font-weight: 500;
-      line-height: 0.92;
+      line-height: 1.02;
       letter-spacing: -0.045em;
       margin: 0;
-      padding-bottom: clamp(28px, 4vw, 56px);
+      padding: clamp(28px, 4vw, 56px) 0 clamp(20px, 3vw, 36px);
       border-bottom: 1px solid var(--rule);
     }
 
     /* ── Day row ────────────────────────────────────────── */
     .day {
       display: grid;
-      grid-template-columns: minmax(220px, 1fr) minmax(0, 2.3fr);
-      gap: clamp(24px, 4vw, 64px);
-      padding: clamp(20px, 3vw, 36px) 0;
+      grid-template-columns: minmax(180px, 22%) minmax(0, 1fr);
+      gap: clamp(20px, 3vw, 56px);
+      padding: clamp(18px, 2.5vw, 32px) 0;
       border-bottom: 1px solid var(--rule);
       align-items: start;
     }
-    .day.is-empty .day-content { min-height: 0; }
-    .day.is-today .numeral { font-weight: 600; }
+    .day.is-today .numeral { font-weight: 700; }
     .day.is-today .dow .active {
       background: var(--ink);
       color: var(--paper);
       padding: 0 3px;
     }
 
-    .day-marker {
-      align-self: start;
-    }
+    .day-marker { align-self: start; }
     .dow {
       display: flex;
       gap: 6px;
       font-size: 11px;
       letter-spacing: 0.18em;
       font-weight: 400;
-      margin-bottom: clamp(12px, 1.5vw, 20px);
+      margin-bottom: clamp(10px, 1.2vw, 18px);
       text-transform: uppercase;
     }
     .dow span {
@@ -110,7 +172,7 @@
       font-weight: 600;
     }
     .numeral {
-      font-size: clamp(84px, 14vw, 180px);
+      font-size: clamp(72px, 11vw, 160px);
       font-weight: 500;
       line-height: 0.9;
       letter-spacing: -0.055em;
@@ -118,7 +180,8 @@
     }
 
     .day-content {
-      padding-top: 4px;
+      padding-top: 6px;
+      min-width: 0;
     }
 
     /* ── Weather row ────────────────────────────────────── */
@@ -128,18 +191,17 @@
       align-items: baseline;
       gap: 12px;
       font-size: 11px;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       padding-bottom: 10px;
       margin-bottom: 18px;
       border-bottom: 1px solid var(--rule);
-      color: var(--ink);
     }
     .weather-left { display: flex; gap: 16px; flex-wrap: wrap; }
     .weather-temp { font-feature-settings: 'tnum'; }
     .weather-mood { color: var(--soft); }
     .weather-right { color: var(--soft); }
-    .day.is-empty .weather { display: none; }
+    body.hide-weather .weather { display: none; }
 
     /* ── Events list ────────────────────────────────────── */
     .events {
@@ -149,14 +211,12 @@
     }
     .event {
       display: grid;
-      grid-template-columns: 56px 1fr auto;
-      gap: 16px;
-      padding: 10px 0;
+      grid-template-columns: 64px 1fr auto;
+      gap: 18px;
+      padding: 12px 0;
       align-items: baseline;
     }
-    .event + .event {
-      border-top: 1px solid var(--softer);
-    }
+    .event + .event { border-top: 1px solid var(--softest); }
     .event-time {
       font-size: 11px;
       letter-spacing: 0.08em;
@@ -166,7 +226,7 @@
     }
     .event-body { min-width: 0; }
     .event-title {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 500;
       line-height: 1.3;
       letter-spacing: -0.005em;
@@ -180,28 +240,54 @@
     .event-title a:hover { border-bottom-color: var(--ink); }
     .event-meta {
       font-size: 11px;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--soft);
       margin-top: 4px;
     }
     .event-note {
-      font-size: 13px;
-      line-height: 1.45;
+      font-size: 13.5px;
+      line-height: 1.5;
       margin-top: 6px;
-      max-width: 56ch;
-      color: var(--ink);
+      max-width: 68ch;
     }
     .event-cat {
       font-size: 10px;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--soft);
       padding-top: 4px;
       text-align: right;
     }
 
-    /* ── Empty day affordance ───────────────────────────── */
+    /* ── Show more ──────────────────────────────────────── */
+    .day .event.is-hidden { display: none; }
+    .day.is-expanded .event.is-hidden { display: grid; }
+    .more {
+      appearance: none;
+      background: none;
+      border: 0;
+      padding: 14px 0 4px;
+      font: inherit;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--soft);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .more::before {
+      content: '+';
+      font-size: 14px;
+      line-height: 1;
+    }
+    .more:hover { color: var(--ink); }
+    .day.is-expanded .more::before { content: '–'; }
+
+    /* ── Empty day ──────────────────────────────────────── */
+    .day.is-empty .weather { display: none; }
     .day.is-empty .day-content::before {
       content: '—';
       display: block;
@@ -209,44 +295,93 @@
       letter-spacing: 0.08em;
       color: var(--softer);
       text-transform: uppercase;
+      padding-top: 8px;
+    }
+
+    /* ── Floating today button ──────────────────────────── */
+    .today-btn {
+      position: fixed;
+      right: clamp(20px, 4vw, 56px);
+      bottom: clamp(20px, 3vw, 40px);
+      z-index: 40;
+      background: var(--ink);
+      color: var(--paper);
+      border: 0;
+      padding: 14px 22px;
+      font: inherit;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+    .today-btn.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .today-btn::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      margin-right: 8px;
+      background: var(--paper);
+      vertical-align: 1px;
     }
 
     /* ── Mobile ─────────────────────────────────────────── */
     @media (max-width: 720px) {
-      .sheet { margin: 0; }
+      :root { --filter-h: 52px; }
       .day {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 14px;
       }
       .numeral { font-size: clamp(72px, 22vw, 120px); }
       .month-title { font-size: clamp(64px, 22vw, 120px); }
-      .event { grid-template-columns: 44px 1fr; }
+      .event { grid-template-columns: 48px 1fr; }
       .event-cat { display: none; }
+      .masthead { grid-template-columns: 1fr; gap: 8px; }
+      .masthead .meta-right { text-align: left; }
     }
 
     /* ── Print ──────────────────────────────────────────── */
     @media print {
-      body { background: #fff; }
-      .sheet { max-width: none; margin: 0; box-shadow: none; padding: 24px 32px; }
+      .filters, .today-btn { display: none; }
+      .month-title { position: static; }
       .month { break-before: page; }
       .day { break-inside: avoid; }
     }
   </style>
 </head>
 <body>
-  <main class="sheet" id="sheet">
-    <header class="masthead">
-      <div class="meta-left">
-        <span class="meta-label">What's on</span>
-        <span class="meta-label">Brooklyn / NYC</span>
-      </div>
-      <div class="meta-right">
-        <span class="meta-label" id="meta-edition">Edition 01</span>
-        <span class="meta-label" id="meta-date">—</span>
-      </div>
-    </header>
-    <div id="calendar"></div>
-  </main>
+  <header class="masthead">
+    <div class="meta-left">
+      <span class="meta-label">What's on</span>
+      <span class="meta-label">Brooklyn / NYC</span>
+    </div>
+    <div class="meta-right">
+      <span class="meta-label" id="meta-edition">Edition 01</span>
+      <span class="meta-label" id="meta-date">—</span>
+    </div>
+    <h1 class="title">2026 / A year in nights.</h1>
+  </header>
+
+  <nav class="filters" id="filters" role="toolbar" aria-label="Filters">
+    <div class="filter-group" id="filter-cats" data-group="categories"></div>
+    <div class="filter-group">
+      <button class="chip weather is-active" data-toggle="weather" aria-pressed="true">Weather</button>
+    </div>
+  </nav>
+
+  <main id="calendar"></main>
+
+  <button class="today-btn" id="today-btn" type="button" aria-label="Scroll to today">Today</button>
 
   <script>
     const MONTHS = [
@@ -254,11 +389,12 @@
       'July', 'August', 'September', 'October', 'November', 'December'
     ];
     const DOW = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+    const CATEGORIES = ['music', 'comedy', 'art', 'food', 'talk', 'nightlife'];
+    const TOP_N = 3;
 
     const pad = (n) => String(n).padStart(2, '0');
     const isoDate = (y, m, d) => `${y}-${pad(m + 1)}-${pad(d)}`;
     const daysInMonth = (y, m) => new Date(y, m + 1, 0).getDate();
-    // 0 = Monday, 6 = Sunday
     const dowIndex = (y, m, d) => (new Date(y, m, d).getDay() + 6) % 7;
 
     function fmtTime(t) {
@@ -269,16 +405,73 @@
       return m ? `${hh}:${pad(m)}${period}` : `${hh}${period}`;
     }
 
-    function renderDay(y, m, d, payload, todayKey) {
+    // ── State ──────────────────────────────────────────
+    const state = {
+      feed: { edition: '01', year: new Date().getFullYear(), generated_at: '', days: {} },
+      activeCats: new Set(), // empty = all
+      showWeather: true,
+      expandedDates: new Set(),
+      todayKey: null,
+    };
+
+    // ── Filter bar ─────────────────────────────────────
+    function renderFilters() {
+      const wrap = document.getElementById('filter-cats');
+      wrap.innerHTML = '';
+      CATEGORIES.forEach((cat) => {
+        const btn = document.createElement('button');
+        btn.className = 'chip';
+        btn.textContent = cat;
+        btn.dataset.cat = cat;
+        btn.setAttribute('aria-pressed', 'false');
+        btn.addEventListener('click', () => toggleCategory(cat));
+        wrap.appendChild(btn);
+      });
+      document.querySelector('.chip.weather').addEventListener('click', toggleWeather);
+    }
+
+    function toggleCategory(cat) {
+      if (state.activeCats.has(cat)) state.activeCats.delete(cat);
+      else state.activeCats.add(cat);
+      updateCategoryChips();
+      renderCalendar();
+    }
+
+    function updateCategoryChips() {
+      document.querySelectorAll('.chip[data-cat]').forEach((btn) => {
+        const on = state.activeCats.has(btn.dataset.cat);
+        btn.classList.toggle('is-active', on);
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+    }
+
+    function toggleWeather() {
+      state.showWeather = !state.showWeather;
+      document.body.classList.toggle('hide-weather', !state.showWeather);
+      const btn = document.querySelector('.chip.weather');
+      btn.classList.toggle('is-active', state.showWeather);
+      btn.setAttribute('aria-pressed', state.showWeather ? 'true' : 'false');
+    }
+
+    // ── Render ─────────────────────────────────────────
+    function filterEvents(events) {
+      if (!state.activeCats.size) return events;
+      return events.filter((e) => state.activeCats.has(e.category));
+    }
+
+    function renderDay(y, m, d) {
       const key = isoDate(y, m, d);
       const dow = dowIndex(y, m, d);
-      const events = payload?.events ?? [];
+      const payload = state.feed.days[key];
+      const allEvents = payload?.events ?? [];
+      const events = filterEvents(allEvents);
       const weather = payload?.weather;
-      const isToday = key === todayKey;
+      const isToday = key === state.todayKey;
       const isEmpty = !events.length && !weather;
+      const isExpanded = state.expandedDates.has(key);
 
       const day = document.createElement('article');
-      day.className = `day${isEmpty ? ' is-empty' : ''}${isToday ? ' is-today' : ''}`;
+      day.className = `day${isEmpty ? ' is-empty' : ''}${isToday ? ' is-today' : ''}${isExpanded ? ' is-expanded' : ''}`;
       day.dataset.date = key;
 
       const marker = document.createElement('div');
@@ -320,48 +513,39 @@
       if (events.length) {
         const list = document.createElement('ul');
         list.className = 'events';
-        events.forEach((ev) => {
+        events.forEach((ev, i) => {
           const li = document.createElement('li');
-          li.className = 'event';
-          const time = document.createElement('div');
-          time.className = 'event-time';
-          time.textContent = fmtTime(ev.time);
-          const body = document.createElement('div');
-          body.className = 'event-body';
-          const title = document.createElement('div');
-          title.className = 'event-title';
-          if (ev.url) {
-            const a = document.createElement('a');
-            a.href = ev.url;
-            a.target = '_blank';
-            a.rel = 'noopener';
-            a.textContent = ev.title;
-            title.appendChild(a);
-          } else {
-            title.textContent = ev.title;
-          }
-          body.appendChild(title);
-          if (ev.venue || ev.neighborhood) {
-            const meta = document.createElement('div');
-            meta.className = 'event-meta';
-            meta.textContent = [ev.venue, ev.neighborhood].filter(Boolean).join(' · ');
-            body.appendChild(meta);
-          }
-          if (ev.note) {
-            const note = document.createElement('div');
-            note.className = 'event-note';
-            note.textContent = ev.note;
-            body.appendChild(note);
-          }
-          const cat = document.createElement('div');
-          cat.className = 'event-cat';
-          cat.textContent = ev.category || '';
-          li.appendChild(time);
-          li.appendChild(body);
-          li.appendChild(cat);
+          li.className = `event${i >= TOP_N ? ' is-hidden' : ''}`;
+          li.innerHTML = `
+            <div class="event-time">${fmtTime(ev.time)}</div>
+            <div class="event-body">
+              <div class="event-title">${ev.url
+                ? `<a href="${ev.url}" target="_blank" rel="noopener">${escapeHtml(ev.title)}</a>`
+                : escapeHtml(ev.title)}</div>
+              ${ev.venue || ev.neighborhood
+                ? `<div class="event-meta">${[ev.venue, ev.neighborhood].filter(Boolean).map(escapeHtml).join(' · ')}</div>`
+                : ''}
+              ${ev.note ? `<div class="event-note">${escapeHtml(ev.note)}</div>` : ''}
+            </div>
+            <div class="event-cat">${ev.category || ''}</div>
+          `;
           list.appendChild(li);
         });
         content.appendChild(list);
+
+        if (events.length > TOP_N) {
+          const more = document.createElement('button');
+          more.className = 'more';
+          more.type = 'button';
+          const hiddenCount = events.length - TOP_N;
+          more.textContent = isExpanded ? 'Show less' : `${hiddenCount} more`;
+          more.addEventListener('click', () => {
+            if (state.expandedDates.has(key)) state.expandedDates.delete(key);
+            else state.expandedDates.add(key);
+            renderCalendar();
+          });
+          content.appendChild(more);
+        }
       }
 
       day.appendChild(marker);
@@ -369,9 +553,11 @@
       return day;
     }
 
-    function renderYear(year, days, todayKey) {
+    function renderCalendar() {
       const root = document.getElementById('calendar');
+      const scrollY = window.scrollY;
       root.innerHTML = '';
+      const year = state.feed.year || new Date().getFullYear();
       for (let m = 0; m < 12; m++) {
         const section = document.createElement('section');
         section.className = 'month';
@@ -380,39 +566,79 @@
         h2.className = 'month-title';
         h2.textContent = MONTHS[m];
         section.appendChild(h2);
-
         for (let d = 1; d <= daysInMonth(year, m); d++) {
-          const key = isoDate(year, m, d);
-          section.appendChild(renderDay(year, m, d, days[key], todayKey));
+          section.appendChild(renderDay(year, m, d));
         }
         root.appendChild(section);
       }
+      observeToday();
+      // Preserve scroll across re-render (filter changes)
+      window.scrollTo({ top: scrollY, behavior: 'instant' });
     }
 
+    function escapeHtml(s) {
+      if (s == null) return '';
+      return String(s).replace(/[&<>"']/g, (c) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]));
+    }
+
+    // ── Today: observer + button ───────────────────────
+    let todayObserver = null;
+    function observeToday() {
+      if (todayObserver) todayObserver.disconnect();
+      const todayEl = document.querySelector(`[data-date="${state.todayKey}"]`);
+      const btn = document.getElementById('today-btn');
+      if (!todayEl) {
+        btn.classList.remove('is-visible');
+        return;
+      }
+      todayObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            btn.classList.toggle('is-visible', !e.isIntersecting);
+          });
+        },
+        { rootMargin: `-${parseInt(getComputedStyle(document.documentElement).getPropertyValue('--filter-h')) || 56}px 0px -20% 0px` }
+      );
+      todayObserver.observe(todayEl);
+    }
+
+    function scrollToToday() {
+      const el = document.querySelector(`[data-date="${state.todayKey}"]`);
+      if (!el) return;
+      const filterH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--filter-h')) || 56;
+      const monthTitleH = el.closest('.month')?.querySelector('.month-title')?.offsetHeight ?? 0;
+      const top = el.getBoundingClientRect().top + window.scrollY - filterH - 12;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+
+    // ── Init ───────────────────────────────────────────
     async function init() {
-      let feed = { edition: '01', year: new Date().getFullYear(), generated_at: '', days: {} };
+      renderFilters();
       try {
         const res = await fetch('feed.json', { cache: 'no-store' });
-        if (res.ok) feed = await res.json();
-      } catch (_) { /* no feed yet — render empty year */ }
+        if (res.ok) state.feed = await res.json();
+      } catch (_) { /* empty year is fine */ }
 
       const today = new Date();
-      const todayKey = isoDate(today.getFullYear(), today.getMonth(), today.getDate());
+      state.todayKey = isoDate(today.getFullYear(), today.getMonth(), today.getDate());
+      // Today expanded by default
+      state.expandedDates.add(state.todayKey);
 
-      document.getElementById('meta-edition').textContent = `Edition ${feed.edition || '01'}`;
-      document.getElementById('meta-date').textContent = feed.generated_at || todayKey;
+      document.getElementById('meta-edition').textContent = `Edition ${state.feed.edition || '01'}`;
+      document.getElementById('meta-date').textContent = state.feed.generated_at || state.todayKey;
 
-      const year = feed.year || today.getFullYear();
-      renderYear(year, feed.days || {}, todayKey);
+      renderCalendar();
 
       // Jump to today on first load
-      const todayEl = document.querySelector(`[data-date="${todayKey}"]`);
-      if (todayEl) {
-        requestAnimationFrame(() => {
-          const offset = todayEl.getBoundingClientRect().top + window.scrollY - 24;
-          window.scrollTo({ top: offset, behavior: 'instant' });
-        });
-      }
+      requestAnimationFrame(() => {
+        scrollToToday();
+        // Initial visibility check
+        setTimeout(() => observeToday(), 50);
+      });
+
+      document.getElementById('today-btn').addEventListener('click', scrollToToday);
     }
 
     init();
