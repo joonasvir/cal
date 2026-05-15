@@ -1,7 +1,7 @@
 {
-  "edition": "03",
+  "edition": "04",
   "year": 2026,
-  "generated_at": "2026-05-15T18:57:42.365Z",
+  "generated_at": "2026-05-15T19:49:31.698Z",
   "city": "New York",
   "meta": {
     "sources": [
@@ -13,7 +13,7 @@
         ],
         "kept": 10,
         "error": null,
-        "fetched_at": "2026-05-15T18:55:36.428Z"
+        "fetched_at": "2026-05-15T19:48:18.065Z"
       },
       {
         "name": "The Skint",
@@ -23,7 +23,7 @@
         ],
         "kept": 10,
         "error": null,
-        "fetched_at": "2026-05-15T18:55:36.429Z"
+        "fetched_at": "2026-05-15T19:48:18.065Z"
       },
       {
         "name": "Bedford + Bowery",
@@ -33,7 +33,7 @@
         ],
         "kept": 0,
         "error": null,
-        "fetched_at": "2026-05-15T18:55:36.429Z"
+        "fetched_at": "2026-05-15T19:48:18.065Z"
       },
       {
         "name": "Brooklyn Vegan",
@@ -43,7 +43,7 @@
         ],
         "kept": 15,
         "error": null,
-        "fetched_at": "2026-05-15T18:55:36.429Z"
+        "fetched_at": "2026-05-15T19:48:18.065Z"
       },
       {
         "name": "Hyperallergic",
@@ -53,7 +53,7 @@
         ],
         "kept": 15,
         "error": null,
-        "fetched_at": "2026-05-15T18:55:36.429Z"
+        "fetched_at": "2026-05-15T19:48:18.065Z"
       }
     ],
     "weather": {
@@ -66,18 +66,18 @@
     "ranker": {
       "provider": "Anthropic",
       "model": "claude-opus-4-7",
-      "ranked_days": 17
+      "ranked_days": 10
     },
     "stats": {
       "items_pulled": 50,
-      "events_curated": 59,
-      "days_covered": 21
+      "events_curated": 26,
+      "days_covered": 18
     },
     "images": {
-      "from_og": 6,
-      "from_rss": 25,
-      "from_cache": 0,
-      "missing": 28
+      "from_og": 0,
+      "from_rss": 14,
+      "from_cache": 6,
+      "missing": 6
     }
   },
   "days": {
@@ -93,90 +93,46 @@
       },
       "events": [
         {
-          "time": "19:30",
-          "title": "Bruce Springsteen & The E Street Band",
-          "venue": "Barclays Center",
-          "neighborhood": "Prospect Heights",
-          "category": "music",
-          "url": "https://www.brooklynvegan.com/bruce-springsteen-the-e-street-bands-nyc-run-underway-barclays-center-pics-setlists-video/",
-          "note": "The 'NO KINGS' tour run is a moment — Bruce in Brooklyn is the kind of show people will talk about for a decade.",
-          "indoor": true,
-          "image": "https://media.brooklynvegan.com/xxrzsfjkyw/uploads/2026/05/15/brucespringsteen-barclays-16.jpg"
-        },
-        {
           "time": "19:00",
-          "title": "Cafe Bar J.F. — opening week",
-          "venue": "Cafe Bar J.F.",
-          "neighborhood": "Williamsburg",
-          "category": "food",
-          "url": "https://ny.eater.com/restaurant-openings/411355/cafe-bar-j-f-williamsburg-opening-llama-inn-erik-ramirez-juan-correa",
-          "note": "Erik Ramirez taking over the old Llama Inn space with a South American tavern angle — exactly the kind of Withers Street night to get in early on.",
-          "indoor": true,
-          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/050726_CS_Eater_CafeBarBF_0058.jpg"
-        },
-        {
-          "time": "18:00",
-          "title": "Le Dive — opening week in the West Village",
-          "venue": "Le Dive",
-          "neighborhood": "West Village",
-          "category": "food",
-          "url": "https://ny.eater.com/news/411250/nyc-new-restaurant-openings-may-2026",
-          "note": "Steak tartare, salade Niçoise, and a sceney French room — go before the wait gets unmanageable.",
-          "indoor": true,
-          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/ledive.webp"
-        },
-        {
-          "time": "19:30",
-          "title": "Business Business Business — corporate satire circus",
+          "title": "Business Business Business: A Corporate Satire Circus",
           "venue": "Circus Academy New York",
           "neighborhood": "Brooklyn",
           "category": "comedy",
           "url": "https://theskint.com/business-business-business-a-corporate-satire-circus-at-circus-academy-ny-5-15-17-sponsored/",
-          "note": "Wolf of Wall Street meets Cirque du Soleil in 75 minutes — has the right kind of weird.",
+          "note": "Wolf of Wall Street meets Cirque du Soleil for 75 minutes — has the right kind of weird for a Friday.",
           "indoor": true,
           "image": "https://theskint.com/wp-content/uploads/2026/04/Business-1-640.jpg"
         },
         {
-          "time": "17:00",
-          "title": "St. George's Ukrainian Festival",
-          "venue": "East 7th Street between 2nd & 3rd",
+          "time": "18:00",
+          "title": "St. George's 50th Ukrainian Festival",
+          "venue": "East 7th Street between 2nd & 3rd Aves",
           "neighborhood": "East Village",
           "category": "food",
           "url": "https://theskint.com/fri-mon-5-15-18-skint-weekend/",
-          "note": "50th edition — pierogi, varenyky, and old East Village energy on a closed-off block.",
+          "note": "Old neighborhood New York at its best — pierogi, sausages, and the 50th edition gravitas.",
           "indoor": false,
           "image": "https://theskint.com/wp-content/uploads/2026/04/Wrembel_Skint_email_header-2526.png"
         },
         {
-          "time": "22:30",
-          "title": "Smalls late-night jazz set",
+          "time": "22:00",
+          "title": "Late Set at Smalls",
           "venue": "Smalls Jazz Club",
           "neighborhood": "West Village",
           "category": "music",
           "url": "https://www.smallslive.com/",
-          "note": "The reliable late set in a basement room — exactly the supper-club-after-dinner move.",
+          "note": "The default Friday move when nothing else lands — basement jazz, no fuss, exactly the supper-club energy you keep coming back for.",
           "indoor": true,
           "image": ""
         },
         {
           "time": "23:00",
-          "title": "Nowadays Friday Resident",
+          "title": "Resident Friday at Nowadays",
           "venue": "Nowadays",
           "neighborhood": "Ridgewood",
           "category": "nightlife",
           "url": "https://nowadays.nyc/",
-          "note": "Long-form Friday into Saturday — best room in the city when you want a real scene, not bottle service.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "17:00",
-          "title": "Manhattan Vintage Clothing Show",
-          "venue": "Metropolitan Pavilion",
-          "neighborhood": "Chelsea",
-          "category": "art",
-          "url": "https://theskint.com/fri-mon-5-15-18-skint-weekend/",
-          "note": "Spring edition — sharp curation if you actually care about how clothes are cut.",
+          "note": "Long, properly curated dance floor — the antidote to bottle service if you want a real late night.",
           "indoor": true,
           "image": ""
         }
@@ -195,91 +151,58 @@
       "events": [
         {
           "time": "18:00",
-          "title": "Sono opens — Korean Italian by Sechul Yang",
-          "venue": "Sono",
+          "title": "Sono Opening Night — Korean-Italian by Sechul Yang",
+          "venue": "Sono, 176 First Avenue",
           "neighborhood": "East Village",
           "category": "food",
           "url": "https://ny.eater.com/restaurant-openings/411448/sono-korean-italian-nyc-restaurant-openings",
-          "note": "Oxtail fettuccine that crosses cacio e pepe with Korean oxbone soup — the kind of opening-night bet that's actually worth taking.",
+          "note": "Oxtail fettuccine that bridges cacio e pepe and Korean oxbone soup on opening day — this feels very you.",
           "indoor": true,
-          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/DSC09262.jpg"
-        },
-        {
-          "time": "19:30",
-          "title": "Bruce Springsteen & The E Street Band — final NYC night",
-          "venue": "Barclays Center",
-          "neighborhood": "Prospect Heights",
-          "category": "music",
-          "url": "https://www.brooklynvegan.com/bruce-springsteen-the-e-street-bands-nyc-run-underway-barclays-center-pics-setlists-video/",
-          "note": "Last of the three-night Brooklyn run — go if you can get in.",
-          "indoor": true,
-          "image": "https://media.brooklynvegan.com/xxrzsfjkyw/uploads/2026/05/15/brucespringsteen-barclays-16.jpg"
+          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/DSC09262.jpg?quality=90&strip=all&crop=0,0,100,100"
         },
         {
           "time": "20:00",
-          "title": "Business Business Business — corporate satire circus",
-          "venue": "Circus Academy New York",
-          "neighborhood": "Brooklyn",
-          "category": "comedy",
-          "url": "https://theskint.com/business-business-business-a-corporate-satire-circus-at-circus-academy-ny-5-15-17-sponsored/",
-          "note": "Concept comedy with actual circus chops — way more interesting than a straight stand-up room.",
-          "indoor": true,
-          "image": "https://theskint.com/wp-content/uploads/2026/04/Business-1-640.jpg"
-        },
-        {
-          "time": "19:00",
-          "title": "Musaek — underground Koreatown seafood bar",
-          "venue": "Musaek",
-          "neighborhood": "Koreatown",
+          "title": "Cafe Bar J.F. — South American Tavern (opening week)",
+          "venue": "Cafe Bar J.F., 50 Withers Street",
+          "neighborhood": "Williamsburg",
           "category": "food",
-          "url": "https://ny.eater.com/dining-report/411410/musaek-nyc-korean-seafood-restaurant-review-koreatown",
-          "note": "Subterranean room, soy-marinated shrimp from Yeosu, cocktails — strong date-night pick.",
+          "url": "https://ny.eater.com/restaurant-openings/411355/cafe-bar-j-f-williamsburg-opening-llama-inn-erik-ramirez-juan-correa",
+          "note": "Erik Ramirez taking over the old Llama Inn space — go this week while the room is still finding itself.",
           "indoor": true,
-          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/IMG_9038-copy.jpg"
+          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/050726_CS_Eater_CafeBarBF_0058.jpg?quality=90&strip=all&crop=0,0,100,100"
         },
         {
           "time": "12:00",
-          "title": "Ukrainian Festival — Saturday",
-          "venue": "East 7th Street between 2nd & 3rd",
-          "neighborhood": "East Village",
-          "category": "food",
-          "url": "https://theskint.com/fri-mon-5-15-18-skint-weekend/",
-          "note": "Daytime block party energy on one of the most specific streets in the East Village.",
-          "indoor": false,
-          "image": "https://theskint.com/wp-content/uploads/2026/04/Wrembel_Skint_email_header-2526.png"
-        },
-        {
-          "time": "21:00",
-          "title": "Bar Bayeux trio night",
-          "venue": "Bar Bayeux",
-          "neighborhood": "Prospect Lefferts Gardens",
-          "category": "music",
-          "url": "https://www.barbayeux.com/",
-          "note": "Tiny room, real players, no cover — worth the trip for the room alone.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "11:00",
-          "title": "Manhattan Vintage Clothing Show",
+          "title": "Manhattan Vintage Clothing Show — Spring Edition",
           "venue": "Metropolitan Pavilion",
           "neighborhood": "Chelsea",
           "category": "art",
           "url": "https://theskint.com/fri-mon-5-15-18-skint-weekend/",
-          "note": "Daytime browse with sharp dealers — pair with a long lunch nearby.",
+          "note": "Worth the $25 if you actually wear what you buy — dealers here have Jazz Age tailoring and decent Art Deco jewelry.",
           "indoor": true,
-          "image": ""
+          "image": "https://theskint.com/wp-content/uploads/2026/04/Wrembel_Skint_email_header-2526.png"
         },
         {
-          "time": "22:00",
-          "title": "Public Records — Saturday program",
-          "venue": "Public Records",
-          "neighborhood": "Gowanus",
-          "category": "nightlife",
-          "url": "https://publicrecords.nyc/",
-          "note": "Best sound system in Brooklyn and a vermouth bar up front — the right kind of late.",
+          "time": "19:30",
+          "title": "Business Business Business (Sat night)",
+          "venue": "Circus Academy New York",
+          "neighborhood": "Brooklyn",
+          "category": "comedy",
+          "url": "https://theskint.com/business-business-business-a-corporate-satire-circus-at-circus-academy-ny-5-15-17-sponsored/",
+          "note": "Corporate satire as circus — the kind of premise that justifies leaving the apartment.",
           "indoor": true,
-          "image": ""
+          "image": "https://theskint.com/wp-content/uploads/2026/04/Business-1-640.jpg"
+        },
+        {
+          "time": "21:00",
+          "title": "Bluegrass at Sunny's",
+          "venue": "Sunny's Bar",
+          "neighborhood": "Red Hook",
+          "category": "music",
+          "url": "https://sunnysredhook.com/",
+          "note": "The Saturday bluegrass jam in the back room is one of the last unpretentious New York rituals.",
+          "indoor": true,
+          "image": "https://images.getbento.com/gIKOds9jQnCArqwGp5TD_logo_transparent.png?w=1200&fit=fill&auto=compress,format&cs=origin&h=600&bg=EDEDF1&pad=100"
         }
       ]
     },
@@ -289,65 +212,43 @@
         "low": 18,
         "unit": "C",
         "condition": "Overcast",
-        "precip_chance": 5,
+        "precip_chance": 6,
         "sunset": "20:07",
         "note": "shirtsleeves"
       },
       "events": [
         {
-          "time": "19:00",
-          "title": "Billy on Billy — Billy Eichner live",
-          "venue": "NYC venue",
+          "time": "20:00",
+          "title": "Billy on Billy — Billy Eichner Live",
+          "venue": "TBA NYC",
           "neighborhood": "Manhattan",
           "category": "comedy",
           "url": "https://theskint.com/join-billy-eichner-live-in-nyc-on-5-17-sponsored/",
-          "note": "Eichner doing a long-form solo show is the kind of one-off that won't repeat — go.",
+          "note": "Eichner doing a real live night in NYC — sharper than the average podcast-taping circuit.",
           "indoor": true,
           "image": "https://theskint.com/wp-content/uploads/2026/04/Billy-on-Billy_Skint-Newsletter-Graphic-fun-1_cover-only-new-tagline-v4.jpg"
         },
         {
           "time": "15:00",
-          "title": "Indian Princesses — closing performance",
-          "venue": "Atlantic Theater Company",
-          "neighborhood": "Chelsea",
+          "title": "Indian Princesses — Closing Performance",
+          "venue": "Atlantic Theater / Rattlestick",
+          "neighborhood": "West Village",
           "category": "talk",
           "url": "https://theskint.com/see-indian-princesses-for-25-limited-availability-sponsored/",
-          "note": "Last day of Eliana Theologides Rodriguez's debut — small-room Off-Broadway that's actually about something.",
+          "note": "Final day of Eliana Theologides Rodriguez's debut — $25 if you grab it, a smart small-room play.",
           "indoor": true,
           "image": "https://theskint.com/wp-content/uploads/2026/05/1-IP-Native-Unit-4x3-copy.jpg"
         },
         {
           "time": "13:00",
-          "title": "Ukrainian Festival — final day",
+          "title": "Ukrainian Festival — Final Day",
           "venue": "East 7th Street",
           "neighborhood": "East Village",
           "category": "food",
           "url": "https://theskint.com/fri-mon-5-15-18-skint-weekend/",
-          "note": "Sunday afternoon, last shot at the borscht line.",
+          "note": "Sunday afternoon, the crowd thins out and you can actually eat — make it a wander.",
           "indoor": false,
-          "image": ""
-        },
-        {
-          "time": "16:00",
-          "title": "Sunny's bluegrass jam",
-          "venue": "Sunny's Bar",
-          "neighborhood": "Red Hook",
-          "category": "music",
-          "url": "https://sunnysredhook.com/",
-          "note": "Old Red Hook longshoremen's bar, fiddles in the back room — closest thing to a time machine in the city.",
-          "indoor": true,
-          "image": "https://images.getbento.com/gIKOds9jQnCArqwGp5TD_logo_transparent.png?w=1200&fit=fill&auto=compress,format&cs=origin&h=600&bg=EDEDF1&pad=100"
-        },
-        {
-          "time": "19:00",
-          "title": "Sono — second-night dinner",
-          "venue": "Sono",
-          "neighborhood": "East Village",
-          "category": "food",
-          "url": "https://ny.eater.com/restaurant-openings/411448/sono-korean-italian-nyc-restaurant-openings",
-          "note": "If Saturday was a zoo, Sunday night is the sneak-in move.",
-          "indoor": true,
-          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/DSC09262.jpg"
+          "image": "https://theskint.com/wp-content/uploads/2026/04/Wrembel_Skint_email_header-2526.png"
         }
       ]
     },
@@ -373,30 +274,7 @@
         "sunset": "20:09",
         "note": "shirtsleeves"
       },
-      "events": [
-        {
-          "time": "19:30",
-          "title": "Smalls — early jazz set",
-          "venue": "Smalls Jazz Club",
-          "neighborhood": "West Village",
-          "category": "music",
-          "url": "https://www.smallslive.com/",
-          "note": "Quiet Tuesday move — sit at the bar, order the cheap pour, stay through two sets.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "19:00",
-          "title": "Bryant Park Reading Room — Books on Broadway",
-          "venue": "Bryant Park",
-          "neighborhood": "Midtown",
-          "category": "talk",
-          "url": "https://theskint.com/tues-thurs-5-12-14-college-night-at-the-met-dead-in-the-park-road-to-broadway-and-more/",
-          "note": "Backstage Broadway talk under the trees — small, free, civilized.",
-          "indoor": false,
-          "image": ""
-        }
-      ]
+      "events": []
     },
     "2026-05-20": {
       "weather": {
@@ -411,25 +289,14 @@
       "events": [
         {
           "time": "18:00",
-          "title": "Lehman College 2026 Thesis Exhibition — opening",
+          "title": "Lehman College 2026 Thesis Exhibition — Opening",
           "venue": "Lehman College Art Gallery",
           "neighborhood": "Bronx",
           "category": "art",
           "url": "https://hyperallergic.com/lehman-college-art-gallery-presents-the-2026-thesis-exhibition/",
-          "note": "Thirty-plus emerging artists, the kind of show where you find someone before everyone else does.",
+          "note": "Thirty-plus thesis artists — go for the conceptual inquiry, stay for the unfiltered material risks.",
           "indoor": true,
           "image": "https://storage.ghost.io/c/51/f8/51f871d8-b6be-4a73-b958-0ca4fff0110a/content/images/2026/05/hyperallergic.jpg"
-        },
-        {
-          "time": "20:00",
-          "title": "Caveat — Wednesday alt comedy",
-          "venue": "Caveat",
-          "neighborhood": "Lower East Side",
-          "category": "comedy",
-          "url": "https://caveat.nyc/",
-          "note": "Concept-first comedy under Essex Market — the room you actually want.",
-          "indoor": true,
-          "image": ""
         }
       ]
     },
@@ -443,30 +310,7 @@
         "sunset": "20:11",
         "note": "evening could turn"
       },
-      "events": [
-        {
-          "time": "19:00",
-          "title": "Frieze Week aftershocks — gallery walk",
-          "venue": "Tribeca galleries",
-          "neighborhood": "Tribeca",
-          "category": "art",
-          "url": "https://hyperallergic.com/frieze-new-york-is-an-assembly-line-salad/",
-          "note": "Thursday gallery night after the fair clears — you'll see better work than at the Shed.",
-          "indoor": true,
-          "image": "https://storage.ghost.io/c/51/f8/51f871d8-b6be-4a73-b958-0ca4fff0110a/content/images/size/w1200/2026/05/IMG_0148-1.jpeg"
-        },
-        {
-          "time": "21:00",
-          "title": "Mercury Lounge — Thursday bill",
-          "venue": "Mercury Lounge",
-          "neighborhood": "Lower East Side",
-          "category": "music",
-          "url": "https://www.mercuryloungenyc.com/",
-          "note": "Default LES Thursday — small room, good odds something's worth catching.",
-          "indoor": true,
-          "image": ""
-        }
-      ]
+      "events": []
     },
     "2026-05-22": {
       "weather": {
@@ -480,46 +324,35 @@
       },
       "events": [
         {
-          "time": "20:00",
-          "title": "Bowery Ballroom — Friday show",
-          "venue": "Bowery Ballroom",
-          "neighborhood": "Lower East Side",
-          "category": "music",
-          "url": "https://www.boweryballroom.com/",
-          "note": "Check the bill — when it's right, this is still the best mid-size room in Manhattan.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "22:30",
-          "title": "Smalls — late set",
+          "time": "22:00",
+          "title": "Late Set at Smalls",
           "venue": "Smalls Jazz Club",
           "neighborhood": "West Village",
           "category": "music",
           "url": "https://www.smallslive.com/",
-          "note": "Friday's late set is the move after a downtown dinner.",
+          "note": "Worth it for the room alone — squeeze in near the piano and order a Manhattan.",
           "indoor": true,
           "image": ""
         },
         {
-          "time": "19:00",
-          "title": "Cafe Bar J.F. — second weekend",
-          "venue": "Cafe Bar J.F.",
-          "neighborhood": "Williamsburg",
+          "time": "20:00",
+          "title": "Sono — Week 2 Dinner",
+          "venue": "Sono",
+          "neighborhood": "East Village",
           "category": "food",
-          "url": "https://ny.eater.com/restaurant-openings/411355/cafe-bar-j-f-williamsburg-opening-llama-inn-erik-ramirez-juan-correa",
-          "note": "Now that the openers have settled in — get the South American tavern night you wanted.",
+          "url": "https://ny.eater.com/restaurant-openings/411448/sono-korean-italian-nyc-restaurant-openings",
+          "note": "Itameshi but Korean — go now before the line settles in for the year.",
           "indoor": true,
-          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/050726_CS_Eater_CafeBarBF_0058.jpg"
+          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/DSC09262.jpg?quality=90&strip=all&crop=0,0,100,100"
         },
         {
           "time": "23:00",
-          "title": "Nowadays Friday Resident",
+          "title": "Friday Resident at Nowadays",
           "venue": "Nowadays",
           "neighborhood": "Ridgewood",
           "category": "nightlife",
           "url": "https://nowadays.nyc/",
-          "note": "Long set, dark room, good people — the real Friday option.",
+          "note": "The reliable late-night for an actual dance floor, no velvet rope nonsense.",
           "indoor": true,
           "image": ""
         }
@@ -538,47 +371,36 @@
       "events": [
         {
           "time": "19:00",
-          "title": "Sono — Saturday night",
-          "venue": "Sono",
-          "neighborhood": "East Village",
+          "title": "Cafe Bar J.F. — Saturday in Williamsburg",
+          "venue": "Cafe Bar J.F., 50 Withers",
+          "neighborhood": "Williamsburg",
           "category": "food",
-          "url": "https://ny.eater.com/restaurant-openings/411448/sono-korean-italian-nyc-restaurant-openings",
-          "note": "Korean-Italian on First Ave is the date-night plan a week into opening.",
+          "url": "https://ny.eater.com/restaurant-openings/411355/cafe-bar-j-f-williamsburg-opening-llama-inn-erik-ramirez-juan-correa",
+          "note": "Pisco, Peruvian-leaning small plates, ex-Llama Inn space — the Withers Street block is at its best on a Saturday.",
           "indoor": true,
-          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/DSC09262.jpg"
+          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/050726_CS_Eater_CafeBarBF_0058.jpg?quality=90&strip=all&crop=0,0,100,100"
         },
         {
           "time": "21:00",
-          "title": "Bar Bayeux trio night",
-          "venue": "Bar Bayeux",
-          "neighborhood": "Prospect Lefferts Gardens",
-          "category": "music",
-          "url": "https://www.barbayeux.com/",
-          "note": "Drop-in jazz in a 30-seat room — neighborhood night, not a big production.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "20:00",
-          "title": "Pioneer Works — Saturday programming",
-          "venue": "Pioneer Works",
+          "title": "Bluegrass at Sunny's",
+          "venue": "Sunny's Bar",
           "neighborhood": "Red Hook",
-          "category": "art",
-          "url": "https://pioneerworks.org/",
-          "note": "Always worth checking the calendar — when something's on here, it's usually the best thing happening that night.",
+          "category": "music",
+          "url": "https://sunnysredhook.com/",
+          "note": "Old New York holdout, end-of-the-line cottage vibe, free music and cheap whiskey.",
           "indoor": true,
-          "image": "https://cdn.sanity.io/images/vgvol637/production/e2ff399f287bde5592ea833bf94e12e29f693459-800x534.webp?auto=format"
+          "image": "https://images.getbento.com/gIKOds9jQnCArqwGp5TD_logo_transparent.png?w=1200&fit=fill&auto=compress,format&cs=origin&h=600&bg=EDEDF1&pad=100"
         },
         {
           "time": "22:00",
-          "title": "Public Records — Saturday",
-          "venue": "Public Records",
-          "neighborhood": "Gowanus",
+          "title": "Michelle's Cocktail Lounge — Panamanian Night",
+          "venue": "Michelle's, 2294 Bedford Ave",
+          "neighborhood": "Flatbush",
           "category": "nightlife",
-          "url": "https://publicrecords.nyc/",
-          "note": "Vermouth in front, sound system in back — pick your tempo.",
+          "url": "https://ny.eater.com/featured-stories/411289/michelles-cocktail-lounge-flatbush-panamanian-bar-nyc-the-office",
+          "note": "Fifty years deep, now in the hands of the third-generation Johnson — go for the real thing, not a recreation.",
           "indoor": true,
-          "image": ""
+          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/050126_Eater_Michelles_0006.jpg?quality=90&strip=all&crop=0,0,100,100"
         }
       ]
     },
@@ -592,30 +414,7 @@
         "sunset": "20:13",
         "note": ""
       },
-      "events": [
-        {
-          "time": "16:00",
-          "title": "Sunny's bluegrass jam",
-          "venue": "Sunny's Bar",
-          "neighborhood": "Red Hook",
-          "category": "music",
-          "url": "https://sunnysredhook.com/",
-          "note": "Sunday afternoon in a 130-year-old waterfront bar — the kind of NYC that's actually leaving.",
-          "indoor": true,
-          "image": "https://images.getbento.com/gIKOds9jQnCArqwGp5TD_logo_transparent.png?w=1200&fit=fill&auto=compress,format&cs=origin&h=600&bg=EDEDF1&pad=100"
-        },
-        {
-          "time": "14:00",
-          "title": "Lehman College Thesis Exhibition",
-          "venue": "Lehman College Art Gallery",
-          "neighborhood": "Bronx",
-          "category": "art",
-          "url": "https://hyperallergic.com/lehman-college-art-gallery-presents-the-2026-thesis-exhibition/",
-          "note": "Sunday gallery day — take the 4 train and make a day of it.",
-          "indoor": true,
-          "image": "https://storage.ghost.io/c/51/f8/51f871d8-b6be-4a73-b958-0ca4fff0110a/content/images/2026/05/hyperallergic.jpg"
-        }
-      ]
+      "events": []
     },
     "2026-05-25": {
       "weather": {
@@ -635,7 +434,7 @@
         "low": 17,
         "unit": "C",
         "condition": "Drizzle",
-        "precip_chance": 28,
+        "precip_chance": 23,
         "sunset": "20:15",
         "note": "patio weather"
       },
@@ -663,30 +462,7 @@
         "sunset": "20:17",
         "note": ""
       },
-      "events": [
-        {
-          "time": "18:00",
-          "title": "Lehman College Thesis Exhibition — closing week",
-          "venue": "Lehman College Art Gallery",
-          "neighborhood": "Bronx",
-          "category": "art",
-          "url": "https://hyperallergic.com/lehman-college-art-gallery-presents-the-2026-thesis-exhibition/",
-          "note": "Last week to see it — material experimentation across 30+ artists.",
-          "indoor": true,
-          "image": "https://storage.ghost.io/c/51/f8/51f871d8-b6be-4a73-b958-0ca4fff0110a/content/images/2026/05/hyperallergic.jpg"
-        },
-        {
-          "time": "21:00",
-          "title": "Mercury Lounge — Thursday",
-          "venue": "Mercury Lounge",
-          "neighborhood": "Lower East Side",
-          "category": "music",
-          "url": "https://www.mercuryloungenyc.com/",
-          "note": "Reliable Thursday default if nothing else is calling.",
-          "indoor": true,
-          "image": ""
-        }
-      ]
+      "events": []
     },
     "2026-05-29": {
       "weather": {
@@ -700,37 +476,26 @@
       },
       "events": [
         {
-          "time": "19:00",
-          "title": "Le Dive — Friday dinner",
-          "venue": "Le Dive",
-          "neighborhood": "West Village",
-          "category": "food",
-          "url": "https://ny.eater.com/news/411250/nyc-new-restaurant-openings-may-2026",
-          "note": "Two weeks in, the room should be calibrated — French bistro energy with West Village staffing.",
-          "indoor": true,
-          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/ledive.webp"
-        },
-        {
-          "time": "22:30",
-          "title": "Smalls — late set",
+          "time": "22:00",
+          "title": "Late Set at Smalls",
           "venue": "Smalls Jazz Club",
           "neighborhood": "West Village",
           "category": "music",
           "url": "https://www.smallslive.com/",
-          "note": "Walk five blocks from Le Dive and you're at the basement jazz bar.",
+          "note": "The Friday default — late set after a long dinner is the move.",
           "indoor": true,
           "image": ""
         },
         {
-          "time": "23:00",
-          "title": "Nowadays Friday Resident",
-          "venue": "Nowadays",
-          "neighborhood": "Ridgewood",
-          "category": "nightlife",
-          "url": "https://nowadays.nyc/",
-          "note": "Long-form Friday — get there before 1.",
+          "time": "20:00",
+          "title": "Le Dive — Sceney French Bistro",
+          "venue": "Le Dive",
+          "neighborhood": "West Village",
+          "category": "food",
+          "url": "https://ny.eater.com/news/411250/nyc-new-restaurant-openings-may-2026",
+          "note": "Salade Niçoise with seared tuna, steak tartare — go now while it's still finding its rhythm.",
           "indoor": true,
-          "image": ""
+          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/ledive.webp?quality=90&strip=all&crop=0,0,100,100"
         }
       ]
     },
@@ -747,74 +512,25 @@
       "events": [
         {
           "time": "19:00",
-          "title": "Michelle's Cocktail Lounge — Saturday night",
-          "venue": "Michelle's Cocktail Lounge",
-          "neighborhood": "Flatbush",
-          "category": "nightlife",
-          "url": "https://ny.eater.com/featured-stories/411289/michelles-cocktail-lounge-flatbush-panamanian-bar-nyc-the-office",
-          "note": "50-year-old Panamanian institution on a Bedford Ave corner — exactly the kind of room you go out of your way for.",
+          "title": "Musaek — Subterranean Korean Seafood + Cocktails",
+          "venue": "Musaek, Koreatown",
+          "neighborhood": "Koreatown",
+          "category": "food",
+          "url": "https://ny.eater.com/dining-report/411410/musaek-nyc-korean-seafood-restaurant-review-koreatown",
+          "note": "Downstairs in the new Howoo/DubuHaus complex — soy-marinated Yeosu shrimp and a real cocktail program, exactly the hidden-room energy.",
           "indoor": true,
-          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/050126_Eater_Michelles_0006.jpg"
+          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/IMG_9038-copy.jpg?quality=90&strip=all&crop=0,0,100,100"
         },
         {
           "time": "21:00",
-          "title": "Bar Bayeux trio night",
-          "venue": "Bar Bayeux",
-          "neighborhood": "Prospect Lefferts Gardens",
-          "category": "music",
-          "url": "https://www.barbayeux.com/",
-          "note": "Pair it with Michelle's — two-stop Flatbush night.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "22:00",
-          "title": "Public Records — Saturday",
-          "venue": "Public Records",
-          "neighborhood": "Gowanus",
-          "category": "nightlife",
-          "url": "https://publicrecords.nyc/",
-          "note": "If you want the cleaner techno night, this is it.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "19:00",
-          "title": "Cafe Bar J.F.",
-          "venue": "Cafe Bar J.F.",
-          "neighborhood": "Williamsburg",
-          "category": "food",
-          "url": "https://ny.eater.com/restaurant-openings/411355/cafe-bar-j-f-williamsburg-opening-llama-inn-erik-ramirez-juan-correa",
-          "note": "South American tavern on Withers — pre-show dinner before something on Metropolitan.",
-          "indoor": true,
-          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/050726_CS_Eater_CafeBarBF_0058.jpg"
-        }
-      ]
-    },
-    "2026-05-31": {
-      "weather": null,
-      "events": [
-        {
-          "time": "16:00",
-          "title": "Sunny's bluegrass jam",
+          "title": "Bluegrass at Sunny's",
           "venue": "Sunny's Bar",
           "neighborhood": "Red Hook",
           "category": "music",
           "url": "https://sunnysredhook.com/",
-          "note": "The Sunday move when the weather turns — walk Van Brunt before, jam after.",
+          "note": "Recurring Saturday — the room is the show.",
           "indoor": true,
           "image": "https://images.getbento.com/gIKOds9jQnCArqwGp5TD_logo_transparent.png?w=1200&fit=fill&auto=compress,format&cs=origin&h=600&bg=EDEDF1&pad=100"
-        },
-        {
-          "time": "15:00",
-          "title": "Neue Galerie — before the Met merger",
-          "venue": "Neue Galerie",
-          "neighborhood": "Upper East Side",
-          "category": "art",
-          "url": "https://hyperallergic.com/manhattans-neue-galerie-to-merge-with-met-museum/",
-          "note": "Klimt and Schiele in a Beaux-Arts mansion — go while it's still its own thing.",
-          "indoor": true,
-          "image": "https://storage.ghost.io/c/51/f8/51f871d8-b6be-4a73-b958-0ca4fff0110a/content/images/2026/05/Ronald-S.-Lauder-and-Max-Hollein.-Credit_-Thomas-Loof.jpg"
         }
       ]
     },
@@ -822,35 +538,13 @@
       "weather": null,
       "events": [
         {
-          "time": "19:00",
-          "title": "Le Dive — settle-in dinner",
-          "venue": "Le Dive",
-          "neighborhood": "West Village",
-          "category": "food",
-          "url": "https://ny.eater.com/news/411250/nyc-new-restaurant-openings-may-2026",
-          "note": "A month in, the room runs smooth — Friday bistro plan.",
-          "indoor": true,
-          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/ledive.webp"
-        },
-        {
-          "time": "22:30",
-          "title": "Smalls — late jazz set",
+          "time": "22:00",
+          "title": "Late Set at Smalls",
           "venue": "Smalls Jazz Club",
           "neighborhood": "West Village",
           "category": "music",
           "url": "https://www.smallslive.com/",
-          "note": "Basement room, last set, two-drink minimum — classic move.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "23:00",
-          "title": "Nowadays Friday Resident",
-          "venue": "Nowadays",
-          "neighborhood": "Ridgewood",
-          "category": "nightlife",
-          "url": "https://nowadays.nyc/",
-          "note": "Long Friday — the dance floor everyone you know ends up on eventually.",
+          "note": "Friday standby when nothing on the calendar pulls hard enough.",
           "indoor": true,
           "image": ""
         }
@@ -860,102 +554,26 @@
       "weather": null,
       "events": [
         {
-          "time": "19:00",
-          "title": "Musaek — Koreatown seafood bar",
-          "venue": "Musaek",
-          "neighborhood": "Koreatown",
+          "time": "20:00",
+          "title": "Cafe Bar J.F. — Saturday",
+          "venue": "Cafe Bar J.F.",
+          "neighborhood": "Williamsburg",
           "category": "food",
-          "url": "https://ny.eater.com/dining-report/411410/musaek-nyc-korean-seafood-restaurant-review-koreatown",
-          "note": "Subterranean cocktail and seafood — go before the lines form on weekends.",
+          "url": "https://ny.eater.com/restaurant-openings/411355/cafe-bar-j-f-williamsburg-opening-llama-inn-erik-ramirez-juan-correa",
+          "note": "Three weeks in, the kitchen should be locked — strong date pick on Withers.",
           "indoor": true,
-          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/IMG_9038-copy.jpg"
+          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/050726_CS_Eater_CafeBarBF_0058.jpg?quality=90&strip=all&crop=0,0,100,100"
         },
         {
           "time": "21:00",
-          "title": "Bar Bayeux trio night",
-          "venue": "Bar Bayeux",
-          "neighborhood": "Prospect Lefferts Gardens",
-          "category": "music",
-          "url": "https://www.barbayeux.com/",
-          "note": "30 seats, real players, no cover — the Brooklyn night.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "22:00",
-          "title": "Public Records",
-          "venue": "Public Records",
-          "neighborhood": "Gowanus",
-          "category": "nightlife",
-          "url": "https://publicrecords.nyc/",
-          "note": "Vermouth bar at 9, dance floor at midnight.",
-          "indoor": true,
-          "image": ""
-        }
-      ]
-    },
-    "2026-06-12": {
-      "weather": null,
-      "events": [
-        {
-          "time": "20:00",
-          "title": "Mercury Lounge — Friday bill",
-          "venue": "Mercury Lounge",
-          "neighborhood": "Lower East Side",
-          "category": "music",
-          "url": "https://www.mercuryloungenyc.com/",
-          "note": "Default LES Friday — small room, no bullshit.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "22:30",
-          "title": "Smalls — late set",
-          "venue": "Smalls Jazz Club",
-          "neighborhood": "West Village",
-          "category": "music",
-          "url": "https://www.smallslive.com/",
-          "note": "Reliable jazz move when nothing else hits.",
-          "indoor": true,
-          "image": ""
-        }
-      ]
-    },
-    "2026-06-13": {
-      "weather": null,
-      "events": [
-        {
-          "time": "20:00",
-          "title": "Pioneer Works — Saturday programming",
-          "venue": "Pioneer Works",
+          "title": "Bluegrass at Sunny's",
+          "venue": "Sunny's Bar",
           "neighborhood": "Red Hook",
-          "category": "art",
-          "url": "https://pioneerworks.org/",
-          "note": "Always check what's running — when it's good, it's the best thing happening that night.",
-          "indoor": true,
-          "image": "https://cdn.sanity.io/images/vgvol637/production/e2ff399f287bde5592ea833bf94e12e29f693459-800x534.webp?auto=format"
-        },
-        {
-          "time": "19:00",
-          "title": "Michelle's Cocktail Lounge",
-          "venue": "Michelle's Cocktail Lounge",
-          "neighborhood": "Flatbush",
-          "category": "nightlife",
-          "url": "https://ny.eater.com/featured-stories/411289/michelles-cocktail-lounge-flatbush-panamanian-bar-nyc-the-office",
-          "note": "Third-generation Panamanian bar — the kind of room that won't exist forever, so go.",
-          "indoor": true,
-          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/050126_Eater_Michelles_0006.jpg"
-        },
-        {
-          "time": "21:00",
-          "title": "Bar Bayeux trio",
-          "venue": "Bar Bayeux",
-          "neighborhood": "Prospect Lefferts Gardens",
           "category": "music",
-          "url": "https://www.barbayeux.com/",
-          "note": "Pair it with Michelle's — two-stop neighborhood night.",
+          "url": "https://sunnysredhook.com/",
+          "note": "Standing residency at the best Red Hook holdout.",
           "indoor": true,
-          "image": ""
+          "image": "https://images.getbento.com/gIKOds9jQnCArqwGp5TD_logo_transparent.png?w=1200&fit=fill&auto=compress,format&cs=origin&h=600&bg=EDEDF1&pad=100"
         }
       ]
     }
