@@ -1,0 +1,9 @@
+# Vercel should serve this as a pure static site.
+# The actual build (RSS + weather + Claude ranking) runs in GitHub Actions
+# and commits feed.json back to the repo.
+package.json
+package-lock.json
+node_modules
+scripts
+.github
+taste.md
