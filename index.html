@@ -17,7 +17,6 @@
       --softer:  rgba(0, 0, 0, 0.45);   /* inactive dow letters, soft borders — large-text gray */
       --softest: rgba(0, 0, 0, 0.14);   /* hairline dividers */
       --pad-x: clamp(20px, 4vw, 80px);
-      --filter-row-h: 56px;
       --filter-h: 56px;
       --topbar-h: 48px;
     }
@@ -356,68 +355,44 @@
       border-bottom-color: var(--ink);
     }
 
-    /* ── Filter bar (sticky) ───────────────────────────── */
-    .filters {
-      position: sticky;
-      top: var(--topbar-h, 48px);
-      z-index: 30;
-      background: var(--paper);
-      border-top: 0;
-      border-bottom: 1px solid var(--rule);
-    }
-    .filter-row {
-      height: var(--filter-row-h);
-      display: flex;
-      align-items: center;
-      gap: clamp(8px, 1.5vw, 24px);
-      padding: 0 var(--pad-x);
-      overflow-x: auto;
-      overflow-y: hidden;
-      scrollbar-width: none;
-      white-space: nowrap;
-    }
-    .filter-row + .filter-row { border-top: 1px solid var(--softest); }
-    .filter-row[hidden] { display: none; }
-    .filter-row::-webkit-scrollbar { display: none; }
-    .filter-group {
-      display: flex;
-      align-items: center;
-      gap: clamp(10px, 1.5vw, 22px);
-    }
-    .filter-group-end {
-      margin-left: auto;
-      padding-left: clamp(16px, 2vw, 32px);
-      border-left: 1px solid var(--softer);
-    }
-    .filter-label {
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--softer);
-      padding-right: 2px;
-    }
-
     /* Categories dropdown (button stays in the scroll lane, panel is fixed-positioned) */
     .dropdown { position: relative; }
+    /* Dropdown trigger lives in the topbar next to the view tabs. Matches the
+       tab typography (Inter 600 small-caps) so the line reads uniformly. */
     .dropdown-btn {
+      appearance: none;
+      background: none;
+      border: 0;
+      padding: 16px 0 14px;
+      margin: 0 24px 0 0;
+      margin-bottom: -1px;
+      font: inherit;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--soft);
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      border-bottom: 2px solid transparent;
+      transition: color 120ms ease, border-color 120ms ease;
     }
+    .dropdown-btn:hover { color: var(--ink); }
+    .dropdown-btn:hover .dropdown-label { color: var(--ink); }
     .dropdown-btn::after {
       content: '▾';
       font-size: 9px;
       color: var(--soft);
       transition: transform 120ms ease;
+      letter-spacing: 0;
     }
     .dropdown-btn[aria-expanded="true"]::after { transform: rotate(180deg); }
+    .dropdown-btn .dropdown-label { color: var(--soft); font-weight: 600; }
     .dropdown-btn .dropdown-value {
       color: var(--ink);
-      font-weight: 600;
-      letter-spacing: 0.12em;
+      font-weight: 700;
     }
-    .dropdown-btn .dropdown-label { color: var(--soft); }
-    .dropdown-btn:hover .dropdown-label { color: var(--ink); }
 
     .dropdown-panel {
       position: fixed;
@@ -1273,9 +1248,10 @@
     body:not([data-view="month"]) .picks { display: none; }
 
     /* Filters apply to Month / Week / Year (event filtering).
-       Hide in Date Night and Map where they don't apply. */
-    body[data-view="dn"]  .filters,
-    body[data-view="map"] .filters { display: none; }
+       Hide the dropdowns in Date Night and Map where they don't apply,
+       but keep the topbar (view toggles stay visible). */
+    body[data-view="dn"]  .topbar .dropdown,
+    body[data-view="map"] .topbar .dropdown { display: none; }
 
     #map-view { position: relative; }
     #map {
@@ -1593,8 +1569,7 @@
     @media (max-width: 720px) {
       :root {
         --pad-x: clamp(16px, 5vw, 24px);
-        --filter-row-h: 48px;
-        --filter-h: 48px;
+        --filter-h: 44px;
       }
       .masthead .meta-right { align-items: flex-start; }
       .meta-links { gap: 14px; }
@@ -1616,15 +1591,7 @@
       .year-month-name { font-size: 28px; }
       .year-day { font-size: 11px; }
 
-      /* Filters: on mobile the weather chip flows inline in the same lane
-         (auto-margin + overflow scroll pushed it off-screen). */
-      .filter-group-end {
-        margin-left: 0;
-        padding-left: clamp(12px, 3vw, 18px);
-        border-left: 1px solid var(--softer);
-      }
-      .chip { font-size: 10px; letter-spacing: 0.12em; }
-      .filter-label { font-size: 9px; }
+      .dropdown-btn { margin-right: 14px; padding: 13px 0 11px; font-size: 10px; letter-spacing: 0.12em; }
 
       .masthead {
         grid-template-columns: 1fr;
@@ -1763,7 +1730,7 @@
 
     /* ── Print ──────────────────────────────────────────── */
     @media print {
-      .topbar, .filters, .float-actions { display: none; }
+      .topbar, .float-actions { display: none; }
       .month-title { position: static; }
       .month { break-before: page; }
       .day { break-inside: avoid; }
@@ -1796,34 +1763,26 @@
     <h1 class="title">2026 / A year in nights.</h1>
   </header>
 
-  <nav class="topbar" id="topbar" aria-label="View toggles">
+  <nav class="topbar" id="topbar" aria-label="Filters and views">
     <div class="topbar-group">
-      <button class="tab" id="meta-sources" type="button" aria-haspopup="dialog" aria-controls="sources-sheet">Sources</button>
+      <div class="dropdown" id="cat-dropdown">
+        <button class="dropdown-btn" id="cat-dropdown-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="cat-dropdown-panel">
+          <span class="dropdown-label">Categories</span>
+          <span class="dropdown-value" id="cat-dropdown-value">All</span>
+        </button>
+      </div>
+      <div class="dropdown" id="hood-dropdown">
+        <button class="dropdown-btn" id="hood-dropdown-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="hood-dropdown-panel" hidden>
+          <span class="dropdown-label">Where</span>
+          <span class="dropdown-value" id="hood-dropdown-value">All</span>
+        </button>
+      </div>
     </div>
     <div class="topbar-group is-end" role="tablist" aria-label="Zoom">
       <button class="tab" id="tab-today" type="button" data-action="today">Today</button>
       <button class="tab" id="tab-week"  role="tab" aria-selected="false" data-view="week">Week</button>
       <button class="tab is-active" id="tab-month" role="tab" aria-selected="true" data-view="month">Month</button>
       <button class="tab" id="tab-year"  role="tab" aria-selected="false" data-view="year">Year</button>
-    </div>
-  </nav>
-
-  <nav class="filters" id="filters" role="toolbar" aria-label="Filters">
-    <div class="filter-row">
-      <div class="filter-group">
-        <div class="dropdown" id="cat-dropdown">
-          <button class="dropdown-btn chip" id="cat-dropdown-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="cat-dropdown-panel">
-            <span class="dropdown-label">Categories</span>
-            <span class="dropdown-value" id="cat-dropdown-value">All</span>
-          </button>
-        </div>
-        <div class="dropdown" id="hood-dropdown">
-          <button class="dropdown-btn chip" id="hood-dropdown-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="hood-dropdown-panel" hidden>
-            <span class="dropdown-label">Where</span>
-            <span class="dropdown-value" id="hood-dropdown-value">All</span>
-          </button>
-        </div>
-      </div>
     </div>
   </nav>
 
@@ -1869,7 +1828,7 @@
     <div class="cap" id="title-preview-cap"></div>
   </div>
 
-  <div class="float-actions" role="toolbar" aria-label="Quick views">
+  <div class="float-actions" role="toolbar" aria-label="Quick actions">
     <button class="float-btn" id="action-dn" type="button" data-view="dn" aria-label="Date night">
       <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <path d="M5 4h14l-7 8z"/><path d="M12 12v8"/><path d="M8 20h8"/>
@@ -1881,6 +1840,12 @@
         <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
       </svg>
       <span class="float-btn-label">Map</span>
+    </button>
+    <button class="float-btn" id="action-sources" type="button" aria-label="About this calendar" aria-haspopup="dialog" aria-controls="sources-sheet">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+      </svg>
+      <span class="float-btn-label">Sources</span>
     </button>
   </div>
 
@@ -2404,16 +2369,15 @@
     function onEscHoodDropdown(e) { if (e.key === 'Escape') closeHoodDropdown(); }
 
     function updateFilterHeight() {
-      // Combined height of the two sticky bars at the top — topbar always
-      // visible, filter bar visible only in views that filter events.
-      // The month-title sticky-top uses this so it slots in beneath both.
+      // Single sticky bar now — the topbar carries both the filter
+      // dropdowns and the view toggles. .day's scroll-margin-top and
+      // .month-title's sticky top both use --filter-h.
       const tb = document.getElementById('topbar');
-      const fb = document.getElementById('filters');
       const tbH = tb ? tb.offsetHeight : 0;
-      const fbH = fb && fb.offsetParent !== null ? fb.offsetHeight : 0;
-      if (tbH) document.documentElement.style.setProperty('--topbar-h', `${tbH}px`);
-      const combined = tbH + fbH;
-      if (combined) document.documentElement.style.setProperty('--filter-h', `${combined}px`);
+      if (tbH) {
+        document.documentElement.style.setProperty('--topbar-h', `${tbH}px`);
+        document.documentElement.style.setProperty('--filter-h', `${tbH}px`);
+      }
     }
 
     // ── Render ─────────────────────────────────────────
@@ -3734,8 +3698,8 @@
         });
       });
 
-      // Topbar Sources link.
-      document.getElementById('meta-sources').addEventListener('click', openSourcesSheet);
+      // Sources is now a floating info icon in the bottom-right cluster.
+      document.getElementById('action-sources').addEventListener('click', openSourcesSheet);
       document.getElementById('sources-close').addEventListener('click', closeSourcesSheet);
 
       // Today tab → snap to today (Month view), no separate Today page.
