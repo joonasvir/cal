@@ -365,6 +365,17 @@
       },
       "events": [
         {
+          "time": "18:30",
+          "title": "Public Records \u2014 vermouth hour DJ",
+          "venue": "Public Records",
+          "neighborhood": "Gowanus",
+          "category": "music",
+          "url": "https://publicrecords.nyc/events",
+          "note": "Quieter Monday start, sit by the speakers, ease into the week.",
+          "indoor": true,
+          "image": ""
+        },
+        {
           "time": "19:00",
           "title": "AI & the City \u2014 panel + drinks",
           "venue": "Caveat",
@@ -375,6 +386,17 @@
           "indoor": true
         },
         {
+          "time": "19:30",
+          "title": "Caveat \u2014 Monday alt comedy",
+          "venue": "Caveat",
+          "neighborhood": "Lower East Side",
+          "category": "comedy",
+          "url": "https://www.caveat.nyc/",
+          "note": "Monday lineups skew bookish \u2014 Caveat's bread and butter.",
+          "indoor": true,
+          "image": ""
+        },
+        {
           "time": "20:00",
           "title": "Spike Wilner Quartet",
           "venue": "Smalls Jazz Club",
@@ -383,6 +405,39 @@
           "url": "https://www.smallslive.com/",
           "note": "House pianist, tight quartet. Show up at 7:30, get the back booth.",
           "indoor": true
+        },
+        {
+          "time": "20:30",
+          "title": "Roberta's \u2014 Monday pizza patio",
+          "venue": "Roberta's",
+          "neighborhood": "Bushwick",
+          "category": "food",
+          "url": "https://robertaspizza.com/",
+          "note": "Slow start to the week. Bee Sting, a Vermentino, the back patio.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "21:00",
+          "title": "Bar Bayeux \u2014 Monday duo",
+          "venue": "Bar Bayeux",
+          "neighborhood": "Prospect Heights",
+          "category": "music",
+          "url": "https://www.barbayeux.com/",
+          "note": "Two musicians, a tiny room, conversation just under the bar.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "22:00",
+          "title": "The Long Room \u2014 Monday drinks",
+          "venue": "The Long Room",
+          "neighborhood": "Williamsburg",
+          "category": "nightlife",
+          "url": "",
+          "note": "Dark tile, deep booth, late-Monday Manhattan.",
+          "indoor": true,
+          "image": ""
         }
       ]
     },
@@ -397,6 +452,17 @@
         "note": "walkable everywhere"
       },
       "events": [
+        {
+          "time": "18:30",
+          "title": "Mercury Lounge \u2014 early Tuesday show",
+          "venue": "Mercury Lounge",
+          "neighborhood": "Lower East Side",
+          "category": "music",
+          "url": "https://www.mercuryeastpresents.com/",
+          "note": "LES room, the room itself is worth showing up for. Check the lineup.",
+          "indoor": true,
+          "image": ""
+        },
         {
           "time": "19:30",
           "title": "Listening session \u2014 new releases, hosted by DJ Python",
@@ -416,6 +482,50 @@
           "url": "https://www.bkcomedycollective.com/",
           "note": "Concept-driven improv, not the random kind. Bedford dinner first.",
           "indoor": true
+        },
+        {
+          "time": "20:00",
+          "title": "Smalls \u2014 Tuesday late trio",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com/",
+          "note": "Tuesday's late slot is usually the headliner. Stand by the bar.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "20:30",
+          "title": "Lilia \u2014 Tuesday seating",
+          "venue": "Lilia",
+          "neighborhood": "Williamsburg",
+          "category": "food",
+          "url": "https://www.lilianewyork.com/",
+          "note": "Easier to walk in mid-week. Cacio e pepe, glass of trebbiano.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "21:00",
+          "title": "Bar Bayeux \u2014 Tuesday trio session",
+          "venue": "Bar Bayeux",
+          "neighborhood": "Prospect Heights",
+          "category": "music",
+          "url": "https://www.barbayeux.com/",
+          "note": "Trio nights are the staple. Sit so you can see the drummer.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "21:30",
+          "title": "Public Records \u2014 Tuesday vinyl set",
+          "venue": "Public Records",
+          "neighborhood": "Gowanus",
+          "category": "music",
+          "url": "https://publicrecords.nyc/events",
+          "note": "Vinyl-only listening sessions. The sound system is the point.",
+          "indoor": true,
+          "image": ""
         }
       ]
     },
@@ -431,6 +541,17 @@
       },
       "events": [
         {
+          "time": "18:30",
+          "title": "Wythe rooftop \u2014 Wednesday drinks",
+          "venue": "Wythe Hotel",
+          "neighborhood": "Williamsburg",
+          "category": "food",
+          "url": "https://wythehotel.com/",
+          "note": "Quieter mid-week. Manhattan view, no rush.",
+          "indoor": false,
+          "image": ""
+        },
+        {
           "time": "19:00",
           "title": "Yaeji \u2014 full band",
           "venue": "Bowery Ballroom",
@@ -441,6 +562,17 @@
           "indoor": true
         },
         {
+          "time": "20:00",
+          "title": "Smalls \u2014 Wednesday late",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com/",
+          "note": "Drummer-led trio. Late set after the early crowd clears.",
+          "indoor": true,
+          "image": ""
+        },
+        {
           "time": "20:30",
           "title": "Jazz Age night \u2014 Bobby Short tribute",
           "venue": "Caf\u00e9 Carlyle",
@@ -449,6 +581,39 @@
           "url": "https://www.rosewoodhotels.com/en/the-carlyle-new-york",
           "note": "Old New York / Gilded Age in one room. Dress up, drink a Manhattan, this is the brief.",
           "indoor": true
+        },
+        {
+          "time": "20:30",
+          "title": "Bar Bayeux \u2014 Wednesday session",
+          "venue": "Bar Bayeux",
+          "neighborhood": "Prospect Heights",
+          "category": "music",
+          "url": "https://www.barbayeux.com/",
+          "note": "Walking-distance from the Brooklyn Museum if you start there earlier.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "21:00",
+          "title": "Public Records \u2014 Wednesday vermouth",
+          "venue": "Public Records",
+          "neighborhood": "Gowanus",
+          "category": "food",
+          "url": "https://publicrecords.nyc/events",
+          "note": "Cocktail program is sneakily good. Order the spritz.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "22:00",
+          "title": "Caveat \u2014 Wednesday alt comedy",
+          "venue": "Caveat",
+          "neighborhood": "Lower East Side",
+          "category": "comedy",
+          "url": "https://www.caveat.nyc/",
+          "note": "Mid-week showcases are where the writers' rooms try material.",
+          "indoor": true,
+          "image": ""
         }
       ]
     },
@@ -474,6 +639,39 @@
           "indoor": true
         },
         {
+          "time": "19:00",
+          "title": "Smalls \u2014 Thursday early set",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com/",
+          "note": "Earlier set, dinner first. Walk over from the West Village after.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "20:00",
+          "title": "Lilia \u2014 Thursday seating",
+          "venue": "Lilia",
+          "neighborhood": "Williamsburg",
+          "category": "food",
+          "url": "https://www.lilianewyork.com/",
+          "note": "Pre-weekend warmup. Pasta + a real glass of red.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "20:30",
+          "title": "Caveat \u2014 Thursday late showcase",
+          "venue": "Caveat",
+          "neighborhood": "Lower East Side",
+          "category": "comedy",
+          "url": "https://www.caveat.nyc/",
+          "note": "Strong Thursday curators. Watch which writers' rooms show up.",
+          "indoor": true,
+          "image": ""
+        },
+        {
           "time": "21:00",
           "title": "Marc Cary Trio \u2014 late set",
           "venue": "Smalls Jazz Club",
@@ -492,6 +690,28 @@
           "url": "https://caveat.nyc/",
           "note": "Novak hosting = bookish, sharp, very you. Probably the night of the week.",
           "indoor": true
+        },
+        {
+          "time": "22:00",
+          "title": "Public Records \u2014 Thursday Resident",
+          "venue": "Public Records",
+          "neighborhood": "Gowanus",
+          "category": "music",
+          "url": "https://publicrecords.nyc/events",
+          "note": "Anthony Naples territory. Long set, real crowd.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "23:00",
+          "title": "Attaboy \u2014 Thursday nightcap",
+          "venue": "Attaboy",
+          "neighborhood": "Lower East Side",
+          "category": "nightlife",
+          "url": "https://attaboy.us/",
+          "note": "Ring the bell. Tell them a flavor. Stay late.",
+          "indoor": true,
+          "image": ""
         }
       ]
     },
@@ -507,6 +727,17 @@
       },
       "events": [
         {
+          "time": "18:30",
+          "title": "Public Records \u2014 Friday opening hour",
+          "venue": "Public Records",
+          "neighborhood": "Gowanus",
+          "category": "music",
+          "url": "https://publicrecords.nyc/events",
+          "note": "Listening room early; queue is gentle before 8.",
+          "indoor": true,
+          "image": ""
+        },
+        {
           "time": "19:00",
           "title": "Whitney Late \u2014 Edward Hopper room talks",
           "venue": "Whitney Museum",
@@ -515,6 +746,39 @@
           "url": "https://whitney.org/",
           "note": "Hopper at dusk is film-noir hours. Then dinner downstairs at Frenchette.",
           "indoor": true
+        },
+        {
+          "time": "20:00",
+          "title": "Lilia \u2014 Friday seating",
+          "venue": "Lilia",
+          "neighborhood": "Williamsburg",
+          "category": "food",
+          "url": "https://www.lilianewyork.com/",
+          "note": "Book ahead. Friday energy at the bar, anchovies + agnolotti.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "20:30",
+          "title": "Bar Bayeux \u2014 Friday trio",
+          "venue": "Bar Bayeux",
+          "neighborhood": "Prospect Heights",
+          "category": "music",
+          "url": "https://www.barbayeux.com/",
+          "note": "Trio nights are the staple. Stand if seats are gone.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "21:30",
+          "title": "Smalls \u2014 Friday late",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com/",
+          "note": "Late set is the move. Late set is always the move.",
+          "indoor": true,
+          "image": ""
         },
         {
           "time": "22:00",
@@ -535,6 +799,17 @@
           "url": "https://nowadays.nyc/",
           "note": "Long, sweaty, the real scene. Set a 4am alarm to leave.",
           "indoor": false
+        },
+        {
+          "time": "23:30",
+          "title": "Sunny's \u2014 Friday bluegrass",
+          "venue": "Sunny's",
+          "neighborhood": "Red Hook",
+          "category": "music",
+          "url": "https://sunnysredhook.com/",
+          "note": "Waterfront, jukebox, weekend warmup. Lyft home.",
+          "indoor": true,
+          "image": ""
         }
       ]
     },
@@ -938,7 +1213,7 @@
     },
     "stats": {
       "items_pulled": 87,
-      "events_curated": 62,
+      "events_curated": 87,
       "days_covered": 18
     }
   }

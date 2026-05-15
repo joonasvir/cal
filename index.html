@@ -11,9 +11,11 @@
       --ink: #000;
       --paper: #fff;
       --rule: #000;
-      --soft: rgba(0, 0, 0, 0.4);
-      --softer: rgba(0, 0, 0, 0.2);
-      --softest: rgba(0, 0, 0, 0.08);
+      /* Bumped from 0.40 / 0.20 / 0.08 so the secondary gray text clears
+         WCAG AA on white (4.5:1 for normal text, 3:1 for large). */
+      --soft:    rgba(0, 0, 0, 0.62);   /* event-meta, captions, time column — body-text gray */
+      --softer:  rgba(0, 0, 0, 0.45);   /* inactive dow letters, soft borders — large-text gray */
+      --softest: rgba(0, 0, 0, 0.14);   /* hairline dividers */
       --pad-x: clamp(20px, 4vw, 80px);
       --filter-row-h: 56px;
       --filter-h: 56px;
@@ -699,6 +701,29 @@
       transition: border-color 120ms ease;
     }
     .event-title a:hover { border-bottom-color: var(--ink); }
+
+    /* Secondary events (past the top TOP_N picks) — shown only when the day
+       is expanded, at a clearly smaller scale. Top picks stay bold and big;
+       the additional options sit underneath as a quieter list. */
+    .event.is-secondary { padding: 8px 0; }
+    .event.is-secondary .event-icon-wrap { transform: scale(0.85); transform-origin: top left; opacity: 0.75; }
+    .event.is-secondary .event-title {
+      font-size: clamp(15px, 1.1vw, 17px);
+      font-weight: 600;
+      line-height: 1.3;
+      letter-spacing: -0.005em;
+    }
+    .event.is-secondary .event-note {
+      font-size: 12.5px;
+      line-height: 1.45;
+      margin-top: 4px;
+    }
+    .event.is-secondary .event-meta {
+      font-size: 10px;
+      margin-top: 2px;
+    }
+    .event.is-secondary .event-time { font-size: 10px; padding-top: 4px; }
+    .event.is-secondary .event-cat  { font-size: 9.5px; }
     .event-meta {
       font-size: 11px;
       letter-spacing: 0.08em;
@@ -1774,6 +1799,9 @@
       .event { grid-template-columns: 44px 1fr; gap: 12px; padding: 12px 0; }
       .event-time { font-size: 10px; padding-top: 4px; }
       .event-title { font-size: 18px; font-weight: 700; line-height: 1.2; }
+      .event.is-secondary .event-title { font-size: 14.5px; font-weight: 600; }
+      .event.is-secondary .event-note  { font-size: 12.5px; }
+      .event.is-secondary { padding: 7px 0; }
       .event-meta { font-size: 10px; }
       .event-note { font-size: 13.5px; max-width: none; }
       .event-cat { display: none; }
@@ -2007,7 +2035,7 @@
     const DOW = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
     const DOW_LONG = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
     const CATEGORIES = ['music', 'comedy', 'art', 'food', 'talk', 'nightlife'];
-    const TOP_N = 2; // show 2 events per day by default; click "see N more" or the numeral to expand
+    const TOP_N = 3; // show the top 3 events large by default; the rest expand into a smaller-typography secondary list
 
     // ── Date-night catalog ─────────────────────────────
     // Static set of Brooklyn/NYC date moves. Tagged by time band, vibe and
@@ -2587,7 +2615,10 @@
         list.className = 'events';
         events.forEach((ev, i) => {
           const li = document.createElement('li');
-          li.className = `event${i >= TOP_N ? ' is-hidden' : ''}`;
+          // Events past TOP_N are both hidden (default) and rendered smaller
+          // (when expanded) — clear visual hierarchy between the recommended
+          // picks and the additional options.
+          li.className = `event${i >= TOP_N ? ' is-hidden is-secondary' : ''}`;
           const previewImg = imageForEvent(ev);
           const previewCap = [ev.venue, ev.neighborhood].filter(Boolean).join(' · ');
           li.innerHTML = `
