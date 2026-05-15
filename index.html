@@ -995,25 +995,44 @@
       padding-top: 8px;
     }
 
-    /* ── Week view (7-column at-a-glance) ────────────────── */
+    /* ── Week view (horizontal infinite-scroll strip) ─────── */
     #week-view {
-      padding: clamp(20px, 3vw, 40px) var(--pad-x) clamp(40px, 6vw, 80px);
+      padding: clamp(20px, 3vw, 40px) 0 clamp(40px, 6vw, 80px);
     }
+    .week-frame {
+      overflow-x: auto;
+      overflow-y: hidden;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      /* Visual lead-in so the first column doesn't kiss the edge on wide screens */
+      padding: 0 var(--pad-x) 4px;
+    }
+    .week-frame::-webkit-scrollbar { display: none; }
     .week-grid {
-      display: grid;
-      grid-template-columns: repeat(7, minmax(0, 1fr));
+      display: flex;
       gap: 1px;
       background: var(--rule);
       border: 1px solid var(--rule);
+      width: max-content;
     }
     .week-col {
       background: var(--paper);
-      padding: 16px 14px 20px;
-      min-height: 280px;
+      padding: 18px 16px 24px;
+      min-height: 360px;
       display: flex;
       flex-direction: column;
       gap: 12px;
+      flex: 0 0 clamp(220px, 22vw, 300px);
+      scroll-snap-align: start;
+      cursor: pointer;
     }
+    .week-col.is-month-edge {
+      border-left: 4px solid var(--ink);
+    }
+    .week-col.is-weekend { background: rgba(0, 0, 0, 0.025); }
+    .week-col.is-today.is-weekend { background: var(--ink); }
     .week-col.is-today { background: var(--ink); color: var(--paper); }
     .week-col.is-today .week-dow,
     .week-col.is-today .week-wx,
@@ -2724,6 +2743,10 @@
 
     // ── Year view (brutalist 12-month poster) ──────────
     // ── Week view (7 days centred on today) ─────────────
+    // How many days the horizontal strip renders, anchored on today.
+    const WEEK_DAYS_BACK = 30;
+    const WEEK_DAYS_FORWARD = 60;
+
     function renderWeekView() {
       const root = document.getElementById('week-frame');
       if (!root) return;
@@ -2731,22 +2754,22 @@
         const t = new Date();
         state.todayKey = isoDate(t.getFullYear(), t.getMonth(), t.getDate());
       }
-      // Start of the week = Monday of the current week.
       const today = new Date(state.todayKey + 'T00:00:00');
-      const dowMonFirst = (today.getDay() + 6) % 7;
-      const start = new Date(today);
-      start.setDate(today.getDate() - dowMonFirst);
 
       const cols = [];
-      for (let i = 0; i < 7; i++) {
-        const d = new Date(start);
-        d.setDate(start.getDate() + i);
+      let lastMonth = -1;
+      for (let i = -WEEK_DAYS_BACK; i <= WEEK_DAYS_FORWARD; i++) {
+        const d = new Date(today);
+        d.setDate(today.getDate() + i);
         const key = isoDate(d.getFullYear(), d.getMonth(), d.getDate());
         const payload = state.feed.days?.[key];
         const events = filterEvents(payload?.events || []);
         const weather = payload?.weather;
         const isToday = key === state.todayKey;
         const dowIdx = (d.getDay() + 6) % 7;
+        const isWeekend = dowIdx >= 5;
+        const monthChange = d.getMonth() !== lastMonth;
+        lastMonth = d.getMonth();
 
         const wxHtml = (weather && state.showWeather)
           ? `<div class="week-wx">${weather.high ?? weather.high_f}°/${weather.low ?? weather.low_f}° · ${escapeHtml(weather.condition || '')}</div>`
@@ -2767,10 +2790,20 @@
             }).join('')}</ul>`
           : `<div class="week-empty">—</div>`;
 
+        // Show month label on the first column AND when month changes.
+        const monthLabel = monthChange ? MONTHS[d.getMonth()].slice(0, 3).toUpperCase() : '';
+
+        const classes = [
+          'week-col',
+          isToday ? 'is-today' : '',
+          isWeekend ? 'is-weekend' : '',
+          monthChange ? 'is-month-edge' : '',
+        ].filter(Boolean).join(' ');
+
         cols.push(`
-          <article class="week-col${isToday ? ' is-today' : ''}" data-date="${escapeHtml(key)}">
+          <article class="${classes}" data-date="${escapeHtml(key)}">
             <header class="week-col-head">
-              <div class="week-dow">${DOW_LONG[dowIdx]}</div>
+              <div class="week-dow">${monthLabel ? `<strong>${monthLabel}</strong> · ` : ''}${DOW_LONG[dowIdx]}</div>
               <button type="button" class="week-num" data-date="${escapeHtml(key)}" aria-label="Open ${key} in Month view">${d.getDate()}</button>
               ${wxHtml}
             </header>
@@ -2779,7 +2812,8 @@
         `);
       }
       root.innerHTML = `<div class="week-grid">${cols.join('')}</div>`;
-      // Numeral click → zoom into Month at that day.
+
+      // Numeral click → zoom into Month view at that day.
       root.querySelectorAll('.week-num[data-date]').forEach((btn) => {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -2790,6 +2824,17 @@
           requestAnimationFrame(() => scrollToDate(key, 'instant'));
         });
       });
+
+      // Snap horizontal scroll to today on every render.
+      const todayCol = root.querySelector(`.week-col[data-date="${state.todayKey}"]`);
+      if (todayCol) {
+        // Use scrollIntoView with `inline:'start'`, falling back to left math.
+        try {
+          todayCol.scrollIntoView({ inline: 'start', block: 'nearest', behavior: 'instant' });
+        } catch {
+          root.scrollLeft = todayCol.offsetLeft - 16;
+        }
+      }
     }
 
     function renderYearView() {
