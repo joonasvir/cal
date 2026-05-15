@@ -17,6 +17,7 @@
       --pad-x: clamp(20px, 4vw, 80px);
       --filter-row-h: 56px;
       --filter-h: 56px;
+      --topbar-h: 48px;
     }
 
     * { box-sizing: border-box; }
@@ -283,26 +284,44 @@
       margin-top: clamp(20px, 3vw, 36px);
     }
 
-    /* ── Mode tabs (above filters) ─────────────────────── */
-    .tabs {
-      display: flex;
-      gap: 0;
-      padding: 0 var(--pad-x);
-      border-top: 1px solid var(--rule);
+    /* ── Sticky top bar (view toggles + sources/weather) ───
+       Always visible. Views on the left, action links on the right. */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 35;
       background: var(--paper);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: stretch;
+      gap: 8px;
+      padding: 0 var(--pad-x);
       overflow-x: auto;
       overflow-y: hidden;
       scrollbar-width: none;
       white-space: nowrap;
       -webkit-overflow-scrolling: touch;
     }
-    .tabs::-webkit-scrollbar { display: none; }
+    .topbar::-webkit-scrollbar { display: none; }
+    .topbar-group {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+    }
+    .topbar-group + .topbar-group {
+      margin-left: 18px;
+      padding-left: 18px;
+      border-left: 1px solid var(--softest);
+    }
+    .topbar-group.is-end { margin-left: auto; }
+
     .tab {
       appearance: none;
       background: none;
       border: 0;
-      padding: 14px 0;
-      margin-right: 28px;
+      padding: 16px 0 14px;
+      margin-right: 24px;
       font: inherit;
       font-size: 11px;
       letter-spacing: 0.18em;
@@ -313,6 +332,7 @@
       margin-bottom: -1px;
       transition: color 120ms ease, border-color 120ms ease;
     }
+    .topbar-group .tab:last-child { margin-right: 0; }
     .tab:hover { color: var(--ink); }
     .tab.is-active {
       color: var(--ink);
@@ -323,10 +343,10 @@
     /* ── Filter bar (sticky) ───────────────────────────── */
     .filters {
       position: sticky;
-      top: 0;
+      top: var(--topbar-h, 48px);
       z-index: 30;
       background: var(--paper);
-      border-top: 1px solid var(--rule);
+      border-top: 0;
       border-bottom: 1px solid var(--rule);
     }
     .filter-row {
@@ -1095,6 +1115,99 @@
       padding: 32px 0;
     }
 
+    /* ── Week view (7-column at-a-glance) ────────────────── */
+    #week-view {
+      padding: clamp(20px, 3vw, 40px) var(--pad-x) clamp(40px, 6vw, 80px);
+    }
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+    .week-col {
+      background: var(--paper);
+      padding: 16px 14px 20px;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .week-col.is-today { background: var(--ink); color: var(--paper); }
+    .week-col.is-today .week-dow,
+    .week-col.is-today .week-wx,
+    .week-col.is-today .week-event-meta,
+    .week-col.is-today .week-event-time { color: rgba(255,255,255,0.7); }
+    .week-col.is-today .week-event-title a { color: inherit; }
+    .week-col-head { display: flex; flex-direction: column; gap: 4px; }
+    .week-dow {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--soft);
+      font-weight: 600;
+    }
+    .week-num {
+      appearance: none;
+      background: none;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+      text-align: left;
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 800;
+      letter-spacing: -0.045em;
+      line-height: 0.92;
+      font-variant-numeric: lining-nums;
+      width: max-content;
+    }
+    .week-num:hover { opacity: 0.65; }
+    .week-wx {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--soft);
+      font-variant-numeric: tabular-nums;
+    }
+    .week-events { list-style: none; padding: 0; margin: 0; }
+    .week-event {
+      padding: 8px 0;
+      border-top: 1px solid var(--softest);
+    }
+    .week-event:first-child { border-top: 0; padding-top: 0; }
+    .week-col.is-today .week-event { border-top-color: rgba(255,255,255,0.15); }
+    .week-event-time {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      font-variant-numeric: tabular-nums;
+      color: var(--soft);
+      margin-bottom: 2px;
+    }
+    .week-event-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.005em;
+    }
+    .week-event-title a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+    .week-event-title a:hover { border-bottom-color: currentColor; }
+    .week-event-meta {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--soft);
+      margin-top: 3px;
+    }
+    .week-empty { color: var(--softer); font-size: 14px; padding-top: 8px; }
+
     /* ── Year view (brutalist poster) ─────────────────────
        12 month tiles, tight day grids, days with events filled black.
        Click any day → snap to Month view at that date. */
@@ -1236,47 +1349,31 @@
     }
 
     /* ── View visibility ─────────────────────────────────
-       Only one main view section is visible at a time. Tabs flip body[data-view].
+       Only one main view section is visible at a time. Topbar flips body[data-view].
        Default body markup has data-view="month". */
-    #today-view, #year-view, #map-view, #date-night { display: none; }
-    body[data-view="today"] #calendar,
-    body[data-view="today"] #date-night,
-    body[data-view="today"] #year-view,
-    body[data-view="today"] #map-view { display: none; }
+    #today-view, #week-view, #year-view, #map-view, #date-night { display: none; }
+
     body[data-view="today"] #today-view { display: block; }
-    body[data-view="today"] .picks,
-    body[data-view="today"] .today-btn,
-    body[data-view="today"] .filters { display: none; }
+    body[data-view="week"]  #week-view  { display: block; }
+    body[data-view="year"]  #year-view  { display: block; }
+    body[data-view="dn"]    #date-night { display: block; }
+    body[data-view="map"]   #map-view   { display: block; }
 
-    body[data-view="year"] #calendar,
-    body[data-view="year"] #date-night,
-    body[data-view="year"] #today-view,
-    body[data-view="year"] #map-view { display: none; }
-    body[data-view="year"] #year-view { display: block; }
-    body[data-view="year"] .picks,
-    body[data-view="year"] .today-btn,
-    body[data-view="year"] .filters { display: none; }
+    /* Hide the calendar grid in non-month views. */
+    body[data-view="today"] #calendar,
+    body[data-view="week"]  #calendar,
+    body[data-view="year"]  #calendar,
+    body[data-view="dn"]    #calendar,
+    body[data-view="map"]   #calendar { display: none; }
 
-    body[data-view="month"] #today-view,
-    body[data-view="month"] #year-view,
-    body[data-view="month"] #date-night,
-    body[data-view="month"] #map-view { display: none; }
+    /* Picks (My Usuals) and the floating Today button only make sense in Month view. */
+    body:not([data-view="month"]) .picks { display: none; }
+    body:not([data-view="month"]) .today-btn { display: none; }
 
-    body[data-view="dn"] #calendar,
-    body[data-view="dn"] #today-view,
-    body[data-view="dn"] #year-view,
-    body[data-view="dn"] #map-view { display: none; }
-    body[data-view="dn"] #date-night { display: block; }
-    body[data-view="dn"] .today-btn,
-    body[data-view="dn"] .filters,
-    body[data-view="dn"] .picks { display: none; }
-
-    body[data-view="map"] #calendar,
-    body[data-view="map"] #today-view,
-    body[data-view="map"] #year-view,
-    body[data-view="map"] #date-night,
-    body[data-view="map"] .today-btn { display: none; }
-    body[data-view="map"] #map-view { display: block; }
+    /* Filters apply to Month / Today / Week / Year (event filtering).
+       Hide in Date Night and Map where they don't apply. */
+    body[data-view="dn"]  .filters,
+    body[data-view="map"] .filters { display: none; }
 
     #map-view { position: relative; }
     #map {
@@ -1690,8 +1787,21 @@
         bottom: 16px;
       }
 
-      .tab { font-size: 10px; padding: 12px 0; margin-right: 16px; letter-spacing: 0.12em; }
-      .tab:last-child { margin-right: var(--pad-x); }
+      :root { --topbar-h: 44px; }
+      .topbar { padding: 0 var(--pad-x); }
+      .topbar-group + .topbar-group { margin-left: 14px; padding-left: 14px; }
+      .tab { font-size: 10px; padding: 13px 0 11px; margin-right: 14px; letter-spacing: 0.12em; }
+      .topbar-group .tab:last-child { margin-right: 0; }
+
+      /* Week view stacks vertically on phones — 7 columns is unreadable. */
+      .week-grid {
+        grid-template-columns: 1fr;
+      }
+      .week-col {
+        min-height: 0;
+        padding: 14px var(--pad-x) 18px;
+      }
+      .week-num { font-size: 44px; }
 
       #map { height: calc(100vh - var(--filter-h, 48px) - 44px - 1px); min-height: 360px; }
       .map-status { font-size: 10px; padding: 6px 10px; bottom: 8px; left: 8px; }
@@ -1781,10 +1891,6 @@
       <span class="meta-label">Brooklyn / NYC</span>
     </div>
     <div class="meta-right">
-      <div class="meta-links">
-        <button class="meta-link" id="meta-sources" type="button" aria-haspopup="dialog" aria-controls="sources-sheet">Sources</button>
-        <button class="meta-link" id="meta-weather" type="button" aria-pressed="true">Weather</button>
-      </div>
       <span class="meta-caption" id="meta-caption">
         <span id="meta-edition">Edition 01</span> · <span id="meta-date">—</span>
       </span>
@@ -1792,12 +1898,21 @@
     <h1 class="title">2026 / A year in nights.</h1>
   </header>
 
-  <nav class="tabs" id="tabs" role="tablist" aria-label="View">
-    <button class="tab" id="tab-today" role="tab" type="button" aria-selected="false" data-view="today">Today</button>
-    <button class="tab is-active" id="tab-month" role="tab" type="button" aria-selected="true" data-view="month">Month</button>
-    <button class="tab" id="tab-year"  role="tab" type="button" aria-selected="false" data-view="year">Year</button>
-    <button class="tab" id="tab-dn"    role="tab" type="button" aria-selected="false" data-view="dn">Date night</button>
-    <button class="tab" id="tab-map"   role="tab" type="button" aria-selected="false" data-view="map">Map</button>
+  <nav class="topbar" id="topbar" aria-label="View and data toggles">
+    <div class="topbar-group" role="tablist" aria-label="Zoom">
+      <button class="tab" id="tab-today" role="tab" type="button" aria-selected="false" data-view="today">Today</button>
+      <button class="tab" id="tab-week"  role="tab" type="button" aria-selected="false" data-view="week">Week</button>
+      <button class="tab is-active" id="tab-month" role="tab" type="button" aria-selected="true" data-view="month">Month</button>
+      <button class="tab" id="tab-year"  role="tab" type="button" aria-selected="false" data-view="year">Year</button>
+    </div>
+    <div class="topbar-group" role="tablist" aria-label="Modes">
+      <button class="tab" id="tab-dn"  role="tab" type="button" aria-selected="false" data-view="dn">Date night</button>
+      <button class="tab" id="tab-map" role="tab" type="button" aria-selected="false" data-view="map">Map</button>
+    </div>
+    <div class="topbar-group is-end">
+      <button class="tab" id="meta-sources" type="button" aria-haspopup="dialog" aria-controls="sources-sheet">Sources</button>
+      <button class="tab is-active" id="meta-weather" type="button" aria-pressed="true">Weather</button>
+    </div>
   </nav>
 
   <nav class="filters" id="filters" role="toolbar" aria-label="Filters">
@@ -1833,6 +1948,9 @@
 
   <section id="today-view" aria-label="Today">
     <div class="today-frame" id="today-frame"></div>
+  </section>
+  <section id="week-view" aria-label="This week">
+    <div class="week-frame" id="week-frame"></div>
   </section>
   <section id="year-view" aria-label="Year overview">
     <div class="year-head">
@@ -2207,6 +2325,7 @@
     function renderCurrent() {
       renderCalendar();
       if (state.view === 'today') renderTodayView();
+      if (state.view === 'week')  renderWeekView();
       if (state.view === 'year')  renderYearView();
       if (state.view === 'dn')    renderDateNight();
       refreshMapMarkers();
@@ -2287,9 +2406,13 @@
       state.showWeather = !state.showWeather;
       document.body.classList.toggle('hide-weather', !state.showWeather);
       const btn = document.getElementById('meta-weather');
-      if (btn) btn.setAttribute('aria-pressed', state.showWeather ? 'true' : 'false');
-      // Today view bakes the weather block into its render — re-render so the change is visible.
+      if (btn) {
+        btn.setAttribute('aria-pressed', state.showWeather ? 'true' : 'false');
+        btn.classList.toggle('is-active', state.showWeather);
+      }
+      // Today and Week views bake the weather block in — re-render so the change is visible.
       if (state.view === 'today') renderTodayView();
+      if (state.view === 'week')  renderWeekView();
       writeHash();
     }
 
@@ -2380,10 +2503,16 @@
     function onEscHoodDropdown(e) { if (e.key === 'Escape') closeHoodDropdown(); }
 
     function updateFilterHeight() {
+      // Combined height of the two sticky bars at the top — topbar always
+      // visible, filter bar visible only in views that filter events.
+      // The month-title sticky-top uses this so it slots in beneath both.
+      const tb = document.getElementById('topbar');
       const fb = document.getElementById('filters');
-      if (!fb) return;
-      const h = fb.offsetHeight;
-      if (h) document.documentElement.style.setProperty('--filter-h', `${h}px`);
+      const tbH = tb ? tb.offsetHeight : 0;
+      const fbH = fb && fb.offsetParent !== null ? fb.offsetHeight : 0;
+      if (tbH) document.documentElement.style.setProperty('--topbar-h', `${tbH}px`);
+      const combined = tbH + fbH;
+      if (combined) document.documentElement.style.setProperty('--filter-h', `${combined}px`);
     }
 
     // ── Render ─────────────────────────────────────────
@@ -2672,9 +2801,10 @@
     }
 
     // ── Date Night ─────────────────────────────────────
-    const ALL_VIEWS = ['today', 'month', 'year', 'dn', 'map'];
-    // Zoom levels — higher = more zoomed in. Used to pick transition direction.
-    const VIEW_ZOOM = { today: 3, month: 2, dn: 2, map: 2, year: 1 };
+    const ALL_VIEWS = ['today', 'week', 'month', 'year', 'dn', 'map'];
+    // Zoom levels — higher = more zoomed in. Today → Year is a clean
+    // zoom-out gradient; Date Night and Map sit at the "Month" level.
+    const VIEW_ZOOM = { today: 4, week: 3, month: 2, dn: 2, map: 2, year: 1 };
 
     function normalizeView(v) {
       if (v === 'calendar') return 'month'; // backwards-compat with old URLs
@@ -2689,12 +2819,11 @@
       const dir = delta > 0 ? 'in' : delta < 0 ? 'out' : 'flat';
       document.documentElement.dataset.zoomDir = dir;
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      // Skip view-transitions on coarse pointers (mobile). View Transitions
-      // on iOS Safari can leave a stale snapshot when tapped through tabs;
-      // snap-change is safer there.
-      const coarse = window.matchMedia('(hover: none), (pointer: coarse)').matches;
-      if (!reduced && !coarse && typeof document.startViewTransition === 'function') {
-        document.startViewTransition(() => setView(next));
+      if (!reduced && typeof document.startViewTransition === 'function') {
+        const t = document.startViewTransition(() => setView(next));
+        // If the transition is interrupted, finished rejects — we still want
+        // the new view to be the source of truth, so swallow the error.
+        t.finished?.catch?.(() => {});
       } else {
         setView(next);
       }
@@ -2709,7 +2838,11 @@
         b.classList.toggle('is-active', on);
         b.setAttribute('aria-selected', on ? 'true' : 'false');
       });
+      // Recalculate sticky offsets — the filter bar shows in some views and
+      // hides in others, so the month-title's effective sticky-top changes.
+      requestAnimationFrame(updateFilterHeight);
       if (v === 'today') renderTodayView();
+      if (v === 'week')  renderWeekView();
       if (v === 'year')  renderYearView();
       if (v === 'dn') {
         if (!state.dnDate) state.dnDate = state.linkedDate || state.todayKey;
@@ -2795,6 +2928,75 @@
     }
 
     // ── Year view (brutalist 12-month poster) ──────────
+    // ── Week view (7 days centred on today) ─────────────
+    function renderWeekView() {
+      const root = document.getElementById('week-frame');
+      if (!root) return;
+      if (!state.todayKey) {
+        const t = new Date();
+        state.todayKey = isoDate(t.getFullYear(), t.getMonth(), t.getDate());
+      }
+      // Start of the week = Monday of the current week.
+      const today = new Date(state.todayKey + 'T00:00:00');
+      const dowMonFirst = (today.getDay() + 6) % 7;
+      const start = new Date(today);
+      start.setDate(today.getDate() - dowMonFirst);
+
+      const cols = [];
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(start);
+        d.setDate(start.getDate() + i);
+        const key = isoDate(d.getFullYear(), d.getMonth(), d.getDate());
+        const payload = state.feed.days?.[key];
+        const events = filterEvents(payload?.events || []);
+        const weather = payload?.weather;
+        const isToday = key === state.todayKey;
+        const dowIdx = (d.getDay() + 6) % 7;
+
+        const wxHtml = (weather && state.showWeather)
+          ? `<div class="week-wx">${weather.high ?? weather.high_f}°/${weather.low ?? weather.low_f}° · ${escapeHtml(weather.condition || '')}</div>`
+          : '';
+        const eventsHtml = events.length
+          ? `<ul class="week-events">${events.slice(0, 8).map((ev) => {
+              const img = imageForEvent(ev);
+              const cap = [ev.venue, ev.neighborhood].filter(Boolean).join(' · ');
+              return `
+                <li class="week-event">
+                  <div class="week-event-time">${escapeHtml(fmtTime(ev.time) || '')}</div>
+                  <div class="week-event-title" data-image="${escapeHtml(img)}"${cap ? ` data-caption="${escapeHtml(cap)}"` : ''}>${ev.url
+                    ? `<a href="${escapeHtml(ev.url)}" target="_blank" rel="noopener">${escapeHtml(ev.title)}</a>`
+                    : escapeHtml(ev.title)}</div>
+                  ${ev.venue ? `<div class="week-event-meta">${escapeHtml(ev.venue)}</div>` : ''}
+                </li>
+              `;
+            }).join('')}</ul>`
+          : `<div class="week-empty">—</div>`;
+
+        cols.push(`
+          <article class="week-col${isToday ? ' is-today' : ''}" data-date="${escapeHtml(key)}">
+            <header class="week-col-head">
+              <div class="week-dow">${DOW_LONG[dowIdx]}</div>
+              <button type="button" class="week-num" data-date="${escapeHtml(key)}" aria-label="Open ${key} in Month view">${d.getDate()}</button>
+              ${wxHtml}
+            </header>
+            ${eventsHtml}
+          </article>
+        `);
+      }
+      root.innerHTML = `<div class="week-grid">${cols.join('')}</div>`;
+      // Numeral click → zoom into Month at that day.
+      root.querySelectorAll('.week-num[data-date]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const key = btn.dataset.date;
+          state.linkedDate = key;
+          state.expandedDates.add(key);
+          transitionTo('month');
+          requestAnimationFrame(() => scrollToDate(key, 'instant'));
+        });
+      });
+    }
+
     function renderYearView() {
       const year = state.feed.year || new Date().getFullYear();
       const headline = document.getElementById('year-headline');
@@ -3228,17 +3430,84 @@
     }
 
     // ── Hover image preview ────────────────────────────
-    // Picsum gives stable deterministic photos until the build pipeline
-    // populates a real ev.image (from RSS enclosures / Claude pass-through).
-    function imageForEvent(ev) {
-      if (ev && ev.image) return ev.image;
-      const seedRaw = [ev?.title, ev?.venue, ev?.category].filter(Boolean).join('-') || 'nyc';
-      const seed = encodeURIComponent(seedRaw.toLowerCase().replace(/[^a-z0-9-]+/g, '-').slice(0, 64));
-      return `https://picsum.photos/seed/${seed}/640/400`;
+    // Priority:
+    //   1. ev.image — real image scraped from the event's site (og:image)
+    //      or passed through from RSS by the build pipeline. Always wins.
+    //   2. Curated venue → URL map (so the well-known rooms — Smalls, Public
+    //      Records, Bar Bayeux, Caveat, Lilia, Pioneer Works — show a
+    //      recognisable photo today, before the next daily build runs).
+    //   3. Topical fallback: LoremFlickr with category-aware keywords +
+    //      a deterministic lock seed. A music event gets jazz/club/concert
+    //      photos; an art event gets gallery/museum photos; a food event
+    //      gets restaurant/interior photos. Far less random than picsum.
+
+    // Hand-curated stable image URLs for the most-mentioned venues.
+    // These are Wikimedia / OpenStreetMap-hosted assets so they don't 404
+    // and don't need an API key. Keys are normalised lowercase venue names.
+    const VENUE_IMAGES = {
+      "smalls jazz club":   "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Smalls_Jazz_Club_NYC.jpg/640px-Smalls_Jazz_Club_NYC.jpg",
+      "smalls":             "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Smalls_Jazz_Club_NYC.jpg/640px-Smalls_Jazz_Club_NYC.jpg",
+      "brooklyn museum":    "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Brooklyn_Museum_-_eastern_facade.jpg/640px-Brooklyn_Museum_-_eastern_facade.jpg",
+      "mercury lounge":     "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Mercury_Lounge_NYC.jpg/640px-Mercury_Lounge_NYC.jpg",
+      "bowery ballroom":    "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Bowery_Ballroom.jpg/640px-Bowery_Ballroom.jpg",
+      "pioneer works":      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Pioneer_Works_Red_Hook.jpg/640px-Pioneer_Works_Red_Hook.jpg",
+      "whitney museum":     "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Whitney_Museum_of_American_Art_-_Renzo_Piano.jpg/640px-Whitney_Museum_of_American_Art_-_Renzo_Piano.jpg",
+      "the bell house":     "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/The_Bell_House_Brooklyn.jpg/640px-The_Bell_House_Brooklyn.jpg",
+      "knockdown center":   "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Knockdown_Center_Queens.jpg/640px-Knockdown_Center_Queens.jpg",
+      "café carlyle":       "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Cafe_Carlyle.jpg/640px-Cafe_Carlyle.jpg",
+      "film forum":         "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Film_Forum.jpg/640px-Film_Forum.jpg",
+      "new museum":         "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/New_Museum_of_Contemporary_Art.jpg/640px-New_Museum_of_Contemporary_Art.jpg",
+    };
+
+    // LoremFlickr keyword tags per category. Multiple comma-separated tags
+    // are ANDed, so "jazz,club,music" returns photos matching all three.
+    const CATEGORY_IMAGE_TAGS = {
+      music:     'jazz,club,music,stage',
+      comedy:    'standup,microphone,stage,club',
+      art:       'gallery,art,exhibition,museum',
+      food:      'restaurant,interior,wine,dining',
+      talk:      'library,books,lecture,bookstore',
+      nightlife: 'nightclub,bar,party,night',
+    };
+
+    function fnvHash(s) {
+      let h = 2166136261 >>> 0;
+      for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+      return h >>> 0;
     }
+
+    function loremflickrUrl(tags, seedStr) {
+      const lock = fnvHash(seedStr) % 1000000;
+      return `https://loremflickr.com/640/400/${encodeURIComponent(tags)}?lock=${lock}`;
+    }
+
+    function imageForEvent(ev) {
+      // 1. Real image from build pipeline / og:image scrape.
+      if (ev && ev.image && /^https?:/i.test(ev.image)) return ev.image;
+      // 2. Curated venue overrides.
+      const v = (ev?.venue || '').toLowerCase().trim().replace(/[’`]/g, "'").replace(/\s+/g, ' ');
+      if (v && VENUE_IMAGES[v]) return VENUE_IMAGES[v];
+      if (v) {
+        for (const key in VENUE_IMAGES) { if (v.includes(key) || key.includes(v)) return VENUE_IMAGES[key]; }
+      }
+      // 3. Topical loremflickr fallback (category keywords + brooklyn).
+      const cat = (ev?.category || 'music').toLowerCase();
+      const baseTags = CATEGORY_IMAGE_TAGS[cat] || 'newyork,brooklyn';
+      const tags = `${baseTags},brooklyn`;
+      const seedStr = `${ev?.title || ''}|${ev?.venue || ''}|${cat}`;
+      return loremflickrUrl(tags, seedStr);
+    }
+
     function imageForMove(m) {
-      const seed = encodeURIComponent(`dn-${m.id || m.title || 'move'}`);
-      return `https://picsum.photos/seed/${seed}/640/400`;
+      // Date-night moves: treat as music by default unless the vibe is food/art.
+      const vibe = (m?.vibe || []).join(',').toLowerCase();
+      const cat = /food|restaurant|cocktail|wine/.test(vibe) ? 'food'
+                : /art|gallery|museum|cinema/.test(vibe) ? 'art'
+                : /comedy|karaoke/.test(vibe) ? 'comedy'
+                : /late|nightlife|club/.test(vibe) ? 'nightlife'
+                : 'music';
+      const tags = `${CATEGORY_IMAGE_TAGS[cat]},brooklyn`;
+      return loremflickrUrl(tags, `dn-${m?.id || m?.title || cat}`);
     }
 
     const preview = {
@@ -3429,7 +3698,10 @@
         state.showWeather = h.weather;
         document.body.classList.toggle('hide-weather', !state.showWeather);
         const wbtn = document.getElementById('meta-weather');
-        if (wbtn) wbtn.setAttribute('aria-pressed', state.showWeather ? 'true' : 'false');
+        if (wbtn) {
+          wbtn.setAttribute('aria-pressed', state.showWeather ? 'true' : 'false');
+          wbtn.classList.toggle('is-active', state.showWeather);
+        }
       }
       if (h.date && /^\d{4}-\d{2}-\d{2}$/.test(h.date)) {
         state.linkedDate = h.date;
@@ -3648,7 +3920,9 @@
       // My Usuals — show more / show fewer
       const picksMore = document.getElementById('picks-more');
       if (picksMore) picksMore.addEventListener('click', togglePicksExpanded);
-      document.querySelectorAll('.tab').forEach((b) => {
+      // Only tabs with data-view trigger a view change; Sources/Weather
+      // are visually tab-styled but wired separately above.
+      document.querySelectorAll('.tab[data-view]').forEach((b) => {
         b.addEventListener('click', () => transitionTo(b.dataset.view));
       });
       document.getElementById('dn-shuffle').addEventListener('click', () => {
