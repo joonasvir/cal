@@ -652,10 +652,10 @@
       text-align: right;
     }
 
-    /* ── Top picks (above the calendar) ─────────────────── */
+    /* ── My Usuals (top picks list above the calendar) ──── */
     .picks {
-      padding: clamp(28px, 4vw, 56px) var(--pad-x) clamp(20px, 3vw, 36px);
-      border-bottom: 2px solid var(--ink);
+      padding: clamp(28px, 4vw, 56px) var(--pad-x) clamp(28px, 4vw, 56px);
+      border-bottom: 3px solid var(--ink);
     }
     body[data-view="map"] .picks,
     body[data-view="dn"] .picks { display: none; }
@@ -664,15 +664,18 @@
       align-items: baseline;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: clamp(18px, 2vw, 28px);
+      margin-bottom: clamp(16px, 2vw, 24px);
+      padding-bottom: clamp(12px, 1.5vw, 18px);
+      border-bottom: 2px solid var(--ink);
       flex-wrap: wrap;
     }
     .picks-title {
-      font-size: clamp(22px, 3vw, 36px);
+      font-size: clamp(26px, 3.6vw, 44px);
       font-weight: 900;
-      letter-spacing: -0.025em;
+      letter-spacing: -0.03em;
       margin: 0;
       text-transform: uppercase;
+      line-height: 0.95;
     }
     .picks-sub {
       font-size: 11px;
@@ -681,52 +684,55 @@
       color: var(--soft);
       font-weight: 700;
     }
-    .picks-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      border-top: 2px solid var(--ink);
-      border-left: 2px solid var(--ink);
+    .picks-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
     }
-    .pick-card {
-      border-right: 2px solid var(--ink);
-      border-bottom: 2px solid var(--ink);
-      padding: clamp(20px, 2.5vw, 36px);
+    .pick-row {
+      display: grid;
+      grid-template-columns: 44px 120px 1fr auto;
+      gap: 18px;
+      padding: clamp(14px, 1.8vw, 22px) 0;
+      align-items: start;
       cursor: pointer;
       transition: background 120ms ease;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      min-height: 200px;
     }
-    .pick-card:hover { background: rgba(0, 0, 0, 0.04); }
-    .pick-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 14px;
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      font-weight: 800;
-      color: var(--soft);
-      flex-wrap: wrap;
-    }
+    .pick-row + .pick-row { border-top: 1px solid var(--softest); }
+    .pick-row:hover { background: rgba(0, 0, 0, 0.04); }
+    .pick-row.is-hidden { display: none; }
+    .picks-list.is-expanded .pick-row.is-hidden { display: grid; }
     .pick-icon-wrap {
-      width: 28px;
-      height: 28px;
+      width: 36px;
+      height: 36px;
       background: var(--ink);
       color: var(--paper);
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
     }
-    .pick-icon-wrap .event-icon { width: 18px; height: 18px; }
-    .pick-date { color: var(--ink); }
-    .pick-title {
-      font-size: clamp(22px, 2.4vw, 32px);
+    .pick-icon-wrap .event-icon { width: 20px; height: 20px; }
+    .pick-when {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
       font-weight: 900;
-      line-height: 1.1;
+      color: var(--ink);
+      padding-top: 9px;
+      font-feature-settings: 'tnum';
+    }
+    .pick-when .pick-when-time {
+      display: block;
+      font-weight: 700;
+      color: var(--soft);
+      margin-top: 2px;
+    }
+    .pick-body { min-width: 0; }
+    .pick-title {
+      font-size: clamp(20px, 2vw, 28px);
+      font-weight: 900;
+      line-height: 1.15;
       letter-spacing: -0.02em;
     }
     .pick-title a {
@@ -741,14 +747,51 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--soft);
-      font-weight: 700;
+      font-weight: 800;
+      margin-top: 6px;
     }
     .pick-note {
       font-size: 14px;
-      line-height: 1.5;
-      max-width: 56ch;
-      margin-top: auto;
+      line-height: 1.55;
+      max-width: 64ch;
+      margin-top: 8px;
     }
+    .pick-cat {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--soft);
+      font-weight: 800;
+      padding-top: 12px;
+      text-align: right;
+    }
+    .picks-more {
+      appearance: none;
+      background: none;
+      border: 0;
+      padding: 18px 0 6px;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1.5px solid var(--ink);
+      padding-bottom: 4px;
+      margin-top: 12px;
+      line-height: 1;
+    }
+    .picks-more::after {
+      content: '↓';
+      font-weight: 400;
+      transition: transform 160ms ease;
+    }
+    .picks-list.is-expanded ~ .picks-more::after { transform: rotate(180deg); }
+    .picks-more:hover { opacity: 0.55; }
+    .picks-more[hidden] { display: none; }
     .picks-empty {
       padding: 24px;
       border: 2px dashed var(--softer);
@@ -759,8 +802,14 @@
       color: var(--soft);
     }
     @media (max-width: 720px) {
-      .picks-grid { grid-template-columns: 1fr; }
+      .pick-row { grid-template-columns: 36px 90px 1fr; gap: 12px; }
+      .pick-cat { display: none; }
+      .pick-icon-wrap { width: 30px; height: 30px; }
+      .pick-icon-wrap .event-icon { width: 18px; height: 18px; }
     }
+
+    /* Make sticky filter offset land days correctly under scrollIntoView */
+    .day { scroll-margin-top: calc(var(--filter-h, 56px) + 12px); }
 
     /* ── Show more ──────────────────────────────────────── */
     .day .event.is-hidden { display: none; }
@@ -1381,9 +1430,10 @@
   <section class="picks" id="picks" aria-label="My Usuals">
     <div class="picks-head">
       <h2 class="picks-title">My Usuals</h2>
-      <span class="picks-sub" id="picks-sub">The two nights that fit you best</span>
+      <span class="picks-sub" id="picks-sub">Top 3 nights curated for you</span>
     </div>
-    <div class="picks-grid" id="picks-grid"></div>
+    <ul class="picks-list" id="picks-grid"></ul>
+    <button class="picks-more" id="picks-more" type="button" hidden></button>
   </section>
 
   <main id="calendar"></main>
@@ -2091,69 +2141,91 @@
       window.scrollTo({ top: scrollY, behavior: 'instant' });
     }
 
-    // ── Top picks (curated 2 events from the next event-having days) ───
+    // ── My Usuals (top picks list — top 3 by default, expand for more) ──
+    const PICKS_TOP_N = 3;
+    const PICKS_MAX = 8;
+    let picksExpanded = false;
+
     function renderPicks() {
-      const grid = document.getElementById('picks-grid');
+      const list = document.getElementById('picks-grid');
       const sub = document.getElementById('picks-sub');
-      if (!grid) return;
+      const moreBtn = document.getElementById('picks-more');
+      if (!list) return;
+
       const today = state.todayKey;
       const days = state.feed.days || {};
-      const dateKeys = Object.keys(days)
-        .filter((k) => k >= today)
-        .sort();
+      const dateKeys = Object.keys(days).filter((k) => k >= today).sort();
 
       const picks = [];
       for (const key of dateKeys) {
         const events = filterEvents(days[key].events || []);
         if (events.length === 0) continue;
         picks.push({ date: key, event: events[0] });
-        if (picks.length >= 2) break;
+        if (picks.length >= PICKS_MAX) break;
       }
 
-      const filterNote = (state.activeCats?.size || state.activeHoods?.size)
-        ? 'Filtered to what you chose'
-        : 'The two nights that fit you best';
-      if (sub) sub.textContent = filterNote;
+      const filtered = !!(state.activeCats?.size || state.activeHoods?.size);
+      if (sub) sub.textContent = filtered ? 'Filtered to what you chose' : 'Top 3 nights curated for you';
+
+      list.classList.toggle('is-expanded', picksExpanded);
 
       if (!picks.length) {
-        grid.innerHTML = '<div class="picks-empty">No matching events in the next days. Try clearing filters.</div>';
+        list.innerHTML = '<li class="picks-empty">No matching events in the next days. Try clearing filters.</li>';
+        if (moreBtn) moreBtn.hidden = true;
         return;
       }
 
-      grid.innerHTML = picks.map((p) => {
-        const [py, pm, pd] = p.date.split('-').map(Number);
+      list.innerHTML = picks.map((p, i) => {
+        const [, pm, pd] = p.date.split('-').map(Number);
         const dayLabel = `${MONTHS[pm - 1].slice(0, 3).toUpperCase()} ${pd}`;
         const ev = p.event;
         const titleInner = ev.url
           ? `<a href="${escapeHtml(ev.url)}" target="_blank" rel="noopener">${escapeHtml(ev.title)}</a>`
           : escapeHtml(ev.title);
         return `
-          <article class="pick-card" data-date="${escapeHtml(p.date)}">
-            <div class="pick-head">
-              <span class="pick-date">${escapeHtml(dayLabel)} · ${escapeHtml(fmtTime(ev.time))}</span>
-              <span class="pick-icon-wrap" aria-hidden="true">${iconFor(ev.category)}</span>
+          <li class="pick-row${i >= PICKS_TOP_N ? ' is-hidden' : ''}" data-date="${escapeHtml(p.date)}">
+            <div class="pick-icon-wrap" aria-hidden="true">${iconFor(ev.category)}</div>
+            <div class="pick-when">
+              ${escapeHtml(dayLabel)}
+              <span class="pick-when-time">${escapeHtml(fmtTime(ev.time))}</span>
             </div>
-            <div class="pick-title">${titleInner}</div>
-            ${ev.venue || ev.neighborhood
-              ? `<div class="pick-meta">${[ev.venue, ev.neighborhood].filter(Boolean).map(escapeHtml).join(' · ')}</div>`
-              : ''}
-            ${ev.note ? `<div class="pick-note">${escapeHtml(ev.note)}</div>` : ''}
-          </article>
+            <div class="pick-body">
+              <div class="pick-title">${titleInner}</div>
+              ${ev.venue || ev.neighborhood
+                ? `<div class="pick-meta">${[ev.venue, ev.neighborhood].filter(Boolean).map(escapeHtml).join(' · ')}</div>`
+                : ''}
+              ${ev.note ? `<div class="pick-note">${escapeHtml(ev.note)}</div>` : ''}
+            </div>
+            <div class="pick-cat">${escapeHtml(ev.category || '')}</div>
+          </li>
         `;
       }).join('');
 
-      // Tap card → smooth-scroll to that day in the calendar
-      grid.querySelectorAll('.pick-card').forEach((card) => {
-        card.addEventListener('click', (e) => {
+      // Show-more button
+      if (moreBtn) {
+        const hiddenCount = Math.max(0, picks.length - PICKS_TOP_N);
+        if (hiddenCount === 0) {
+          moreBtn.hidden = true;
+        } else {
+          moreBtn.hidden = false;
+          moreBtn.textContent = picksExpanded
+            ? 'Show fewer usuals'
+            : `${hiddenCount} more usual${hiddenCount === 1 ? '' : 's'}`;
+        }
+      }
+
+      // Tap a pick row → scroll to that day in the calendar (skip link clicks)
+      list.querySelectorAll('.pick-row').forEach((row) => {
+        row.addEventListener('click', (e) => {
           if (e.target.closest('a')) return;
-          const date = card.dataset.date;
-          const dayEl = document.querySelector(`#calendar [data-date="${date}"]`);
-          if (!dayEl) return;
-          const filterH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--filter-h')) || 56;
-          const top = dayEl.getBoundingClientRect().top + window.scrollY - filterH - 12;
-          window.scrollTo({ top, behavior: 'smooth' });
+          scrollToDate(row.dataset.date, 'smooth');
         });
       });
+    }
+
+    function togglePicksExpanded() {
+      picksExpanded = !picksExpanded;
+      renderPicks();
     }
 
     // Watches each month's sentinel; when it leaves the viewport at the top
@@ -2692,11 +2764,11 @@
     }
 
     function scrollToDate(key, behavior = 'smooth') {
-      const el = document.querySelector(`[data-date="${key}"]`);
+      const el = document.querySelector(`#calendar [data-date="${key}"]`);
       if (!el) return;
-      const filterH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--filter-h')) || 56;
-      const top = el.getBoundingClientRect().top + window.scrollY - filterH - 12;
-      window.scrollTo({ top, behavior });
+      // scrollIntoView + CSS scroll-margin-top on .day handles the sticky
+      // filter bar offset automatically and re-resolves after layout shifts.
+      el.scrollIntoView({ block: 'start', behavior });
     }
 
     function setLinkedDate(key) {
@@ -2969,6 +3041,9 @@
         if (btn.getAttribute('aria-expanded') === 'true') closeHoodDropdown();
         else openHoodDropdown();
       });
+      // My Usuals — show more / show fewer
+      const picksMore = document.getElementById('picks-more');
+      if (picksMore) picksMore.addEventListener('click', togglePicksExpanded);
       document.querySelectorAll('.tab').forEach((b) => {
         b.addEventListener('click', () => setView(b.dataset.view));
       });
