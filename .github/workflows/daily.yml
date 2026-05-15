@@ -38,16 +38,22 @@ jobs:
         run: |
           git config user.name "cal-bot"
           git config user.email "cal-bot@users.noreply.github.com"
-          git add feed.json
-          if git diff --staged --quiet; then
-            echo "No changes — skipping commit."
-            exit 0
-          fi
-          git commit -m "Daily feed for $(date -u +%Y-%m-%d)"
-          # Retry with rebase in case origin moved during the build
-          # (parallel agents or human commits land while we run).
+          # The workflow only produces feed.json. Stash our generated copy
+          # off-tree, then for each retry: hard-reset to origin, drop our
+          # feed.json back in, commit + push. This avoids the entire
+          # category of rebase-conflict failures when parallel commits land.
+          cp feed.json /tmp/feed-new.json
           for i in 1 2 3 4 5; do
-            if git pull --rebase origin main && git push; then
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/feed-new.json feed.json
+            git add feed.json
+            if git diff --staged --quiet; then
+              echo "No changes after sync — skipping commit on attempt $i."
+              exit 0
+            fi
+            git commit -m "Daily feed for $(date -u +%Y-%m-%d)"
+            if git push; then
               echo "Pushed on attempt $i."
               exit 0
             fi
