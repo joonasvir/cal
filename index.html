@@ -144,13 +144,24 @@
     }
     .source-row {
       display: grid;
-      grid-template-columns: 1fr auto;
-      column-gap: 16px;
+      grid-template-columns: 12px 1fr auto;
+      column-gap: 14px;
       row-gap: 2px;
-      padding: 10px 0;
+      padding: 12px 0;
       border-top: 1px solid var(--softest);
     }
     .source-row:first-child { border-top: 0; padding-top: 4px; }
+    .source-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-top: 7px;
+      background: var(--softer);
+      box-shadow: 0 0 0 2px var(--softest);
+    }
+    .source-row.is-ok    .source-dot { background: #16a34a; box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.18); }
+    .source-row.is-empty .source-dot { background: #d97706; box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.18); }
+    .source-row.has-error .source-dot { background: #b00020; box-shadow: 0 0 0 2px rgba(176, 0, 32, 0.18); }
     .source-name { font-size: 14px; font-weight: 500; }
     .source-count {
       font-size: 11px;
@@ -160,10 +171,20 @@
       color: var(--soft);
       align-self: center;
     }
+    .source-row.is-ok    .source-count { color: var(--ink); font-weight: 600; }
     .source-row.has-error .source-count { color: #b00020; font-weight: 600; }
-    .source-row.is-empty .source-count { color: var(--softer); }
+    .source-row.is-empty .source-count { color: #d97706; font-weight: 600; }
+    .source-fetched {
+      grid-column: 2 / -1;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--softer);
+      font-variant-numeric: tabular-nums;
+      margin-top: 2px;
+    }
     .source-row .source-err {
-      grid-column: 1 / -1;
+      grid-column: 2 / -1;
       font-size: 11px;
       color: #b00020;
       font-family: ui-monospace, 'JetBrains Mono', SF Mono, Menlo, monospace;
@@ -180,7 +201,7 @@
     .sheet-summary .bad { color: #b00020; font-weight: 600; }
     .sheet-summary .muted { color: var(--soft); }
     .source-url {
-      grid-column: 1 / -1;
+      grid-column: 2 / -1;
       font-size: 11px;
       color: var(--soft);
       font-family: ui-monospace, 'JetBrains Mono', SF Mono, Menlo, monospace;
@@ -571,18 +592,29 @@
     }
     .event {
       display: grid;
-      grid-template-columns: 64px 1fr auto;
-      gap: 18px;
-      padding: 12px 0;
-      align-items: baseline;
+      grid-template-columns: 44px 64px 1fr auto;
+      gap: 16px;
+      padding: 14px 0;
+      align-items: start;
     }
     .event + .event { border-top: 1px solid var(--softest); }
+    .event-icon-wrap {
+      width: 36px;
+      height: 36px;
+      background: var(--ink);
+      color: var(--paper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .event-icon { width: 20px; height: 20px; }
     .event-time {
       font-size: 11px;
       letter-spacing: 0.08em;
       font-feature-settings: 'tnum';
       color: var(--soft);
-      padding-top: 3px;
+      padding-top: 9px;
     }
     .event-body { min-width: 0; }
     .event-title {
@@ -618,6 +650,116 @@
       color: var(--soft);
       padding-top: 4px;
       text-align: right;
+    }
+
+    /* ── Top picks (above the calendar) ─────────────────── */
+    .picks {
+      padding: clamp(28px, 4vw, 56px) var(--pad-x) clamp(20px, 3vw, 36px);
+      border-bottom: 2px solid var(--ink);
+    }
+    body[data-view="map"] .picks,
+    body[data-view="dn"] .picks { display: none; }
+    .picks-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: clamp(18px, 2vw, 28px);
+      flex-wrap: wrap;
+    }
+    .picks-title {
+      font-size: clamp(22px, 3vw, 36px);
+      font-weight: 900;
+      letter-spacing: -0.025em;
+      margin: 0;
+      text-transform: uppercase;
+    }
+    .picks-sub {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--soft);
+      font-weight: 700;
+    }
+    .picks-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 2px solid var(--ink);
+      border-left: 2px solid var(--ink);
+    }
+    .pick-card {
+      border-right: 2px solid var(--ink);
+      border-bottom: 2px solid var(--ink);
+      padding: clamp(20px, 2.5vw, 36px);
+      cursor: pointer;
+      transition: background 120ms ease;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 200px;
+    }
+    .pick-card:hover { background: rgba(0, 0, 0, 0.04); }
+    .pick-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--soft);
+      flex-wrap: wrap;
+    }
+    .pick-icon-wrap {
+      width: 28px;
+      height: 28px;
+      background: var(--ink);
+      color: var(--paper);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pick-icon-wrap .event-icon { width: 18px; height: 18px; }
+    .pick-date { color: var(--ink); }
+    .pick-title {
+      font-size: clamp(22px, 2.4vw, 32px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .pick-title a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: border-color 120ms ease;
+    }
+    .pick-title a:hover { border-bottom-color: var(--ink); }
+    .pick-meta {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--soft);
+      font-weight: 700;
+    }
+    .pick-note {
+      font-size: 14px;
+      line-height: 1.5;
+      max-width: 56ch;
+      margin-top: auto;
+    }
+    .picks-empty {
+      padding: 24px;
+      border: 2px dashed var(--softer);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--soft);
+    }
+    @media (max-width: 720px) {
+      .picks-grid { grid-template-columns: 1fr; }
     }
 
     /* ── Show more ──────────────────────────────────────── */
@@ -1177,6 +1319,18 @@
   </style>
 </head>
 <body data-view="calendar">
+  <!-- Brutalist category icon set -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 3h11v4H12v10.5a4.5 4.5 0 1 1-3-4.2V3z" fill="currentColor"/></symbol>
+      <symbol id="i-comedy" viewBox="0 0 24 24"><path d="M2 3h20v14H10l-6 5v-5H2V3z" fill="currentColor"/></symbol>
+      <symbol id="i-art" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M2 2v20h20V2H2zm4 4v12h12V6H6z" fill="currentColor"/></symbol>
+      <symbol id="i-food" viewBox="0 0 24 24"><path d="M6 2v8H4v3a3 3 0 0 0 3 3v6h2v-6a3 3 0 0 0 3-3v-3h-2V2h-1v8H7V2H6zm10 0a4 4 0 0 0-4 4v6h3v10h2V12h3V6a4 4 0 0 0-4-4z" fill="currentColor"/></symbol>
+      <symbol id="i-talk" viewBox="0 0 24 24"><path d="M2 3h20v5h-7v13h-6V8H2V3z" fill="currentColor"/></symbol>
+      <symbol id="i-nightlife" viewBox="0 0 24 24"><path d="M14 2a9 9 0 1 0 7.5 14A7 7 0 0 1 14 2z" fill="currentColor"/></symbol>
+    </defs>
+  </svg>
+
   <header class="masthead">
     <div class="meta-left">
       <span class="meta-label">What's on</span>
@@ -1207,21 +1361,30 @@
             <span class="dropdown-value" id="cat-dropdown-value">All</span>
           </button>
         </div>
+        <div class="dropdown" id="hood-dropdown">
+          <button class="dropdown-btn chip" id="hood-dropdown-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="hood-dropdown-panel" hidden>
+            <span class="dropdown-label">Where</span>
+            <span class="dropdown-value" id="hood-dropdown-value">All</span>
+          </button>
+        </div>
       </div>
       <div class="filter-group filter-group-end">
         <button class="chip chip-action" id="sources-chip-btn" type="button" aria-haspopup="dialog" aria-controls="sources-sheet">Sources</button>
         <button class="chip weather is-active" data-toggle="weather" aria-pressed="true">Weather</button>
       </div>
     </div>
-    <div class="filter-row" id="filter-row-hoods" hidden>
-      <div class="filter-group">
-        <span class="filter-label">Where</span>
-      </div>
-      <div class="filter-group" id="filter-hoods" data-group="neighborhoods"></div>
-    </div>
   </nav>
 
   <div class="dropdown-panel" id="cat-dropdown-panel" role="menu" aria-labelledby="cat-dropdown-btn" hidden></div>
+  <div class="dropdown-panel" id="hood-dropdown-panel" role="menu" aria-labelledby="hood-dropdown-btn" hidden></div>
+
+  <section class="picks" id="picks" aria-label="My Usuals">
+    <div class="picks-head">
+      <h2 class="picks-title">My Usuals</h2>
+      <span class="picks-sub" id="picks-sub">The two nights that fit you best</span>
+    </div>
+    <div class="picks-grid" id="picks-grid"></div>
+  </section>
 
   <main id="calendar"></main>
   <section id="map-view" aria-label="Event map">
@@ -1257,7 +1420,7 @@
       <div class="sheet-body" id="sources-body"></div>
       <footer class="sheet-foot">
         <a href="https://github.com/joonasvir/cal" target="_blank" rel="noopener">Repo</a>
-        <a href="https://github.com/joonasvir/cal/blob/main/taste.md" target="_blank" rel="noopener">Taste profile</a>
+        <span class="sheet-sub" title="Private — stored in GitHub Actions secret TASTE_PROFILE">Taste profile · private</span>
       </footer>
     </div>
   </dialog>
@@ -1551,23 +1714,29 @@
       });
       document.getElementById('cat-dropdown-clear').addEventListener('click', clearCategories);
 
+      // Neighborhoods live in their own dropdown panel, mirroring categories.
       const hoods = deriveNeighborhoods();
-      const hoodsRow = document.getElementById('filter-row-hoods');
-      const hoodsWrap = document.getElementById('filter-hoods');
-      hoodsWrap.innerHTML = '';
+      const hoodBtn = document.getElementById('hood-dropdown-btn');
+      const hoodPanel = document.getElementById('hood-dropdown-panel');
+      hoodPanel.innerHTML = '';
       if (!hoods.length) {
-        hoodsRow.hidden = true;
+        hoodBtn.hidden = true;
       } else {
-        hoodsRow.hidden = false;
+        hoodBtn.hidden = false;
+        const hoodHead = document.createElement('div');
+        hoodHead.className = 'dp-head';
+        hoodHead.innerHTML = `
+          <span class="dp-title">Where</span>
+          <button type="button" class="dp-clear" id="hood-dropdown-clear">Clear</button>
+        `;
+        hoodPanel.appendChild(hoodHead);
         hoods.forEach(({ slug, name }) => {
-          const btn = document.createElement('button');
-          btn.className = 'chip';
-          btn.textContent = name;
-          btn.dataset.hood = slug;
-          btn.setAttribute('aria-pressed', 'false');
-          btn.addEventListener('click', () => toggleHood(slug));
-          hoodsWrap.appendChild(btn);
+          const label = document.createElement('label');
+          label.innerHTML = `<input type="checkbox" data-hood="${escapeHtml(slug)}"><span>${escapeHtml(name)}</span>`;
+          label.querySelector('input').addEventListener('change', () => toggleHood(slug));
+          hoodPanel.appendChild(label);
         });
+        document.getElementById('hood-dropdown-clear').addEventListener('click', clearHoods);
       }
       // Drop any active hoods that no longer exist in the feed
       for (const slug of [...state.activeHoods]) {
@@ -1623,12 +1792,34 @@
       if (clear) clear.disabled = cats.length === 0;
     }
 
+    function clearHoods() {
+      state.activeHoods.clear();
+      updateHoodChips();
+      writeHash();
+      renderCalendar();
+      refreshMapMarkers();
+    }
+
     function updateHoodChips() {
-      document.querySelectorAll('.chip[data-hood]').forEach((btn) => {
-        const on = state.activeHoods.has(btn.dataset.hood);
-        btn.classList.toggle('is-active', on);
-        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      // Update checkboxes inside the dropdown
+      document.querySelectorAll('#hood-dropdown-panel input[data-hood]').forEach((cb) => {
+        cb.checked = state.activeHoods.has(cb.dataset.hood);
       });
+      // Update the button label
+      const valueEl = document.getElementById('hood-dropdown-value');
+      const clear = document.getElementById('hood-dropdown-clear');
+      if (!valueEl) return;
+      const hoods = [...state.activeHoods]
+        .map((slug) => state.hoodSlugToName.get(slug))
+        .filter(Boolean);
+      if (!hoods.length) {
+        valueEl.textContent = 'All';
+      } else if (hoods.length <= 2) {
+        valueEl.textContent = hoods.join(', ');
+      } else {
+        valueEl.textContent = `${hoods.length} selected`;
+      }
+      if (clear) clear.disabled = hoods.length === 0;
     }
 
     function toggleWeather() {
@@ -1682,6 +1873,49 @@
       closeCatDropdown();
     }
     function onEscDropdown(e) { if (e.key === 'Escape') closeCatDropdown(); }
+
+    // Neighborhood dropdown — mirrors the categories pattern
+    function positionHoodDropdown() {
+      const btn = document.getElementById('hood-dropdown-btn');
+      const panel = document.getElementById('hood-dropdown-panel');
+      if (!btn || panel.hidden) return;
+      const r = btn.getBoundingClientRect();
+      const panelW = panel.offsetWidth || 220;
+      let left = r.left;
+      if (left + panelW > window.innerWidth - 8) {
+        left = Math.max(8, window.innerWidth - panelW - 8);
+      }
+      panel.style.top = `${Math.round(r.bottom + 6)}px`;
+      panel.style.left = `${Math.round(left)}px`;
+    }
+    function openHoodDropdown() {
+      const btn = document.getElementById('hood-dropdown-btn');
+      const panel = document.getElementById('hood-dropdown-panel');
+      panel.hidden = false;
+      btn.setAttribute('aria-expanded', 'true');
+      positionHoodDropdown();
+      document.addEventListener('mousedown', onDocCloseHoodDropdown, true);
+      document.addEventListener('keydown', onEscHoodDropdown);
+      window.addEventListener('resize', positionHoodDropdown);
+      window.addEventListener('scroll', positionHoodDropdown, true);
+    }
+    function closeHoodDropdown() {
+      const btn = document.getElementById('hood-dropdown-btn');
+      const panel = document.getElementById('hood-dropdown-panel');
+      panel.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+      document.removeEventListener('mousedown', onDocCloseHoodDropdown, true);
+      document.removeEventListener('keydown', onEscHoodDropdown);
+      window.removeEventListener('resize', positionHoodDropdown);
+      window.removeEventListener('scroll', positionHoodDropdown, true);
+    }
+    function onDocCloseHoodDropdown(e) {
+      const panel = document.getElementById('hood-dropdown-panel');
+      const btn = document.getElementById('hood-dropdown-btn');
+      if (panel.contains(e.target) || btn.contains(e.target)) return;
+      closeHoodDropdown();
+    }
+    function onEscHoodDropdown(e) { if (e.key === 'Escape') closeHoodDropdown(); }
 
     function updateFilterHeight() {
       const fb = document.getElementById('filters');
@@ -1766,6 +2000,7 @@
           const previewImg = imageForEvent(ev);
           const previewCap = [ev.venue, ev.neighborhood].filter(Boolean).join(' · ');
           li.innerHTML = `
+            <div class="event-icon-wrap" aria-hidden="true">${iconFor(ev.category)}</div>
             <div class="event-time">${fmtTime(ev.time)}</div>
             <div class="event-body">
               <div class="event-title" data-image="${escapeHtml(previewImg)}"${previewCap ? ` data-caption="${escapeHtml(previewCap)}"` : ''}>${ev.url
@@ -1790,10 +2025,9 @@
           more.textContent = isExpanded
             ? 'Show fewer'
             : `See ${hiddenCount} more event${hiddenCount === 1 ? '' : 's'}`;
-          more.addEventListener('click', () => {
-            if (state.expandedDates.has(key)) state.expandedDates.delete(key);
-            else state.expandedDates.add(key);
-            renderCalendar();
+          more.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleDayExpanded(key);
           });
           content.appendChild(more);
         }
@@ -1801,7 +2035,30 @@
 
       day.appendChild(marker);
       day.appendChild(content);
+
+      // Click anywhere on the day (except links, the marker, or "+ more") to
+      // toggle inline expansion of the day's events.
+      if (!isEmpty) {
+        day.style.cursor = 'pointer';
+        day.addEventListener('click', (e) => {
+          if (e.target.closest('a, button, input, label')) return;
+          toggleDayExpanded(key);
+        });
+      }
+
       return day;
+    }
+
+    function toggleDayExpanded(key) {
+      if (state.expandedDates.has(key)) state.expandedDates.delete(key);
+      else state.expandedDates.add(key);
+      renderCalendar();
+    }
+
+    function iconFor(category) {
+      const id = ['music','comedy','art','food','talk','nightlife'].includes(category)
+        ? `i-${category}` : 'i-talk';
+      return `<svg class="event-icon" aria-hidden="true"><use href="#${id}"/></svg>`;
     }
 
     function renderCalendar() {
@@ -1827,10 +2084,76 @@
         }
         root.appendChild(section);
       }
+      renderPicks();
       observeToday();
       observeMonthTitles();
       // Preserve scroll across re-render (filter changes)
       window.scrollTo({ top: scrollY, behavior: 'instant' });
+    }
+
+    // ── Top picks (curated 2 events from the next event-having days) ───
+    function renderPicks() {
+      const grid = document.getElementById('picks-grid');
+      const sub = document.getElementById('picks-sub');
+      if (!grid) return;
+      const today = state.todayKey;
+      const days = state.feed.days || {};
+      const dateKeys = Object.keys(days)
+        .filter((k) => k >= today)
+        .sort();
+
+      const picks = [];
+      for (const key of dateKeys) {
+        const events = filterEvents(days[key].events || []);
+        if (events.length === 0) continue;
+        picks.push({ date: key, event: events[0] });
+        if (picks.length >= 2) break;
+      }
+
+      const filterNote = (state.activeCats?.size || state.activeHoods?.size)
+        ? 'Filtered to what you chose'
+        : 'The two nights that fit you best';
+      if (sub) sub.textContent = filterNote;
+
+      if (!picks.length) {
+        grid.innerHTML = '<div class="picks-empty">No matching events in the next days. Try clearing filters.</div>';
+        return;
+      }
+
+      grid.innerHTML = picks.map((p) => {
+        const [py, pm, pd] = p.date.split('-').map(Number);
+        const dayLabel = `${MONTHS[pm - 1].slice(0, 3).toUpperCase()} ${pd}`;
+        const ev = p.event;
+        const titleInner = ev.url
+          ? `<a href="${escapeHtml(ev.url)}" target="_blank" rel="noopener">${escapeHtml(ev.title)}</a>`
+          : escapeHtml(ev.title);
+        return `
+          <article class="pick-card" data-date="${escapeHtml(p.date)}">
+            <div class="pick-head">
+              <span class="pick-date">${escapeHtml(dayLabel)} · ${escapeHtml(fmtTime(ev.time))}</span>
+              <span class="pick-icon-wrap" aria-hidden="true">${iconFor(ev.category)}</span>
+            </div>
+            <div class="pick-title">${titleInner}</div>
+            ${ev.venue || ev.neighborhood
+              ? `<div class="pick-meta">${[ev.venue, ev.neighborhood].filter(Boolean).map(escapeHtml).join(' · ')}</div>`
+              : ''}
+            ${ev.note ? `<div class="pick-note">${escapeHtml(ev.note)}</div>` : ''}
+          </article>
+        `;
+      }).join('');
+
+      // Tap card → smooth-scroll to that day in the calendar
+      grid.querySelectorAll('.pick-card').forEach((card) => {
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('a')) return;
+          const date = card.dataset.date;
+          const dayEl = document.querySelector(`#calendar [data-date="${date}"]`);
+          if (!dayEl) return;
+          const filterH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--filter-h')) || 56;
+          const top = dayEl.getBoundingClientRect().top + window.scrollY - filterH - 12;
+          window.scrollTo({ top, behavior: 'smooth' });
+        });
+      });
     }
 
     // Watches each month's sentinel; when it leaves the viewport at the top
@@ -2457,19 +2780,39 @@
       const stats = meta.stats || {};
       const images = meta.images || {};
 
+      const fmtAgo = (iso) => {
+        if (!iso) return '';
+        const ms = Date.now() - Date.parse(iso);
+        if (!Number.isFinite(ms) || ms < 0) return '';
+        const m = Math.round(ms / 60000);
+        if (m < 1) return 'just now';
+        if (m < 60) return `${m}m ago`;
+        const h = Math.round(m / 60);
+        if (h < 24) return `${h}h ago`;
+        return `${Math.round(h / 24)}d ago`;
+      };
+
       const sourcesHtml = sources.length
         ? sources.map((s) => {
             const failed = !!s.error;
             const empty = !failed && (s.kept ?? 0) === 0;
-            const cls = failed ? ' has-error' : (empty ? ' is-empty' : '');
-            const status = failed ? '✗ failed' : (empty ? '— no items' : `✓ ${s.kept} items`);
+            const cls = failed ? ' has-error' : (empty ? ' is-empty' : ' is-ok');
+            const status = failed ? '✗ failed' : (empty ? '— no items' : `${s.kept} items`);
+            const fetched = s.fetched_at
+              ? `${escapeHtml(s.fetched_at.slice(0, 16).replace('T', ' '))} UTC · ${fmtAgo(s.fetched_at)}`
+              : (gen ? `${escapeHtml(gen.slice(0, 16).replace('T', ' '))} UTC · ${fmtAgo(gen)}` : '');
+            const fetchedHtml = fetched
+              ? `<div class="source-fetched">Scraped ${fetched}</div>`
+              : '';
             const errHtml = failed
               ? `<div class="source-err">${escapeHtml(s.error)}</div>`
               : '';
             return `
               <div class="source-row${cls}">
+                <div class="source-dot" aria-hidden="true"></div>
                 <div class="source-name">${escapeHtml(s.name)}</div>
                 <div class="source-count">${escapeHtml(status)}</div>
+                ${fetchedHtml}
                 <a class="source-url" href="${escapeHtml(s.url)}" target="_blank" rel="noopener">${escapeHtml(s.url)}</a>
                 ${errHtml}
               </div>
@@ -2594,10 +2937,19 @@
       setView(state.view, { silent: true });
 
       // Scroll target: linked date from hash, else today.
+      // Picks renders after fetch and changes layout height, so we double-RAF
+      // + a fallback setTimeout to make sure today is the landing position
+      // regardless of when layout settles.
       const target = state.linkedDate || state.todayKey;
-      requestAnimationFrame(() => {
+      const goToTarget = () => {
         if (state.view === 'calendar') scrollToDate(target, 'instant');
-        setTimeout(() => observeToday(), 50);
+      };
+      requestAnimationFrame(() => {
+        goToTarget();
+        requestAnimationFrame(() => {
+          goToTarget();
+          setTimeout(() => { goToTarget(); observeToday(); }, 80);
+        });
       });
 
       document.getElementById('today-btn').addEventListener('click', scrollToToday);
@@ -2610,6 +2962,12 @@
         const btn = document.getElementById('cat-dropdown-btn');
         if (btn.getAttribute('aria-expanded') === 'true') closeCatDropdown();
         else openCatDropdown();
+      });
+      // Neighborhood dropdown toggle
+      document.getElementById('hood-dropdown-btn').addEventListener('click', () => {
+        const btn = document.getElementById('hood-dropdown-btn');
+        if (btn.getAttribute('aria-expanded') === 'true') closeHoodDropdown();
+        else openHoodDropdown();
       });
       document.querySelectorAll('.tab').forEach((b) => {
         b.addEventListener('click', () => setView(b.dataset.view));
