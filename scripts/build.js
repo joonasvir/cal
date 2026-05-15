@@ -21,6 +21,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const FEED_PATH = path.join(ROOT, "feed.json");
 const TASTE_PATH = path.join(ROOT, "taste.md");
+const TASTE_DEFAULT_PATH = path.join(ROOT, "taste.default.md");
 
 function todayKey() {
   return new Date().toISOString().slice(0, 10);
@@ -100,12 +101,29 @@ async function main() {
   }
 
   console.error("# 2/4 ranking with Claude…");
-  // Taste profile is private — pulled from env (GH Actions secret) or
-  // falls back to a local file for ad-hoc runs. Never read from a public path.
-  const tasteMd = process.env.TASTE_PROFILE
-    ?? await fs.readFile(TASTE_PATH, "utf-8").catch(() => null);
+  // Resolve the taste profile with a three-step fallback so a missing or
+  // truncated secret can never produce off-taste feeds again:
+  //   1. TASTE_PROFILE env var (GH Actions secret) — must look substantial.
+  //   2. taste.md (gitignored — private local override for ad-hoc dev).
+  //   3. taste.default.md (committed — strong fallback so the daily
+  //      ranker always has something opinionated to work with).
+  const envTaste  = process.env.TASTE_PROFILE?.trim();
+  const fileTaste = await fs.readFile(TASTE_PATH, "utf-8").catch(() => null);
+  const defaultTaste = await fs.readFile(TASTE_DEFAULT_PATH, "utf-8").catch(() => null);
+  let tasteMd, tasteSource;
+  if (envTaste && envTaste.length >= 200) {
+    tasteMd = envTaste; tasteSource = "TASTE_PROFILE env";
+  } else if (fileTaste) {
+    tasteMd = fileTaste; tasteSource = "taste.md";
+  } else if (defaultTaste) {
+    tasteMd = defaultTaste; tasteSource = "taste.default.md";
+  }
   if (!tasteMd) {
-    throw new Error("TASTE_PROFILE env var not set and taste.md not found locally");
+    throw new Error("No taste profile available anywhere — fix TASTE_PROFILE secret or add taste.default.md");
+  }
+  console.error(`# taste profile: ${tasteSource} (${tasteMd.length} chars)`);
+  if (envTaste && envTaste.length < 200) {
+    console.error(`# warn: TASTE_PROFILE env was only ${envTaste.length} chars — IGNORED in favor of ${tasteSource}`);
   }
   const ranked = await rankItems({ tasteMd, items, todayKey: today });
 
