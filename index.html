@@ -857,7 +857,10 @@
     }
 
     /* Make sticky filter offset land days correctly under scrollIntoView */
-    .day { scroll-margin-top: calc(var(--filter-h, 56px) + 12px); }
+    /* Generous breathing room above the day when scrolled-to, so the
+       sticky filter bar doesn't crowd the weather row at the top of
+       the day's content. */
+    .day { scroll-margin-top: calc(var(--filter-h, 56px) + 40px); }
 
     /* ── Show more ──────────────────────────────────────── */
     .day .event.is-hidden { display: none; }
@@ -2482,7 +2485,7 @@
           more.type = 'button';
           const hiddenCount = events.length - TOP_N;
           more.textContent = isExpanded
-            ? 'Show fewer'
+            ? `Hide ${hiddenCount} event${hiddenCount === 1 ? '' : 's'}`
             : `See ${hiddenCount} more event${hiddenCount === 1 ? '' : 's'}`;
           more.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -2502,10 +2505,28 @@
       return day;
     }
 
+    // In-place expansion — toggle the class on the existing day element and
+    // update the "more" button label. Avoids a full renderCalendar() which
+    // wipes the DOM and causes a perceived "reload" jump.
     function toggleDayExpanded(key) {
-      if (state.expandedDates.has(key)) state.expandedDates.delete(key);
-      else state.expandedDates.add(key);
-      renderCalendar();
+      const willExpand = !state.expandedDates.has(key);
+      if (willExpand) state.expandedDates.add(key);
+      else state.expandedDates.delete(key);
+      const dayEl = document.querySelector(`.day[data-date="${key}"]`);
+      if (!dayEl) return;
+      dayEl.classList.toggle('is-expanded', willExpand);
+      updateMoreLabel(dayEl, key);
+    }
+
+    function updateMoreLabel(dayEl, key) {
+      const more = dayEl.querySelector('.more');
+      if (!more) return;
+      const all = filterEvents(state.feed.days?.[key]?.events ?? []);
+      const hidden = Math.max(0, all.length - TOP_N);
+      const expanded = state.expandedDates.has(key);
+      more.textContent = expanded
+        ? `Hide ${hidden} event${hidden === 1 ? '' : 's'}`
+        : `See ${hidden} more event${hidden === 1 ? '' : 's'}`;
     }
 
     function iconFor(category) {
@@ -3338,18 +3359,29 @@
     }
 
     function setLinkedDate(key) {
-      // Clicking the date numeral toggles the day's expanded state AND
-      // toggles whether the URL hash points to it (for sharing).
+      // Clicking the date numeral toggles the day's expanded state AND the
+      // URL-shareable link. All in-place — no calendar re-render so the
+      // page doesn't jump.
       const wasExpanded = state.expandedDates.has(key);
+
+      // Unlink whatever was previously linked.
+      if (state.linkedDate && state.linkedDate !== key) {
+        const prev = document.querySelector(`.day[data-date="${state.linkedDate}"]`);
+        if (prev) prev.classList.remove('is-linked');
+      }
+
+      const dayEl = document.querySelector(`.day[data-date="${key}"]`);
       if (wasExpanded) {
         state.expandedDates.delete(key);
         state.linkedDate = null;
+        if (dayEl) dayEl.classList.remove('is-expanded', 'is-linked');
       } else {
         state.expandedDates.add(key);
         state.linkedDate = key;
+        if (dayEl) dayEl.classList.add('is-expanded', 'is-linked');
       }
+      if (dayEl) updateMoreLabel(dayEl, key);
       writeHash();
-      renderCalendar();
       if (!wasExpanded) requestAnimationFrame(() => scrollToDate(key, 'smooth'));
     }
 

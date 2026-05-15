@@ -59,6 +59,28 @@
       },
       "events": [
         {
+          "time": "18:00",
+          "title": "Early set \u2014 Spike Wilner Trio",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com/",
+          "note": "Stage-side seating before the room fills. Drummer-led trio, the proper supper-club thing.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "18:30",
+          "title": "Vermouth bar \u2014 opening hour DJ",
+          "venue": "Public Records",
+          "neighborhood": "Gowanus",
+          "category": "music",
+          "url": "https://publicrecords.nyc/events",
+          "note": "Listening room downstairs, soft start. Sit close to the speakers.",
+          "indoor": true,
+          "image": ""
+        },
+        {
           "time": "19:00",
           "title": "Opening: Cybernetic Echoes \u2014 Ian Cheng + Holly Herndon",
           "venue": "Pioneer Works",
@@ -79,6 +101,28 @@
           "indoor": true
         },
         {
+          "time": "20:00",
+          "title": "Bar Bayeux trio \u2014 Friday session",
+          "venue": "Bar Bayeux",
+          "neighborhood": "Prospect Heights",
+          "category": "music",
+          "url": "https://www.barbayeux.com/",
+          "note": "Tiny room, supper-club energy. You'll talk softly because it's that kind of place.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "20:30",
+          "title": "Late seating \u2014 Lilia",
+          "venue": "Lilia",
+          "neighborhood": "Williamsburg",
+          "category": "food",
+          "url": "https://www.lilianewyork.com/",
+          "note": "Prettiest Italian room in Brooklyn. Get the agnolotti and orange wine.",
+          "indoor": true,
+          "image": ""
+        },
+        {
           "time": "22:00",
           "title": "Friday Resident: Aurora Halal all-night",
           "venue": "Nowadays",
@@ -87,6 +131,28 @@
           "url": "https://nowadays.nyc/",
           "note": "Long set, indoor + outdoor, the loft-y room when the lights come down. Stay late.",
           "indoor": false
+        },
+        {
+          "time": "23:00",
+          "title": "Speakeasy nightcap \u2014 no menu",
+          "venue": "Attaboy",
+          "neighborhood": "Lower East Side",
+          "category": "nightlife",
+          "url": "https://attaboy.us/",
+          "note": "Ring the bell, tell them a flavor. The proper end-of-Friday move.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "23:30",
+          "title": "Bluegrass jam \u2014 late",
+          "venue": "Sunny's",
+          "neighborhood": "Red Hook",
+          "category": "music",
+          "url": "https://sunnysredhook.com/",
+          "note": "Jukebox, waterfront, vaguely impossible to get to \u2014 exactly why it works.",
+          "indoor": true,
+          "image": ""
         }
       ]
     },
@@ -102,6 +168,28 @@
       },
       "events": [
         {
+          "time": "12:00",
+          "title": "Smorgasburg \u2014 Saturday market",
+          "venue": "Marsha P. Johnson State Park",
+          "neighborhood": "Williamsburg",
+          "category": "food",
+          "url": "https://www.smorgasburg.com/",
+          "note": "Walkable Saturday lunch. Skip the bigger lines, get a coffee at Devoci\u00f3n after.",
+          "indoor": false,
+          "image": ""
+        },
+        {
+          "time": "18:30",
+          "title": "Wythe rooftop \u2014 golden hour drinks",
+          "venue": "Wythe Hotel",
+          "neighborhood": "Williamsburg",
+          "category": "food",
+          "url": "https://wythehotel.com/",
+          "note": "Manhattan view from the east side of the deck. Negroni and don't rush.",
+          "indoor": false,
+          "image": ""
+        },
+        {
           "time": "19:00",
           "title": "Members' late hours \u2014 Ian Cheng: Emissaries",
           "venue": "New Museum",
@@ -110,6 +198,28 @@
           "url": "https://www.newmuseum.org/",
           "note": "Worth it for the install alone. Wine bar on the 7th floor \u2014 go early, walk to Dimes after.",
           "indoor": true
+        },
+        {
+          "time": "20:00",
+          "title": "Late trio \u2014 Ari Hoenig",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com/",
+          "note": "Drummer-led trio, the late set is the one. Stand near the bar if seats are gone.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "20:30",
+          "title": "Lilia \u2014 Saturday seating",
+          "venue": "Lilia",
+          "neighborhood": "Williamsburg",
+          "category": "food",
+          "url": "https://www.lilianewyork.com/",
+          "note": "Book ahead. The grilled lamb and a glass of frappato \u2014 that kind of night.",
+          "indoor": true,
+          "image": ""
         },
         {
           "time": "21:00",
@@ -130,6 +240,28 @@
           "url": "https://www.thebellhouseny.com/",
           "note": "Podcast taping, improv-flavored, runs long. Bell House has the right Gowanus warehouse mood.",
           "indoor": true
+        },
+        {
+          "time": "22:30",
+          "title": "Warehouse late \u2014 DJ Python b2b",
+          "venue": "Public Records",
+          "neighborhood": "Gowanus",
+          "category": "nightlife",
+          "url": "https://publicrecords.nyc/events",
+          "note": "Sound system worth showing up for. Long set, real crowd.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "23:30",
+          "title": "Sunny's late \u2014 bluegrass + jukebox",
+          "venue": "Sunny's",
+          "neighborhood": "Red Hook",
+          "category": "music",
+          "url": "https://sunnysredhook.com/",
+          "note": "The kind of night that becomes a story. Take a Lyft home.",
+          "indoor": true,
+          "image": ""
         }
       ]
     },
@@ -145,6 +277,17 @@
       },
       "events": [
         {
+          "time": "11:00",
+          "title": "Brooklyn Heights Promenade walk",
+          "venue": "Brooklyn Heights Promenade",
+          "neighborhood": "Brooklyn Heights",
+          "category": "art",
+          "url": "",
+          "note": "Old NY Sunday walk. Coffee at Books are Magic after, lunch at Cafe Spaghetti.",
+          "indoor": false,
+          "image": ""
+        },
+        {
           "time": "14:00",
           "title": "Curator's walkthrough \u2014 Spike Lee: Creative Sources",
           "venue": "Brooklyn Museum",
@@ -155,6 +298,39 @@
           "indoor": true
         },
         {
+          "time": "15:00",
+          "title": "Books are Magic \u2014 Sunday browse",
+          "venue": "Books are Magic",
+          "neighborhood": "Cobble Hill",
+          "category": "art",
+          "url": "https://www.booksaremagic.net/",
+          "note": "Pick a book each, no pressure. Slow Sunday energy.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "17:00",
+          "title": "Whitney late hours",
+          "venue": "Whitney Museum",
+          "neighborhood": "Meatpacking",
+          "category": "art",
+          "url": "https://whitney.org/",
+          "note": "Quiet rooms, well-lit galleries. End at a martini somewhere west.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "19:00",
+          "title": "Sunday session at Bar Bayeux",
+          "venue": "Bar Bayeux",
+          "neighborhood": "Prospect Heights",
+          "category": "music",
+          "url": "https://www.barbayeux.com/",
+          "note": "The Sunday line-up is the local-friend pick. Walk over from the museum.",
+          "indoor": true,
+          "image": ""
+        },
+        {
           "time": "20:00",
           "title": "Sunday Late \u2014 Sondre Lerche solo",
           "venue": "Mercury Lounge",
@@ -163,6 +339,17 @@
           "url": "https://www.mercuryeastpresents.com/mercurylounge",
           "note": "Tiny room, the kind of LES night the calendar exists for. Cocktail at Attaboy after.",
           "indoor": true
+        },
+        {
+          "time": "21:00",
+          "title": "Smalls \u2014 Sunday late",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com/",
+          "note": "Stand by the bar, share a drink, drummer's late set is the one.",
+          "indoor": true,
+          "image": ""
         }
       ]
     },
@@ -751,7 +938,7 @@
     },
     "stats": {
       "items_pulled": 87,
-      "events_curated": 45,
+      "events_curated": 62,
       "days_covered": 18
     }
   }

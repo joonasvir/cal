@@ -71,10 +71,12 @@ For each real event you find:
 
 # Ranking rules
 
-- Within each day, order events BY FIT — strongest pick first. The first event for a day should be the night Joonas would actually choose.
-- Drop low-fit items entirely (see "Low-fit signals" in the taste profile).
+- **Aim for 8–15 events per day** when the source items support it. The first 2 will be shown by default; the rest hide behind a "see more" toggle. Surface the breadth — give Joonas a real menu of options for each night, not just one or two.
+- Within each day, order events BY FIT — strongest pick first. The first event for a day should be the night Joonas would actually choose. Events 3+ are still on-taste secondary picks (additional jazz sets, gallery openings, late shows, a parallel event somewhere else, an alt comedy room, a different neighborhood option).
+- Drop low-fit items entirely (see "Low-fit signals" in the taste profile). Better to return 3 great events for a day than 12 padded with corporate panels, generic street fairs, or vintage clothing shows.
 - Aggregate articles often reference multiple events — split them out, one event per object.
 - If an item is an editorial review of a permanent restaurant with no specific date, drop it (the calendar is for dated nights).
+- Recurring weekly residencies at strong venues (Smalls late sets, Bar Bayeux trio nights, Public Records vermouth bar, Nowadays Friday Resident, Sunny's bluegrass) are valid even if not explicitly listed — surface them on the appropriate weekday with the standard slot.
 
 # Output rules
 
