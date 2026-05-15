@@ -1,0 +1,46 @@
+name: daily build
+
+on:
+  schedule:
+    # 09:00 UTC daily ≈ 5am ET (EDT) / 4am ET (EST). Curates the day's events
+    # before anyone wakes up; Vercel auto-deploys the resulting commit.
+    - cron: "0 9 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build feed.json
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: npm run build
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "cal-bot"
+          git config user.email "cal-bot@users.noreply.github.com"
+          git add feed.json
+          if git diff --staged --quiet; then
+            echo "No changes — skipping commit."
+            exit 0
+          fi
+          git commit -m "Daily feed for $(date -u +%Y-%m-%d)"
+          git push

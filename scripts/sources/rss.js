@@ -1,0 +1,68 @@
+// Pull RSS feeds, normalize to a common shape.
+// Errors are logged and skipped — one bad feed doesn't kill the build.
+
+import Parser from "rss-parser";
+
+const parser = new Parser({ timeout: 20_000 });
+
+// Working RSS feeds. Grub Street, Infatuation, Time Out, and e-flux gate their
+// feeds (404 to non-browsers); add them via Apify/ScrapingBee in v2 if needed.
+export const FEEDS = [
+  { name: "Eater NY",         url: "https://ny.eater.com/rss/index.xml",     tags: ["food"] },
+  { name: "The Skint",        url: "https://theskint.com/feed/",             tags: ["general"] },
+  { name: "Bedford + Bowery", url: "https://bedfordandbowery.com/feed/",     tags: ["general"] },
+  { name: "Brooklyn Vegan",   url: "https://www.brooklynvegan.com/feed/",    tags: ["music"] },
+  { name: "Hyperallergic",    url: "https://hyperallergic.com/feed/",        tags: ["art"] },
+];
+
+const MAX_ITEMS_PER_FEED = 25;
+const MAX_AGE_DAYS = 21;
+
+export async function fetchAllFeeds() {
+  const cutoff = Date.now() - MAX_AGE_DAYS * 24 * 60 * 60 * 1000;
+  const results = await Promise.allSettled(FEEDS.map(fetchOne));
+
+  const items = [];
+  for (let i = 0; i < FEEDS.length; i++) {
+    const r = results[i];
+    const feed = FEEDS[i];
+    if (r.status === "rejected") {
+      console.error(`  ✗ ${feed.name}: ${r.reason?.message ?? r.reason}`);
+      continue;
+    }
+    let kept = 0;
+    for (const item of r.value) {
+      const published = item.published_at ? Date.parse(item.published_at) : Date.now();
+      if (Number.isFinite(published) && published < cutoff) continue;
+      items.push(item);
+      kept++;
+      if (kept >= MAX_ITEMS_PER_FEED) break;
+    }
+    console.error(`  ✓ ${feed.name}: ${kept} items`);
+  }
+  return items;
+}
+
+async function fetchOne(feed) {
+  const parsed = await parser.parseURL(feed.url);
+  return (parsed.items || []).map((item) => ({
+    source: feed.name,
+    tags: feed.tags,
+    title: cleanText(item.title),
+    url: item.link,
+    summary: cleanText(item.contentSnippet || item.content || "").slice(0, 600),
+    published_at: item.isoDate || item.pubDate || null,
+  }));
+}
+
+function cleanText(s) {
+  if (!s) return "";
+  return s.replace(/\s+/g, " ").replace(/<[^>]+>/g, "").trim();
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  fetchAllFeeds().then((items) => {
+    console.error(`\nTotal: ${items.length} items`);
+    console.log(JSON.stringify(items.slice(0, 5), null, 2));
+  });
+}

@@ -1,0 +1,19 @@
+{
+  "name": "cal",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "What's on in NYC — a personal, curated daily calendar",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "weather": "node scripts/weather.js",
+    "sources": "node scripts/sources/rss.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.88.0",
+    "rss-parser": "^3.13.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
