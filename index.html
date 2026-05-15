@@ -2772,12 +2772,19 @@
     }
 
     function setLinkedDate(key) {
-      const next = state.linkedDate === key ? null : key;
-      state.linkedDate = next;
-      if (next) state.expandedDates.add(next);
+      // Clicking the date numeral toggles the day's expanded state AND
+      // toggles whether the URL hash points to it (for sharing).
+      const wasExpanded = state.expandedDates.has(key);
+      if (wasExpanded) {
+        state.expandedDates.delete(key);
+        state.linkedDate = null;
+      } else {
+        state.expandedDates.add(key);
+        state.linkedDate = key;
+      }
       writeHash();
       renderCalendar();
-      if (next) requestAnimationFrame(() => scrollToDate(next, 'smooth'));
+      if (!wasExpanded) requestAnimationFrame(() => scrollToDate(key, 'smooth'));
     }
 
     // ── URL hash sync ──────────────────────────────────
