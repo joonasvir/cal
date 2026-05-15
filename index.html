@@ -498,8 +498,10 @@
         w.className = 'weather';
         const left = document.createElement('div');
         left.className = 'weather-left';
+        const hi = weather.high ?? weather.high_f;
+        const lo = weather.low ?? weather.low_f;
         left.innerHTML = `
-          <span class="weather-temp">${weather.high_f}° / ${weather.low_f}°</span>
+          <span class="weather-temp">${hi}° / ${lo}°</span>
           <span class="weather-mood">${weather.condition}</span>
         `;
         const right = document.createElement('div');

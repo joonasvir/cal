@@ -38,7 +38,7 @@ export async function fetchWeather() {
     "daily",
     "temperature_2m_max,temperature_2m_min,precipitation_probability_max,weather_code,sunset",
   );
-  url.searchParams.set("temperature_unit", "fahrenheit");
+  url.searchParams.set("temperature_unit", "celsius");
   url.searchParams.set("timezone", "America/New_York");
   url.searchParams.set("forecast_days", "16");
 
@@ -54,8 +54,9 @@ export async function fetchWeather() {
     const high = Math.round(d.temperature_2m_max[i]);
     const low = Math.round(d.temperature_2m_min[i]);
     days[d.time[i]] = {
-      high_f: high,
-      low_f: low,
+      high,
+      low,
+      unit: "C",
       condition: WEATHER_CODE[code] || "—",
       precip_chance: precip,
       sunset: d.sunset[i].slice(11, 16),
@@ -70,9 +71,9 @@ function buildNote({ high, low, precip, code }) {
   if (code >= 71 && code <= 86) return "snow — bundle up";
   if (precip >= 60) return "indoor-leaning · pack a jacket";
   if (precip >= 30) return "evening could turn";
-  if (high >= 85) return "shirtsleeves";
-  if (high >= 75 && low >= 60) return "patio weather";
-  if (high <= 40) return "cold — cozy room night";
+  if (high >= 29) return "shirtsleeves";
+  if (high >= 24 && low >= 16) return "patio weather";
+  if (high <= 5) return "cold — cozy room night";
   return "";
 }
 
