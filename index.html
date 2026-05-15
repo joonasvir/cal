@@ -290,7 +290,13 @@
       padding: 0 var(--pad-x);
       border-top: 1px solid var(--rule);
       background: var(--paper);
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
     }
+    .tabs::-webkit-scrollbar { display: none; }
     .tab {
       appearance: none;
       background: none;
@@ -1675,7 +1681,8 @@
         bottom: 16px;
       }
 
-      .tab { font-size: 10px; padding: 12px 0; margin-right: 20px; }
+      .tab { font-size: 10px; padding: 12px 0; margin-right: 16px; letter-spacing: 0.12em; }
+      .tab:last-child { margin-right: var(--pad-x); }
 
       #map { height: calc(100vh - var(--filter-h, 48px) - 44px - 1px); min-height: 360px; }
       .map-status { font-size: 10px; padding: 6px 10px; bottom: 8px; left: 8px; }
@@ -2661,7 +2668,11 @@
       const dir = delta > 0 ? 'in' : delta < 0 ? 'out' : 'flat';
       document.documentElement.dataset.zoomDir = dir;
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (!reduced && typeof document.startViewTransition === 'function') {
+      // Skip view-transitions on coarse pointers (mobile). View Transitions
+      // on iOS Safari can leave a stale snapshot when tapped through tabs;
+      // snap-change is safer there.
+      const coarse = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+      if (!reduced && !coarse && typeof document.startViewTransition === 'function') {
         document.startViewTransition(() => setView(next));
       } else {
         setView(next);
@@ -2693,6 +2704,11 @@
     function renderTodayView() {
       const root = document.getElementById('today-frame');
       if (!root) return;
+      // Defensive: if init() hasn't computed todayKey yet, compute it inline.
+      if (!state.todayKey) {
+        const t = new Date();
+        state.todayKey = isoDate(t.getFullYear(), t.getMonth(), t.getDate());
+      }
       const key = state.todayKey;
       const payload = state.feed.days?.[key];
       const events = filterEvents(payload?.events || []);
