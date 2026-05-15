@@ -862,32 +862,38 @@
     /* ── Show more ──────────────────────────────────────── */
     .day .event.is-hidden { display: none; }
     .day.is-expanded .event.is-hidden { display: grid; }
+    /* Full-width expand row — clearly the affordance that opens the rest of the day. */
     .more {
       appearance: none;
       background: none;
       border: 0;
-      padding: 18px 0 6px;
+      border-top: 1px solid var(--softest);
+      padding: 16px 0 14px;
+      margin: 8px 0 0;
       font: inherit;
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 600;
-      letter-spacing: 0.02em;
-      color: var(--ink);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--soft);
       cursor: pointer;
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 10px;
-      border-bottom: 1.5px solid var(--ink);
-      padding-bottom: 4px;
-      margin-top: 12px;
-      line-height: 1;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+      text-align: left;
+      transition: color 120ms ease, background 120ms ease;
     }
+    .more:hover { color: var(--ink); }
     .more::after {
       content: '↓';
       font-weight: 400;
-      transition: transform 160ms ease;
+      font-size: 14px;
+      transition: transform 200ms ease;
     }
     .day.is-expanded .more::after { transform: rotate(180deg); }
-    .more:hover { opacity: 0.55; }
+    .day.is-expanded .more { color: var(--ink); }
 
     /* ── Hover preview (image follows cursor on event titles) ── */
     .title-preview {
@@ -1880,7 +1886,7 @@
     const DOW = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
     const DOW_LONG = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
     const CATEGORIES = ['music', 'comedy', 'art', 'food', 'talk', 'nightlife'];
-    const TOP_N = 3;
+    const TOP_N = 2; // show 2 events per day by default; click "see N more" or the numeral to expand
 
     // ── Date-night catalog ─────────────────────────────
     // Static set of Brooklyn/NYC date moves. Tagged by time band, vibe and
@@ -2489,15 +2495,9 @@
       day.appendChild(marker);
       day.appendChild(content);
 
-      // Click anywhere on the day (except links, the marker, or "+ more") to
-      // toggle inline expansion of the day's events.
-      if (!isEmpty) {
-        day.style.cursor = 'pointer';
-        day.addEventListener('click', (e) => {
-          if (e.target.closest('a, button, input, label')) return;
-          toggleDayExpanded(key);
-        });
-      }
+      // The only ways to toggle a day's expansion are the date numeral and
+      // the "See N more" row. Clicks inside an event row are ignored so a
+      // user reading an event can't accidentally collapse the day.
 
       return day;
     }
