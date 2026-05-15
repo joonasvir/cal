@@ -1638,8 +1638,20 @@
       }
       .weather-right { width: 100%; }
 
-      .event { grid-template-columns: 44px 1fr; gap: 12px; padding: 12px 0; }
-      .event-time { font-size: 10px; padding-top: 4px; }
+      /* Mobile event layout: icon column on the left spans two rows;
+         time sits above the body in the right column. Without explicit
+         placement the body auto-flows into the 44px icon column and
+         wraps to one word per line. */
+      .event {
+        grid-template-columns: 44px minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        column-gap: 12px;
+        row-gap: 2px;
+        padding: 12px 0;
+      }
+      .event-icon-wrap { grid-column: 1; grid-row: 1 / span 2; }
+      .event-time { grid-column: 2; grid-row: 1; font-size: 10px; padding-top: 0; }
+      .event-body { grid-column: 2; grid-row: 2; }
       .event-title { font-size: 18px; font-weight: 700; line-height: 1.2; }
       .event.is-secondary .event-title { font-size: 14.5px; font-weight: 600; }
       .event.is-secondary .event-note  { font-size: 12.5px; }
@@ -1653,9 +1665,28 @@
       .float-btn { width: 42px; height: 42px; }
 
       :root { --topbar-h: 44px; }
-      .topbar { padding: 0 var(--pad-x); }
-      .topbar-group + .topbar-group { margin-left: 14px; padding-left: 14px; }
-      .tab { font-size: 10px; padding: 13px 0 11px; margin-right: 14px; letter-spacing: 0.12em; }
+      /* Wrap the topbar to two rows so both the filter dropdowns and the
+         view tabs stay fully visible — horizontal scroll hides the
+         right-most tab and is brittle on touch. updateFilterHeight()
+         measures the actual height and feeds it into --filter-h. */
+      .topbar {
+        padding: 0 var(--pad-x);
+        flex-wrap: wrap;
+        overflow-x: visible;
+        white-space: normal;
+      }
+      .topbar-group + .topbar-group {
+        margin-left: 0;
+        padding-left: 0;
+        border-left: 0;
+      }
+      .topbar-group.is-end {
+        margin-left: 0;
+        flex-basis: 100%;
+        border-top: 1px solid var(--softest);
+        justify-content: flex-start;
+      }
+      .tab { font-size: 10px; padding: 13px 0 11px; margin-right: 16px; letter-spacing: 0.12em; }
       .topbar-group .tab:last-child { margin-right: 0; }
 
       /* Week view stacks vertically on phones — 7 columns is unreadable. */
