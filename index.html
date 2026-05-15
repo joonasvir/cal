@@ -46,8 +46,51 @@
       line-height: 1.4;
       padding: clamp(28px, 4vw, 56px) var(--pad-x) clamp(24px, 4vw, 48px);
     }
-    .masthead .meta-right { text-align: right; }
+    .masthead .meta-right {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
     .masthead .meta-label { display: block; }
+    .meta-links {
+      display: flex;
+      gap: 18px;
+      align-items: baseline;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .meta-link {
+      appearance: none;
+      background: none;
+      border: 0;
+      padding: 4px 0 6px;
+      font: inherit;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--ink);
+      cursor: pointer;
+      border-bottom: 1.5px solid var(--ink);
+      transition: opacity 120ms ease;
+    }
+    .meta-link:hover { opacity: 0.55; }
+    .meta-link[aria-pressed="false"] {
+      color: var(--soft);
+      border-bottom-color: var(--softer);
+      font-weight: 500;
+    }
+    .meta-link[aria-pressed="false"]:hover { color: var(--ink); border-bottom-color: var(--ink); opacity: 1; }
+    .meta-caption {
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--soft);
+      font-feature-settings: 'tnum';
+    }
 
     .meta-btn {
       appearance: none;
@@ -657,8 +700,7 @@
       padding: clamp(28px, 4vw, 56px) var(--pad-x) clamp(20px, 3vw, 36px);
       border-bottom: 2px solid var(--ink);
     }
-    body[data-view="map"] .picks,
-    body[data-view="dn"] .picks { display: none; }
+    body:not([data-view="month"]) .picks { display: none; }
     .picks-head {
       display: flex;
       align-items: baseline;
@@ -854,18 +896,323 @@
       padding-top: 8px;
     }
 
-    /* ── Date Night view ───────────────────────────────── */
-    body[data-view="dn"] #calendar { display: none; }
-    body[data-view="calendar"] #date-night { display: none; }
-    body[data-view="dn"] .today-btn { display: none; }
-    /* The category/hood/weather chips don't apply to the planner. */
-    body[data-view="dn"] .filters { display: none; }
+    /* ── Today view ──────────────────────────────────────
+       One-day focused page. Massive numeral + weather + the day's events,
+       no calendar grid clutter. */
+    #today-view {
+      padding: clamp(24px, 4vw, 56px) var(--pad-x) clamp(48px, 6vw, 96px);
+    }
+    .today-frame { max-width: 100%; }
+    .today-hero {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: clamp(24px, 4vw, 64px);
+      align-items: end;
+      padding-bottom: clamp(20px, 3vw, 36px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .today-dow {
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--soft);
+      margin-bottom: clamp(10px, 1.5vw, 18px);
+    }
+    .today-numeral {
+      font-size: clamp(160px, 28vw, 420px);
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      line-height: 0.84;
+      font-variant-numeric: lining-nums;
+    }
+    .today-month {
+      font-size: clamp(28px, 4vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-top: 8px;
+    }
+    .today-weather { padding-bottom: 12px; }
+    .today-weather .row {
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--soft);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 16px;
+      align-items: baseline;
+    }
+    .today-weather .row strong {
+      color: var(--ink);
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+    .today-weather .note {
+      font-size: 15px;
+      line-height: 1.4;
+      margin-top: 10px;
+      max-width: 48ch;
+    }
+    .today-section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin: clamp(28px, 4vw, 56px) 0 clamp(16px, 2vw, 24px);
+    }
+    .today-section-head h2 {
+      font-size: clamp(20px, 2.8vw, 28px);
+      font-weight: 700;
+      letter-spacing: -0.012em;
+      margin: 0;
+    }
+    .today-section-head .count {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--soft);
+      font-variant-numeric: tabular-nums;
+    }
+    .today-events {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .today-event {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 24px;
+      padding: clamp(18px, 2.5vw, 28px) 0;
+      border-bottom: 1px solid var(--softest);
+      align-items: baseline;
+    }
+    .today-event-time {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-variant-numeric: tabular-nums;
+      color: var(--soft);
+    }
+    .today-event-title {
+      font-size: clamp(22px, 2vw, 30px);
+      font-weight: 700;
+      line-height: 1.18;
+      letter-spacing: -0.015em;
+    }
+    .today-event-title a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+    .today-event-title a:hover { border-bottom-color: var(--ink); }
+    .today-event-meta {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--soft);
+      margin-top: 6px;
+    }
+    .today-event-note {
+      font-size: 15px;
+      line-height: 1.5;
+      margin-top: 10px;
+      max-width: 60ch;
+    }
+    .today-event-cat {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--soft);
+    }
+    .today-empty {
+      font-size: 14px;
+      color: var(--soft);
+      padding: 32px 0;
+    }
 
-    /* ── Map view ──────────────────────────────────────── */
+    /* ── Year view (brutalist poster) ─────────────────────
+       12 month tiles, tight day grids, days with events filled black.
+       Click any day → snap to Month view at that date. */
+    #year-view {
+      padding: clamp(24px, 4vw, 56px) var(--pad-x) clamp(48px, 6vw, 96px);
+    }
+    .year-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-bottom: clamp(20px, 3vw, 36px);
+      border-bottom: 3px solid var(--ink);
+      margin-bottom: clamp(28px, 4vw, 56px);
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .year-headline {
+      font-size: clamp(96px, 18vw, 280px);
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      line-height: 0.84;
+      font-variant-numeric: lining-nums;
+    }
+    .year-sub {
+      font-size: clamp(14px, 1.6vw, 18px);
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--soft);
+      padding-bottom: 12px;
+    }
+    .year-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(28px, 3vw, 56px);
+    }
+    .year-month {
+      border-top: 2px solid var(--ink);
+      padding-top: 10px;
+      cursor: default;
+    }
+    .year-month-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
+    .year-month-name {
+      font-size: clamp(28px, 3.4vw, 48px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .year-month-count {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--soft);
+      font-variant-numeric: tabular-nums;
+    }
+    .year-month-dow {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: var(--softer);
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    .year-month-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+    }
+    .year-day {
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      font-size: clamp(10px, 1vw, 13px);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      color: var(--soft);
+      cursor: pointer;
+      border: 0;
+      background: transparent;
+      appearance: none;
+      padding: 0;
+      font-family: inherit;
+      transition: background 80ms ease, color 80ms ease;
+    }
+    .year-day:hover {
+      background: var(--softest);
+      color: var(--ink);
+    }
+    .year-day.has-event {
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .year-day.has-event:hover { opacity: 0.85; }
+    .year-day.is-today {
+      outline: 2.5px solid var(--ink);
+      outline-offset: -2.5px;
+      color: var(--ink);
+      font-weight: 900;
+    }
+    .year-day.is-today.has-event { color: var(--paper); }
+    .year-day.is-empty {
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    @media (min-width: 721px) and (max-width: 1080px) {
+      .year-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    /* ── View transitions (zoom in/out between Today/Month/Year) ─── */
+    @media (prefers-reduced-motion: no-preference) {
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation-duration: 320ms;
+        animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      [data-zoom-dir="in"]::view-transition-old(root)  { animation-name: vt-zoom-out-old; }
+      [data-zoom-dir="in"]::view-transition-new(root)  { animation-name: vt-zoom-in-new; }
+      [data-zoom-dir="out"]::view-transition-old(root) { animation-name: vt-zoom-in-old; }
+      [data-zoom-dir="out"]::view-transition-new(root) { animation-name: vt-zoom-out-new; }
+      [data-zoom-dir="flat"]::view-transition-old(root){ animation-name: vt-fade-old; }
+      [data-zoom-dir="flat"]::view-transition-new(root){ animation-name: vt-fade-new; }
+      @keyframes vt-zoom-out-old { from { opacity: 1; transform: scale(1); } to   { opacity: 0; transform: scale(0.92); } }
+      @keyframes vt-zoom-in-new  { from { opacity: 0; transform: scale(1.08); } to { opacity: 1; transform: scale(1); } }
+      @keyframes vt-zoom-in-old  { from { opacity: 1; transform: scale(1); } to   { opacity: 0; transform: scale(1.08); } }
+      @keyframes vt-zoom-out-new { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+      @keyframes vt-fade-old { from { opacity: 1; } to { opacity: 0; } }
+      @keyframes vt-fade-new { from { opacity: 0; } to { opacity: 1; } }
+    }
+
+    /* ── View visibility ─────────────────────────────────
+       Only one main view section is visible at a time. Tabs flip body[data-view].
+       Default body markup has data-view="month". */
+    #today-view, #year-view, #map-view, #date-night { display: none; }
+    body[data-view="today"] #calendar,
+    body[data-view="today"] #date-night,
+    body[data-view="today"] #year-view,
+    body[data-view="today"] #map-view { display: none; }
+    body[data-view="today"] #today-view { display: block; }
+    body[data-view="today"] .picks,
+    body[data-view="today"] .today-btn,
+    body[data-view="today"] .filters { display: none; }
+
+    body[data-view="year"] #calendar,
+    body[data-view="year"] #date-night,
+    body[data-view="year"] #today-view,
+    body[data-view="year"] #map-view { display: none; }
+    body[data-view="year"] #year-view { display: block; }
+    body[data-view="year"] .picks,
+    body[data-view="year"] .today-btn,
+    body[data-view="year"] .filters { display: none; }
+
+    body[data-view="month"] #today-view,
+    body[data-view="month"] #year-view,
+    body[data-view="month"] #date-night,
+    body[data-view="month"] #map-view { display: none; }
+
+    body[data-view="dn"] #calendar,
+    body[data-view="dn"] #today-view,
+    body[data-view="dn"] #year-view,
+    body[data-view="dn"] #map-view { display: none; }
+    body[data-view="dn"] #date-night { display: block; }
+    body[data-view="dn"] .today-btn,
+    body[data-view="dn"] .filters,
+    body[data-view="dn"] .picks { display: none; }
+
     body[data-view="map"] #calendar,
+    body[data-view="map"] #today-view,
+    body[data-view="map"] #year-view,
     body[data-view="map"] #date-night,
     body[data-view="map"] .today-btn { display: none; }
-    body:not([data-view="map"]) #map-view { display: none; }
+    body[data-view="map"] #map-view { display: block; }
 
     #map-view { position: relative; }
     #map {
@@ -1176,6 +1523,38 @@
         --filter-row-h: 48px;
         --filter-h: 48px;
       }
+      .masthead .meta-right { align-items: flex-start; }
+      .meta-links { gap: 14px; }
+      .meta-link, .meta-links { font-size: 10px; letter-spacing: 0.14em; }
+      .meta-caption { font-size: 10px; }
+
+      #today-view { padding: 16px var(--pad-x) 40px; }
+      .today-hero {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        align-items: start;
+      }
+      .today-numeral { font-size: clamp(140px, 42vw, 220px); line-height: 0.86; }
+      .today-month { font-size: 22px; }
+      .today-event { grid-template-columns: 60px 1fr; gap: 12px; padding: 14px 0; }
+      .today-event-cat { display: none; }
+      .today-event-title { font-size: 19px; }
+      .today-event-note { font-size: 13.5px; }
+
+      #year-view { padding: 16px var(--pad-x) 40px; }
+      .year-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        padding-bottom: 14px;
+        margin-bottom: 18px;
+      }
+      .year-headline { font-size: clamp(72px, 26vw, 140px); }
+      .year-sub { padding-bottom: 0; font-size: 11px; }
+      .year-grid { grid-template-columns: 1fr; gap: 22px; }
+      .year-month-name { font-size: 28px; }
+      .year-day { font-size: 11px; }
+
       /* Filters: on mobile the weather chip flows inline in the same lane
          (auto-margin + overflow scroll pushed it off-screen). */
       .filter-group-end {
@@ -1318,7 +1697,7 @@
     }
   </style>
 </head>
-<body data-view="calendar">
+<body data-view="month">
   <!-- Brutalist category icon set -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
@@ -1337,19 +1716,23 @@
       <span class="meta-label">Brooklyn / NYC</span>
     </div>
     <div class="meta-right">
-      <button class="meta-btn" id="sources-open" type="button" aria-haspopup="dialog" aria-controls="sources-sheet">
-        <span class="meta-label" id="meta-edition">Edition 01</span>
-        <span class="meta-label" id="meta-date">—</span>
-        <span class="meta-cta">Sources</span>
-      </button>
+      <div class="meta-links">
+        <button class="meta-link" id="meta-sources" type="button" aria-haspopup="dialog" aria-controls="sources-sheet">Sources</button>
+        <button class="meta-link" id="meta-weather" type="button" aria-pressed="true">Weather</button>
+      </div>
+      <span class="meta-caption" id="meta-caption">
+        <span id="meta-edition">Edition 01</span> · <span id="meta-date">—</span>
+      </span>
     </div>
     <h1 class="title">2026 / A year in nights.</h1>
   </header>
 
   <nav class="tabs" id="tabs" role="tablist" aria-label="View">
-    <button class="tab is-active" id="tab-calendar" role="tab" type="button" aria-selected="true" data-view="calendar">Calendar</button>
-    <button class="tab" id="tab-dn" role="tab" type="button" aria-selected="false" data-view="dn">Date night</button>
-    <button class="tab" id="tab-map" role="tab" type="button" aria-selected="false" data-view="map">Map</button>
+    <button class="tab" id="tab-today" role="tab" type="button" aria-selected="false" data-view="today">Today</button>
+    <button class="tab is-active" id="tab-month" role="tab" type="button" aria-selected="true" data-view="month">Month</button>
+    <button class="tab" id="tab-year"  role="tab" type="button" aria-selected="false" data-view="year">Year</button>
+    <button class="tab" id="tab-dn"    role="tab" type="button" aria-selected="false" data-view="dn">Date night</button>
+    <button class="tab" id="tab-map"   role="tab" type="button" aria-selected="false" data-view="map">Map</button>
   </nav>
 
   <nav class="filters" id="filters" role="toolbar" aria-label="Filters">
@@ -1368,10 +1751,6 @@
           </button>
         </div>
       </div>
-      <div class="filter-group filter-group-end">
-        <button class="chip chip-action" id="sources-chip-btn" type="button" aria-haspopup="dialog" aria-controls="sources-sheet">Sources</button>
-        <button class="chip weather is-active" data-toggle="weather" aria-pressed="true">Weather</button>
-      </div>
     </div>
   </nav>
 
@@ -1386,6 +1765,16 @@
     <div class="picks-grid" id="picks-grid"></div>
   </section>
 
+  <section id="today-view" aria-label="Today">
+    <div class="today-frame" id="today-frame"></div>
+  </section>
+  <section id="year-view" aria-label="Year overview">
+    <div class="year-head">
+      <div class="year-headline" id="year-headline">2026</div>
+      <div class="year-sub" id="year-sub">A year in nights</div>
+    </div>
+    <div class="year-grid" id="year-grid"></div>
+  </section>
   <main id="calendar"></main>
   <section id="map-view" aria-label="Event map">
     <div id="map" role="application" aria-label="Event locations"></div>
@@ -1659,7 +2048,7 @@
       todayKey: null,
       linkedDate: null, // YYYY-MM-DD when set via URL/click
       hoodSlugToName: new Map(),
-      view: 'calendar', // 'calendar' | 'dn'
+      view: 'month', // 'today' | 'month' | 'year' | 'dn' | 'map'
       dnDate: null, // YYYY-MM-DD selected in date-night view
       dnSeed: 0, // bumps on shuffle
     };
@@ -1747,21 +2136,29 @@
       updateFilterHeight();
     }
 
+    // Re-render the calendar grid (kept current even when hidden so view
+    // switches feel instant) plus whichever view is on top.
+    function renderCurrent() {
+      renderCalendar();
+      if (state.view === 'today') renderTodayView();
+      if (state.view === 'year')  renderYearView();
+      if (state.view === 'dn')    renderDateNight();
+      refreshMapMarkers();
+    }
+
     function toggleCategory(cat) {
       if (state.activeCats.has(cat)) state.activeCats.delete(cat);
       else state.activeCats.add(cat);
       updateCategoryChips();
       writeHash();
-      renderCalendar();
-      refreshMapMarkers();
+      renderCurrent();
     }
 
     function clearCategories() {
       state.activeCats.clear();
       updateCategoryChips();
       writeHash();
-      renderCalendar();
-      refreshMapMarkers();
+      renderCurrent();
     }
 
     function toggleHood(slug) {
@@ -1769,8 +2166,7 @@
       else state.activeHoods.add(slug);
       updateHoodChips();
       writeHash();
-      renderCalendar();
-      refreshMapMarkers();
+      renderCurrent();
     }
 
     function updateCategoryChips() {
@@ -1796,8 +2192,7 @@
       state.activeHoods.clear();
       updateHoodChips();
       writeHash();
-      renderCalendar();
-      refreshMapMarkers();
+      renderCurrent();
     }
 
     function updateHoodChips() {
@@ -1825,9 +2220,10 @@
     function toggleWeather() {
       state.showWeather = !state.showWeather;
       document.body.classList.toggle('hide-weather', !state.showWeather);
-      const btn = document.querySelector('.chip.weather');
-      btn.classList.toggle('is-active', state.showWeather);
-      btn.setAttribute('aria-pressed', state.showWeather ? 'true' : 'false');
+      const btn = document.getElementById('meta-weather');
+      if (btn) btn.setAttribute('aria-pressed', state.showWeather ? 'true' : 'false');
+      // Today view bakes the weather block into its render — re-render so the change is visible.
+      if (state.view === 'today') renderTodayView();
       writeHash();
     }
 
@@ -2176,8 +2572,32 @@
     }
 
     // ── Date Night ─────────────────────────────────────
+    const ALL_VIEWS = ['today', 'month', 'year', 'dn', 'map'];
+    // Zoom levels — higher = more zoomed in. Used to pick transition direction.
+    const VIEW_ZOOM = { today: 3, month: 2, dn: 2, map: 2, year: 1 };
+
+    function normalizeView(v) {
+      if (v === 'calendar') return 'month'; // backwards-compat with old URLs
+      return ALL_VIEWS.includes(v) ? v : 'month';
+    }
+
+    function transitionTo(viewName) {
+      const next = normalizeView(viewName);
+      const prev = state.view;
+      if (next === prev) return;
+      const delta = (VIEW_ZOOM[next] ?? 2) - (VIEW_ZOOM[prev] ?? 2);
+      const dir = delta > 0 ? 'in' : delta < 0 ? 'out' : 'flat';
+      document.documentElement.dataset.zoomDir = dir;
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduced && typeof document.startViewTransition === 'function') {
+        document.startViewTransition(() => setView(next));
+      } else {
+        setView(next);
+      }
+    }
+
     function setView(v, opts = {}) {
-      if (v !== 'calendar' && v !== 'dn' && v !== 'map') v = 'calendar';
+      v = normalizeView(v);
       state.view = v;
       document.body.dataset.view = v;
       document.querySelectorAll('.tab').forEach((b) => {
@@ -2185,6 +2605,8 @@
         b.classList.toggle('is-active', on);
         b.setAttribute('aria-selected', on ? 'true' : 'false');
       });
+      if (v === 'today') renderTodayView();
+      if (v === 'year')  renderYearView();
       if (v === 'dn') {
         if (!state.dnDate) state.dnDate = state.linkedDate || state.todayKey;
         renderDateNight();
@@ -2193,6 +2615,134 @@
         initMap();
       }
       if (!opts.silent) writeHash();
+    }
+
+    // ── Today view ─────────────────────────────────────
+    function renderTodayView() {
+      const root = document.getElementById('today-frame');
+      if (!root) return;
+      const key = state.todayKey;
+      const payload = state.feed.days?.[key];
+      const events = filterEvents(payload?.events || []);
+      const weather = payload?.weather;
+      const d = new Date(key + 'T00:00:00');
+      const dowIdx = (d.getDay() + 6) % 7;
+
+      let weatherHtml = '';
+      if (weather && state.showWeather) {
+        const hi = weather.high ?? weather.high_f;
+        const lo = weather.low ?? weather.low_f;
+        const unit = (weather.unit || (weather.high_f != null ? 'F' : 'C'));
+        weatherHtml = `
+          <div class="today-weather">
+            <div class="row">
+              <strong>${hi}° / ${lo}°${unit}</strong>
+              <span>${escapeHtml(weather.condition || '')}</span>
+              ${weather.sunset ? `<span>sunset ${escapeHtml(weather.sunset)}</span>` : ''}
+              ${weather.precip_chance != null ? `<span>${weather.precip_chance}% precip</span>` : ''}
+            </div>
+            ${weather.note ? `<div class="note">${escapeHtml(weather.note)}</div>` : ''}
+          </div>
+        `;
+      }
+
+      const eventsHtml = events.length
+        ? `<ul class="today-events">${events.map((ev) => {
+            const previewImg = imageForEvent(ev);
+            const previewCap = [ev.venue, ev.neighborhood].filter(Boolean).join(' · ');
+            return `
+              <li class="today-event">
+                <div class="today-event-time">${escapeHtml(fmtTime(ev.time) || '—')}</div>
+                <div class="today-event-body">
+                  <div class="today-event-title" data-image="${escapeHtml(previewImg)}"${previewCap ? ` data-caption="${escapeHtml(previewCap)}"` : ''}>${ev.url
+                    ? `<a href="${escapeHtml(ev.url)}" target="_blank" rel="noopener">${escapeHtml(ev.title)}</a>`
+                    : escapeHtml(ev.title)}</div>
+                  ${ev.venue || ev.neighborhood
+                    ? `<div class="today-event-meta">${[ev.venue, ev.neighborhood].filter(Boolean).map(escapeHtml).join(' · ')}</div>`
+                    : ''}
+                  ${ev.note ? `<div class="today-event-note">${escapeHtml(ev.note)}</div>` : ''}
+                </div>
+                <div class="today-event-cat">${escapeHtml(ev.category || '')}</div>
+              </li>
+            `;
+          }).join('')}</ul>`
+        : '<div class="today-empty">Nothing curated for tonight. Check the Month or Date Night view.</div>';
+
+      root.innerHTML = `
+        <div class="today-hero">
+          <div>
+            <div class="today-dow">${DOW_LONG[dowIdx]}</div>
+            <div class="today-numeral">${d.getDate()}</div>
+            <div class="today-month">${MONTHS[d.getMonth()]} ${d.getFullYear()}</div>
+          </div>
+          ${weatherHtml || '<div></div>'}
+        </div>
+        <div class="today-section-head">
+          <h2>Tonight</h2>
+          <span class="count">${events.length} event${events.length === 1 ? '' : 's'}</span>
+        </div>
+        ${eventsHtml}
+      `;
+    }
+
+    // ── Year view (brutalist 12-month poster) ──────────
+    function renderYearView() {
+      const year = state.feed.year || new Date().getFullYear();
+      const headline = document.getElementById('year-headline');
+      const sub = document.getElementById('year-sub');
+      if (headline) headline.textContent = String(year);
+      const totalEvents = Object.values(state.feed.days || {}).reduce((a, d) => a + (d.events?.length || 0), 0);
+      const filterNote = state.activeCats.size || state.activeHoods.size ? ' (filtered)' : '';
+      if (sub) sub.textContent = `${totalEvents} curated event${totalEvents === 1 ? '' : 's'}${filterNote}`;
+
+      const grid = document.getElementById('year-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      for (let m = 0; m < 12; m++) {
+        const monthDiv = document.createElement('div');
+        monthDiv.className = 'year-month';
+        const days = daysInMonth(year, m);
+        let monthEventCount = 0;
+        const cells = [];
+        // Empty cells for the leading week offset (Mon-first).
+        const firstDow = dowIndex(year, m, 1);
+        for (let i = 0; i < firstDow; i++) {
+          cells.push(`<span class="year-day is-empty">·</span>`);
+        }
+        for (let d = 1; d <= days; d++) {
+          const key = isoDate(year, m, d);
+          const payload = state.feed.days?.[key];
+          const filtered = payload ? filterEvents(payload.events || []) : [];
+          const has = filtered.length > 0;
+          if (has) monthEventCount += filtered.length;
+          const isToday = key === state.todayKey;
+          const cls = ['year-day'];
+          if (has) cls.push('has-event');
+          if (isToday) cls.push('is-today');
+          cells.push(
+            `<button type="button" class="${cls.join(' ')}" data-date="${key}" aria-label="${key}${has ? `, ${filtered.length} event${filtered.length === 1 ? '' : 's'}` : ''}">${d}</button>`,
+          );
+        }
+        monthDiv.innerHTML = `
+          <div class="year-month-label">
+            <div class="year-month-name">${MONTHS[m]}</div>
+            <div class="year-month-count">${monthEventCount || '—'}${monthEventCount ? ' ev' : ''}</div>
+          </div>
+          <div class="year-month-dow"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+          <div class="year-month-days">${cells.join('')}</div>
+        `;
+        grid.appendChild(monthDiv);
+      }
+      // Wire day-click → zoom into Month view at that date.
+      grid.querySelectorAll('.year-day[data-date]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const key = btn.dataset.date;
+          state.linkedDate = key;
+          state.expandedDates.add(key);
+          transitionTo('month');
+          requestAnimationFrame(() => scrollToDate(key, 'instant'));
+        });
+      });
     }
 
     // ── Map (Leaflet, lazy-loaded) ─────────────────────
@@ -2732,7 +3282,8 @@
       if (state.activeHoods.size) params.set('n', [...state.activeHoods].join(','));
       if (!state.showWeather) params.set('w', '0');
       if (state.linkedDate) params.set('d', state.linkedDate);
-      if (state.view === 'dn') params.set('v', 'dn');
+      // Persist non-default view. Month is the default so we omit it.
+      if (state.view && state.view !== 'month') params.set('v', state.view);
       if (state.view === 'dn' && state.dnDate) params.set('dn', state.dnDate);
       if (state.view === 'dn' && state.dnSeed) params.set('s', String(state.dnSeed));
       const str = params.toString();
@@ -2750,17 +3301,14 @@
       if (typeof h.weather === 'boolean') {
         state.showWeather = h.weather;
         document.body.classList.toggle('hide-weather', !state.showWeather);
-        const wbtn = document.querySelector('.chip.weather');
-        if (wbtn) {
-          wbtn.classList.toggle('is-active', state.showWeather);
-          wbtn.setAttribute('aria-pressed', state.showWeather ? 'true' : 'false');
-        }
+        const wbtn = document.getElementById('meta-weather');
+        if (wbtn) wbtn.setAttribute('aria-pressed', state.showWeather ? 'true' : 'false');
       }
       if (h.date && /^\d{4}-\d{2}-\d{2}$/.test(h.date)) {
         state.linkedDate = h.date;
         state.expandedDates.add(h.date);
       }
-      if (h.view === 'dn') state.view = 'dn';
+      if (h.view) state.view = normalizeView(h.view);
       if (h.dnDate && /^\d{4}-\d{2}-\d{2}$/.test(h.dnDate)) state.dnDate = h.dnDate;
       if (Number.isFinite(h.dnSeed)) state.dnSeed = h.dnSeed;
     }
@@ -2942,7 +3490,7 @@
       // regardless of when layout settles.
       const target = state.linkedDate || state.todayKey;
       const goToTarget = () => {
-        if (state.view === 'calendar') scrollToDate(target, 'instant');
+        if (state.view === 'month') scrollToDate(target, 'instant');
       };
       requestAnimationFrame(() => {
         goToTarget();
@@ -2953,8 +3501,9 @@
       });
 
       document.getElementById('today-btn').addEventListener('click', scrollToToday);
-      document.getElementById('sources-open').addEventListener('click', openSourcesSheet);
-      document.getElementById('sources-chip-btn').addEventListener('click', openSourcesSheet);
+      // Masthead links (cleaner replacement for the old chip-action + chip.weather)
+      document.getElementById('meta-sources').addEventListener('click', openSourcesSheet);
+      document.getElementById('meta-weather').addEventListener('click', toggleWeather);
       document.getElementById('sources-close').addEventListener('click', closeSourcesSheet);
 
       // Categories dropdown toggle
@@ -2970,7 +3519,7 @@
         else openHoodDropdown();
       });
       document.querySelectorAll('.tab').forEach((b) => {
-        b.addEventListener('click', () => setView(b.dataset.view));
+        b.addEventListener('click', () => transitionTo(b.dataset.view));
       });
       document.getElementById('dn-shuffle').addEventListener('click', () => {
         state.dnSeed = (state.dnSeed + 1) >>> 0 || 1;
@@ -2989,7 +3538,7 @@
         state.activeHoods = new Set();
         state.showWeather = true;
         state.linkedDate = null;
-        state.view = 'calendar';
+        state.view = 'month';
         state.dnDate = null;
         state.dnSeed = 0;
         document.body.classList.remove('hide-weather');
@@ -3003,7 +3552,7 @@
         setView(state.view, { silent: true });
         refreshMapMarkers();
         suppressHash = false;
-        if (state.view === 'calendar' && state.linkedDate) scrollToDate(state.linkedDate, 'smooth');
+        if (state.view === 'month' && state.linkedDate) scrollToDate(state.linkedDate, 'smooth');
       });
     }
 
