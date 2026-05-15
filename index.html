@@ -387,19 +387,21 @@
       transform: rotate(-45deg) translateY(-1px);
     }
 
-    /* Always-visible action chip (Sources). Sits next to the weather toggle. */
+    /* Always-visible action chip (Sources). Visually matches the active weather chip
+       so the two right-side chips line up. */
     .chip-action {
       color: var(--ink);
+      font-weight: 600;
       border-bottom: 1.5px solid var(--ink);
     }
     .chip-action::before {
       content: '';
       display: inline-block;
-      width: 6px;
-      height: 6px;
+      width: 7px;
+      height: 7px;
       border-radius: 999px;
       background: var(--ink);
-      margin-right: 8px;
+      margin-right: 6px;
       vertical-align: 1px;
     }
     .chip-action:hover { opacity: 0.7; }
@@ -440,18 +442,34 @@
     .month {
       padding: 0 var(--pad-x);
     }
+    .month-sentinel { display: block; height: 1px; margin-top: clamp(28px, 4vw, 56px); }
     .month-title {
       position: sticky;
       top: var(--filter-h);
       z-index: 20;
       background: var(--paper);
-      font-size: clamp(56px, 11vw, 180px);
-      font-weight: 500;
-      line-height: 1.02;
-      letter-spacing: -0.045em;
+      font-size: clamp(72px, 13vw, 200px);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.05em;
       margin: 0;
-      padding: clamp(28px, 4vw, 56px) 0 clamp(20px, 3vw, 36px);
+      padding: 0 0 clamp(20px, 3vw, 36px);
       border-bottom: 1px solid var(--rule);
+      transition:
+        font-size 220ms ease,
+        padding 220ms ease,
+        letter-spacing 220ms ease,
+        font-weight 220ms ease,
+        line-height 220ms ease;
+      will-change: font-size, padding;
+    }
+    /* Collapses to a slim sticky label once you scroll into the month. */
+    .month-title.is-stuck {
+      font-size: clamp(18px, 2.2vw, 28px);
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 1.2;
+      padding: 14px 0 12px;
     }
 
     /* ── Day row ────────────────────────────────────────── */
@@ -463,7 +481,7 @@
       border-bottom: 1px solid var(--rule);
       align-items: start;
     }
-    .day.is-today .numeral { font-weight: 700; }
+    .day.is-today .numeral { font-weight: 900; }
     .day.is-today .dow .active {
       background: var(--ink);
       color: var(--paper);
@@ -514,10 +532,10 @@
       font-weight: 600;
     }
     .numeral {
-      font-size: clamp(72px, 11vw, 160px);
-      font-weight: 500;
-      line-height: 0.9;
-      letter-spacing: -0.055em;
+      font-size: clamp(108px, 16vw, 240px);
+      font-weight: 800;
+      line-height: 0.86;
+      letter-spacing: -0.065em;
       font-variant-numeric: lining-nums;
     }
 
@@ -568,10 +586,10 @@
     }
     .event-body { min-width: 0; }
     .event-title {
-      font-size: 16px;
-      font-weight: 500;
-      line-height: 1.3;
-      letter-spacing: -0.005em;
+      font-size: clamp(20px, 1.6vw, 26px);
+      font-weight: 700;
+      line-height: 1.22;
+      letter-spacing: -0.012em;
     }
     .event-title a {
       color: inherit;
@@ -609,24 +627,28 @@
       appearance: none;
       background: none;
       border: 0;
-      padding: 14px 0 4px;
+      padding: 18px 0 6px;
       font: inherit;
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--soft);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--ink);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-    }
-    .more::before {
-      content: '+';
-      font-size: 14px;
+      gap: 10px;
+      border-bottom: 1.5px solid var(--ink);
+      padding-bottom: 4px;
+      margin-top: 12px;
       line-height: 1;
     }
-    .more:hover { color: var(--ink); }
-    .day.is-expanded .more::before { content: '–'; }
+    .more::after {
+      content: '↓';
+      font-weight: 400;
+      transition: transform 160ms ease;
+    }
+    .day.is-expanded .more::after { transform: rotate(180deg); }
+    .more:hover { opacity: 0.55; }
 
     /* ── Empty day ──────────────────────────────────────── */
     .day.is-empty .weather { display: none; }
@@ -887,10 +909,10 @@
       padding-top: 6px;
     }
     .dn-move-title {
-      font-size: clamp(18px, 2.5vw, 22px);
-      font-weight: 500;
-      line-height: 1.25;
-      letter-spacing: -0.005em;
+      font-size: clamp(20px, 2.4vw, 26px);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.012em;
     }
     .dn-move-title a {
       color: inherit;
@@ -983,9 +1005,15 @@
         margin-top: 16px;
       }
 
+      .month-sentinel { margin-top: 24px; }
       .month-title {
-        font-size: clamp(56px, 18vw, 96px);
-        padding: 24px 0 16px;
+        font-size: clamp(72px, 22vw, 128px);
+        font-weight: 700;
+        padding: 0 0 16px;
+      }
+      .month-title.is-stuck {
+        font-size: 17px;
+        padding: 11px 0;
       }
 
       .day {
@@ -995,9 +1023,10 @@
       }
       .dow { margin-bottom: 6px; font-size: 10px; gap: 5px; }
       .numeral {
-        font-size: clamp(52px, 16vw, 80px);
-        letter-spacing: -0.045em;
-        line-height: 1;
+        font-size: clamp(72px, 22vw, 124px);
+        font-weight: 800;
+        letter-spacing: -0.055em;
+        line-height: 0.9;
       }
       .day-content { padding-top: 4px; }
 
@@ -1010,12 +1039,13 @@
       }
       .weather-right { width: 100%; }
 
-      .event { grid-template-columns: 44px 1fr; gap: 12px; padding: 10px 0; }
-      .event-time { font-size: 10px; padding-top: 2px; }
-      .event-title { font-size: 15px; }
+      .event { grid-template-columns: 44px 1fr; gap: 12px; padding: 12px 0; }
+      .event-time { font-size: 10px; padding-top: 4px; }
+      .event-title { font-size: 18px; font-weight: 700; line-height: 1.2; }
       .event-meta { font-size: 10px; }
-      .event-note { font-size: 13px; max-width: none; }
+      .event-note { font-size: 13.5px; max-width: none; }
       .event-cat { display: none; }
+      .more { font-size: 13px; }
 
       .today-btn {
         padding: 11px 16px;
@@ -1030,7 +1060,8 @@
       #map { height: calc(100vh - var(--filter-h, 48px) - 44px - 1px); min-height: 360px; }
       .map-status { font-size: 10px; padding: 6px 10px; bottom: 8px; left: 8px; }
       .leaflet-popup-content { font-size: 12.5px; margin: 10px 12px; }
-      .chip-action::before { width: 5px; height: 5px; margin-right: 6px; }
+      .chip-action::before { width: 6px; height: 6px; margin-right: 6px; }
+      .chip.weather::after { width: 6px; height: 6px; margin-left: 6px; }
       .dropdown-btn { gap: 6px; }
       .dropdown-btn .dropdown-value { font-size: 10px; }
       .dropdown-btn::after { font-size: 8px; }
@@ -1058,7 +1089,7 @@
       }
       .dn-move-band { padding-top: 0; }
       .dn-move-band .flag { border-top: 0; padding-top: 0; margin-top: 4px; display: inline; margin-left: 8px; }
-      .dn-move-title { font-size: 17px; }
+      .dn-move-title { font-size: 19px; font-weight: 700; }
       .dn-move-blurb { font-size: 13.5px; }
 
       /* Sheet slides up from bottom on phones */
@@ -1699,7 +1730,9 @@
           more.className = 'more';
           more.type = 'button';
           const hiddenCount = events.length - TOP_N;
-          more.textContent = isExpanded ? 'Show less' : `${hiddenCount} more`;
+          more.textContent = isExpanded
+            ? 'Show fewer'
+            : `See ${hiddenCount} more event${hiddenCount === 1 ? '' : 's'}`;
           more.addEventListener('click', () => {
             if (state.expandedDates.has(key)) state.expandedDates.delete(key);
             else state.expandedDates.add(key);
@@ -1723,6 +1756,11 @@
         const section = document.createElement('section');
         section.className = 'month';
         section.id = `month-${pad(m + 1)}`;
+        // Sentinel sits just above the sticky title. When it scrolls out of
+        // view past the filter bar, the title gets `is-stuck` and collapses.
+        const sentinel = document.createElement('div');
+        sentinel.className = 'month-sentinel';
+        section.appendChild(sentinel);
         const h2 = document.createElement('h2');
         h2.className = 'month-title';
         h2.textContent = MONTHS[m];
@@ -1733,8 +1771,28 @@
         root.appendChild(section);
       }
       observeToday();
+      observeMonthTitles();
       // Preserve scroll across re-render (filter changes)
       window.scrollTo({ top: scrollY, behavior: 'instant' });
+    }
+
+    // Watches each month's sentinel; when it leaves the viewport at the top
+    // (under the sticky filter bar), the sibling .month-title becomes
+    // "stuck" and collapses to a slim label via CSS transition.
+    let monthObserver = null;
+    function observeMonthTitles() {
+      if (monthObserver) monthObserver.disconnect();
+      const filterH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--filter-h')) || 56;
+      monthObserver = new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          const title = e.target.nextElementSibling;
+          if (!title || !title.classList.contains('month-title')) continue;
+          // Stuck when the sentinel has scrolled above the filter bar.
+          const stuck = !e.isIntersecting && e.boundingClientRect.top < filterH + 1;
+          title.classList.toggle('is-stuck', stuck);
+        }
+      }, { rootMargin: `-${filterH + 1}px 0px 0px 0px`, threshold: [0, 1] });
+      document.querySelectorAll('.month-sentinel').forEach((s) => monthObserver.observe(s));
     }
 
     // ── Date Night ─────────────────────────────────────
