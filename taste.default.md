@@ -32,7 +32,11 @@ Atmospheric and specific. Good design, neighborhood energy, sense of scene. Clas
 
 ## Low-fit signals (demote or drop)
 
-- Generic networking events. **"Business"-themed corporate-satire variety shows** specifically — drop.
+- **Sponsored / paid placements** — anything that's promoted content rather than an editorial pick. Drop.
+- **Arena / stadium / amphitheater shows** — Barclays, MSG, UBS Arena, Citi Field, Forest Hills, Radio City, Beacon. 19,000-cap arenas are the opposite of Joonas's "intimate Brooklyn room" lane. Mainstream stadium tours (Springsteen, Taylor, etc.) — drop.
+- **Big productions / commercial spectacles** — Cirque-du-Soleil-style theatrical productions, Broadway-style spectacles, "the experience" pop-ups, "themed immersive" tourist productions (Sleep No More is fine — that's the rare exception; Wolf-of-Wall-Street-meets-Cirque-du-Soleil corporate satire circus is not). When in doubt: if it markets itself as "an experience" or "75 minutes of [theme]", it's a tourist production — drop.
+- **"Business"-themed corporate-satire variety shows** specifically — drop, even when sponsored heavily by local newsletters.
+- Generic networking events.
 - Corporate panels with bland speakers.
 - Tourist-trap comedy clubs (unless a specific, strong lineup).
 - Bottle-service nightlife.

@@ -35,6 +35,7 @@ export async function fetchAllFeeds() {
 
   const items = [];
   const sources = [];
+  let droppedSponsored = 0;
   for (let i = 0; i < FEEDS.length; i++) {
     const r = results[i];
     const feed = FEEDS[i];
@@ -47,6 +48,14 @@ export async function fetchAllFeeds() {
       for (const item of r.value) {
         const published = item.published_at ? Date.parse(item.published_at) : Date.now();
         if (Number.isFinite(published) && published < cutoff) continue;
+        // Drop sponsored / promoted content — paid placements aren't curatorial
+        // picks and don't belong in a personal taste-ranked feed. The Skint
+        // marks them with a `-sponsored` URL suffix; other feeds use similar
+        // conventions (utm_medium=paid, /sponsored/, /promoted/, /advertise/).
+        if (isSponsored(item)) {
+          droppedSponsored++;
+          continue;
+        }
         items.push(item);
         kept++;
         if (kept >= MAX_ITEMS_PER_FEED) break;
@@ -62,7 +71,21 @@ export async function fetchAllFeeds() {
       fetched_at: new Date().toISOString(),
     });
   }
+  if (droppedSponsored) console.error(`  ⊘ dropped ${droppedSponsored} sponsored item${droppedSponsored === 1 ? '' : 's'}`);
   return { items, sources };
+}
+
+// Hard filter for paid placements. Matches common sponsored markers in
+// URLs, titles, and summaries — belt-and-suspenders with the prompt rule.
+function isSponsored(item) {
+  const url = (item.url || "").toLowerCase();
+  if (/(^|[/_-])sponsored(\W|$)|[?&](utm_medium|utm_campaign)=paid|\/sponsored\/|\/promoted\/|\/advertise/.test(url)) return true;
+  const title = (item.title || "").toLowerCase();
+  if (/\bsponsored\b|\bpartner content\b|\badvertisement\b|\bpaid post\b/.test(title)) return true;
+  const summary = (item.summary || "").toLowerCase();
+  // The Skint marks sponsored newsletters explicitly inside the body.
+  if (/^this newsletter is sponsored by|sponsored content/.test(summary)) return true;
+  return false;
 }
 
 async function fetchOne(feed) {
