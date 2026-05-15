@@ -1657,7 +1657,10 @@
       }
       .weather-right { width: 100%; }
 
-      .event { grid-template-columns: 44px 1fr; gap: 12px; padding: 12px 0; }
+      /* Three explicit columns: icon | time | body. Without the auto column
+         for time, time absorbs the 1fr and body collapses to min-content,
+         which turns titles and notes into one-word-per-line walls. */
+      .event { grid-template-columns: 44px auto minmax(0, 1fr); gap: 12px; padding: 12px 0; }
       .event-time { font-size: 10px; padding-top: 4px; }
       .event-title { font-size: 18px; font-weight: 700; line-height: 1.2; }
       .event.is-secondary .event-title { font-size: 14.5px; font-weight: 600; }
