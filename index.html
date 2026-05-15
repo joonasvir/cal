@@ -160,7 +160,25 @@
       color: var(--soft);
       align-self: center;
     }
-    .source-row.has-error .source-count { color: #b00020; }
+    .source-row.has-error .source-count { color: #b00020; font-weight: 600; }
+    .source-row.is-empty .source-count { color: var(--softer); }
+    .source-row .source-err {
+      grid-column: 1 / -1;
+      font-size: 11px;
+      color: #b00020;
+      font-family: ui-monospace, 'JetBrains Mono', SF Mono, Menlo, monospace;
+      margin-top: 4px;
+      word-break: break-word;
+    }
+    .sheet-summary {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .sheet-summary .ok  { color: var(--ink); font-weight: 600; }
+    .sheet-summary .bad { color: #b00020; font-weight: 600; }
+    .sheet-summary .muted { color: var(--soft); }
     .source-url {
       grid-column: 1 / -1;
       font-size: 11px;
@@ -272,6 +290,119 @@
       color: var(--softer);
       padding-right: 2px;
     }
+
+    /* Categories dropdown (button stays in the scroll lane, panel is fixed-positioned) */
+    .dropdown { position: relative; }
+    .dropdown-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .dropdown-btn::after {
+      content: '▾';
+      font-size: 9px;
+      color: var(--soft);
+      transition: transform 120ms ease;
+    }
+    .dropdown-btn[aria-expanded="true"]::after { transform: rotate(180deg); }
+    .dropdown-btn .dropdown-value {
+      color: var(--ink);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+    }
+    .dropdown-btn .dropdown-label { color: var(--soft); }
+    .dropdown-btn:hover .dropdown-label { color: var(--ink); }
+
+    .dropdown-panel {
+      position: fixed;
+      z-index: 60;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      padding: 14px 18px 16px;
+      min-width: 220px;
+      max-width: calc(100vw - 24px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.10);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .dropdown-panel[hidden] { display: none; }
+    .dropdown-panel .dp-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .dropdown-panel .dp-title {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--soft);
+    }
+    .dropdown-panel .dp-clear {
+      appearance: none;
+      background: none;
+      border: 0;
+      padding: 0;
+      font: inherit;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--soft);
+      cursor: pointer;
+    }
+    .dropdown-panel .dp-clear:hover { color: var(--ink); }
+    .dropdown-panel .dp-clear[disabled] { opacity: 0.3; cursor: default; }
+    .dropdown-panel label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 0;
+      font-size: 14px;
+      cursor: pointer;
+      text-transform: capitalize;
+    }
+    .dropdown-panel label:hover { color: var(--ink); }
+    .dropdown-panel input[type="checkbox"] {
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid var(--ink);
+      background: var(--paper);
+      cursor: pointer;
+      display: inline-grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .dropdown-panel input[type="checkbox"]:checked {
+      background: var(--ink);
+    }
+    .dropdown-panel input[type="checkbox"]:checked::after {
+      content: '';
+      width: 8px;
+      height: 4px;
+      border-left: 1.5px solid var(--paper);
+      border-bottom: 1.5px solid var(--paper);
+      transform: rotate(-45deg) translateY(-1px);
+    }
+
+    /* Always-visible action chip (Sources). Sits next to the weather toggle. */
+    .chip-action {
+      color: var(--ink);
+      border-bottom: 1.5px solid var(--ink);
+    }
+    .chip-action::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--ink);
+      margin-right: 8px;
+      vertical-align: 1px;
+    }
+    .chip-action:hover { opacity: 0.7; }
     .chip {
       appearance: none;
       background: none;
@@ -515,6 +646,86 @@
     body[data-view="dn"] .today-btn { display: none; }
     /* The category/hood/weather chips don't apply to the planner. */
     body[data-view="dn"] .filters { display: none; }
+
+    /* ── Map view ──────────────────────────────────────── */
+    body[data-view="map"] #calendar,
+    body[data-view="map"] #date-night,
+    body[data-view="map"] .today-btn { display: none; }
+    body:not([data-view="map"]) #map-view { display: none; }
+
+    #map-view { position: relative; }
+    #map {
+      width: 100%;
+      height: calc(100vh - var(--filter-h, 56px) - 48px /* tabs */ - 1px);
+      min-height: 420px;
+      background: #f5f5f3;
+    }
+    .leaflet-container { font-family: inherit; }
+    /* Tweak Leaflet popup chrome to match the monochrome look */
+    .leaflet-popup-content-wrapper {
+      border-radius: 4px;
+      border: 1px solid var(--rule);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+    }
+    .leaflet-popup-content {
+      margin: 12px 14px;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .leaflet-popup-tip { background: var(--paper); border: 1px solid var(--rule); }
+    .pop-title { font-size: 14px; font-weight: 600; margin: 0 0 4px; }
+    .pop-title a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; }
+    .pop-title a:hover { border-bottom-color: var(--ink); }
+    .pop-meta {
+      font-size: 10.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--soft);
+      margin-bottom: 6px;
+    }
+    .pop-note { font-size: 12.5px; line-height: 1.4; margin: 4px 0 8px; max-width: 32ch; }
+    .pop-open {
+      display: inline-block;
+      font-size: 10.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      border-bottom: 1.5px solid var(--ink);
+      padding-bottom: 1px;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .pop-open:hover { opacity: 0.6; }
+
+    .map-status {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      z-index: 500;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      padding: 8px 12px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--soft);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+      pointer-events: none;
+      max-width: calc(100% - 24px);
+    }
+    .map-status.is-loading::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border: 1.5px solid var(--ink);
+      border-right-color: transparent;
+      border-radius: 999px;
+      margin-right: 8px;
+      vertical-align: -1px;
+      animation: spin 600ms linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     #date-night {
       padding: clamp(24px, 4vw, 48px) var(--pad-x) clamp(40px, 6vw, 80px);
@@ -816,6 +1027,15 @@
 
       .tab { font-size: 10px; padding: 12px 0; margin-right: 20px; }
 
+      #map { height: calc(100vh - var(--filter-h, 48px) - 44px - 1px); min-height: 360px; }
+      .map-status { font-size: 10px; padding: 6px 10px; bottom: 8px; left: 8px; }
+      .leaflet-popup-content { font-size: 12.5px; margin: 10px 12px; }
+      .chip-action::before { width: 5px; height: 5px; margin-right: 6px; }
+      .dropdown-btn { gap: 6px; }
+      .dropdown-btn .dropdown-value { font-size: 10px; }
+      .dropdown-btn::after { font-size: 8px; }
+      .dropdown-panel { padding: 12px 14px; min-width: 200px; }
+
       #date-night { padding: 20px var(--pad-x) 40px; }
       .dn-day-chip { min-width: 64px; padding: 8px 12px 6px; }
       .dn-day-chip .num { font-size: 18px; }
@@ -894,12 +1114,21 @@
   <nav class="tabs" id="tabs" role="tablist" aria-label="View">
     <button class="tab is-active" id="tab-calendar" role="tab" type="button" aria-selected="true" data-view="calendar">Calendar</button>
     <button class="tab" id="tab-dn" role="tab" type="button" aria-selected="false" data-view="dn">Date night</button>
+    <button class="tab" id="tab-map" role="tab" type="button" aria-selected="false" data-view="map">Map</button>
   </nav>
 
   <nav class="filters" id="filters" role="toolbar" aria-label="Filters">
     <div class="filter-row">
-      <div class="filter-group" id="filter-cats" data-group="categories"></div>
+      <div class="filter-group">
+        <div class="dropdown" id="cat-dropdown">
+          <button class="dropdown-btn chip" id="cat-dropdown-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="cat-dropdown-panel">
+            <span class="dropdown-label">Categories</span>
+            <span class="dropdown-value" id="cat-dropdown-value">All</span>
+          </button>
+        </div>
+      </div>
       <div class="filter-group filter-group-end">
+        <button class="chip chip-action" id="sources-chip-btn" type="button" aria-haspopup="dialog" aria-controls="sources-sheet">Sources</button>
         <button class="chip weather is-active" data-toggle="weather" aria-pressed="true">Weather</button>
       </div>
     </div>
@@ -911,7 +1140,13 @@
     </div>
   </nav>
 
+  <div class="dropdown-panel" id="cat-dropdown-panel" role="menu" aria-labelledby="cat-dropdown-btn" hidden></div>
+
   <main id="calendar"></main>
+  <section id="map-view" aria-label="Event map">
+    <div id="map" role="application" aria-label="Event locations"></div>
+    <div id="map-status" class="map-status" aria-live="polite"></div>
+  </section>
   <section id="date-night" aria-label="Date night planner">
     <div class="dn-day-picker" id="dn-days"></div>
     <div class="dn-hero" id="dn-hero"></div>
@@ -1025,6 +1260,133 @@
       { id:'late',      label:'Late' },
     ];
 
+    // ── Geocode lookups (no API keys) ──────────────────
+    // Curated venue → [lat, lon]. Lowercase, fuzzy match handled in code.
+    const VENUE_COORDS = {
+      'public records':          [40.6747, -73.9851],
+      'smalls jazz club':        [40.7332, -74.0024],
+      'smalls':                  [40.7332, -74.0024],
+      'brooklyn comedy collective': [40.7108, -73.9603],
+      'mercury lounge':          [40.7222, -73.9876],
+      'bowery ballroom':         [40.7202, -73.9933],
+      'brooklyn museum':         [40.6712, -73.9636],
+      'long island bar':         [40.6877, -73.9979],
+      'bar bayeux':              [40.6691, -73.9591],
+      'attaboy':                 [40.7167, -73.9892],
+      "sunny's":                 [40.6726, -74.0177],
+      'sunnys':                  [40.6726, -74.0177],
+      'film forum':              [40.7290, -74.0026],
+      'pioneer works':           [40.6788, -74.0114],
+      'lilia':                   [40.7193, -73.9612],
+      'four horsemen':           [40.7164, -73.9579],
+      'oxalis':                  [40.6727, -73.9522],
+      "roberta's":               [40.7050, -73.9337],
+      'robertas':                [40.7050, -73.9337],
+      'mood ring':               [40.6982, -73.9268],
+      'tørst':                   [40.7244, -73.9512],
+      'torst':                   [40.7244, -73.9512],
+      'wythe hotel':             [40.7218, -73.9586],
+      'wythe rooftop':           [40.7218, -73.9586],
+      'mccarren park':           [40.7197, -73.9525],
+      'coney island':            [40.5749, -73.9789],
+      'prospect park':           [40.6602, -73.9690],
+      'long meadow':             [40.6663, -73.9710],
+      'brooklyn bridge':         [40.7061, -73.9969],
+      'whitney museum':          [40.7396, -74.0089],
+      'whitney':                 [40.7396, -74.0089],
+      'the strand':              [40.7333, -73.9912],
+      'strand':                  [40.7333, -73.9912],
+      'books are magic':         [40.6863, -73.9974],
+      'cafe spaghetti':          [40.6843, -74.0000],
+      'green-wood cemetery':     [40.6577, -73.9904],
+      'sahadi’s':                [40.6915, -73.9966],
+      'sahadis':                 [40.6915, -73.9966],
+      'cecconi’s':               [40.7037, -73.9886],
+      'cecconis':                [40.7037, -73.9886],
+      'lucali':                  [40.6810, -74.0001],
+      'attaboy lower east side': [40.7167, -73.9892],
+      'domino park':             [40.7142, -73.9670],
+      'governors island':        [40.6895, -74.0167],
+      'caveat':                  [40.7177, -73.9899],
+      'joe coffee':              [40.7345, -73.9929],
+      'cafe spaghetti':          [40.6843, -74.0000],
+      'henry public':            [40.6886, -73.9988],
+      'attaboy nyc':             [40.7167, -73.9892],
+      'the long room':           [40.7148, -73.9609],
+      'long room':               [40.7148, -73.9609],
+      'four horsemen wine':      [40.7164, -73.9579],
+      'caputo’s':                [40.6824, -73.9985],
+      'caputos':                 [40.6824, -73.9985],
+      'she wolf':                [40.7110, -73.9560],
+    };
+
+    // Neighborhood centroids (fallback when venue isn't in the table).
+    const HOOD_COORDS = {
+      'williamsburg':            [40.7081, -73.9571],
+      'south williamsburg':      [40.7038, -73.9536],
+      'east williamsburg':       [40.7137, -73.9355],
+      'greenpoint':              [40.7311, -73.9512],
+      'dumbo':                   [40.7033, -73.9881],
+      'brooklyn heights':        [40.6962, -73.9942],
+      'carroll gardens':         [40.6794, -74.0036],
+      'cobble hill':             [40.6867, -73.9971],
+      'park slope':              [40.6708, -73.9786],
+      'gowanus':                 [40.6747, -73.9846],
+      'fort greene':             [40.6884, -73.9737],
+      'bed-stuy':                [40.6872, -73.9418],
+      'bedford-stuyvesant':      [40.6872, -73.9418],
+      'crown heights':           [40.6694, -73.9442],
+      'bushwick':                [40.6944, -73.9213],
+      'red hook':                [40.6755, -74.0099],
+      'prospect park':           [40.6602, -73.9690],
+      'prospect heights':        [40.6789, -73.9651],
+      'sunset park':             [40.6451, -74.0118],
+      'coney island':            [40.5749, -73.9789],
+      'east village':            [40.7270, -73.9817],
+      'lower east side':         [40.7156, -73.9858],
+      'west village':            [40.7355, -74.0029],
+      'greenwich village':       [40.7336, -74.0027],
+      'soho':                    [40.7233, -74.0030],
+      'noho':                    [40.7286, -73.9919],
+      'tribeca':                 [40.7163, -74.0086],
+      'chelsea':                 [40.7466, -74.0023],
+      'meatpacking':             [40.7398, -74.0089],
+      'meatpacking district':    [40.7398, -74.0089],
+      'midtown':                 [40.7549, -73.9840],
+      'upper east side':         [40.7736, -73.9566],
+      'upper west side':         [40.7870, -73.9754],
+      'harlem':                  [40.8116, -73.9465],
+      'astoria':                 [40.7644, -73.9235],
+      'lic':                     [40.7447, -73.9485],
+      'long island city':        [40.7447, -73.9485],
+      'union square':            [40.7359, -73.9911],
+      'gramercy':                [40.7385, -73.9847],
+      'flatiron':                [40.7411, -73.9897],
+      'nolita':                  [40.7232, -73.9956],
+      'chinatown':               [40.7158, -73.9970],
+      'dimes square':            [40.7146, -73.9919],
+      'times square':            [40.7580, -73.9855],
+    };
+
+    function normalizeName(s) {
+      return String(s || '').toLowerCase().trim()
+        .replace(/[’`]/g, "'")
+        .replace(/\s+/g, ' ');
+    }
+    function eventCoords(ev) {
+      const v = normalizeName(ev.venue);
+      if (v && VENUE_COORDS[v]) return VENUE_COORDS[v];
+      // Looser match: try contains
+      if (v) {
+        for (const key in VENUE_COORDS) {
+          if (key && (v.includes(key) || key.includes(v))) return VENUE_COORDS[key];
+        }
+      }
+      const h = normalizeName(ev.neighborhood);
+      if (h && HOOD_COORDS[h]) return HOOD_COORDS[h];
+      return null;
+    }
+
     const pad = (n) => String(n).padStart(2, '0');
     const isoDate = (y, m, d) => `${y}-${pad(m + 1)}-${pad(d)}`;
     const daysInMonth = (y, m) => new Date(y, m + 1, 0).getDate();
@@ -1083,18 +1445,25 @@
 
     // ── Filter bar ─────────────────────────────────────
     function renderFilters() {
-      const catsWrap = document.getElementById('filter-cats');
-      catsWrap.innerHTML = '';
+      // Categories live inside a dropdown panel rendered as a fixed-positioned
+      // sibling so it can pop over the scrollable filter lane.
+      const panel = document.getElementById('cat-dropdown-panel');
+      panel.innerHTML = '';
+      const head = document.createElement('div');
+      head.className = 'dp-head';
+      head.innerHTML = `
+        <span class="dp-title">Categories</span>
+        <button type="button" class="dp-clear" id="cat-dropdown-clear">Clear</button>
+      `;
+      panel.appendChild(head);
       CATEGORIES.forEach((cat) => {
-        const btn = document.createElement('button');
-        btn.className = 'chip';
-        btn.textContent = cat;
-        btn.dataset.cat = cat;
-        btn.setAttribute('aria-pressed', 'false');
-        btn.addEventListener('click', () => toggleCategory(cat));
-        catsWrap.appendChild(btn);
+        const label = document.createElement('label');
+        label.innerHTML = `<input type="checkbox" data-cat="${cat}"><span>${cat}</span>`;
+        const cb = label.querySelector('input');
+        cb.addEventListener('change', () => toggleCategory(cat));
+        panel.appendChild(label);
       });
-      document.querySelector('.chip.weather').addEventListener('click', toggleWeather);
+      document.getElementById('cat-dropdown-clear').addEventListener('click', clearCategories);
 
       const hoods = deriveNeighborhoods();
       const hoodsRow = document.getElementById('filter-row-hoods');
@@ -1129,6 +1498,15 @@
       updateCategoryChips();
       writeHash();
       renderCalendar();
+      refreshMapMarkers();
+    }
+
+    function clearCategories() {
+      state.activeCats.clear();
+      updateCategoryChips();
+      writeHash();
+      renderCalendar();
+      refreshMapMarkers();
     }
 
     function toggleHood(slug) {
@@ -1137,14 +1515,26 @@
       updateHoodChips();
       writeHash();
       renderCalendar();
+      refreshMapMarkers();
     }
 
     function updateCategoryChips() {
-      document.querySelectorAll('.chip[data-cat]').forEach((btn) => {
-        const on = state.activeCats.has(btn.dataset.cat);
-        btn.classList.toggle('is-active', on);
-        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      // Update checkboxes inside the dropdown.
+      document.querySelectorAll('#cat-dropdown-panel input[data-cat]').forEach((cb) => {
+        cb.checked = state.activeCats.has(cb.dataset.cat);
       });
+      // Update the button label so the active selection is visible without opening the panel.
+      const valueEl = document.getElementById('cat-dropdown-value');
+      const clear = document.getElementById('cat-dropdown-clear');
+      const cats = [...state.activeCats];
+      if (!cats.length) {
+        valueEl.textContent = 'All';
+      } else if (cats.length <= 2) {
+        valueEl.textContent = cats.join(', ');
+      } else {
+        valueEl.textContent = `${cats.length} selected`;
+      }
+      if (clear) clear.disabled = cats.length === 0;
     }
 
     function updateHoodChips() {
@@ -1163,6 +1553,49 @@
       btn.setAttribute('aria-pressed', state.showWeather ? 'true' : 'false');
       writeHash();
     }
+
+    // Dropdown open/close ──────────────────────────────
+    function positionCatDropdown() {
+      const btn = document.getElementById('cat-dropdown-btn');
+      const panel = document.getElementById('cat-dropdown-panel');
+      if (!btn || panel.hidden) return;
+      const r = btn.getBoundingClientRect();
+      const panelW = panel.offsetWidth || 220;
+      let left = r.left;
+      if (left + panelW > window.innerWidth - 8) {
+        left = Math.max(8, window.innerWidth - panelW - 8);
+      }
+      panel.style.top = `${Math.round(r.bottom + 6)}px`;
+      panel.style.left = `${Math.round(left)}px`;
+    }
+    function openCatDropdown() {
+      const btn = document.getElementById('cat-dropdown-btn');
+      const panel = document.getElementById('cat-dropdown-panel');
+      panel.hidden = false;
+      btn.setAttribute('aria-expanded', 'true');
+      positionCatDropdown();
+      document.addEventListener('mousedown', onDocCloseDropdown, true);
+      document.addEventListener('keydown', onEscDropdown);
+      window.addEventListener('resize', positionCatDropdown);
+      window.addEventListener('scroll', positionCatDropdown, true);
+    }
+    function closeCatDropdown() {
+      const btn = document.getElementById('cat-dropdown-btn');
+      const panel = document.getElementById('cat-dropdown-panel');
+      panel.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+      document.removeEventListener('mousedown', onDocCloseDropdown, true);
+      document.removeEventListener('keydown', onEscDropdown);
+      window.removeEventListener('resize', positionCatDropdown);
+      window.removeEventListener('scroll', positionCatDropdown, true);
+    }
+    function onDocCloseDropdown(e) {
+      const panel = document.getElementById('cat-dropdown-panel');
+      const btn = document.getElementById('cat-dropdown-btn');
+      if (panel.contains(e.target) || btn.contains(e.target)) return;
+      closeCatDropdown();
+    }
+    function onEscDropdown(e) { if (e.key === 'Escape') closeCatDropdown(); }
 
     function updateFilterHeight() {
       const fb = document.getElementById('filters');
@@ -1306,7 +1739,7 @@
 
     // ── Date Night ─────────────────────────────────────
     function setView(v, opts = {}) {
-      if (v !== 'calendar' && v !== 'dn') v = 'calendar';
+      if (v !== 'calendar' && v !== 'dn' && v !== 'map') v = 'calendar';
       state.view = v;
       document.body.dataset.view = v;
       document.querySelectorAll('.tab').forEach((b) => {
@@ -1318,7 +1751,166 @@
         if (!state.dnDate) state.dnDate = state.linkedDate || state.todayKey;
         renderDateNight();
       }
+      if (v === 'map') {
+        initMap();
+      }
       if (!opts.silent) writeHash();
+    }
+
+    // ── Map (Leaflet, lazy-loaded) ─────────────────────
+    const LEAFLET_JS = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    const LEAFLET_CSS = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+    let leafletLoading = null;
+    let mapInstance = null;
+    let mapMarkerLayer = null;
+    let mapFittedOnce = false;
+    const isAppleDevice = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent || '');
+
+    function setMapStatus(text, loading = false) {
+      const el = document.getElementById('map-status');
+      if (!el) return;
+      if (!text) { el.hidden = true; el.textContent = ''; el.classList.remove('is-loading'); return; }
+      el.hidden = false;
+      el.textContent = text;
+      el.classList.toggle('is-loading', !!loading);
+    }
+
+    function loadLeaflet() {
+      if (typeof window.L !== 'undefined') return Promise.resolve();
+      if (leafletLoading) return leafletLoading;
+      leafletLoading = new Promise((resolve, reject) => {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = LEAFLET_CSS;
+        document.head.appendChild(link);
+        const s = document.createElement('script');
+        s.src = LEAFLET_JS;
+        s.async = true;
+        s.onload = () => resolve();
+        s.onerror = () => reject(new Error('Failed to load Leaflet'));
+        document.head.appendChild(s);
+      });
+      return leafletLoading;
+    }
+
+    async function initMap() {
+      const container = document.getElementById('map');
+      if (!container) return;
+      try {
+        if (!mapInstance) {
+          setMapStatus('Loading map…', true);
+          await loadLeaflet();
+          mapInstance = L.map(container, {
+            zoomControl: true,
+            scrollWheelZoom: true,
+            preferCanvas: true,
+          }).setView([40.6892, -73.9667], 12);
+          L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 19,
+          }).addTo(mapInstance);
+        }
+        refreshMapMarkers();
+        // Resize after CSS settles (tab-switch initial display)
+        requestAnimationFrame(() => mapInstance && mapInstance.invalidateSize());
+      } catch (e) {
+        setMapStatus('Couldn’t load the map.', false);
+        console.error(e);
+      }
+    }
+
+    function buildPopupHtml(ev, ll) {
+      const venue = ev.venue || '';
+      const hood = ev.neighborhood || '';
+      const q = encodeURIComponent([venue, hood, 'NYC'].filter(Boolean).join(', '));
+      const mapsUrl = isAppleDevice
+        ? `https://maps.apple.com/?q=${q}&ll=${ll[0]},${ll[1]}`
+        : `https://www.google.com/maps/search/?api=1&query=${q}`;
+      const titleHtml = ev.url
+        ? `<a href="${escapeHtml(ev.url)}" target="_blank" rel="noopener">${escapeHtml(ev.title)}</a>`
+        : escapeHtml(ev.title);
+      const meta = [venue, hood, fmtTime(ev.time)].filter(Boolean).map(escapeHtml).join(' · ');
+      return `
+        <div class="pop">
+          <div class="pop-title">${titleHtml}</div>
+          ${meta ? `<div class="pop-meta">${meta}</div>` : ''}
+          ${ev.note ? `<div class="pop-note">${escapeHtml(ev.note)}</div>` : ''}
+          <a class="pop-open" href="${mapsUrl}" target="_blank" rel="noopener">Open in Maps ↗</a>
+        </div>
+      `;
+    }
+
+    function refreshMapMarkers() {
+      if (!mapInstance || typeof L === 'undefined') return;
+      if (mapMarkerLayer) mapMarkerLayer.remove();
+      mapMarkerLayer = L.layerGroup().addTo(mapInstance);
+
+      const markers = [];
+      let placed = 0, missing = 0;
+      const days = state.feed.days || {};
+      // Build a list of all events first so we can dedupe and stack same-venue points.
+      const byPoint = new Map();
+      for (const [date, day] of Object.entries(days)) {
+        for (const ev of day.events || []) {
+          if (state.activeCats.size && !state.activeCats.has(ev.category)) continue;
+          if (state.activeHoods.size && !state.activeHoods.has(slugify(ev.neighborhood))) continue;
+          const ll = eventCoords(ev);
+          if (!ll) { missing++; continue; }
+          const key = `${ll[0].toFixed(4)},${ll[1].toFixed(4)}`;
+          if (!byPoint.has(key)) byPoint.set(key, { ll, items: [] });
+          byPoint.get(key).items.push({ ...ev, date });
+          placed++;
+        }
+      }
+      for (const { ll, items } of byPoint.values()) {
+        const m = L.circleMarker(ll, {
+          radius: items.length > 1 ? 8 : 6,
+          color: '#000',
+          weight: 1.5,
+          fillColor: '#000',
+          fillOpacity: 0.85,
+        }).addTo(mapMarkerLayer);
+        if (items.length === 1) {
+          m.bindPopup(buildPopupHtml(items[0], ll), { maxWidth: 280 });
+        } else {
+          const listHtml = items.map((ev) => `
+            <div class="pop-item" style="border-top:1px solid var(--softest); padding-top:6px; margin-top:6px;">
+              <div class="pop-title" style="font-size:13px;">${ev.url
+                ? `<a href="${escapeHtml(ev.url)}" target="_blank" rel="noopener">${escapeHtml(ev.title)}</a>`
+                : escapeHtml(ev.title)}</div>
+              <div class="pop-meta">${[ev.date, fmtTime(ev.time)].filter(Boolean).map(escapeHtml).join(' · ')}</div>
+            </div>
+          `).join('');
+          const firstEv = items[0];
+          const q = encodeURIComponent([firstEv.venue, firstEv.neighborhood, 'NYC'].filter(Boolean).join(', '));
+          const mapsUrl = isAppleDevice
+            ? `https://maps.apple.com/?q=${q}&ll=${ll[0]},${ll[1]}`
+            : `https://www.google.com/maps/search/?api=1&query=${q}`;
+          m.bindPopup(`
+            <div class="pop">
+              <div class="pop-title">${escapeHtml(firstEv.venue || firstEv.neighborhood || 'Multiple events')}</div>
+              <div class="pop-meta">${items.length} events</div>
+              ${listHtml}
+              <div style="margin-top:10px;"><a class="pop-open" href="${mapsUrl}" target="_blank" rel="noopener">Open in Maps ↗</a></div>
+            </div>
+          `, { maxWidth: 320 });
+        }
+        markers.push(m);
+      }
+
+      const totalEvents = Object.values(days).reduce((a, d) => a + (d.events?.length || 0), 0);
+      const filterNote = (state.activeCats.size || state.activeHoods.size) ? ' (filtered)' : '';
+      const missNote = missing ? ` · ${missing} without coords` : '';
+      setMapStatus(markers.length
+        ? `${placed} event${placed === 1 ? '' : 's'} across ${markers.length} location${markers.length === 1 ? '' : 's'}${filterNote}${missNote}`
+        : (totalEvents ? `No events match — try clearing filters${missNote}` : 'No events in the feed yet.'));
+
+      if (!mapFittedOnce && markers.length) {
+        const group = L.featureGroup(markers);
+        try { mapInstance.fitBounds(group.getBounds(), { padding: [40, 40], maxZoom: 14 }); } catch (_) {}
+        mapFittedOnce = true;
+      }
     }
 
     function weatherTags(w) {
@@ -1650,17 +2242,30 @@
 
       const sourcesHtml = sources.length
         ? sources.map((s) => {
-            const cls = s.error ? ' has-error' : '';
-            const count = s.error ? 'failed' : `${s.kept ?? 0} items`;
+            const failed = !!s.error;
+            const empty = !failed && (s.kept ?? 0) === 0;
+            const cls = failed ? ' has-error' : (empty ? ' is-empty' : '');
+            const status = failed ? '✗ failed' : (empty ? '— no items' : `✓ ${s.kept} items`);
+            const errHtml = failed
+              ? `<div class="source-err">${escapeHtml(s.error)}</div>`
+              : '';
             return `
               <div class="source-row${cls}">
                 <div class="source-name">${escapeHtml(s.name)}</div>
-                <div class="source-count">${escapeHtml(count)}</div>
+                <div class="source-count">${escapeHtml(status)}</div>
                 <a class="source-url" href="${escapeHtml(s.url)}" target="_blank" rel="noopener">${escapeHtml(s.url)}</a>
+                ${errHtml}
               </div>
             `;
           }).join('')
         : '<p class="sheet-sub" style="text-transform:none; letter-spacing:0;">No source data in this build yet.</p>';
+
+      const ok = sources.filter((s) => !s.error && (s.kept ?? 0) > 0).length;
+      const failed = sources.filter((s) => s.error).length;
+      const empty = sources.filter((s) => !s.error && (s.kept ?? 0) === 0).length;
+      const sourcesSummary = sources.length
+        ? `<div class="sheet-summary"><span class="ok">${ok} ok</span>${failed ? ` <span class="bad">· ${failed} failed</span>` : ''}${empty ? ` <span class="muted">· ${empty} empty</span>` : ''}</div>`
+        : '';
 
       const weatherHtml = `
         <dl class="kv">
@@ -1693,6 +2298,7 @@
       body.innerHTML = `
         <section class="sheet-section">
           <h3>Feeds</h3>
+          ${sourcesSummary}
           ${sourcesHtml}
         </section>
         <section class="sheet-section">
@@ -1764,7 +2370,15 @@
 
       document.getElementById('today-btn').addEventListener('click', scrollToToday);
       document.getElementById('sources-open').addEventListener('click', openSourcesSheet);
+      document.getElementById('sources-chip-btn').addEventListener('click', openSourcesSheet);
       document.getElementById('sources-close').addEventListener('click', closeSourcesSheet);
+
+      // Categories dropdown toggle
+      document.getElementById('cat-dropdown-btn').addEventListener('click', () => {
+        const btn = document.getElementById('cat-dropdown-btn');
+        if (btn.getAttribute('aria-expanded') === 'true') closeCatDropdown();
+        else openCatDropdown();
+      });
       document.querySelectorAll('.tab').forEach((b) => {
         b.addEventListener('click', () => setView(b.dataset.view));
       });
@@ -1797,6 +2411,7 @@
         updateHoodChips();
         renderCalendar();
         setView(state.view, { silent: true });
+        refreshMapMarkers();
         suppressHash = false;
         if (state.view === 'calendar' && state.linkedDate) scrollToDate(state.linkedDate, 'smooth');
       });
