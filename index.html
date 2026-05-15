@@ -650,6 +650,56 @@
     .day.is-expanded .more::after { transform: rotate(180deg); }
     .more:hover { opacity: 0.55; }
 
+    /* ── Hover preview (image follows cursor on event titles) ── */
+    .title-preview {
+      position: fixed;
+      z-index: 90;
+      pointer-events: none;
+      left: -9999px;
+      top: -9999px;
+      width: 320px;
+      height: 200px;
+      background: var(--softest);
+      border: 1px solid var(--rule);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.18);
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.96);
+      transition: opacity 140ms ease, transform 160ms ease;
+      will-change: left, top, opacity, transform;
+    }
+    .title-preview.is-visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .title-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(0%) saturate(0.95);
+    }
+    /* Surface a caption with the venue, kept subtle. */
+    .title-preview .cap {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 8px 12px 10px;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 100%);
+      color: #fff;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .event-title[data-image],
+    .dn-move-title[data-image] { cursor: help; }
+    /* Disable preview on touch / coarse pointer devices. */
+    @media (hover: none), (pointer: coarse) {
+      .title-preview { display: none !important; }
+      .event-title[data-image],
+      .dn-move-title[data-image] { cursor: auto; }
+    }
+
     /* ── Empty day ──────────────────────────────────────── */
     .day.is-empty .weather { display: none; }
     .day.is-empty .day-content::before {
@@ -1188,6 +1238,11 @@
     <ul class="dn-plan" id="dn-plan"></ul>
   </section>
 
+  <div class="title-preview" id="title-preview" aria-hidden="true">
+    <img id="title-preview-img" alt="" loading="lazy" decoding="async" />
+    <div class="cap" id="title-preview-cap"></div>
+  </div>
+
   <button class="today-btn" id="today-btn" type="button" aria-label="Scroll to today">Today</button>
 
   <dialog class="sheet" id="sources-sheet" aria-labelledby="sources-sheet-title">
@@ -1708,10 +1763,12 @@
         events.forEach((ev, i) => {
           const li = document.createElement('li');
           li.className = `event${i >= TOP_N ? ' is-hidden' : ''}`;
+          const previewImg = imageForEvent(ev);
+          const previewCap = [ev.venue, ev.neighborhood].filter(Boolean).join(' · ');
           li.innerHTML = `
             <div class="event-time">${fmtTime(ev.time)}</div>
             <div class="event-body">
-              <div class="event-title">${ev.url
+              <div class="event-title" data-image="${escapeHtml(previewImg)}"${previewCap ? ` data-caption="${escapeHtml(previewCap)}"` : ''}>${ev.url
                 ? `<a href="${ev.url}" target="_blank" rel="noopener">${escapeHtml(ev.title)}</a>`
                 : escapeHtml(ev.title)}</div>
               ${ev.venue || ev.neighborhood
@@ -2147,13 +2204,15 @@
           li.className = 'dn-move';
           if (item.fromEvent) {
             const ev = item.ev;
+            const evImg = imageForEvent(ev);
+            const evCap = [ev.venue, ev.neighborhood].filter(Boolean).join(' · ');
             li.innerHTML = `
               <div class="dn-move-band">
                 ${escapeHtml(item.label)}${ev.time ? ` · ${escapeHtml(fmtTime(ev.time))}` : ''}
                 <span class="flag">★ on this week</span>
               </div>
               <div>
-                <div class="dn-move-title">${ev.url
+                <div class="dn-move-title" data-image="${escapeHtml(evImg)}"${evCap ? ` data-caption="${escapeHtml(evCap)}"` : ''}>${ev.url
                   ? `<a href="${escapeHtml(ev.url)}" target="_blank" rel="noopener">${escapeHtml(ev.title)}</a>`
                   : escapeHtml(ev.title)}</div>
                 ${ev.venue || ev.neighborhood
@@ -2164,10 +2223,11 @@
             `;
           } else {
             const m = item.move;
+            const mImg = imageForMove(m);
             li.innerHTML = `
               <div class="dn-move-band">${escapeHtml(item.label)}</div>
               <div>
-                <div class="dn-move-title">${escapeHtml(m.title)}</div>
+                <div class="dn-move-title" data-image="${escapeHtml(mImg)}"${m.hood ? ` data-caption="${escapeHtml(m.hood)}"` : ''}>${escapeHtml(m.title)}</div>
                 ${m.hood ? `<div class="dn-move-meta">${escapeHtml(m.hood)}</div>` : ''}
                 <div class="dn-move-blurb">${escapeHtml(m.blurb)}</div>
               </div>
@@ -2184,6 +2244,104 @@
         '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
       }[c]));
     }
+
+    // ── Hover image preview ────────────────────────────
+    // Picsum gives stable deterministic photos until the build pipeline
+    // populates a real ev.image (from RSS enclosures / Claude pass-through).
+    function imageForEvent(ev) {
+      if (ev && ev.image) return ev.image;
+      const seedRaw = [ev?.title, ev?.venue, ev?.category].filter(Boolean).join('-') || 'nyc';
+      const seed = encodeURIComponent(seedRaw.toLowerCase().replace(/[^a-z0-9-]+/g, '-').slice(0, 64));
+      return `https://picsum.photos/seed/${seed}/640/400`;
+    }
+    function imageForMove(m) {
+      const seed = encodeURIComponent(`dn-${m.id || m.title || 'move'}`);
+      return `https://picsum.photos/seed/${seed}/640/400`;
+    }
+
+    const preview = {
+      el: null,
+      img: null,
+      cap: null,
+      visible: false,
+      hideTimer: null,
+      currentSrc: null,
+      init() {
+        this.el  = document.getElementById('title-preview');
+        this.img = document.getElementById('title-preview-img');
+        this.cap = document.getElementById('title-preview-cap');
+        if (!this.el || !this.img) return;
+        // Bail entirely on touch / coarse pointer devices.
+        if (window.matchMedia('(hover: none), (pointer: coarse)').matches) {
+          this.el.remove();
+          return;
+        }
+        this.img.addEventListener('error', () => this.hide(true));
+        document.addEventListener('mouseover', this.onOver.bind(this));
+        document.addEventListener('mouseout', this.onOut.bind(this));
+        document.addEventListener('mousemove', this.onMove.bind(this), { passive: true });
+        // If the user starts scrolling, hide so it doesn't drift mid-page.
+        window.addEventListener('scroll', () => this.hide(true), { passive: true });
+      },
+      target(el) {
+        while (el && el.nodeType === 1 && el !== document.body) {
+          if (el.dataset && el.dataset.image) return el;
+          el = el.parentElement;
+        }
+        return null;
+      },
+      onOver(e) {
+        if (!this.el) return;
+        const t = this.target(e.target);
+        if (!t) return;
+        const src = t.dataset.image;
+        const caption = t.dataset.caption || '';
+        if (this.currentSrc !== src) {
+          this.img.src = src;
+          this.currentSrc = src;
+        }
+        this.cap.textContent = caption;
+        this.cap.style.display = caption ? 'block' : 'none';
+        if (this.hideTimer) { clearTimeout(this.hideTimer); this.hideTimer = null; }
+        this.position(e);
+        this.show();
+      },
+      onOut(e) {
+        if (!this.el || !this.visible) return;
+        const next = this.target(e.relatedTarget);
+        if (next) return;
+        if (this.hideTimer) clearTimeout(this.hideTimer);
+        this.hideTimer = setTimeout(() => this.hide(), 80);
+      },
+      onMove(e) {
+        if (!this.el || !this.visible) return;
+        this.position(e);
+      },
+      position(e) {
+        const w = this.el.offsetWidth  || 320;
+        const h = this.el.offsetHeight || 200;
+        const pad = 18;
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        let x = e.clientX + pad;
+        let y = e.clientY + pad;
+        if (x + w > vw - 8) x = e.clientX - w - pad;
+        if (y + h > vh - 8) y = e.clientY - h - pad;
+        if (x < 8) x = 8;
+        if (y < 8) y = 8;
+        this.el.style.left = `${Math.round(x)}px`;
+        this.el.style.top  = `${Math.round(y)}px`;
+      },
+      show() {
+        this.visible = true;
+        this.el.classList.add('is-visible');
+      },
+      hide(force) {
+        this.visible = false;
+        if (this.el) this.el.classList.remove('is-visible');
+        if (force && this.hideTimer) { clearTimeout(this.hideTimer); this.hideTimer = null; }
+      },
+    };
 
     // ── Today: observer + button ───────────────────────
     let todayObserver = null;
@@ -2389,6 +2547,7 @@
 
     // ── Init ───────────────────────────────────────────
     async function init() {
+      preview.init();
       try {
         const res = await fetch('feed.json', { cache: 'no-store' });
         if (res.ok) state.feed = await res.json();

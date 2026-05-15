@@ -3,7 +3,18 @@
 
 import Parser from "rss-parser";
 
-const parser = new Parser({ timeout: 20_000 });
+// rss-parser exposes a few image-ish fields by default. We also wire
+// `media:thumbnail` and `media:content` so we can grab a featured image
+// from feeds that use the Media RSS namespace.
+const parser = new Parser({
+  timeout: 20_000,
+  customFields: {
+    item: [
+      ["media:thumbnail", "mediaThumbnail", { keepArray: false }],
+      ["media:content",   "mediaContent",   { keepArray: false }],
+    ],
+  },
+});
 
 // Working RSS feeds. Grub Street, Infatuation, Time Out, and e-flux gate their
 // feeds (404 to non-browsers); add them via Apify/ScrapingBee in v2 if needed.
@@ -61,8 +72,28 @@ async function fetchOne(feed) {
     title: cleanText(item.title),
     url: item.link,
     summary: cleanText(item.contentSnippet || item.content || "").slice(0, 600),
+    image: extractImage(item),
     published_at: item.isoDate || item.pubDate || null,
   }));
+}
+
+function extractImage(item) {
+  // Try the common spots in priority order.
+  // 1. enclosure.url with an image mime
+  if (item.enclosure?.url && /^image\//.test(item.enclosure.type || "image/")) {
+    return item.enclosure.url;
+  }
+  // 2. media:thumbnail / media:content (Media RSS)
+  const media = item.mediaThumbnail || item.mediaContent;
+  const mediaUrl = media?.$?.url || media?.url;
+  if (mediaUrl) return mediaUrl;
+  // 3. itunes image
+  if (item["itunes:image"]?.href) return item["itunes:image"].href;
+  // 4. first <img src="..."> in content
+  const html = item["content:encoded"] || item.content || "";
+  const m = String(html).match(/<img[^>]+src\s*=\s*["']([^"']+)["']/i);
+  if (m) return m[1];
+  return null;
 }
 
 function cleanText(s) {

@@ -38,8 +38,12 @@ const FEED_SCHEMA = {
                   description: "One sentence in Joonas's voice on why this fits. Opinionated, specific, no generic hype.",
                 },
                 indoor: { type: "boolean" },
+                image: {
+                  type: "string",
+                  description: "Featured image URL for hover preview. Pass through the source item's image when it has one; empty string otherwise.",
+                },
               },
-              required: ["time", "title", "venue", "neighborhood", "category", "url", "note", "indoor"],
+              required: ["time", "title", "venue", "neighborhood", "category", "url", "note", "indoor", "image"],
               additionalProperties: false,
             },
           },
@@ -63,6 +67,7 @@ For each real event you find:
 - Pick a category from: music, comedy, art, food, talk, nightlife.
 - Mark indoor (true) or outdoor (false).
 - Write a one-sentence note in Joonas's voice on why it fits. Specific, opinionated, no hype.
+- Pass through the source item's image URL when it has one (so the UI can show a hover preview). Use an empty string if no image is available — don't invent URLs.
 
 # Ranking rules
 
