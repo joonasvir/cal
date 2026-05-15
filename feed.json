@@ -1,1156 +1,8 @@
 {
-  "edition": "01",
+  "edition": "02",
   "year": 2026,
-  "generated_at": "2026-05-15T03:29:58Z",
+  "generated_at": "2026-05-15T17:20:40.582Z",
   "city": "New York",
-  "days": {
-    "2026-05-14": {
-      "weather": {
-        "high": 21,
-        "low": 12,
-        "unit": "C",
-        "condition": "Partly cloudy",
-        "precip_chance": 15,
-        "sunset": "20:01",
-        "note": "soft evening"
-      },
-      "events": [
-        {
-          "time": "19:00",
-          "title": "Vinyl Listening \u2014 Alice Coltrane reissues",
-          "venue": "Public Records",
-          "neighborhood": "Gowanus",
-          "category": "music",
-          "url": "https://publicrecords.nyc/events",
-          "note": "Listening-room format with the spiritual jazz reissues running deep. The sound system is half the reason to go.",
-          "indoor": true
-        },
-        {
-          "time": "20:30",
-          "title": "Ari Hoenig Trio \u2014 late set",
-          "venue": "Smalls Jazz Club",
-          "neighborhood": "West Village",
-          "category": "music",
-          "url": "https://www.smallslive.com/",
-          "note": "Stage-side seating, drummer-led trio, the whole supper-club thing. Strong date pick.",
-          "indoor": true
-        },
-        {
-          "time": "21:00",
-          "title": "Alt comedy showcase \u2014 Whitmer Thomas + friends",
-          "venue": "Brooklyn Comedy Collective",
-          "neighborhood": "Williamsburg",
-          "category": "comedy",
-          "url": "https://www.bkcomedycollective.com/",
-          "note": "BCC pulls a sharp crowd; lineup leans alt. Walk over after dinner on Bedford.",
-          "indoor": true
-        }
-      ]
-    },
-    "2026-05-15": {
-      "weather": {
-        "high": 24,
-        "low": 14,
-        "unit": "C",
-        "condition": "Sunny",
-        "precip_chance": 0,
-        "sunset": "20:02",
-        "note": "clean spring evening"
-      },
-      "events": [
-        {
-          "time": "18:00",
-          "title": "Early set \u2014 Spike Wilner Trio",
-          "venue": "Smalls Jazz Club",
-          "neighborhood": "West Village",
-          "category": "music",
-          "url": "https://www.smallslive.com/",
-          "note": "Stage-side seating before the room fills. Drummer-led trio, the proper supper-club thing.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "18:30",
-          "title": "Vermouth bar \u2014 opening hour DJ",
-          "venue": "Public Records",
-          "neighborhood": "Gowanus",
-          "category": "music",
-          "url": "https://publicrecords.nyc/events",
-          "note": "Listening room downstairs, soft start. Sit close to the speakers.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "19:00",
-          "title": "Opening: Cybernetic Echoes \u2014 Ian Cheng + Holly Herndon",
-          "venue": "Pioneer Works",
-          "neighborhood": "Red Hook",
-          "category": "art",
-          "url": "https://pioneerworks.org/",
-          "note": "Exactly the design-meets-AI lane. Free wine, big room, walk the waterfront after.",
-          "indoor": true
-        },
-        {
-          "time": "19:30",
-          "title": "Book launch + standup \u2014 Andrew Doyle: 'How to Disagree'",
-          "venue": "Caveat",
-          "neighborhood": "Lower East Side",
-          "category": "comedy",
-          "url": "https://caveat.nyc/",
-          "note": "Caveat-flavored: bookish premise, real standup. Has the right kind of weird.",
-          "indoor": true
-        },
-        {
-          "time": "20:00",
-          "title": "Bar Bayeux trio \u2014 Friday session",
-          "venue": "Bar Bayeux",
-          "neighborhood": "Prospect Heights",
-          "category": "music",
-          "url": "https://www.barbayeux.com/",
-          "note": "Tiny room, supper-club energy. You'll talk softly because it's that kind of place.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "20:30",
-          "title": "Late seating \u2014 Lilia",
-          "venue": "Lilia",
-          "neighborhood": "Williamsburg",
-          "category": "food",
-          "url": "https://www.lilianewyork.com/",
-          "note": "Prettiest Italian room in Brooklyn. Get the agnolotti and orange wine.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "22:00",
-          "title": "Friday Resident: Aurora Halal all-night",
-          "venue": "Nowadays",
-          "neighborhood": "Ridgewood",
-          "category": "music",
-          "url": "https://nowadays.nyc/",
-          "note": "Long set, indoor + outdoor, the loft-y room when the lights come down. Stay late.",
-          "indoor": false
-        },
-        {
-          "time": "23:00",
-          "title": "Speakeasy nightcap \u2014 no menu",
-          "venue": "Attaboy",
-          "neighborhood": "Lower East Side",
-          "category": "nightlife",
-          "url": "https://attaboy.us/",
-          "note": "Ring the bell, tell them a flavor. The proper end-of-Friday move.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "23:30",
-          "title": "Bluegrass jam \u2014 late",
-          "venue": "Sunny's",
-          "neighborhood": "Red Hook",
-          "category": "music",
-          "url": "https://sunnysredhook.com/",
-          "note": "Jukebox, waterfront, vaguely impossible to get to \u2014 exactly why it works.",
-          "indoor": true,
-          "image": ""
-        }
-      ]
-    },
-    "2026-05-16": {
-      "weather": {
-        "high": 26,
-        "low": 16,
-        "unit": "C",
-        "condition": "Sunny",
-        "precip_chance": 0,
-        "sunset": "20:03",
-        "note": "patio weather"
-      },
-      "events": [
-        {
-          "time": "12:00",
-          "title": "Smorgasburg \u2014 Saturday market",
-          "venue": "Marsha P. Johnson State Park",
-          "neighborhood": "Williamsburg",
-          "category": "food",
-          "url": "https://www.smorgasburg.com/",
-          "note": "Walkable Saturday lunch. Skip the bigger lines, get a coffee at Devoci\u00f3n after.",
-          "indoor": false,
-          "image": ""
-        },
-        {
-          "time": "18:30",
-          "title": "Wythe rooftop \u2014 golden hour drinks",
-          "venue": "Wythe Hotel",
-          "neighborhood": "Williamsburg",
-          "category": "food",
-          "url": "https://wythehotel.com/",
-          "note": "Manhattan view from the east side of the deck. Negroni and don't rush.",
-          "indoor": false,
-          "image": ""
-        },
-        {
-          "time": "19:00",
-          "title": "Members' late hours \u2014 Ian Cheng: Emissaries",
-          "venue": "New Museum",
-          "neighborhood": "Bowery",
-          "category": "art",
-          "url": "https://www.newmuseum.org/",
-          "note": "Worth it for the install alone. Wine bar on the 7th floor \u2014 go early, walk to Dimes after.",
-          "indoor": true
-        },
-        {
-          "time": "20:00",
-          "title": "Late trio \u2014 Ari Hoenig",
-          "venue": "Smalls Jazz Club",
-          "neighborhood": "West Village",
-          "category": "music",
-          "url": "https://www.smallslive.com/",
-          "note": "Drummer-led trio, the late set is the one. Stand near the bar if seats are gone.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "20:30",
-          "title": "Lilia \u2014 Saturday seating",
-          "venue": "Lilia",
-          "neighborhood": "Williamsburg",
-          "category": "food",
-          "url": "https://www.lilianewyork.com/",
-          "note": "Book ahead. The grilled lamb and a glass of frappato \u2014 that kind of night.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "21:00",
-          "title": "Bemba Color\u00e1 \u2014 Afro-Cuban + reggaeton night",
-          "venue": "Knockdown Center",
-          "neighborhood": "Maspeth",
-          "category": "nightlife",
-          "url": "https://knockdown.center/",
-          "note": "Authentic Latin programming, not the bottle-service version. Big warehouse, real dancers.",
-          "indoor": true
-        },
-        {
-          "time": "22:00",
-          "title": "Hello From The Magic Tavern \u2014 live taping",
-          "venue": "The Bell House",
-          "neighborhood": "Gowanus",
-          "category": "comedy",
-          "url": "https://www.thebellhouseny.com/",
-          "note": "Podcast taping, improv-flavored, runs long. Bell House has the right Gowanus warehouse mood.",
-          "indoor": true
-        },
-        {
-          "time": "22:30",
-          "title": "Warehouse late \u2014 DJ Python b2b",
-          "venue": "Public Records",
-          "neighborhood": "Gowanus",
-          "category": "nightlife",
-          "url": "https://publicrecords.nyc/events",
-          "note": "Sound system worth showing up for. Long set, real crowd.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "23:30",
-          "title": "Sunny's late \u2014 bluegrass + jukebox",
-          "venue": "Sunny's",
-          "neighborhood": "Red Hook",
-          "category": "music",
-          "url": "https://sunnysredhook.com/",
-          "note": "The kind of night that becomes a story. Take a Lyft home.",
-          "indoor": true,
-          "image": ""
-        }
-      ]
-    },
-    "2026-05-17": {
-      "weather": {
-        "high": 25,
-        "low": 15,
-        "unit": "C",
-        "condition": "Mostly clear",
-        "precip_chance": 5,
-        "sunset": "20:04",
-        "note": "long golden hour"
-      },
-      "events": [
-        {
-          "time": "11:00",
-          "title": "Brooklyn Heights Promenade walk",
-          "venue": "Brooklyn Heights Promenade",
-          "neighborhood": "Brooklyn Heights",
-          "category": "art",
-          "url": "",
-          "note": "Old NY Sunday walk. Coffee at Books are Magic after, lunch at Cafe Spaghetti.",
-          "indoor": false,
-          "image": ""
-        },
-        {
-          "time": "14:00",
-          "title": "Curator's walkthrough \u2014 Spike Lee: Creative Sources",
-          "venue": "Brooklyn Museum",
-          "neighborhood": "Prospect Heights",
-          "category": "art",
-          "url": "https://www.brooklynmuseum.org/",
-          "note": "Sunday afternoon, design-forward, dry. Easy day plan in a great room.",
-          "indoor": true
-        },
-        {
-          "time": "15:00",
-          "title": "Books are Magic \u2014 Sunday browse",
-          "venue": "Books are Magic",
-          "neighborhood": "Cobble Hill",
-          "category": "art",
-          "url": "https://www.booksaremagic.net/",
-          "note": "Pick a book each, no pressure. Slow Sunday energy.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "17:00",
-          "title": "Whitney late hours",
-          "venue": "Whitney Museum",
-          "neighborhood": "Meatpacking",
-          "category": "art",
-          "url": "https://whitney.org/",
-          "note": "Quiet rooms, well-lit galleries. End at a martini somewhere west.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "19:00",
-          "title": "Sunday session at Bar Bayeux",
-          "venue": "Bar Bayeux",
-          "neighborhood": "Prospect Heights",
-          "category": "music",
-          "url": "https://www.barbayeux.com/",
-          "note": "The Sunday line-up is the local-friend pick. Walk over from the museum.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "20:00",
-          "title": "Sunday Late \u2014 Sondre Lerche solo",
-          "venue": "Mercury Lounge",
-          "neighborhood": "Lower East Side",
-          "category": "music",
-          "url": "https://www.mercuryeastpresents.com/mercurylounge",
-          "note": "Tiny room, the kind of LES night the calendar exists for. Cocktail at Attaboy after.",
-          "indoor": true
-        },
-        {
-          "time": "21:00",
-          "title": "Smalls \u2014 Sunday late",
-          "venue": "Smalls Jazz Club",
-          "neighborhood": "West Village",
-          "category": "music",
-          "url": "https://www.smallslive.com/",
-          "note": "Stand by the bar, share a drink, drummer's late set is the one.",
-          "indoor": true,
-          "image": ""
-        }
-      ]
-    },
-    "2026-05-18": {
-      "weather": {
-        "high": 23,
-        "low": 14,
-        "unit": "C",
-        "condition": "Partly cloudy",
-        "precip_chance": 10,
-        "sunset": "20:05",
-        "note": "easy outdoor day"
-      },
-      "events": [
-        {
-          "time": "18:30",
-          "title": "Public Records \u2014 vermouth hour DJ",
-          "venue": "Public Records",
-          "neighborhood": "Gowanus",
-          "category": "music",
-          "url": "https://publicrecords.nyc/events",
-          "note": "Quieter Monday start, sit by the speakers, ease into the week.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "19:00",
-          "title": "AI & the City \u2014 panel + drinks",
-          "venue": "Caveat",
-          "neighborhood": "Lower East Side",
-          "category": "talk",
-          "url": "https://caveat.nyc/",
-          "note": "Urbanists + technologists, exactly the talk lane. Caveat keeps it un-corporate.",
-          "indoor": true
-        },
-        {
-          "time": "19:30",
-          "title": "Caveat \u2014 Monday alt comedy",
-          "venue": "Caveat",
-          "neighborhood": "Lower East Side",
-          "category": "comedy",
-          "url": "https://www.caveat.nyc/",
-          "note": "Monday lineups skew bookish \u2014 Caveat's bread and butter.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "20:00",
-          "title": "Spike Wilner Quartet",
-          "venue": "Smalls Jazz Club",
-          "neighborhood": "West Village",
-          "category": "music",
-          "url": "https://www.smallslive.com/",
-          "note": "House pianist, tight quartet. Show up at 7:30, get the back booth.",
-          "indoor": true
-        },
-        {
-          "time": "20:30",
-          "title": "Roberta's \u2014 Monday pizza patio",
-          "venue": "Roberta's",
-          "neighborhood": "Bushwick",
-          "category": "food",
-          "url": "https://robertaspizza.com/",
-          "note": "Slow start to the week. Bee Sting, a Vermentino, the back patio.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "21:00",
-          "title": "Bar Bayeux \u2014 Monday duo",
-          "venue": "Bar Bayeux",
-          "neighborhood": "Prospect Heights",
-          "category": "music",
-          "url": "https://www.barbayeux.com/",
-          "note": "Two musicians, a tiny room, conversation just under the bar.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "22:00",
-          "title": "The Long Room \u2014 Monday drinks",
-          "venue": "The Long Room",
-          "neighborhood": "Williamsburg",
-          "category": "nightlife",
-          "url": "",
-          "note": "Dark tile, deep booth, late-Monday Manhattan.",
-          "indoor": true,
-          "image": ""
-        }
-      ]
-    },
-    "2026-05-19": {
-      "weather": {
-        "high": 22,
-        "low": 13,
-        "unit": "C",
-        "condition": "Sunny",
-        "precip_chance": 0,
-        "sunset": "20:06",
-        "note": "walkable everywhere"
-      },
-      "events": [
-        {
-          "time": "18:30",
-          "title": "Mercury Lounge \u2014 early Tuesday show",
-          "venue": "Mercury Lounge",
-          "neighborhood": "Lower East Side",
-          "category": "music",
-          "url": "https://www.mercuryeastpresents.com/",
-          "note": "LES room, the room itself is worth showing up for. Check the lineup.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "19:30",
-          "title": "Listening session \u2014 new releases, hosted by DJ Python",
-          "venue": "Public Records",
-          "neighborhood": "Gowanus",
-          "category": "music",
-          "url": "https://publicrecords.nyc/events",
-          "note": "Quiet first half, dancier second half. The good kind of midweek out.",
-          "indoor": true
-        },
-        {
-          "time": "20:00",
-          "title": "Improv jam \u2014 news of the day",
-          "venue": "Brooklyn Comedy Collective",
-          "neighborhood": "Williamsburg",
-          "category": "comedy",
-          "url": "https://www.bkcomedycollective.com/",
-          "note": "Concept-driven improv, not the random kind. Bedford dinner first.",
-          "indoor": true
-        },
-        {
-          "time": "20:00",
-          "title": "Smalls \u2014 Tuesday late trio",
-          "venue": "Smalls Jazz Club",
-          "neighborhood": "West Village",
-          "category": "music",
-          "url": "https://www.smallslive.com/",
-          "note": "Tuesday's late slot is usually the headliner. Stand by the bar.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "20:30",
-          "title": "Lilia \u2014 Tuesday seating",
-          "venue": "Lilia",
-          "neighborhood": "Williamsburg",
-          "category": "food",
-          "url": "https://www.lilianewyork.com/",
-          "note": "Easier to walk in mid-week. Cacio e pepe, glass of trebbiano.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "21:00",
-          "title": "Bar Bayeux \u2014 Tuesday trio session",
-          "venue": "Bar Bayeux",
-          "neighborhood": "Prospect Heights",
-          "category": "music",
-          "url": "https://www.barbayeux.com/",
-          "note": "Trio nights are the staple. Sit so you can see the drummer.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "21:30",
-          "title": "Public Records \u2014 Tuesday vinyl set",
-          "venue": "Public Records",
-          "neighborhood": "Gowanus",
-          "category": "music",
-          "url": "https://publicrecords.nyc/events",
-          "note": "Vinyl-only listening sessions. The sound system is the point.",
-          "indoor": true,
-          "image": ""
-        }
-      ]
-    },
-    "2026-05-20": {
-      "weather": {
-        "high": 24,
-        "low": 15,
-        "unit": "C",
-        "condition": "Sunny",
-        "precip_chance": 0,
-        "sunset": "20:07",
-        "note": "shirtsleeves"
-      },
-      "events": [
-        {
-          "time": "18:30",
-          "title": "Wythe rooftop \u2014 Wednesday drinks",
-          "venue": "Wythe Hotel",
-          "neighborhood": "Williamsburg",
-          "category": "food",
-          "url": "https://wythehotel.com/",
-          "note": "Quieter mid-week. Manhattan view, no rush.",
-          "indoor": false,
-          "image": ""
-        },
-        {
-          "time": "19:00",
-          "title": "Yaeji \u2014 full band",
-          "venue": "Bowery Ballroom",
-          "neighborhood": "Lower East Side",
-          "category": "music",
-          "url": "https://www.boweryballroom.com/",
-          "note": "Sold-out energy, Bowery sound, the right kind of curated indie pop.",
-          "indoor": true
-        },
-        {
-          "time": "20:00",
-          "title": "Smalls \u2014 Wednesday late",
-          "venue": "Smalls Jazz Club",
-          "neighborhood": "West Village",
-          "category": "music",
-          "url": "https://www.smallslive.com/",
-          "note": "Drummer-led trio. Late set after the early crowd clears.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "20:30",
-          "title": "Jazz Age night \u2014 Bobby Short tribute",
-          "venue": "Caf\u00e9 Carlyle",
-          "neighborhood": "Upper East Side",
-          "category": "music",
-          "url": "https://www.rosewoodhotels.com/en/the-carlyle-new-york",
-          "note": "Old New York / Gilded Age in one room. Dress up, drink a Manhattan, this is the brief.",
-          "indoor": true
-        },
-        {
-          "time": "20:30",
-          "title": "Bar Bayeux \u2014 Wednesday session",
-          "venue": "Bar Bayeux",
-          "neighborhood": "Prospect Heights",
-          "category": "music",
-          "url": "https://www.barbayeux.com/",
-          "note": "Walking-distance from the Brooklyn Museum if you start there earlier.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "21:00",
-          "title": "Public Records \u2014 Wednesday vermouth",
-          "venue": "Public Records",
-          "neighborhood": "Gowanus",
-          "category": "food",
-          "url": "https://publicrecords.nyc/events",
-          "note": "Cocktail program is sneakily good. Order the spritz.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "22:00",
-          "title": "Caveat \u2014 Wednesday alt comedy",
-          "venue": "Caveat",
-          "neighborhood": "Lower East Side",
-          "category": "comedy",
-          "url": "https://www.caveat.nyc/",
-          "note": "Mid-week showcases are where the writers' rooms try material.",
-          "indoor": true,
-          "image": ""
-        }
-      ]
-    },
-    "2026-05-21": {
-      "weather": {
-        "high": 26,
-        "low": 17,
-        "unit": "C",
-        "condition": "Partly cloudy",
-        "precip_chance": 10,
-        "sunset": "20:08",
-        "note": "warm dusk"
-      },
-      "events": [
-        {
-          "time": "19:00",
-          "title": "Science Sandbox \u2014 The Architecture of AI",
-          "venue": "Pioneer Works",
-          "neighborhood": "Red Hook",
-          "category": "talk",
-          "url": "https://pioneerworks.org/",
-          "note": "Smart talk lane, free, you'll know half the room. Walk to Hometown BBQ after.",
-          "indoor": true
-        },
-        {
-          "time": "19:00",
-          "title": "Smalls \u2014 Thursday early set",
-          "venue": "Smalls Jazz Club",
-          "neighborhood": "West Village",
-          "category": "music",
-          "url": "https://www.smallslive.com/",
-          "note": "Earlier set, dinner first. Walk over from the West Village after.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "20:00",
-          "title": "Lilia \u2014 Thursday seating",
-          "venue": "Lilia",
-          "neighborhood": "Williamsburg",
-          "category": "food",
-          "url": "https://www.lilianewyork.com/",
-          "note": "Pre-weekend warmup. Pasta + a real glass of red.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "20:30",
-          "title": "Caveat \u2014 Thursday late showcase",
-          "venue": "Caveat",
-          "neighborhood": "Lower East Side",
-          "category": "comedy",
-          "url": "https://www.caveat.nyc/",
-          "note": "Strong Thursday curators. Watch which writers' rooms show up.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "21:00",
-          "title": "Marc Cary Trio \u2014 late set",
-          "venue": "Smalls Jazz Club",
-          "neighborhood": "West Village",
-          "category": "music",
-          "url": "https://www.smallslive.com/",
-          "note": "Heavyweight pianist, supper-club hours. Strong date pick.",
-          "indoor": true
-        },
-        {
-          "time": "21:30",
-          "title": "Alt standup showcase \u2014 Jacqueline Novak hosts",
-          "venue": "Caveat",
-          "neighborhood": "Lower East Side",
-          "category": "comedy",
-          "url": "https://caveat.nyc/",
-          "note": "Novak hosting = bookish, sharp, very you. Probably the night of the week.",
-          "indoor": true
-        },
-        {
-          "time": "22:00",
-          "title": "Public Records \u2014 Thursday Resident",
-          "venue": "Public Records",
-          "neighborhood": "Gowanus",
-          "category": "music",
-          "url": "https://publicrecords.nyc/events",
-          "note": "Anthony Naples territory. Long set, real crowd.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "23:00",
-          "title": "Attaboy \u2014 Thursday nightcap",
-          "venue": "Attaboy",
-          "neighborhood": "Lower East Side",
-          "category": "nightlife",
-          "url": "https://attaboy.us/",
-          "note": "Ring the bell. Tell them a flavor. Stay late.",
-          "indoor": true,
-          "image": ""
-        }
-      ]
-    },
-    "2026-05-22": {
-      "weather": {
-        "high": 23,
-        "low": 15,
-        "unit": "C",
-        "condition": "Partly cloudy",
-        "precip_chance": 25,
-        "sunset": "20:09",
-        "note": "evening could turn"
-      },
-      "events": [
-        {
-          "time": "18:30",
-          "title": "Public Records \u2014 Friday opening hour",
-          "venue": "Public Records",
-          "neighborhood": "Gowanus",
-          "category": "music",
-          "url": "https://publicrecords.nyc/events",
-          "note": "Listening room early; queue is gentle before 8.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "19:00",
-          "title": "Whitney Late \u2014 Edward Hopper room talks",
-          "venue": "Whitney Museum",
-          "neighborhood": "Meatpacking",
-          "category": "art",
-          "url": "https://whitney.org/",
-          "note": "Hopper at dusk is film-noir hours. Then dinner downstairs at Frenchette.",
-          "indoor": true
-        },
-        {
-          "time": "20:00",
-          "title": "Lilia \u2014 Friday seating",
-          "venue": "Lilia",
-          "neighborhood": "Williamsburg",
-          "category": "food",
-          "url": "https://www.lilianewyork.com/",
-          "note": "Book ahead. Friday energy at the bar, anchovies + agnolotti.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "20:30",
-          "title": "Bar Bayeux \u2014 Friday trio",
-          "venue": "Bar Bayeux",
-          "neighborhood": "Prospect Heights",
-          "category": "music",
-          "url": "https://www.barbayeux.com/",
-          "note": "Trio nights are the staple. Stand if seats are gone.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "21:30",
-          "title": "Smalls \u2014 Friday late",
-          "venue": "Smalls Jazz Club",
-          "neighborhood": "West Village",
-          "category": "music",
-          "url": "https://www.smallslive.com/",
-          "note": "Late set is the move. Late set is always the move.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "22:00",
-          "title": "Reggaeton Forever \u2014 DJ Bembona + perreo line",
-          "venue": "Knockdown Center",
-          "neighborhood": "Maspeth",
-          "category": "nightlife",
-          "url": "https://knockdown.center/",
-          "note": "The authentic version, not the cheesy version. Dance, don't stand at the rail.",
-          "indoor": false
-        },
-        {
-          "time": "23:00",
-          "title": "Friday Resident \u2014 Eris Drew & Octo Octa b2b",
-          "venue": "Nowadays",
-          "neighborhood": "Ridgewood",
-          "category": "music",
-          "url": "https://nowadays.nyc/",
-          "note": "Long, sweaty, the real scene. Set a 4am alarm to leave.",
-          "indoor": false
-        },
-        {
-          "time": "23:30",
-          "title": "Sunny's \u2014 Friday bluegrass",
-          "venue": "Sunny's",
-          "neighborhood": "Red Hook",
-          "category": "music",
-          "url": "https://sunnysredhook.com/",
-          "note": "Waterfront, jukebox, weekend warmup. Lyft home.",
-          "indoor": true,
-          "image": ""
-        }
-      ]
-    },
-    "2026-05-23": {
-      "weather": {
-        "high": 21,
-        "low": 13,
-        "unit": "C",
-        "condition": "Overcast",
-        "precip_chance": 40,
-        "sunset": "20:10",
-        "note": "cinema weather"
-      },
-      "events": [
-        {
-          "time": "19:00",
-          "title": "Book launch + comedy \u2014 Patti Harrison reads new fiction",
-          "venue": "Caveat",
-          "neighborhood": "Lower East Side",
-          "category": "comedy",
-          "url": "https://caveat.nyc/",
-          "note": "Bookish + standup-adjacent, exactly the Caveat brief. Cocktail at Attaboy after.",
-          "indoor": true
-        },
-        {
-          "time": "20:00",
-          "title": "Film noir double \u2014 In a Lonely Place + The Killers",
-          "venue": "Metrograph",
-          "neighborhood": "Lower East Side",
-          "category": "art",
-          "url": "https://metrograph.com/",
-          "note": "Worth it for the room alone. Negroni at the upstairs bar.",
-          "indoor": true
-        },
-        {
-          "time": "22:00",
-          "title": "Sondre Lerche \u2014 full band",
-          "venue": "Mercury Lounge",
-          "neighborhood": "Lower East Side",
-          "category": "music",
-          "url": "https://www.mercuryeastpresents.com/mercurylounge",
-          "note": "Tiny room show. Stack with Metrograph if you want a one-block night.",
-          "indoor": true
-        }
-      ]
-    },
-    "2026-05-24": {
-      "weather": {
-        "high": 24,
-        "low": 15,
-        "unit": "C",
-        "condition": "Sunny",
-        "precip_chance": 0,
-        "sunset": "20:11",
-        "note": "outdoor Sunday"
-      },
-      "events": [
-        {
-          "time": "16:00",
-          "title": "Sunday Soundwalk \u2014 Red Hook to Pioneer Works",
-          "venue": "Pioneer Works",
-          "neighborhood": "Red Hook",
-          "category": "art",
-          "url": "https://pioneerworks.org/",
-          "note": "Architecture + sound art on the waterfront. Free, slow, exactly your kind of wandering.",
-          "indoor": false
-        },
-        {
-          "time": "19:00",
-          "title": "Sunday Late Session",
-          "venue": "Smalls Jazz Club",
-          "neighborhood": "West Village",
-          "category": "music",
-          "url": "https://www.smallslive.com/",
-          "note": "Drop-in jam, low key. The right closer to the weekend.",
-          "indoor": true
-        }
-      ]
-    },
-    "2026-05-25": {
-      "weather": {
-        "high": 27,
-        "low": 17,
-        "unit": "C",
-        "condition": "Sunny",
-        "precip_chance": 0,
-        "sunset": "20:12",
-        "note": "Memorial Day \u00b7 outside all day"
-      },
-      "events": [
-        {
-          "time": "14:00",
-          "title": "Brooklyn Bridge Park \u2014 open-air jazz",
-          "venue": "Brooklyn Bridge Park",
-          "neighborhood": "Brooklyn Heights",
-          "category": "music",
-          "url": "https://www.brooklynbridgepark.org/",
-          "note": "Free, scenic, picnic-able. Walk over from Dumbo, end at the carousel.",
-          "indoor": false
-        },
-        {
-          "time": "19:30",
-          "title": "Antonioni \u2014 La Notte",
-          "venue": "BAM Rose Cinemas",
-          "neighborhood": "Fort Greene",
-          "category": "art",
-          "url": "https://www.bam.org/",
-          "note": "Architecture + ennui + Monica Vitti. Dinner at Olmsted after.",
-          "indoor": true
-        }
-      ]
-    },
-    "2026-05-26": {
-      "weather": {
-        "high": 28,
-        "low": 18,
-        "unit": "C",
-        "condition": "Sunny",
-        "precip_chance": 0,
-        "sunset": "20:13",
-        "note": "shirtsleeves"
-      },
-      "events": [
-        {
-          "time": "19:00",
-          "title": "Book launch \u2014 Adam Greenfield: 'Lifehouse'",
-          "venue": "Strand Books",
-          "neighborhood": "Union Square",
-          "category": "talk",
-          "url": "https://www.strandbooks.com/",
-          "note": "Cities + tech + politics \u2014 the urbanist lane. Free, packs out, get there at 6:30.",
-          "indoor": true
-        },
-        {
-          "time": "20:30",
-          "title": "Johnathan Blake Quartet \u2014 late",
-          "venue": "Smalls Jazz Club",
-          "neighborhood": "West Village",
-          "category": "music",
-          "url": "https://www.smallslive.com/",
-          "note": "Drummer-led, tight reads. The stage is six feet from your drink.",
-          "indoor": true
-        }
-      ]
-    },
-    "2026-05-27": {
-      "weather": {
-        "high": 26,
-        "low": 17,
-        "unit": "C",
-        "condition": "Partly cloudy",
-        "precip_chance": 15,
-        "sunset": "20:14",
-        "note": "warm, breezy"
-      },
-      "events": [
-        {
-          "time": "19:00",
-          "title": "Design talk \u2014 Hella Jongerius in conversation",
-          "venue": "92NY",
-          "neighborhood": "Upper East Side",
-          "category": "talk",
-          "url": "https://www.92ny.org/",
-          "note": "Material-driven design, the long view. Worth the cross-town.",
-          "indoor": true
-        },
-        {
-          "time": "20:00",
-          "title": "Indie show \u2014 Adrianne Lenker solo",
-          "venue": "Mercury Lounge",
-          "neighborhood": "Lower East Side",
-          "category": "music",
-          "url": "https://www.mercuryeastpresents.com/mercurylounge",
-          "note": "Will sell out. If you can get in, do.",
-          "indoor": true
-        }
-      ]
-    },
-    "2026-05-28": {
-      "weather": {
-        "high": 23,
-        "low": 15,
-        "unit": "C",
-        "condition": "Partly cloudy",
-        "precip_chance": 30,
-        "sunset": "20:15",
-        "note": "evening could turn"
-      },
-      "events": [
-        {
-          "time": "19:00",
-          "title": "Opening reception \u2014 Sondra Perry: Typhoon coming on",
-          "venue": "MoMA PS1",
-          "neighborhood": "Long Island City",
-          "category": "art",
-          "url": "https://www.momaps1.org/",
-          "note": "PS1 still doing the heaviest contemporary lifts. Free with RSVP, packed by 7:30.",
-          "indoor": true
-        },
-        {
-          "time": "20:30",
-          "title": "Thursday Resident \u2014 Anthony Naples",
-          "venue": "Nowadays",
-          "neighborhood": "Ridgewood",
-          "category": "music",
-          "url": "https://nowadays.nyc/",
-          "note": "Long house set, smaller crowd than Friday. Good for the weeknight version.",
-          "indoor": false
-        },
-        {
-          "time": "21:00",
-          "title": "BCC alt comedy \u2014 concept show",
-          "venue": "Brooklyn Comedy Collective",
-          "neighborhood": "Williamsburg",
-          "category": "comedy",
-          "url": "https://www.bkcomedycollective.com/",
-          "note": "Premise-driven, sharp room. Walk from dinner.",
-          "indoor": true
-        }
-      ]
-    },
-    "2026-05-29": {
-      "weather": {
-        "high": 21,
-        "low": 14,
-        "unit": "C",
-        "condition": "Scattered showers",
-        "precip_chance": 55,
-        "sunset": "20:15",
-        "note": "indoor-leaning \u00b7 pack a jacket"
-      },
-      "events": [
-        {
-          "time": "19:00",
-          "title": "Reggaeton listening night \u2014 vinyl + perreo set",
-          "venue": "Public Records",
-          "neighborhood": "Gowanus",
-          "category": "music",
-          "url": "https://publicrecords.nyc/events",
-          "note": "The thoughtful Latin lane \u2014 not bottle service, real selection. Goes long.",
-          "indoor": true
-        },
-        {
-          "time": "20:00",
-          "title": "Friday show \u2014 Jamila Woods",
-          "venue": "Bowery Ballroom",
-          "neighborhood": "Lower East Side",
-          "category": "music",
-          "url": "https://www.boweryballroom.com/",
-          "note": "Soul-leaning, full band, the right LES night.",
-          "indoor": true
-        },
-        {
-          "time": "21:30",
-          "title": "Cocktail + comedy \u2014 late showcase",
-          "venue": "Caveat",
-          "neighborhood": "Lower East Side",
-          "category": "comedy",
-          "url": "https://caveat.nyc/",
-          "note": "Slot it after dinner. Negroni \u2192 Caveat \u2192 done.",
-          "indoor": true
-        }
-      ]
-    },
-    "2026-05-30": {
-      "weather": {
-        "high": 24,
-        "low": 16,
-        "unit": "C",
-        "condition": "Sunny",
-        "precip_chance": 0,
-        "sunset": "20:16",
-        "note": "warehouse-night weather"
-      },
-      "events": [
-        {
-          "time": "19:00",
-          "title": "Late hours \u2014 Brooklyn Museum + DJ in the lobby",
-          "venue": "Brooklyn Museum",
-          "neighborhood": "Prospect Heights",
-          "category": "art",
-          "url": "https://www.brooklynmuseum.org/",
-          "note": "First Saturday energy, but quieter. Good warm-up before whatever comes after.",
-          "indoor": true
-        },
-        {
-          "time": "22:00",
-          "title": "Saturday warehouse \u2014 Aurora Halal + Discwoman",
-          "venue": "Knockdown Center",
-          "neighborhood": "Maspeth",
-          "category": "music",
-          "url": "https://knockdown.center/",
-          "note": "RA-curated lineup, big room. The night to commit to.",
-          "indoor": false
-        },
-        {
-          "time": "22:30",
-          "title": "Late indie \u2014 Wet Leg",
-          "venue": "Mercury Lounge",
-          "neighborhood": "Lower East Side",
-          "category": "music",
-          "url": "https://www.mercuryeastpresents.com/mercurylounge",
-          "note": "Loud, fast, fun. Skip if you'd rather commit to Knockdown.",
-          "indoor": true
-        }
-      ]
-    },
-    "2026-05-31": {
-      "weather": {
-        "high": 27,
-        "low": 17,
-        "unit": "C",
-        "condition": "Sunny",
-        "precip_chance": 0,
-        "sunset": "20:17",
-        "note": "Sunday-into-summer"
-      },
-      "events": [
-        {
-          "time": "16:00",
-          "title": "Open studios \u2014 spring residents",
-          "venue": "Pioneer Works",
-          "neighborhood": "Red Hook",
-          "category": "art",
-          "url": "https://pioneerworks.org/",
-          "note": "Free, slow, scenic. The way to spend a Sunday afternoon.",
-          "indoor": false
-        },
-        {
-          "time": "19:00",
-          "title": "Closing-night session",
-          "venue": "Smalls Jazz Club",
-          "neighborhood": "West Village",
-          "category": "music",
-          "url": "https://www.smallslive.com/",
-          "note": "Soft close to the weekend. Last set of the month.",
-          "indoor": true
-        }
-      ]
-    }
-  },
   "meta": {
     "sources": [
       {
@@ -1159,8 +11,9 @@
         "tags": [
           "food"
         ],
-        "kept": 22,
-        "error": null
+        "kept": 10,
+        "error": null,
+        "fetched_at": "2026-05-15T17:19:12.480Z"
       },
       {
         "name": "The Skint",
@@ -1168,8 +21,9 @@
         "tags": [
           "general"
         ],
-        "kept": 25,
-        "error": null
+        "kept": 10,
+        "error": null,
+        "fetched_at": "2026-05-15T17:19:12.480Z"
       },
       {
         "name": "Bedford + Bowery",
@@ -1177,8 +31,9 @@
         "tags": [
           "general"
         ],
-        "kept": 14,
-        "error": null
+        "kept": 0,
+        "error": null,
+        "fetched_at": "2026-05-15T17:19:12.480Z"
       },
       {
         "name": "Brooklyn Vegan",
@@ -1186,8 +41,9 @@
         "tags": [
           "music"
         ],
-        "kept": 18,
-        "error": null
+        "kept": 15,
+        "error": null,
+        "fetched_at": "2026-05-15T17:19:12.480Z"
       },
       {
         "name": "Hyperallergic",
@@ -1195,8 +51,9 @@
         "tags": [
           "art"
         ],
-        "kept": 8,
-        "error": null
+        "kept": 15,
+        "error": null,
+        "fetched_at": "2026-05-15T17:19:12.480Z"
       }
     ],
     "weather": {
@@ -1204,17 +61,685 @@
       "url": "https://open-meteo.com",
       "location": "Brooklyn, NYC (40.6782, -73.9442)",
       "unit": "C",
-      "days": 18
+      "days": 16
     },
     "ranker": {
       "provider": "Anthropic",
       "model": "claude-opus-4-7",
-      "ranked_days": 18
+      "ranked_days": 12
     },
     "stats": {
-      "items_pulled": 87,
-      "events_curated": 87,
-      "days_covered": 18
+      "items_pulled": 50,
+      "events_curated": 40,
+      "days_covered": 20
+    },
+    "images": {
+      "from_og": 5,
+      "from_rss": 8,
+      "from_cache": 0,
+      "missing": 27
+    }
+  },
+  "days": {
+    "2026-05-15": {
+      "weather": {
+        "high": 20,
+        "low": 10,
+        "unit": "C",
+        "condition": "Overcast",
+        "precip_chance": 2,
+        "sunset": "20:05",
+        "note": ""
+      },
+      "events": [
+        {
+          "time": "21:30",
+          "title": "Nowadays Friday Resident",
+          "venue": "Nowadays",
+          "neighborhood": "Ridgewood",
+          "category": "nightlife",
+          "url": "https://nowadays.nyc",
+          "note": "The Friday Resident series is still the most reliably scene-aware dance floor in the city — long sets, real heads, no bottle service.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "21:00",
+          "title": "Bar Bayeux Jazz Trio",
+          "venue": "Bar Bayeux",
+          "neighborhood": "Prospect Lefferts Gardens",
+          "category": "music",
+          "url": "https://www.barbayeux.com",
+          "note": "Tiny room, candlelight, a trio inches from your table — this is the supper-club energy you actually want on a Friday.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "22:30",
+          "title": "Smalls Late Set",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com",
+          "note": "The late set at Smalls is the closest thing to old New York that still exists — squeeze in, order a whiskey, don't talk.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "19:30",
+          "title": "Business Business Business: A Corporate Satire Circus",
+          "venue": "Circus Academy NY",
+          "neighborhood": "Brooklyn",
+          "category": "comedy",
+          "url": "https://theskint.com/business-business-business-a-corporate-satire-circus-at-circus-academy-ny-5-15-17-sponsored/",
+          "note": "Wolf of Wall Street meets Cirque du Soleil in a 75-minute unhinged corporate satire — has the right kind of weird.",
+          "indoor": true,
+          "image": "https://theskint.com/wp-content/uploads/2026/04/Business-1-640.jpg"
+        },
+        {
+          "time": "17:00",
+          "title": "50th Annual St. George's Ukrainian Festival",
+          "venue": "East 7th Street",
+          "neighborhood": "East Village",
+          "category": "food",
+          "url": "https://theskint.com/fri-mon-5-15-18-skint-weekend/",
+          "note": "Pierogies, varenyky, and a half-century of East Village immigrant history on one block — exactly the kind of neighborhood thing worth walking through.",
+          "indoor": false,
+          "image": ""
+        }
+      ]
+    },
+    "2026-05-16": {
+      "weather": {
+        "high": 26,
+        "low": 10,
+        "unit": "C",
+        "condition": "Overcast",
+        "precip_chance": 3,
+        "sunset": "20:06",
+        "note": ""
+      },
+      "events": [
+        {
+          "time": "18:00",
+          "title": "Sono Opening Night — Korean Italian",
+          "venue": "Sono",
+          "neighborhood": "East Village",
+          "category": "food",
+          "url": "https://ny.eater.com/restaurant-openings/411448/sono-korean-italian-nyc-restaurant-openings",
+          "note": "Oxtail fettuccine that crosses cacio e pepe with Korean oxbone soup — opening night of a chef-driven East Village room, strong date-night pick.",
+          "indoor": true,
+          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/DSC09262.jpg?quality=90&strip=all&crop=0,0,100,100"
+        },
+        {
+          "time": "21:00",
+          "title": "Sunny's Bluegrass Jam",
+          "venue": "Sunny's Bar",
+          "neighborhood": "Red Hook",
+          "category": "music",
+          "url": "https://www.sunnysredhook.com",
+          "note": "A 130-year-old longshoreman bar at the end of Red Hook with a Saturday bluegrass circle — worth it for the room alone.",
+          "indoor": true,
+          "image": "https://images.getbento.com/gIKOds9jQnCArqwGp5TD_logo_transparent.png?w=1200&fit=fill&auto=compress,format&cs=origin&h=600&bg=EDEDF1&pad=100"
+        },
+        {
+          "time": "22:30",
+          "title": "Smalls Late Set",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com",
+          "note": "Late set, basement, jazz that doesn't end till the sun's up — the West Village at its most stubbornly itself.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "19:30",
+          "title": "Business Business Business: A Corporate Satire Circus",
+          "venue": "Circus Academy NY",
+          "neighborhood": "Brooklyn",
+          "category": "comedy",
+          "url": "https://theskint.com/business-business-business-a-corporate-satire-circus-at-circus-academy-ny-5-15-17-sponsored/",
+          "note": "Second night of the corporate satire circus — concept comedy with actual acrobats, more interesting than another stand-up basement.",
+          "indoor": true,
+          "image": "https://theskint.com/wp-content/uploads/2026/04/Business-1-640.jpg"
+        },
+        {
+          "time": "12:00",
+          "title": "Cafe Bar J.F. (Newly Opened)",
+          "venue": "Cafe Bar J.F.",
+          "neighborhood": "Williamsburg",
+          "category": "food",
+          "url": "https://ny.eater.com/restaurant-openings/411355/cafe-bar-j-f-williamsburg-opening-llama-inn-erik-ramirez-juan-correa",
+          "note": "The Llama Inn team's new South American tavern in the same space — early days, but Ramirez's cooking is reason enough to book the back room.",
+          "indoor": true,
+          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/050726_CS_Eater_CafeBarBF_0058.jpg?quality=90&strip=all&crop=0,0,100,100"
+        }
+      ]
+    },
+    "2026-05-17": {
+      "weather": {
+        "high": 29,
+        "low": 18,
+        "unit": "C",
+        "condition": "Overcast",
+        "precip_chance": 5,
+        "sunset": "20:07",
+        "note": "shirtsleeves"
+      },
+      "events": [
+        {
+          "time": "19:00",
+          "title": "Billy on Billy: Billy Eichner Live",
+          "venue": "NYC venue",
+          "neighborhood": "Manhattan",
+          "category": "comedy",
+          "url": "https://theskint.com/join-billy-eichner-live-in-nyc-on-5-17-sponsored/",
+          "note": "Eichner doing a live show is closer to performance art than club stand-up — go for the manic specificity.",
+          "indoor": true,
+          "image": "https://theskint.com/wp-content/uploads/2026/04/Billy-on-Billy_Skint-Newsletter-Graphic-fun-1_cover-only-new-tagline-v4.jpg"
+        },
+        {
+          "time": "19:30",
+          "title": "Indian Princesses (Closing Performance)",
+          "venue": "Atlantic Theater Company",
+          "neighborhood": "Chelsea",
+          "category": "talk",
+          "url": "https://theskint.com/see-indian-princesses-for-25-limited-availability-sponsored/",
+          "note": "Eliana Theologides Rodriguez's funny, feminist Off-Broadway debut, last night — $25 if you're quick.",
+          "indoor": true,
+          "image": "https://theskint.com/wp-content/uploads/2026/05/1-IP-Native-Unit-4x3-copy.jpg"
+        },
+        {
+          "time": "20:00",
+          "title": "Bar Bayeux Sunday Jazz",
+          "venue": "Bar Bayeux",
+          "neighborhood": "Prospect Lefferts Gardens",
+          "category": "music",
+          "url": "https://www.barbayeux.com",
+          "note": "Sunday trio night in the candlelit room — the quietest, most civilized way to end a weekend.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "15:00",
+          "title": "Business Business Business (Final Show)",
+          "venue": "Circus Academy NY",
+          "neighborhood": "Brooklyn",
+          "category": "comedy",
+          "url": "https://theskint.com/business-business-business-a-corporate-satire-circus-at-circus-academy-ny-5-15-17-sponsored/",
+          "note": "Last chance for the corporate-satire-as-circus thing — gimmicky on paper, weirdly committed in practice.",
+          "indoor": true,
+          "image": "https://theskint.com/wp-content/uploads/2026/04/Business-1-640.jpg"
+        }
+      ]
+    },
+    "2026-05-18": {
+      "weather": {
+        "high": 25,
+        "low": 18,
+        "unit": "C",
+        "condition": "Overcast",
+        "precip_chance": 3,
+        "sunset": "20:08",
+        "note": "patio weather"
+      },
+      "events": []
+    },
+    "2026-05-19": {
+      "weather": {
+        "high": 34,
+        "low": 18,
+        "unit": "C",
+        "condition": "Overcast",
+        "precip_chance": 11,
+        "sunset": "20:09",
+        "note": "shirtsleeves"
+      },
+      "events": []
+    },
+    "2026-05-20": {
+      "weather": {
+        "high": 34,
+        "low": 22,
+        "unit": "C",
+        "condition": "Rain showers",
+        "precip_chance": 50,
+        "sunset": "20:10",
+        "note": "snow — bundle up"
+      },
+      "events": [
+        {
+          "time": "18:00",
+          "title": "Lehman College 2026 Thesis Exhibition Opening",
+          "venue": "Lehman College Art Gallery",
+          "neighborhood": "Bronx",
+          "category": "art",
+          "url": "https://hyperallergic.com/lehman-college-art-gallery-presents-the-2026-thesis-exhibition/",
+          "note": "30+ undergrad and grad artists — thesis shows are where you actually catch someone before the gallery rep does.",
+          "indoor": true,
+          "image": "https://storage.ghost.io/c/51/f8/51f871d8-b6be-4a73-b958-0ca4fff0110a/content/images/2026/05/hyperallergic.jpg"
+        },
+        {
+          "time": "21:00",
+          "title": "Bar Bayeux Wednesday Jazz",
+          "venue": "Bar Bayeux",
+          "neighborhood": "Prospect Lefferts Gardens",
+          "category": "music",
+          "url": "https://www.barbayeux.com",
+          "note": "Midweek trio set in the best small jazz room in Brooklyn — never not a good idea.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "22:30",
+          "title": "Smalls Late Set",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com",
+          "note": "Wednesday late set — the room turns the loosest mid-week, when the regulars sit in.",
+          "indoor": true,
+          "image": ""
+        }
+      ]
+    },
+    "2026-05-21": {
+      "weather": {
+        "high": 22,
+        "low": 12,
+        "unit": "C",
+        "condition": "Drizzle",
+        "precip_chance": 46,
+        "sunset": "20:11",
+        "note": "evening could turn"
+      },
+      "events": []
+    },
+    "2026-05-22": {
+      "weather": {
+        "high": 22,
+        "low": 10,
+        "unit": "C",
+        "condition": "Overcast",
+        "precip_chance": 14,
+        "sunset": "20:12",
+        "note": ""
+      },
+      "events": [
+        {
+          "time": "21:30",
+          "title": "Nowadays Friday Resident",
+          "venue": "Nowadays",
+          "neighborhood": "Ridgewood",
+          "category": "nightlife",
+          "url": "https://nowadays.nyc",
+          "note": "Long-set Friday night programming — the dance floor that still feels like discovery, not bottle service.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "21:00",
+          "title": "Bar Bayeux Jazz Trio",
+          "venue": "Bar Bayeux",
+          "neighborhood": "Prospect Lefferts Gardens",
+          "category": "music",
+          "url": "https://www.barbayeux.com",
+          "note": "Strong default Friday — dinner in PLG and then squeeze into the trio room.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "19:00",
+          "title": "Public Records Vermouth Bar",
+          "venue": "Public Records",
+          "neighborhood": "Gowanus",
+          "category": "nightlife",
+          "url": "https://publicrecords.nyc",
+          "note": "Vermouth list, listening-room sound system, no one yelling — the most adult version of a Friday night out.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "22:30",
+          "title": "Smalls Late Set",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com",
+          "note": "The late set is non-negotiable if you find yourself west of Sixth Avenue after midnight.",
+          "indoor": true,
+          "image": ""
+        }
+      ]
+    },
+    "2026-05-23": {
+      "weather": {
+        "high": 22,
+        "low": 14,
+        "unit": "C",
+        "condition": "Overcast",
+        "precip_chance": 16,
+        "sunset": "20:13",
+        "note": ""
+      },
+      "events": [
+        {
+          "time": "21:00",
+          "title": "Sunny's Bluegrass Jam",
+          "venue": "Sunny's Bar",
+          "neighborhood": "Red Hook",
+          "category": "music",
+          "url": "https://www.sunnysredhook.com",
+          "note": "Saturday bluegrass at the end of the world — Red Hook in May, ferry home, this is the New York night you'll actually remember.",
+          "indoor": true,
+          "image": "https://images.getbento.com/gIKOds9jQnCArqwGp5TD_logo_transparent.png?w=1200&fit=fill&auto=compress,format&cs=origin&h=600&bg=EDEDF1&pad=100"
+        },
+        {
+          "time": "20:00",
+          "title": "Bar Bayeux Saturday Jazz",
+          "venue": "Bar Bayeux",
+          "neighborhood": "Prospect Lefferts Gardens",
+          "category": "music",
+          "url": "https://www.barbayeux.com",
+          "note": "Reservation required, candle on the table, trio in the corner — strong date-night pick.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "22:30",
+          "title": "Smalls Late Set",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com",
+          "note": "West Village basement, late, smoky energy without the smoke — worth it for the room alone.",
+          "indoor": true,
+          "image": ""
+        }
+      ]
+    },
+    "2026-05-24": {
+      "weather": {
+        "high": 26,
+        "low": 15,
+        "unit": "C",
+        "condition": "Overcast",
+        "precip_chance": 24,
+        "sunset": "20:13",
+        "note": ""
+      },
+      "events": []
+    },
+    "2026-05-25": {
+      "weather": {
+        "high": 27,
+        "low": 15,
+        "unit": "C",
+        "condition": "Light drizzle",
+        "precip_chance": 29,
+        "sunset": "20:14",
+        "note": ""
+      },
+      "events": []
+    },
+    "2026-05-26": {
+      "weather": {
+        "high": 16,
+        "low": 11,
+        "unit": "C",
+        "condition": "Overcast",
+        "precip_chance": 26,
+        "sunset": "20:15",
+        "note": ""
+      },
+      "events": []
+    },
+    "2026-05-27": {
+      "weather": {
+        "high": 21,
+        "low": 13,
+        "unit": "C",
+        "condition": "Light drizzle",
+        "precip_chance": 23,
+        "sunset": "20:16",
+        "note": ""
+      },
+      "events": []
+    },
+    "2026-05-28": {
+      "weather": {
+        "high": 19,
+        "low": 14,
+        "unit": "C",
+        "condition": "Overcast",
+        "precip_chance": 19,
+        "sunset": "20:17",
+        "note": ""
+      },
+      "events": []
+    },
+    "2026-05-29": {
+      "weather": {
+        "high": 14,
+        "low": 12,
+        "unit": "C",
+        "condition": "Drizzle",
+        "precip_chance": 18,
+        "sunset": "20:18",
+        "note": ""
+      },
+      "events": [
+        {
+          "time": "21:30",
+          "title": "Nowadays Friday Resident",
+          "venue": "Nowadays",
+          "neighborhood": "Ridgewood",
+          "category": "nightlife",
+          "url": "https://nowadays.nyc",
+          "note": "Backyard's open by now — Friday Resident plus the outdoor garden is peak Nowadays.",
+          "indoor": false,
+          "image": ""
+        },
+        {
+          "time": "21:00",
+          "title": "Bar Bayeux Jazz Trio",
+          "venue": "Bar Bayeux",
+          "neighborhood": "Prospect Lefferts Gardens",
+          "category": "music",
+          "url": "https://www.barbayeux.com",
+          "note": "The Friday default in PLG — never not the right call.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "22:30",
+          "title": "Smalls Late Set",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com",
+          "note": "Late set; if the headliner's name is unfamiliar, even better.",
+          "indoor": true,
+          "image": ""
+        }
+      ]
+    },
+    "2026-05-30": {
+      "weather": {
+        "high": 20,
+        "low": 12,
+        "unit": "C",
+        "condition": "Light drizzle",
+        "precip_chance": 19,
+        "sunset": "20:18",
+        "note": ""
+      },
+      "events": [
+        {
+          "time": "21:00",
+          "title": "Sunny's Bluegrass Jam",
+          "venue": "Sunny's Bar",
+          "neighborhood": "Red Hook",
+          "category": "music",
+          "url": "https://www.sunnysredhook.com",
+          "note": "Walk to Red Hook on a long May evening, eat at Hometown, end up at Sunny's — the whole night writes itself.",
+          "indoor": true,
+          "image": "https://images.getbento.com/gIKOds9jQnCArqwGp5TD_logo_transparent.png?w=1200&fit=fill&auto=compress,format&cs=origin&h=600&bg=EDEDF1&pad=100"
+        },
+        {
+          "time": "20:00",
+          "title": "Bar Bayeux Saturday Jazz",
+          "venue": "Bar Bayeux",
+          "neighborhood": "Prospect Lefferts Gardens",
+          "category": "music",
+          "url": "https://www.barbayeux.com",
+          "note": "The room is small enough that the bass is sitting next to you — that's the whole point.",
+          "indoor": true,
+          "image": ""
+        }
+      ]
+    },
+    "2026-06-05": {
+      "weather": null,
+      "events": [
+        {
+          "time": "21:30",
+          "title": "Nowadays Friday Resident",
+          "venue": "Nowadays",
+          "neighborhood": "Ridgewood",
+          "category": "nightlife",
+          "url": "https://nowadays.nyc",
+          "note": "First Friday of June with the garden in full swing — this is the version of Nowadays you actually want.",
+          "indoor": false,
+          "image": ""
+        },
+        {
+          "time": "21:00",
+          "title": "Bar Bayeux Jazz Trio",
+          "venue": "Bar Bayeux",
+          "neighborhood": "Prospect Lefferts Gardens",
+          "category": "music",
+          "url": "https://www.barbayeux.com",
+          "note": "Reliable, intimate, candlelit — the Friday night you never regret booking.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "22:30",
+          "title": "Smalls Late Set",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com",
+          "note": "The late set never gets old; the lineup's almost beside the point.",
+          "indoor": true,
+          "image": ""
+        }
+      ]
+    },
+    "2026-06-06": {
+      "weather": null,
+      "events": [
+        {
+          "time": "21:00",
+          "title": "Sunny's Bluegrass Jam",
+          "venue": "Sunny's Bar",
+          "neighborhood": "Red Hook",
+          "category": "music",
+          "url": "https://www.sunnysredhook.com",
+          "note": "Bluegrass circle in a 19th-century waterfront bar — the most old-New-York Saturday you can have.",
+          "indoor": true,
+          "image": "https://images.getbento.com/gIKOds9jQnCArqwGp5TD_logo_transparent.png?w=1200&fit=fill&auto=compress,format&cs=origin&h=600&bg=EDEDF1&pad=100"
+        },
+        {
+          "time": "20:00",
+          "title": "Bar Bayeux Saturday Jazz",
+          "venue": "Bar Bayeux",
+          "neighborhood": "Prospect Lefferts Gardens",
+          "category": "music",
+          "url": "https://www.barbayeux.com",
+          "note": "Saturday trio in the candlelit room — strong date-night pick, no exceptions.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "22:30",
+          "title": "Smalls Late Set",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com",
+          "note": "If the night's not over by midnight, this is where it goes.",
+          "indoor": true,
+          "image": ""
+        }
+      ]
+    },
+    "2026-06-12": {
+      "weather": null,
+      "events": [
+        {
+          "time": "21:30",
+          "title": "Nowadays Friday Resident",
+          "venue": "Nowadays",
+          "neighborhood": "Ridgewood",
+          "category": "nightlife",
+          "url": "https://nowadays.nyc",
+          "note": "Backyard, long set, sound that's actually been thought about — the Friday default if you want to dance.",
+          "indoor": false,
+          "image": ""
+        },
+        {
+          "time": "21:00",
+          "title": "Bar Bayeux Jazz Trio",
+          "venue": "Bar Bayeux",
+          "neighborhood": "Prospect Lefferts Gardens",
+          "category": "music",
+          "url": "https://www.barbayeux.com",
+          "note": "Tiny room, candlelight, a trio — the antidote to a loud week.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "22:30",
+          "title": "Smalls Late Set",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com",
+          "note": "Late set, no cover after 1am most nights — the West Village still has this one secret.",
+          "indoor": true,
+          "image": ""
+        }
+      ]
+    },
+    "2026-06-13": {
+      "weather": null,
+      "events": [
+        {
+          "time": "21:00",
+          "title": "Sunny's Bluegrass Jam",
+          "venue": "Sunny's Bar",
+          "neighborhood": "Red Hook",
+          "category": "music",
+          "url": "https://www.sunnysredhook.com",
+          "note": "The Saturday night that always works — bluegrass, picklebacks, a long walk back along the water.",
+          "indoor": true,
+          "image": "https://images.getbento.com/gIKOds9jQnCArqwGp5TD_logo_transparent.png?w=1200&fit=fill&auto=compress,format&cs=origin&h=600&bg=EDEDF1&pad=100"
+        },
+        {
+          "time": "20:00",
+          "title": "Bar Bayeux Saturday Jazz",
+          "venue": "Bar Bayeux",
+          "neighborhood": "Prospect Lefferts Gardens",
+          "category": "music",
+          "url": "https://www.barbayeux.com",
+          "note": "Best small jazz room in Brooklyn, no asterisks.",
+          "indoor": true,
+          "image": ""
+        }
+      ]
     }
   }
 }
