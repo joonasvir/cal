@@ -54,7 +54,13 @@ async function main() {
   }
 
   console.error("# 2/3 ranking with Claude…");
-  const tasteMd = await fs.readFile(TASTE_PATH, "utf-8");
+  // Taste profile is private — pulled from env (GH Actions secret) or
+  // falls back to a local file for ad-hoc runs. Never read from a public path.
+  const tasteMd = process.env.TASTE_PROFILE
+    ?? await fs.readFile(TASTE_PATH, "utf-8").catch(() => null);
+  if (!tasteMd) {
+    throw new Error("TASTE_PROFILE env var not set and taste.md not found locally");
+  }
   const ranked = await rankItems({ tasteMd, items, todayKey: today });
 
   console.error("# 3/3 merging + writing feed.json…");

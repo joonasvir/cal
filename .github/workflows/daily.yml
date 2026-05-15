@@ -31,6 +31,7 @@ jobs:
       - name: Build feed.json
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TASTE_PROFILE: ${{ secrets.TASTE_PROFILE }}
         run: npm run build
 
       - name: Commit and push if changed

@@ -4,3 +4,6 @@ node_modules
 dist
 .env
 .env.local
+
+# Private taste profile — lives in GH Actions secret TASTE_PROFILE
+taste.md
