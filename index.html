@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calendar — NYC</title>
+  <link rel="preconnect" href="https://rsms.me/" />
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+  <style>
+    :root {
+      --ink: #000;
+      --paper: #fff;
+      --rule: #000;
+      --soft: rgba(0, 0, 0, 0.35);
+      --softer: rgba(0, 0, 0, 0.18);
+      --sheet-pad-x: clamp(28px, 6vw, 96px);
+      --sheet-pad-y: clamp(48px, 7vw, 112px);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      background: #000;
+      font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-feature-settings: 'cv11', 'ss03';
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    @supports (font-variation-settings: normal) {
+      body { font-family: 'InterVariable', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+    }
+
+    .sheet {
+      max-width: 1180px;
+      margin: 40px auto;
+      background: var(--paper);
+      padding: var(--sheet-pad-y) var(--sheet-pad-x);
+      min-height: calc(100vh - 80px);
+    }
+
+    /* ── Masthead ───────────────────────────────────────── */
+    .masthead {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+      font-size: 12px;
+      letter-spacing: 0.01em;
+      line-height: 1.4;
+      padding-bottom: clamp(40px, 6vw, 80px);
+    }
+    .masthead .meta-right { text-align: right; }
+    .masthead .meta-label { display: block; }
+
+    /* ── Month section ──────────────────────────────────── */
+    .month {
+      padding-top: clamp(24px, 4vw, 48px);
+    }
+    .month + .month {
+      margin-top: clamp(40px, 6vw, 72px);
+    }
+    .month-title {
+      font-size: clamp(72px, 14vw, 200px);
+      font-weight: 500;
+      line-height: 0.92;
+      letter-spacing: -0.045em;
+      margin: 0;
+      padding-bottom: clamp(28px, 4vw, 56px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    /* ── Day row ────────────────────────────────────────── */
+    .day {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) minmax(0, 2.3fr);
+      gap: clamp(24px, 4vw, 64px);
+      padding: clamp(20px, 3vw, 36px) 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: start;
+    }
+    .day.is-empty .day-content { min-height: 0; }
+    .day.is-today .numeral { font-weight: 600; }
+    .day.is-today .dow .active {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 0 3px;
+    }
+
+    .day-marker {
+      align-self: start;
+    }
+    .dow {
+      display: flex;
+      gap: 6px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      font-weight: 400;
+      margin-bottom: clamp(12px, 1.5vw, 20px);
+      text-transform: uppercase;
+    }
+    .dow span {
+      color: var(--softer);
+      width: 1ch;
+      text-align: center;
+    }
+    .dow span.active {
+      color: var(--ink);
+      font-weight: 600;
+    }
+    .numeral {
+      font-size: clamp(84px, 14vw, 180px);
+      font-weight: 500;
+      line-height: 0.9;
+      letter-spacing: -0.055em;
+      font-variant-numeric: lining-nums;
+    }
+
+    .day-content {
+      padding-top: 4px;
+    }
+
+    /* ── Weather row ────────────────────────────────────── */
+    .weather {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding-bottom: 10px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--rule);
+      color: var(--ink);
+    }
+    .weather-left { display: flex; gap: 16px; flex-wrap: wrap; }
+    .weather-temp { font-feature-settings: 'tnum'; }
+    .weather-mood { color: var(--soft); }
+    .weather-right { color: var(--soft); }
+    .day.is-empty .weather { display: none; }
+
+    /* ── Events list ────────────────────────────────────── */
+    .events {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .event {
+      display: grid;
+      grid-template-columns: 56px 1fr auto;
+      gap: 16px;
+      padding: 10px 0;
+      align-items: baseline;
+    }
+    .event + .event {
+      border-top: 1px solid var(--softer);
+    }
+    .event-time {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      font-feature-settings: 'tnum';
+      color: var(--soft);
+      padding-top: 3px;
+    }
+    .event-body { min-width: 0; }
+    .event-title {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: -0.005em;
+    }
+    .event-title a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 120ms ease;
+    }
+    .event-title a:hover { border-bottom-color: var(--ink); }
+    .event-meta {
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--soft);
+      margin-top: 4px;
+    }
+    .event-note {
+      font-size: 13px;
+      line-height: 1.45;
+      margin-top: 6px;
+      max-width: 56ch;
+      color: var(--ink);
+    }
+    .event-cat {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--soft);
+      padding-top: 4px;
+      text-align: right;
+    }
+
+    /* ── Empty day affordance ───────────────────────────── */
+    .day.is-empty .day-content::before {
+      content: '—';
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--softer);
+      text-transform: uppercase;
+    }
+
+    /* ── Mobile ─────────────────────────────────────────── */
+    @media (max-width: 720px) {
+      .sheet { margin: 0; }
+      .day {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .numeral { font-size: clamp(72px, 22vw, 120px); }
+      .month-title { font-size: clamp(64px, 22vw, 120px); }
+      .event { grid-template-columns: 44px 1fr; }
+      .event-cat { display: none; }
+    }
+
+    /* ── Print ──────────────────────────────────────────── */
+    @media print {
+      body { background: #fff; }
+      .sheet { max-width: none; margin: 0; box-shadow: none; padding: 24px 32px; }
+      .month { break-before: page; }
+      .day { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet" id="sheet">
+    <header class="masthead">
+      <div class="meta-left">
+        <span class="meta-label">What's on</span>
+        <span class="meta-label">Brooklyn / NYC</span>
+      </div>
+      <div class="meta-right">
+        <span class="meta-label" id="meta-edition">Edition 01</span>
+        <span class="meta-label" id="meta-date">—</span>
+      </div>
+    </header>
+    <div id="calendar"></div>
+  </main>
+
+  <script>
+    const MONTHS = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    const DOW = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+
+    const pad = (n) => String(n).padStart(2, '0');
+    const isoDate = (y, m, d) => `${y}-${pad(m + 1)}-${pad(d)}`;
+    const daysInMonth = (y, m) => new Date(y, m + 1, 0).getDate();
+    // 0 = Monday, 6 = Sunday
+    const dowIndex = (y, m, d) => (new Date(y, m, d).getDay() + 6) % 7;
+
+    function fmtTime(t) {
+      if (!t) return '';
+      const [h, m] = t.split(':').map(Number);
+      const period = h >= 12 ? 'pm' : 'am';
+      const hh = h % 12 === 0 ? 12 : h % 12;
+      return m ? `${hh}:${pad(m)}${period}` : `${hh}${period}`;
+    }
+
+    function renderDay(y, m, d, payload, todayKey) {
+      const key = isoDate(y, m, d);
+      const dow = dowIndex(y, m, d);
+      const events = payload?.events ?? [];
+      const weather = payload?.weather;
+      const isToday = key === todayKey;
+      const isEmpty = !events.length && !weather;
+
+      const day = document.createElement('article');
+      day.className = `day${isEmpty ? ' is-empty' : ''}${isToday ? ' is-today' : ''}`;
+      day.dataset.date = key;
+
+      const marker = document.createElement('div');
+      marker.className = 'day-marker';
+      const dowEl = document.createElement('div');
+      dowEl.className = 'dow';
+      DOW.forEach((letter, i) => {
+        const s = document.createElement('span');
+        s.textContent = letter;
+        if (i === dow) s.classList.add('active');
+        dowEl.appendChild(s);
+      });
+      const numEl = document.createElement('div');
+      numEl.className = 'numeral';
+      numEl.textContent = pad(d);
+      marker.appendChild(dowEl);
+      marker.appendChild(numEl);
+
+      const content = document.createElement('div');
+      content.className = 'day-content';
+
+      if (weather) {
+        const w = document.createElement('div');
+        w.className = 'weather';
+        const left = document.createElement('div');
+        left.className = 'weather-left';
+        left.innerHTML = `
+          <span class="weather-temp">${weather.high_f}° / ${weather.low_f}°</span>
+          <span class="weather-mood">${weather.condition}</span>
+        `;
+        const right = document.createElement('div');
+        right.className = 'weather-right';
+        right.textContent = weather.note || `${weather.precip_chance}% precip`;
+        w.appendChild(left);
+        w.appendChild(right);
+        content.appendChild(w);
+      }
+
+      if (events.length) {
+        const list = document.createElement('ul');
+        list.className = 'events';
+        events.forEach((ev) => {
+          const li = document.createElement('li');
+          li.className = 'event';
+          const time = document.createElement('div');
+          time.className = 'event-time';
+          time.textContent = fmtTime(ev.time);
+          const body = document.createElement('div');
+          body.className = 'event-body';
+          const title = document.createElement('div');
+          title.className = 'event-title';
+          if (ev.url) {
+            const a = document.createElement('a');
+            a.href = ev.url;
+            a.target = '_blank';
+            a.rel = 'noopener';
+            a.textContent = ev.title;
+            title.appendChild(a);
+          } else {
+            title.textContent = ev.title;
+          }
+          body.appendChild(title);
+          if (ev.venue || ev.neighborhood) {
+            const meta = document.createElement('div');
+            meta.className = 'event-meta';
+            meta.textContent = [ev.venue, ev.neighborhood].filter(Boolean).join(' · ');
+            body.appendChild(meta);
+          }
+          if (ev.note) {
+            const note = document.createElement('div');
+            note.className = 'event-note';
+            note.textContent = ev.note;
+            body.appendChild(note);
+          }
+          const cat = document.createElement('div');
+          cat.className = 'event-cat';
+          cat.textContent = ev.category || '';
+          li.appendChild(time);
+          li.appendChild(body);
+          li.appendChild(cat);
+          list.appendChild(li);
+        });
+        content.appendChild(list);
+      }
+
+      day.appendChild(marker);
+      day.appendChild(content);
+      return day;
+    }
+
+    function renderYear(year, days, todayKey) {
+      const root = document.getElementById('calendar');
+      root.innerHTML = '';
+      for (let m = 0; m < 12; m++) {
+        const section = document.createElement('section');
+        section.className = 'month';
+        section.id = `month-${pad(m + 1)}`;
+        const h2 = document.createElement('h2');
+        h2.className = 'month-title';
+        h2.textContent = MONTHS[m];
+        section.appendChild(h2);
+
+        for (let d = 1; d <= daysInMonth(year, m); d++) {
+          const key = isoDate(year, m, d);
+          section.appendChild(renderDay(year, m, d, days[key], todayKey));
+        }
+        root.appendChild(section);
+      }
+    }
+
+    async function init() {
+      let feed = { edition: '01', year: new Date().getFullYear(), generated_at: '', days: {} };
+      try {
+        const res = await fetch('feed.json', { cache: 'no-store' });
+        if (res.ok) feed = await res.json();
+      } catch (_) { /* no feed yet — render empty year */ }
+
+      const today = new Date();
+      const todayKey = isoDate(today.getFullYear(), today.getMonth(), today.getDate());
+
+      document.getElementById('meta-edition').textContent = `Edition ${feed.edition || '01'}`;
+      document.getElementById('meta-date').textContent = feed.generated_at || todayKey;
+
+      const year = feed.year || today.getFullYear();
+      renderYear(year, feed.days || {}, todayKey);
+
+      // Jump to today on first load
+      const todayEl = document.querySelector(`[data-date="${todayKey}"]`);
+      if (todayEl) {
+        requestAnimationFrame(() => {
+          const offset = todayEl.getBoundingClientRect().top + window.scrollY - 24;
+          window.scrollTo({ top: offset, behavior: 'instant' });
+        });
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
