@@ -44,4 +44,15 @@ jobs:
             exit 0
           fi
           git commit -m "Daily feed for $(date -u +%Y-%m-%d)"
-          git push
+          # Retry with rebase in case origin moved during the build
+          # (parallel agents or human commits land while we run).
+          for i in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push; then
+              echo "Pushed on attempt $i."
+              exit 0
+            fi
+            echo "Push attempt $i failed, retrying in 5s…"
+            sleep 5
+          done
+          echo "Could not push after 5 attempts." >&2
+          exit 1
