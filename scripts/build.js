@@ -14,6 +14,7 @@ import { fileURLToPath } from "node:url";
 
 import { fetchWeather } from "./weather.js";
 import { fetchAllFeeds } from "./sources/rss.js";
+import { fetchOgImage } from "./sources/ogimage.js";
 import { rankItems } from "./rank.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -38,6 +39,51 @@ async function readPrevFeed() {
   }
 }
 
+function buildPrevImageMap(prev) {
+  const map = new Map();
+  if (!prev?.days) return map;
+  for (const day of Object.values(prev.days)) {
+    for (const ev of day.events || []) {
+      if (ev.url && ev.image && /^https?:/i.test(ev.image)) {
+        map.set(ev.url, ev.image);
+      }
+    }
+  }
+  return map;
+}
+
+// Enrich each event with a hero image. Priority:
+//   1. Already-set ev.image (from RSS pass-through via the ranker).
+//   2. Cached value from the previous build's feed.json (saves a fetch).
+//   3. og:image / twitter:image scraped from ev.url.
+// Anything left empty falls back to picsum on the client.
+async function enrichEventsWithImages(events, prevImages, concurrency = 5) {
+  const stats = { fromOg: 0, fromRss: 0, fromCache: 0, missing: 0 };
+  let i = 0;
+  async function worker() {
+    while (i < events.length) {
+      const ev = events[i++];
+      if (ev.image && /^https?:/i.test(ev.image)) { stats.fromRss++; continue; }
+      if (ev.url && prevImages.has(ev.url)) {
+        ev.image = prevImages.get(ev.url);
+        stats.fromCache++;
+        continue;
+      }
+      if (!ev.url) { stats.missing++; continue; }
+      const img = await fetchOgImage(ev.url);
+      if (img) {
+        ev.image = img;
+        stats.fromOg++;
+      } else {
+        ev.image = "";
+        stats.missing++;
+      }
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(concurrency, events.length) }, worker));
+  return stats;
+}
+
 async function main() {
   const today = todayKey();
   console.error(`# build: ${today}`);
@@ -57,8 +103,17 @@ async function main() {
   const tasteMd = await fs.readFile(TASTE_PATH, "utf-8");
   const ranked = await rankItems({ tasteMd, items, todayKey: today });
 
-  console.error("# 3/3 merging + writing feed.json…");
+  console.error("# 3/4 enriching events with hero images…");
   const prev = await readPrevFeed();
+  const prevImages = buildPrevImageMap(prev);
+  const allRankedEvents = (ranked.days ?? []).flatMap((d) => d.events ?? []);
+  const imgStats = await enrichEventsWithImages(allRankedEvents, prevImages);
+  console.error(
+    `# images: ${imgStats.fromOg} og:image · ${imgStats.fromRss} from feed · ` +
+      `${imgStats.fromCache} cached · ${imgStats.missing} fallback`,
+  );
+
+  console.error("# 4/4 merging + writing feed.json…");
 
   const days = {};
   // Seed every weather day so we always have a forecast row.
@@ -97,6 +152,12 @@ async function main() {
         items_pulled: items.length,
         events_curated: eventCount,
         days_covered: Object.keys(days).length,
+      },
+      images: {
+        from_og: imgStats.fromOg,
+        from_rss: imgStats.fromRss,
+        from_cache: imgStats.fromCache,
+        missing: imgStats.missing,
       },
     },
     days,

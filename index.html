@@ -2455,6 +2455,7 @@
       const weather = meta.weather || {};
       const ranker = meta.ranker || {};
       const stats = meta.stats || {};
+      const images = meta.images || {};
 
       const sourcesHtml = sources.length
         ? sources.map((s) => {
@@ -2511,6 +2512,16 @@
         </dl>
       `;
 
+      const imagesHasData = images && (images.from_og != null || images.from_rss != null || images.from_cache != null || images.missing != null);
+      const imagesHtml = imagesHasData ? `
+        <dl class="kv">
+          <dt>From og:image</dt><dd>${images.from_og ?? 0}</dd>
+          <dt>From RSS feed</dt><dd>${images.from_rss ?? 0}</dd>
+          <dt>Cached</dt><dd>${images.from_cache ?? 0}</dd>
+          <dt>Fallback (picsum)</dt><dd>${images.missing ?? 0}</dd>
+        </dl>
+      ` : '<p class="sheet-sub" style="text-transform:none; letter-spacing:0;">Image scrape not run yet — picsum fallback in use.</p>';
+
       body.innerHTML = `
         <section class="sheet-section">
           <h3>Feeds</h3>
@@ -2524,6 +2535,10 @@
         <section class="sheet-section">
           <h3>Ranker</h3>
           ${rankerHtml}
+        </section>
+        <section class="sheet-section">
+          <h3>Hover images</h3>
+          ${imagesHtml}
         </section>
         <section class="sheet-section">
           <h3>This edition</h3>
