@@ -1063,8 +1063,9 @@
     .week-col.is-month-edge {
       border-left: 4px solid var(--ink);
     }
-    .week-col.is-weekend { background: rgba(0, 0, 0, 0.025); }
-    .week-col.is-today.is-weekend { background: var(--ink); }
+    /* Weekends look identical to weekdays — no gray wash, no
+       "blocked off" feel. Today still gets the ink/black fill for
+       emphasis, weekend or not. */
     .week-col.is-today { background: var(--ink); color: var(--paper); }
     .week-col.is-today .week-dow,
     .week-col.is-today .week-wx,
@@ -1837,10 +1838,10 @@
       </div>
     </div>
     <div class="topbar-group is-end" role="tablist" aria-label="Zoom">
-      <button class="tab" id="tab-today" type="button" data-action="today">Today</button>
+      <!-- Two views only: Today (underlying month view, snaps to today
+           on click) and Week. Year + the separate Month tab removed. -->
+      <button class="tab is-active" id="tab-today" type="button" role="tab" aria-selected="true" data-view="month" data-action="today">Today</button>
       <button class="tab" id="tab-week"  role="tab" aria-selected="false" data-view="week">Week</button>
-      <button class="tab is-active" id="tab-month" role="tab" aria-selected="true" data-view="month">Month</button>
-      <button class="tab" id="tab-year"  role="tab" aria-selected="false" data-view="year">Year</button>
     </div>
     <!-- Mobile-only: collapses the tab row into a single dropdown so the
          topbar fits on a 375px iPhone alongside Categories + Where. -->
@@ -1848,7 +1849,7 @@
       <div class="dropdown" id="view-dropdown">
         <button class="dropdown-btn" id="view-dropdown-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="view-dropdown-panel">
           <span class="dropdown-label">View</span>
-          <span class="dropdown-value" id="view-dropdown-value">Month</span>
+          <span class="dropdown-value" id="view-dropdown-value">Today</span>
         </button>
       </div>
     </div>
@@ -2439,27 +2440,29 @@
 
     // View dropdown (mobile-only) — same shape as Categories / Where but with
     // a single-select radio model since exactly one view can be active.
-    const VIEW_LABELS = { month: 'Month', week: 'Week', year: 'Year', map: 'Map', dn: 'Date Night' };
+    // "Today" is the month view labelled with the today-anchored name —
+    // it's the same renderer underneath, just framed as the day-focused
+    // view. Year + standalone Month removed.
+    const VIEW_LABELS = { month: 'Today', week: 'Week', map: 'Map', dn: 'Date Night' };
     function renderViewDropdownPanel() {
       const panel = document.getElementById('view-dropdown-panel');
       if (!panel || panel.dataset.built === '1') return;
       panel.innerHTML = `
         <div class="dp-head"><span class="dp-title">View</span></div>
-        <button type="button" class="dp-item" data-action="today">Today</button>
-        <button type="button" class="dp-item" data-view="month" role="menuitemradio" aria-checked="true">Month</button>
+        <button type="button" class="dp-item is-active" data-view="month" data-action="today" role="menuitemradio" aria-checked="true">Today</button>
         <button type="button" class="dp-item" data-view="week"  role="menuitemradio" aria-checked="false">Week</button>
-        <button type="button" class="dp-item" data-view="year"  role="menuitemradio" aria-checked="false">Year</button>
         <button type="button" class="dp-item" data-view="map"   role="menuitemradio" aria-checked="false">Map</button>
         <button type="button" class="dp-item" data-view="dn"    role="menuitemradio" aria-checked="false">Date Night</button>
       `;
       panel.querySelectorAll('.dp-item').forEach((btn) => {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
+          // Today is the only entry carrying BOTH data-view (month) and
+          // data-action (today) — switch view first if needed, then
+          // snap-scroll. data-view alone just switches view.
+          if (btn.dataset.view) setView(btn.dataset.view);
           if (btn.dataset.action === 'today') {
-            // Today is an action, not a view — jump to today without changing view.
-            scrollToDate(state.todayKey, 'smooth');
-          } else if (btn.dataset.view) {
-            setView(btn.dataset.view);
+            requestAnimationFrame(() => scrollToDate(state.todayKey, 'smooth'));
           }
           closeViewDropdown();
         });
