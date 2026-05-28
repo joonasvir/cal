@@ -1,7 +1,7 @@
 {
-  "edition": "13",
+  "edition": "14",
   "year": 2026,
-  "generated_at": "2026-05-24T09:43:09.084Z",
+  "generated_at": "2026-05-28T10:32:24.499Z",
   "city": "New York",
   "meta": {
     "sources": [
@@ -13,7 +13,7 @@
         ],
         "kept": 10,
         "error": null,
-        "fetched_at": "2026-05-24T09:41:08.440Z"
+        "fetched_at": "2026-05-28T10:30:26.386Z"
       },
       {
         "name": "The Skint",
@@ -21,9 +21,9 @@
         "tags": [
           "general"
         ],
-        "kept": 3,
+        "kept": 4,
         "error": null,
-        "fetched_at": "2026-05-24T09:41:08.440Z"
+        "fetched_at": "2026-05-28T10:30:26.386Z"
       },
       {
         "name": "Bedford + Bowery",
@@ -33,7 +33,7 @@
         ],
         "kept": 0,
         "error": null,
-        "fetched_at": "2026-05-24T09:41:08.440Z"
+        "fetched_at": "2026-05-28T10:30:26.386Z"
       },
       {
         "name": "Brooklyn Vegan",
@@ -43,7 +43,7 @@
         ],
         "kept": 15,
         "error": null,
-        "fetched_at": "2026-05-24T09:41:08.440Z"
+        "fetched_at": "2026-05-28T10:30:26.386Z"
       },
       {
         "name": "Hyperallergic",
@@ -53,7 +53,7 @@
         ],
         "kept": 15,
         "error": null,
-        "fetched_at": "2026-05-24T09:41:08.440Z"
+        "fetched_at": "2026-05-28T10:30:26.386Z"
       }
     ],
     "weather": {
@@ -69,566 +69,272 @@
       "ranked_days": 7
     },
     "stats": {
-      "items_pulled": 43,
-      "events_curated": 49,
+      "items_pulled": 44,
+      "events_curated": 46,
       "days_covered": 16
     },
     "images": {
-      "from_og": 2,
-      "from_rss": 13,
-      "from_cache": 12,
+      "from_og": 4,
+      "from_rss": 12,
+      "from_cache": 8,
       "missing": 22
     }
   },
   "days": {
-    "2026-05-24": {
-      "weather": {
-        "high": 14,
-        "low": 10,
-        "unit": "C",
-        "condition": "Rain",
-        "precip_chance": 98,
-        "sunset": "20:13",
-        "note": "indoor-leaning · pack a jacket"
-      },
-      "events": [
-        {
-          "time": "19:30",
-          "title": "Sunday Jazz Late Set at Smalls",
-          "venue": "Smalls Jazz Club",
-          "neighborhood": "West Village",
-          "category": "music",
-          "url": "https://www.smallslive.com/",
-          "note": "Sunday at Smalls is the platonic ideal of a low-key NYC night — basement room, stage-side stools, no spectacle.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "20:00",
-          "title": "Bemelmans Bar — Nightly Piano",
-          "venue": "Bemelmans Bar at The Carlyle",
-          "neighborhood": "Upper East Side",
-          "category": "music",
-          "url": "https://www.rosewoodhotels.com/en/the-carlyle-new-york/dining/bemelmans-bar",
-          "note": "Old New York in its purest form: murals, martinis, a piano trio. Worth it for the room alone.",
-          "indoor": true,
-          "image": "https://images.rosewoodhotels.com/is/image/rwhg/Carlyle_Bemelmans_Durston_Saylor"
-        },
-        {
-          "time": "12:00",
-          "title": "Roberto Lugo: Ode to Puerto Rico (on view)",
-          "venue": "Madison Square Park",
-          "neighborhood": "Flatiron",
-          "category": "art",
-          "url": "https://hyperallergic.com/roberto-lugos-colossal-ode-to-puerto-rico-rises-in-madison-square-park/",
-          "note": "Hand-painted ceramic portraits of Bad Bunny and family in the middle of the park — a real public art moment, free, walkable.",
-          "indoor": false,
-          "image": "https://storage.ghost.io/c/51/f8/51f871d8-b6be-4a73-b958-0ca4fff0110a/content/images/2026/05/DSC_0432-1.jpg"
-        },
-        {
-          "time": "14:00",
-          "title": "Karla Knight: Cosmic Conspiracies (while it's up)",
-          "venue": "Andrew Edlin Gallery",
-          "neighborhood": "Lower East Side",
-          "category": "art",
-          "url": "https://hyperallergic.com/karla-knights-cosmic-conspiracies/",
-          "note": "Game-like paintings and tapestries built on crackpot supernatural lore — has the right kind of weird.",
-          "indoor": true,
-          "image": "https://storage.ghost.io/c/51/f8/51f871d8-b6be-4a73-b958-0ca4fff0110a/content/images/2026/05/Karla-Knight-Orbiter-2-1.jpg"
-        },
-        {
-          "time": "15:00",
-          "title": "Nowadays Nonstop (Sunday Day Party)",
-          "venue": "Nowadays",
-          "neighborhood": "Ridgewood",
-          "category": "nightlife",
-          "url": "https://nowadays.nyc/",
-          "note": "The Sunday open-to-close session is the most Brooklyn thing you can do on a long weekend — backyard, real DJs, no posturing.",
-          "indoor": false,
-          "image": ""
-        },
-        {
-          "time": "19:00",
-          "title": "Public Records — Sound Room",
-          "venue": "Public Records",
-          "neighborhood": "Gowanus",
-          "category": "music",
-          "url": "https://publicrecords.nyc/",
-          "note": "Vermouth, hi-fi, plant-walled patio — exactly the listening-room energy that makes a Sunday feel curated.",
-          "indoor": true,
-          "image": ""
-        }
-      ]
-    },
-    "2026-05-25": {
-      "weather": {
-        "high": 21,
-        "low": 13,
-        "unit": "C",
-        "condition": "Rain",
-        "precip_chance": 56,
-        "sunset": "20:14",
-        "note": "evening could turn"
-      },
-      "events": [
-        {
-          "time": "21:00",
-          "title": "Memorial Day Jazz at Smalls",
-          "venue": "Smalls Jazz Club",
-          "neighborhood": "West Village",
-          "category": "music",
-          "url": "https://www.smallslive.com/",
-          "note": "Holiday Monday in the city is quiet in the best way — Smalls is the move when everyone else fled to the Hamptons.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "19:00",
-          "title": "Bar Bayeux — Monday Sessions",
-          "venue": "Bar Bayeux",
-          "neighborhood": "Prospect Lefferts Gardens",
-          "category": "music",
-          "url": "https://www.barbayeux.com/",
-          "note": "Tiny Parisian-feeling room, candles, a trio in the corner — date-night-perfect even on a Monday.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "20:00",
-          "title": "Bemelmans Bar — Nightly Piano",
-          "venue": "Bemelmans Bar at The Carlyle",
-          "neighborhood": "Upper East Side",
-          "category": "music",
-          "url": "https://www.rosewoodhotels.com/en/the-carlyle-new-york/dining/bemelmans-bar",
-          "note": "If you've never had a Manhattan under the Madeline murals, fix that.",
-          "indoor": true,
-          "image": "https://images.rosewoodhotels.com/is/image/rwhg/Carlyle_Bemelmans_Durston_Saylor"
-        },
-        {
-          "time": "12:00",
-          "title": "Roberto Lugo: Ode to Puerto Rico",
-          "venue": "Madison Square Park",
-          "neighborhood": "Flatiron",
-          "category": "art",
-          "url": "https://hyperallergic.com/roberto-lugos-colossal-ode-to-puerto-rico-rises-in-madison-square-park/",
-          "note": "Holiday-walk art stop — Bad Bunny portraits rendered as colossal ceramics, very public, very free.",
-          "indoor": false,
-          "image": "https://storage.ghost.io/c/51/f8/51f871d8-b6be-4a73-b958-0ca4fff0110a/content/images/2026/05/DSC_0432-1.jpg"
-        },
-        {
-          "time": "22:00",
-          "title": "Mood Ring — Holiday Late Night",
-          "venue": "Mood Ring",
-          "neighborhood": "Bushwick",
-          "category": "nightlife",
-          "url": "https://www.moodringnyc.com/",
-          "note": "Astrology-themed dive that still feels like real Bushwick — good for a low-effort Monday close-out.",
-          "indoor": true,
-          "image": "https://ik.imagekit.io/seostudent/situs_qq.webp"
-        }
-      ]
-    },
-    "2026-05-26": {
-      "weather": {
-        "high": 25,
-        "low": 17,
-        "unit": "C",
-        "condition": "Foggy",
-        "precip_chance": 2,
-        "sunset": "20:15",
-        "note": "patio weather"
-      },
-      "events": [
-        {
-          "time": "21:00",
-          "title": "Smalls Late Set",
-          "venue": "Smalls Jazz Club",
-          "neighborhood": "West Village",
-          "category": "music",
-          "url": "https://www.smallslive.com/",
-          "note": "Tuesday lineups at Smalls are where the real heads play — go late, sit close.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "19:00",
-          "title": "Caveat — Tuesday Smart Show",
-          "venue": "Caveat",
-          "neighborhood": "Lower East Side",
-          "category": "comedy",
-          "url": "https://www.caveat.nyc/",
-          "note": "Pick whatever's on the calendar — Caveat's whole brand is nerd-adjacent stand-up with an actual concept.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "20:00",
-          "title": "Bemelmans Bar — Nightly Piano",
-          "venue": "Bemelmans Bar at The Carlyle",
-          "neighborhood": "Upper East Side",
-          "category": "music",
-          "url": "https://www.rosewoodhotels.com/en/the-carlyle-new-york/dining/bemelmans-bar",
-          "note": "A weeknight Negroni in the murals room beats any rooftop in the city.",
-          "indoor": true,
-          "image": "https://images.rosewoodhotels.com/is/image/rwhg/Carlyle_Bemelmans_Durston_Saylor"
-        },
-        {
-          "time": "19:30",
-          "title": "Piccolo Morini — Opening Week",
-          "venue": "Piccolo Morini",
-          "neighborhood": "Nolita",
-          "category": "food",
-          "url": "https://ny.eater.com/restaurant-openings/411547/piccolo-morini-osteria-morini-ahmass-fakahany-soho-reopening",
-          "note": "The Marea sibling returning as a $9-martini neighborhood pasta room on Kenmare — exactly the format Soho actually needed.",
-          "indoor": true,
-          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/pasta-making-4.jpg"
-        },
-        {
-          "time": "19:00",
-          "title": "Bar Bayeux — Weeknight Trio",
-          "venue": "Bar Bayeux",
-          "neighborhood": "Prospect Lefferts Gardens",
-          "category": "music",
-          "url": "https://www.barbayeux.com/",
-          "note": "Five tables, one trio, real natural wine list. The Brooklyn jazz bar to know.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "14:00",
-          "title": "Karla Knight: Cosmic Conspiracies",
-          "venue": "Andrew Edlin Gallery",
-          "neighborhood": "Lower East Side",
-          "category": "art",
-          "url": "https://hyperallergic.com/karla-knights-cosmic-conspiracies/",
-          "note": "Slow Tuesday afternoon on the LES — duck in for the tapestries, stay for the conspiracy diagrams.",
-          "indoor": true,
-          "image": "https://storage.ghost.io/c/51/f8/51f871d8-b6be-4a73-b958-0ca4fff0110a/content/images/2026/05/Karla-Knight-Orbiter-2-1.jpg"
-        }
-      ]
-    },
-    "2026-05-27": {
-      "weather": {
-        "high": 32,
-        "low": 19,
-        "unit": "C",
-        "condition": "Rain showers",
-        "precip_chance": 8,
-        "sunset": "20:16",
-        "note": "snow — bundle up"
-      },
-      "events": [
-        {
-          "time": "21:30",
-          "title": "Smalls Late Set",
-          "venue": "Smalls Jazz Club",
-          "neighborhood": "West Village",
-          "category": "music",
-          "url": "https://www.smallslive.com/",
-          "note": "Midweek Smalls is the cheat code — basement, $25, world-class.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "19:30",
-          "title": "Piccolo Morini — Go This Week",
-          "venue": "Piccolo Morini",
-          "neighborhood": "Nolita",
-          "category": "food",
-          "url": "https://ny.eater.com/restaurant-openings/411547/piccolo-morini-osteria-morini-ahmass-fakahany-soho-reopening",
-          "note": "Tagliatelle and a cheap martini at the Altamarea Group's new casual room — early-week is the best shot at a walk-in.",
-          "indoor": true,
-          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/pasta-making-4.jpg"
-        },
-        {
-          "time": "19:00",
-          "title": "Caveat — Wednesday Talk Show",
-          "venue": "Caveat",
-          "neighborhood": "Lower East Side",
-          "category": "talk",
-          "url": "https://www.caveat.nyc/",
-          "note": "This is the room where alt comedy meets a TED Talk and somehow works. Check whatever's posted.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "20:00",
-          "title": "Bemelmans Bar — Nightly Piano",
-          "venue": "Bemelmans Bar at The Carlyle",
-          "neighborhood": "Upper East Side",
-          "category": "music",
-          "url": "https://www.rosewoodhotels.com/en/the-carlyle-new-york/dining/bemelmans-bar",
-          "note": "Worth the cross-town for the Jazz Age room alone.",
-          "indoor": true,
-          "image": "https://images.rosewoodhotels.com/is/image/rwhg/Carlyle_Bemelmans_Durston_Saylor"
-        },
-        {
-          "time": "19:00",
-          "title": "Bar Bayeux — Weeknight Trio",
-          "venue": "Bar Bayeux",
-          "neighborhood": "Prospect Lefferts Gardens",
-          "category": "music",
-          "url": "https://www.barbayeux.com/",
-          "note": "Strong date-night pick on a Wednesday when nobody's overbooking.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "12:00",
-          "title": "Roberto Lugo: Ode to Puerto Rico",
-          "venue": "Madison Square Park",
-          "neighborhood": "Flatiron",
-          "category": "art",
-          "url": "https://hyperallergic.com/roberto-lugos-colossal-ode-to-puerto-rico-rises-in-madison-square-park/",
-          "note": "Lunchtime detour — colossal hand-painted portraits in the park, then back to your day.",
-          "indoor": false,
-          "image": "https://storage.ghost.io/c/51/f8/51f871d8-b6be-4a73-b958-0ca4fff0110a/content/images/2026/05/DSC_0432-1.jpg"
-        }
-      ]
-    },
     "2026-05-28": {
       "weather": {
-        "high": 26,
-        "low": 17,
+        "high": 25,
+        "low": 16,
         "unit": "C",
-        "condition": "Drizzle",
-        "precip_chance": 8,
+        "condition": "Overcast",
+        "precip_chance": 9,
         "sunset": "20:17",
         "note": "patio weather"
       },
       "events": [
         {
-          "time": "19:00",
-          "title": "Public Records — Thursday Sound Room",
-          "venue": "Public Records",
-          "neighborhood": "Gowanus",
-          "category": "music",
-          "url": "https://publicrecords.nyc/",
-          "note": "Thursday programming here is consistently the most thought-through audio night in the city — vermouth bar first, sound room after.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "21:30",
-          "title": "Smalls Late Set",
-          "venue": "Smalls Jazz Club",
-          "neighborhood": "West Village",
-          "category": "music",
-          "url": "https://www.smallslive.com/",
-          "note": "Thursday at Smalls is when the after-work crowd thins and the music gets serious.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "19:00",
-          "title": "Indienne — Opening Night",
-          "venue": "Indienne",
-          "neighborhood": "Hudson Yards",
-          "category": "food",
-          "url": "https://ny.eater.com/restaurant-openings/411485/indienne-sujan-sarkar-chicago-new-york-hudson-yards-opening-michelin",
-          "note": "Chicago's only Michelin-starred Indian restaurant debuts tonight — Sarkar's tasting menu is the most interesting opening of the month, even if Hudson Yards is the wrong zip code.",
-          "indoor": true,
-          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/Indienne_Paneer-Summer-Squash-Kofta-1.jpg"
-        },
-        {
-          "time": "19:00",
-          "title": "Bar Bayeux — Thursday Trio",
-          "venue": "Bar Bayeux",
-          "neighborhood": "Prospect Lefferts Gardens",
-          "category": "music",
-          "url": "https://www.barbayeux.com/",
-          "note": "Walk over after dinner in PLG — the room is the size of a living room and that's the point.",
-          "indoor": true,
+          "time": "20:11",
+          "title": "Manhattanhenge (full sun on the grid)",
+          "venue": "42nd Street looking west",
+          "neighborhood": "Midtown",
+          "category": "art",
+          "url": "https://theskint.com/weds-thurs-5-27-28-manhattanhenge-busta-rhymes-bryant-park-picnic-performances-and-more/",
+          "note": "The architecture event of the season — stand on 42nd, watch the sun lock into the grid Hugh Ferriss style.",
+          "indoor": false,
           "image": ""
         },
         {
           "time": "19:30",
-          "title": "Kidilum — Keralan Tasting",
+          "title": "Bar Bayeux jazz trio",
+          "venue": "Bar Bayeux",
+          "neighborhood": "Prospect Lefferts Gardens",
+          "category": "music",
+          "url": "https://www.barbayeux.com/",
+          "note": "The platonic ideal of your Brooklyn night — small room, natural wine, a proper trio playing two feet from the bar.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "19:00",
+          "title": "Dinner at Drāvida (just opened)",
+          "venue": "Drāvida",
+          "neighborhood": "East Village",
+          "category": "food",
+          "url": "https://ny.eater.com/news/411250/nyc-new-restaurant-openings-may-2026",
+          "note": "Aarthi Sampath's South Asian diasporan room opened yesterday — Nasi Kandar feast, East Village, this is exactly the kind of opening to catch in week one.",
+          "indoor": true,
+          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/Nasi-Kandoor-Feast.jpg?quality=90&strip=all&crop=0,0,100,100"
+        },
+        {
+          "time": "22:30",
+          "title": "Smalls late set",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com/",
+          "note": "Stairs down, $30 in cash, a horn player you've never heard of who'll wreck you — the only late-night jazz move that always works.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "19:00",
+          "title": "Vermouth bar at Public Records",
+          "venue": "Public Records",
+          "neighborhood": "Gowanus",
+          "category": "nightlife",
+          "url": "https://publicrecords.nyc/",
+          "note": "Thursday at PR is the quiet sweet spot — eat at the vermouth bar before the room turns into a sound system.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "19:00",
+          "title": "Kidilum dinner — Keralan from a Mugaritz alum",
           "venue": "Kidilum",
           "neighborhood": "Flatiron",
           "category": "food",
           "url": "https://ny.eater.com/dining-report/411535/kidilum-nyc-indian-restaurant-review",
-          "note": "Ex-Mugaritz chef grinding his own spices daily in a dedicated spice room — order the chakka and don't argue.",
+          "note": "They grind their own spices in a dedicated room — order the chakka and the crab curry, this is the South Indian restaurant the city's been missing.",
           "indoor": true,
-          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/IMG_7723.jpg"
+          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/IMG_7723.jpg?quality=90&strip=all&crop=0,0,100,100"
         },
         {
-          "time": "22:00",
-          "title": "Mood Ring — Thursday",
-          "venue": "Mood Ring",
-          "neighborhood": "Bushwick",
-          "category": "nightlife",
-          "url": "https://www.moodringnyc.com/",
-          "note": "For when you want to end the night dancing without committing to a 3 a.m. warehouse.",
-          "indoor": true,
-          "image": "https://ik.imagekit.io/seostudent/situs_qq.webp"
-        },
-        {
-          "time": "20:00",
-          "title": "Bemelmans Bar — Nightly Piano",
-          "venue": "Bemelmans Bar at The Carlyle",
+          "time": "21:30",
+          "title": "Bemelmans piano set",
+          "venue": "Bemelmans Bar",
           "neighborhood": "Upper East Side",
           "category": "music",
           "url": "https://www.rosewoodhotels.com/en/the-carlyle-new-york/dining/bemelmans-bar",
-          "note": "Old-world cocktails under the murals — never the wrong call.",
+          "note": "The murals, the martinis, the upright piano — old New York at full strength. Worth it for the room alone.",
           "indoor": true,
           "image": "https://images.rosewoodhotels.com/is/image/rwhg/Carlyle_Bemelmans_Durston_Saylor"
+        },
+        {
+          "time": "20:00",
+          "title": "Caveat — Thursday show",
+          "venue": "Caveat",
+          "neighborhood": "Lower East Side",
+          "category": "comedy",
+          "url": "https://www.caveat.nyc/",
+          "note": "Bookish, conceptual, the crowd is sharp — check the lineup but Caveat on a Thursday rarely disappoints.",
+          "indoor": true,
+          "image": ""
         }
       ]
     },
     "2026-05-29": {
       "weather": {
-        "high": 20,
-        "low": 14,
+        "high": 24,
+        "low": 12,
         "unit": "C",
         "condition": "Overcast",
-        "precip_chance": 5,
+        "precip_chance": 3,
         "sunset": "20:18",
         "note": ""
       },
       "events": [
         {
+          "time": "19:00",
+          "title": "Soba Ulala — cold soba with uni and ikura",
+          "venue": "Soba Ulala",
+          "neighborhood": "Soho",
+          "category": "food",
+          "url": "https://ny.eater.com/dining-report/411657/soba-ulala-nyc-japanese-restaurant-review",
+          "note": "Hirohisa turned his 13-year-old Soho room into a soba counter — quiet, focused, exactly the kind of casual upgrade you go to on a Friday.",
+          "indoor": true,
+          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/IMG_5582.jpg?quality=90&strip=all&crop=0,0,100,100"
+        },
+        {
           "time": "21:00",
-          "title": "Bar Bayeux — Friday Jazz Trio",
-          "venue": "Bar Bayeux",
-          "neighborhood": "Prospect Lefferts Gardens",
-          "category": "music",
-          "url": "https://www.barbayeux.com/",
-          "note": "The Friday trio set is the single most on-taste hour of the week — natural wine, candlelight, six tables.",
+          "title": "Friday Resident at Nowadays",
+          "venue": "Nowadays",
+          "neighborhood": "Ridgewood",
+          "category": "nightlife",
+          "url": "https://nowadays.nyc/",
+          "note": "The most consistent Friday in the city — long DJ sets, indoor-outdoor flow, no bottle-service nonsense.",
           "indoor": true,
           "image": ""
         },
         {
-          "time": "22:00",
-          "title": "Public Records — Friday Resident",
-          "venue": "Public Records",
-          "neighborhood": "Gowanus",
-          "category": "nightlife",
-          "url": "https://publicrecords.nyc/",
-          "note": "This is where you go when you want a real DJ night without the bottle-service garbage uptown.",
+          "time": "20:00",
+          "title": "Bar Bayeux Friday jazz",
+          "venue": "Bar Bayeux",
+          "neighborhood": "Prospect Lefferts Gardens",
+          "category": "music",
+          "url": "https://www.barbayeux.com/",
+          "note": "Get there early, sit at the bar, order the gougères — Friday is the night this place earns the supper-club label.",
           "indoor": true,
           "image": ""
         },
         {
           "time": "23:00",
-          "title": "Nowadays — Friday Resident",
-          "venue": "Nowadays",
-          "neighborhood": "Ridgewood",
+          "title": "Public Records Friday — sound system room",
+          "venue": "Public Records",
+          "neighborhood": "Gowanus",
           "category": "nightlife",
-          "url": "https://nowadays.nyc/",
-          "note": "Sound system, backyard, no-phone-on-the-dancefloor energy. The real one.",
+          "url": "https://publicrecords.nyc/",
+          "note": "Eat downstairs, drink upstairs, end up on the dancefloor — the Brooklyn night that does all three on one block.",
           "indoor": true,
           "image": ""
         },
         {
-          "time": "23:30",
-          "title": "Bossa Nova Civic Club",
-          "venue": "Bossa Nova Civic Club",
-          "neighborhood": "Bushwick",
-          "category": "nightlife",
-          "url": "https://www.bossanovacivicclub.com/",
-          "note": "Tropical-bunker techno club that still feels like a secret — late Friday is when it peaks.",
-          "indoor": true,
-          "image": "https://cdn.sciencelabsupplies.com/2024/12/logo-socolive-tv-official.png"
-        },
-        {
-          "time": "21:30",
-          "title": "Smalls Late Set",
+          "time": "22:30",
+          "title": "Smalls late set",
           "venue": "Smalls Jazz Club",
           "neighborhood": "West Village",
           "category": "music",
           "url": "https://www.smallslive.com/",
-          "note": "If you want jazz before the night opens up — basement, stage-side, $25.",
+          "note": "Friday late at Smalls is louder, drunker, better — the kind of room you walk out of grinning.",
           "indoor": true,
           "image": ""
         },
         {
-          "time": "19:30",
-          "title": "Caveat — Friday Show",
-          "venue": "Caveat",
-          "neighborhood": "Lower East Side",
-          "category": "comedy",
-          "url": "https://www.caveat.nyc/",
-          "note": "Caveat's Friday slot usually books their strongest concept show of the week.",
+          "time": "23:00",
+          "title": "Bossa Nova Civic Club late",
+          "venue": "Bossa Nova Civic Club",
+          "neighborhood": "Bushwick",
+          "category": "nightlife",
+          "url": "https://www.bossanovacivicclub.nyc/",
+          "note": "Tropical-grime lighting, a real local crowd, techno that means it — still the most honest dance floor in Bushwick.",
           "indoor": true,
           "image": ""
-        },
-        {
-          "time": "19:00",
-          "title": "Piccolo Morini — Friday Pasta",
-          "venue": "Piccolo Morini",
-          "neighborhood": "Nolita",
-          "category": "food",
-          "url": "https://ny.eater.com/restaurant-openings/411547/piccolo-morini-osteria-morini-ahmass-fakahany-soho-reopening",
-          "note": "Slide in early for tagliatelle and a $9 martini before the night turns into something else.",
-          "indoor": true,
-          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/pasta-making-4.jpg"
         },
         {
           "time": "22:00",
-          "title": "Mood Ring — Friday",
+          "title": "Mood Ring Friday",
           "venue": "Mood Ring",
           "neighborhood": "Bushwick",
           "category": "nightlife",
           "url": "https://www.moodringnyc.com/",
-          "note": "Astrology-themed but unironically a great dance bar. Easy Friday close-out.",
+          "note": "Astrology-bar premise but the DJs are actually good — a soft landing before or after Bossa Nova.",
           "indoor": true,
           "image": "https://ik.imagekit.io/seostudent/situs_qq.webp"
         },
         {
-          "time": "20:00",
-          "title": "Bemelmans Bar — Friday Piano",
-          "venue": "Bemelmans Bar at The Carlyle",
-          "neighborhood": "Upper East Side",
-          "category": "music",
-          "url": "https://www.rosewoodhotels.com/en/the-carlyle-new-york/dining/bemelmans-bar",
-          "note": "If the night calls for a martini and a piano instead of a dance floor, this is the room.",
+          "time": "21:30",
+          "title": "BCC alt comedy",
+          "venue": "Brooklyn Comedy Collective",
+          "neighborhood": "Williamsburg",
+          "category": "comedy",
+          "url": "https://www.brooklyncomedycollective.com/",
+          "note": "Concept-driven, no tourists, sharper than any midtown club — show up for whatever's on the late Friday slot.",
           "indoor": true,
-          "image": "https://images.rosewoodhotels.com/is/image/rwhg/Carlyle_Bemelmans_Durston_Saylor"
+          "image": "http://static1.squarespace.com/static/5a789921cd39c389ed01baa0/t/5bb698a5e79c70988e50777b/1538693288166/BCCtilt1.png?format=1500w"
+        },
+        {
+          "time": "19:00",
+          "title": "Piccolo Morini — Marea's casual Soho sibling",
+          "venue": "Piccolo Morini",
+          "neighborhood": "Soho/Nolita",
+          "category": "food",
+          "url": "https://ny.eater.com/restaurant-openings/411547/piccolo-morini-osteria-morini-ahmass-fakahany-soho-reopening",
+          "note": "Osteria Morini reborn with $9 martinis and tagliatelle — the Kenmare Street room reopening as a neighborhood pasta spot is the move.",
+          "indoor": true,
+          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/pasta-making-4.jpg?quality=90&strip=all&crop=0,0,100,100"
         }
       ]
     },
     "2026-05-30": {
       "weather": {
-        "high": 22,
-        "low": 12,
+        "high": 20,
+        "low": 11,
         "unit": "C",
         "condition": "Overcast",
-        "precip_chance": 7,
+        "precip_chance": 1,
         "sunset": "20:18",
         "note": ""
       },
       "events": [
         {
           "time": "21:00",
-          "title": "Bar Bayeux — Saturday Jazz",
-          "venue": "Bar Bayeux",
-          "neighborhood": "Prospect Lefferts Gardens",
-          "category": "music",
-          "url": "https://www.barbayeux.com/",
-          "note": "Saturday at Bayeux is the date-night ace — book early, sit in the back, order the gougères.",
-          "indoor": true,
-          "image": ""
-        },
-        {
-          "time": "21:00",
-          "title": "Sunny's Bluegrass Jam",
+          "title": "Sunny's bluegrass jam",
           "venue": "Sunny's Bar",
           "neighborhood": "Red Hook",
           "category": "music",
-          "url": "https://www.sunnysredhook.com/",
-          "note": "180-year-old longshoreman's bar at the end of Red Hook with a bluegrass jam every Saturday — the most New York night in New York.",
+          "url": "https://sunnysredhook.com/",
+          "note": "The single most New York thing you can do on a Saturday — fiddles in the back room of a longshoreman's bar at the edge of the harbor.",
           "indoor": true,
           "image": "https://images.getbento.com/gIKOds9jQnCArqwGp5TD_logo_transparent.png?w=1200&fit=fill&auto=compress,format&cs=origin&h=600&bg=EDEDF1&pad=100"
         },
         {
+          "time": "20:00",
+          "title": "Bar Bayeux Saturday trio",
+          "venue": "Bar Bayeux",
+          "neighborhood": "Prospect Lefferts Gardens",
+          "category": "music",
+          "url": "https://www.barbayeux.com/",
+          "note": "Strong date-night pick — split a bottle, share the banquette, let the trio do the rest.",
+          "indoor": true,
+          "image": ""
+        },
+        {
           "time": "22:00",
-          "title": "Public Records — Saturday",
+          "title": "Public Records Saturday",
           "venue": "Public Records",
           "neighborhood": "Gowanus",
           "category": "nightlife",
           "url": "https://publicrecords.nyc/",
-          "note": "Saturday sound room programming is reliably better than 90% of what gets booked elsewhere in the city.",
+          "note": "The big room is the point on Saturday — go for the sound, stay because the crowd actually came to listen.",
           "indoor": true,
           "image": ""
         },
@@ -638,74 +344,63 @@
           "venue": "Bossa Nova Civic Club",
           "neighborhood": "Bushwick",
           "category": "nightlife",
-          "url": "https://www.bossanovacivicclub.com/",
-          "note": "Sweaty, dark, fog-machine-heavy techno — the right ending to a Saturday if you have the legs.",
-          "indoor": true,
-          "image": "https://cdn.sciencelabsupplies.com/2024/12/logo-socolive-tv-official.png"
-        },
-        {
-          "time": "21:30",
-          "title": "Smalls Late Set",
-          "venue": "Smalls Jazz Club",
-          "neighborhood": "West Village",
-          "category": "music",
-          "url": "https://www.smallslive.com/",
-          "note": "Saturday is when the heaviest players sit in — get there before 9 to get a stool.",
+          "url": "https://www.bossanovacivicclub.nyc/",
+          "note": "Late Saturday is when the room peaks — go after 1 if you're serious about it.",
           "indoor": true,
           "image": ""
         },
         {
-          "time": "20:00",
-          "title": "Brooklyn Comedy Collective — Weekend Alt Comedy",
-          "venue": "BCC",
+          "time": "22:30",
+          "title": "Smalls late set",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com/",
+          "note": "Saturday late at Smalls is a whole evening compressed into a basement — the right way to end the night downtown.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "22:00",
+          "title": "Mood Ring Saturday",
+          "venue": "Mood Ring",
+          "neighborhood": "Bushwick",
+          "category": "nightlife",
+          "url": "https://www.moodringnyc.com/",
+          "note": "Good warm-up bar before whatever else you're doing on Myrtle — the DJ usually overperforms the room.",
+          "indoor": true,
+          "image": "https://ik.imagekit.io/seostudent/situs_qq.webp"
+        },
+        {
+          "time": "19:30",
+          "title": "Saturday dinner at Kidilum",
+          "venue": "Kidilum",
+          "neighborhood": "Flatiron",
+          "category": "food",
+          "url": "https://ny.eater.com/dining-report/411535/kidilum-nyc-indian-restaurant-review",
+          "note": "The dressy Keralan room is the right Saturday move if you want spice-forward fine dining without a tasting-menu lockup.",
+          "indoor": true,
+          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/IMG_7723.jpg?quality=90&strip=all&crop=0,0,100,100"
+        },
+        {
+          "time": "21:30",
+          "title": "BCC weekend alt comedy",
+          "venue": "Brooklyn Comedy Collective",
           "neighborhood": "Williamsburg",
           "category": "comedy",
-          "url": "https://brooklyncomedycollective.com/",
-          "note": "BCC weekends are where the actual smart comedy lives in Brooklyn — not a tourist club.",
+          "url": "https://www.brooklyncomedycollective.com/",
+          "note": "Saturday lineup is usually the strongest of the week — the crowd is in on the joke, the booking is genuinely alt.",
           "indoor": true,
           "image": "http://static1.squarespace.com/static/5a789921cd39c389ed01baa0/t/5bb698a5e79c70988e50777b/1538693288166/BCCtilt1.png?format=1500w"
         },
         {
-          "time": "14:00",
-          "title": "Karla Knight: Cosmic Conspiracies",
-          "venue": "Andrew Edlin Gallery",
-          "neighborhood": "Lower East Side",
-          "category": "art",
-          "url": "https://hyperallergic.com/karla-knights-cosmic-conspiracies/",
-          "note": "Saturday LES gallery walk should end here — overactive-imagination tapestries and game-like paintings.",
-          "indoor": true,
-          "image": "https://storage.ghost.io/c/51/f8/51f871d8-b6be-4a73-b958-0ca4fff0110a/content/images/2026/05/Karla-Knight-Orbiter-2-1.jpg"
-        },
-        {
-          "time": "13:00",
-          "title": "Roberto Lugo: Ode to Puerto Rico",
-          "venue": "Madison Square Park",
-          "neighborhood": "Flatiron",
-          "category": "art",
-          "url": "https://hyperallergic.com/roberto-lugos-colossal-ode-to-puerto-rico-rises-in-madison-square-park/",
-          "note": "Walk through on the way downtown — colossal ceramics, hand-painted, free.",
-          "indoor": false,
-          "image": "https://storage.ghost.io/c/51/f8/51f871d8-b6be-4a73-b958-0ca4fff0110a/content/images/2026/05/DSC_0432-1.jpg"
-        },
-        {
-          "time": "19:30",
-          "title": "Piccolo Morini — Saturday Dinner",
-          "venue": "Piccolo Morini",
-          "neighborhood": "Nolita",
-          "category": "food",
-          "url": "https://ny.eater.com/restaurant-openings/411547/piccolo-morini-osteria-morini-ahmass-fakahany-soho-reopening",
-          "note": "New Altamarea Group casual room on Kenmare — opening week, $9 martinis, the right kind of neighborhood Saturday.",
-          "indoor": true,
-          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/pasta-making-4.jpg"
-        },
-        {
-          "time": "20:00",
-          "title": "Bemelmans Bar — Saturday Piano",
-          "venue": "Bemelmans Bar at The Carlyle",
+          "time": "21:30",
+          "title": "Bemelmans Saturday piano",
+          "venue": "Bemelmans Bar",
           "neighborhood": "Upper East Side",
           "category": "music",
           "url": "https://www.rosewoodhotels.com/en/the-carlyle-new-york/dining/bemelmans-bar",
-          "note": "Suit up, sit at the bar, order a Boulevardier. Old New York doing what it does best.",
+          "note": "Jacket on, Manhattan in hand, Ludwig Bemelmans on the walls — the Gilded Age fantasy still works.",
           "indoor": true,
           "image": "https://images.rosewoodhotels.com/is/image/rwhg/Carlyle_Bemelmans_Durston_Saylor"
         }
@@ -713,59 +408,283 @@
     },
     "2026-05-31": {
       "weather": {
-        "high": 22,
-        "low": 15,
+        "high": 25,
+        "low": 12,
         "unit": "C",
         "condition": "Overcast",
-        "precip_chance": 9,
+        "precip_chance": 1,
         "sunset": "20:19",
         "note": ""
       },
-      "events": []
+      "events": [
+        {
+          "time": "19:00",
+          "title": "Drāvida — Sunday dinner at the new opening",
+          "venue": "Drāvida",
+          "neighborhood": "East Village",
+          "category": "food",
+          "url": "https://ny.eater.com/news/411250/nyc-new-restaurant-openings-may-2026",
+          "note": "Sunday is the easiest reservation week-one — go now before the Chopped-fame line forms.",
+          "indoor": true,
+          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/Nasi-Kandoor-Feast.jpg?quality=90&strip=all&crop=0,0,100,100"
+        },
+        {
+          "time": "21:30",
+          "title": "Smalls Sunday set",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com/",
+          "note": "Sunday night at Smalls is the quietest and arguably best version — fewer tourists, more regulars on the bandstand.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "20:00",
+          "title": "Bemelmans Sunday piano",
+          "venue": "Bemelmans Bar",
+          "neighborhood": "Upper East Side",
+          "category": "music",
+          "url": "https://www.rosewoodhotels.com/en/the-carlyle-new-york/dining/bemelmans-bar",
+          "note": "Sunday at the Carlyle is undervalued — easier seating, same murals, same martini.",
+          "indoor": true,
+          "image": "https://images.rosewoodhotels.com/is/image/rwhg/Carlyle_Bemelmans_Durston_Saylor"
+        },
+        {
+          "time": "19:00",
+          "title": "Soba Ulala — Sunday dinner",
+          "venue": "Soba Ulala",
+          "neighborhood": "Soho",
+          "category": "food",
+          "url": "https://ny.eater.com/dining-report/411657/soba-ulala-nyc-japanese-restaurant-review",
+          "note": "Quiet Soho Sunday, a bowl of hot soba, done by 9 — the right kind of low-key.",
+          "indoor": true,
+          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/IMG_5582.jpg?quality=90&strip=all&crop=0,0,100,100"
+        },
+        {
+          "time": "15:00",
+          "title": "\"In Minor Keys\" — read the Venice Biennale dispatches",
+          "venue": "At home / Hyperallergic",
+          "neighborhood": "Anywhere",
+          "category": "art",
+          "url": "https://hyperallergic.com/in-minor-keys-is-the-biennales-crown-jewel/",
+          "note": "Not an event, but a Sunday well spent if you can't get to Venice — Aruna d'Souza on Khaled Sabsabi is the piece to read.",
+          "indoor": true,
+          "image": "https://storage.ghost.io/c/51/f8/51f871d8-b6be-4a73-b958-0ca4fff0110a/content/images/2026/05/in-minor-keys-1.jpg"
+        }
+      ]
     },
     "2026-06-01": {
       "weather": {
-        "high": 27,
-        "low": 14,
+        "high": 25,
+        "low": 16,
         "unit": "C",
-        "condition": "Partly cloudy",
-        "precip_chance": 9,
+        "condition": "Overcast",
+        "precip_chance": 20,
         "sunset": "20:20",
-        "note": ""
+        "note": "patio weather"
       },
-      "events": []
+      "events": [
+        {
+          "time": "21:30",
+          "title": "Smalls Monday set",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com/",
+          "note": "Monday is the musicians' night — it's where you hear the players the other players go to see.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "20:00",
+          "title": "Bemelmans Monday piano",
+          "venue": "Bemelmans Bar",
+          "neighborhood": "Upper East Side",
+          "category": "music",
+          "url": "https://www.rosewoodhotels.com/en/the-carlyle-new-york/dining/bemelmans-bar",
+          "note": "Quiet Monday, two stools at the bar, one martini each — the most adult use of an evening in Manhattan.",
+          "indoor": true,
+          "image": "https://images.rosewoodhotels.com/is/image/rwhg/Carlyle_Bemelmans_Durston_Saylor"
+        },
+        {
+          "time": "19:00",
+          "title": "Piccolo Morini — Monday pasta and a $9 martini",
+          "venue": "Piccolo Morini",
+          "neighborhood": "Soho/Nolita",
+          "category": "food",
+          "url": "https://ny.eater.com/restaurant-openings/411547/piccolo-morini-osteria-morini-ahmass-fakahany-soho-reopening",
+          "note": "Monday is when openings actually have tables — go now while the room is still figuring itself out.",
+          "indoor": true,
+          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/pasta-making-4.jpg?quality=90&strip=all&crop=0,0,100,100"
+        },
+        {
+          "time": "19:30",
+          "title": "Long Island Bar — Monday Negroni",
+          "venue": "Long Island Bar",
+          "neighborhood": "Cobble Hill",
+          "category": "nightlife",
+          "url": "https://www.thelongislandbar.com/",
+          "note": "Art Deco diner-bar that still gets the proportions right — Monday is the night you can actually sit at the bar.",
+          "indoor": true,
+          "image": "http://static1.squarespace.com/static/522f5054e4b0a5b139fceafc/t/52f3d1c5e4b00e69a8f6e2dc/1391710667009/Logo16.png?format=1500w"
+        }
+      ]
     },
     "2026-06-02": {
       "weather": {
-        "high": 27,
-        "low": 17,
+        "high": 23,
+        "low": 15,
         "unit": "C",
         "condition": "Overcast",
-        "precip_chance": 8,
+        "precip_chance": 34,
         "sunset": "20:21",
-        "note": "patio weather"
+        "note": "evening could turn"
       },
-      "events": []
+      "events": [
+        {
+          "time": "21:30",
+          "title": "Smalls Tuesday set",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com/",
+          "note": "Tuesday late at Smalls is the cheapest cure for a slow week — go down the stairs and remember why you live here.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "20:00",
+          "title": "Caveat — Tuesday show",
+          "venue": "Caveat",
+          "neighborhood": "Lower East Side",
+          "category": "comedy",
+          "url": "https://www.caveat.nyc/",
+          "note": "Tuesday is usually one of their nerdier formats — science-on-stage or storytelling, both lean exactly your way.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "20:00",
+          "title": "Bemelmans Tuesday piano",
+          "venue": "Bemelmans Bar",
+          "neighborhood": "Upper East Side",
+          "category": "music",
+          "url": "https://www.rosewoodhotels.com/en/the-carlyle-new-york/dining/bemelmans-bar",
+          "note": "Same room, same drink, same painted rabbits — sometimes that's the entire pitch.",
+          "indoor": true,
+          "image": "https://images.rosewoodhotels.com/is/image/rwhg/Carlyle_Bemelmans_Durston_Saylor"
+        },
+        {
+          "time": "19:00",
+          "title": "Kidilum — Tuesday tasting",
+          "venue": "Kidilum",
+          "neighborhood": "Flatiron",
+          "category": "food",
+          "url": "https://ny.eater.com/dining-report/411535/kidilum-nyc-indian-restaurant-review",
+          "note": "Weeknight is the best version of the Keralan room — quieter dining room, full focus on the spice work.",
+          "indoor": true,
+          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/IMG_7723.jpg?quality=90&strip=all&crop=0,0,100,100"
+        },
+        {
+          "time": "19:00",
+          "title": "Attaboy walk-in",
+          "venue": "Attaboy",
+          "neighborhood": "Lower East Side",
+          "category": "nightlife",
+          "url": "https://attaboy.us/",
+          "note": "No menu, knock on the door, tell them what you want — a Tuesday is when this actually works without a line.",
+          "indoor": true,
+          "image": ""
+        }
+      ]
     },
     "2026-06-03": {
       "weather": {
-        "high": 25,
-        "low": 15,
+        "high": 26,
+        "low": 13,
         "unit": "C",
-        "condition": "Mostly clear",
-        "precip_chance": 6,
+        "condition": "Overcast",
+        "precip_chance": 21,
         "sunset": "20:21",
         "note": ""
       },
-      "events": []
+      "events": [
+        {
+          "time": "21:30",
+          "title": "Smalls Wednesday set",
+          "venue": "Smalls Jazz Club",
+          "neighborhood": "West Village",
+          "category": "music",
+          "url": "https://www.smallslive.com/",
+          "note": "Midweek Smalls — the back row is empty, the front row is full of musicians, perfect.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "19:30",
+          "title": "Bar Bayeux midweek",
+          "venue": "Bar Bayeux",
+          "neighborhood": "Prospect Lefferts Gardens",
+          "category": "music",
+          "url": "https://www.barbayeux.com/",
+          "note": "Wednesday is a sneakier night here — same room, fewer reservations, the trio still goes.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "19:00",
+          "title": "Public Records — Wednesday vermouth bar",
+          "venue": "Public Records",
+          "neighborhood": "Gowanus",
+          "category": "food",
+          "url": "https://publicrecords.nyc/",
+          "note": "Plant-based small plates, natural wine, lights low — the version of PR most people don't know about.",
+          "indoor": true,
+          "image": ""
+        },
+        {
+          "time": "20:00",
+          "title": "Bemelmans Wednesday piano",
+          "venue": "Bemelmans Bar",
+          "neighborhood": "Upper East Side",
+          "category": "music",
+          "url": "https://www.rosewoodhotels.com/en/the-carlyle-new-york/dining/bemelmans-bar",
+          "note": "Midweek at the Carlyle is the cleanest version of old New York you can buy with a drink minimum.",
+          "indoor": true,
+          "image": "https://images.rosewoodhotels.com/is/image/rwhg/Carlyle_Bemelmans_Durston_Saylor"
+        },
+        {
+          "time": "19:00",
+          "title": "OSL Bach Festival opens at Carnegie Hall",
+          "venue": "Carnegie Hall",
+          "neighborhood": "Midtown",
+          "category": "music",
+          "url": "https://theskint.com/save-30-off-bach-festival-at-carnegie-hall-limited-time-offer/",
+          "note": "Orchestra of St. Luke's doing Bach with McCreesh, Wispelwey, Capuçon, Rondeau — Baroque in Carnegie's room, which is exactly the architecture it was built for.",
+          "indoor": true,
+          "image": "https://theskint.com/wp-content/uploads/2026/05/BACH-Skint_V1.jpg"
+        },
+        {
+          "time": "19:00",
+          "title": "Soba Ulala — midweek dinner",
+          "venue": "Soba Ulala",
+          "neighborhood": "Soho",
+          "category": "food",
+          "url": "https://ny.eater.com/dining-report/411657/soba-ulala-nyc-japanese-restaurant-review",
+          "note": "A bowl of soba and a beer in a Soho counter restaurant — exactly the kind of Wednesday that justifies the rent.",
+          "indoor": true,
+          "image": "https://platform.ny.eater.com/wp-content/uploads/sites/6/2026/05/IMG_5582.jpg?quality=90&strip=all&crop=0,0,100,100"
+        }
+      ]
     },
     "2026-06-04": {
       "weather": {
-        "high": 26,
-        "low": 16,
+        "high": 28,
+        "low": 17,
         "unit": "C",
-        "condition": "Clear",
-        "precip_chance": 13,
+        "condition": "Overcast",
+        "precip_chance": 10,
         "sunset": "20:22",
         "note": "patio weather"
       },
@@ -773,48 +692,96 @@
     },
     "2026-06-05": {
       "weather": {
-        "high": 27,
-        "low": 17,
+        "high": 32,
+        "low": 18,
         "unit": "C",
-        "condition": "Overcast",
+        "condition": "Light drizzle",
+        "precip_chance": 9,
+        "sunset": "20:23",
+        "note": "shirtsleeves"
+      },
+      "events": []
+    },
+    "2026-06-06": {
+      "weather": {
+        "high": 24,
+        "low": 21,
+        "unit": "C",
+        "condition": "Light drizzle",
         "precip_chance": 25,
         "sunset": "20:23",
         "note": "patio weather"
       },
       "events": []
     },
-    "2026-06-06": {
-      "weather": {
-        "high": 28,
-        "low": 18,
-        "unit": "C",
-        "condition": "Partly cloudy",
-        "precip_chance": 32,
-        "sunset": "20:23",
-        "note": "evening could turn"
-      },
-      "events": []
-    },
     "2026-06-07": {
       "weather": {
-        "high": 27,
-        "low": 19,
+        "high": 29,
+        "low": 18,
         "unit": "C",
         "condition": "Overcast",
-        "precip_chance": 20,
+        "precip_chance": 25,
         "sunset": "20:24",
-        "note": "patio weather"
+        "note": "shirtsleeves"
       },
       "events": []
     },
     "2026-06-08": {
       "weather": {
+        "high": 33,
+        "low": 20,
+        "unit": "C",
+        "condition": "Overcast",
+        "precip_chance": 22,
+        "sunset": "20:25",
+        "note": "shirtsleeves"
+      },
+      "events": []
+    },
+    "2026-06-09": {
+      "weather": {
+        "high": 27,
+        "low": 20,
+        "unit": "C",
+        "condition": "Overcast",
+        "precip_chance": 17,
+        "sunset": "20:25",
+        "note": "patio weather"
+      },
+      "events": []
+    },
+    "2026-06-10": {
+      "weather": {
+        "high": 37,
+        "low": 19,
+        "unit": "C",
+        "condition": "Mostly clear",
+        "precip_chance": 19,
+        "sunset": "20:26",
+        "note": "shirtsleeves"
+      },
+      "events": []
+    },
+    "2026-06-11": {
+      "weather": {
+        "high": 36,
+        "low": 18,
+        "unit": "C",
+        "condition": "Heavy drizzle",
+        "precip_chance": 20,
+        "sunset": "20:26",
+        "note": "shirtsleeves"
+      },
+      "events": []
+    },
+    "2026-06-12": {
+      "weather": {
         "high": 0,
         "low": 0,
         "unit": "C",
         "condition": "—",
-        "precip_chance": 26,
-        "sunset": "20:25",
+        "precip_chance": 24,
+        "sunset": "20:27",
         "note": "cold — cozy room night"
       },
       "events": []
